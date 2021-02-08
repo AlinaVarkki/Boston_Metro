@@ -1,2 +1,2 @@
-public interface Graph {
+interface Graph {
 }
