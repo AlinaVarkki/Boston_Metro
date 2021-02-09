@@ -1,3 +1,10 @@
+import java.util.ArrayList;
+
 public class Station extends Node {
-    // For Changing Stations between Line Colours
+
+    public Station(String idNum){
+        this.idNumber = idNum;
+        this.edges = new ArrayList<Edge>();
+
+    }
 }

@@ -4,7 +4,7 @@ public abstract class Node {
 
     String name;
     ArrayList<Edge> edges;
-    int idNumber;
+    String idNumber;
 
     public String getName() {
         return name;
@@ -14,7 +14,11 @@ public abstract class Node {
         return edges;
     }
 
-    public int getIdNumber() {
+    public String getIdNumber() {
         return idNumber;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
