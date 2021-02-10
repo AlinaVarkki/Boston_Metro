@@ -1,14 +1,11 @@
 public class Connection implements Edge {
-    String line;
     Node   prev;
     Node   next;
 
-    public Connection(String line){
-        this.line = line;
+    public Connection(){
     }
 
-    public Connection(String line,Node nxt, Node prv){
-        this.line = line;
+    public Connection(Node nxt, Node prv){
         this.next = nxt;
         this.prev = prv;
     }
@@ -27,9 +24,5 @@ public class Connection implements Edge {
 
     public Node getPrev() {
         return prev;
-    }
-
-    public String getLine() {
-        return line;
     }
 }

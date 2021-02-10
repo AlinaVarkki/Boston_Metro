@@ -1,26 +1,32 @@
 import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Scanner; // Import the Scanner class to read text files
+import java.util.*;
 
 public class GraphBuilder {
-    ArrayList<String[]> stations;
+    ArrayList<String[]> arrsToBeProcessed;
     ArrayList<String[]> edgesToBeProcessed;
+    HashSet<String> linesToBeProcessed;
+    HashMap<String,Node> stationsNodesById;
+    HashMap<String,String> stationsNodesByName;
+
+
 
     public GraphBuilder() {}
 
+
     public Graph readInGraph (String filepath){
 
-        stations = this.readFile(filepath);
-        HashMap<String,Node> stationsNodes = new HashMap<>();
-        HashMap<String,Graph> lines = new HashMap<>();
+        arrsToBeProcessed = this.readFile(filepath);
         edgesToBeProcessed = new ArrayList<>();
+        linesToBeProcessed = new HashSet<>();
 
-        for (int index = 0; index < stations.size(); index++) {
-            String[] entry = stations.get(index);
-            String idNum =entry[0];
+        stationsNodesById = new HashMap<>();
+        stationsNodesByName = new HashMap<>();
+
+
+        for (int index = 0; index < arrsToBeProcessed.size(); index++) {
+            String[] entry = arrsToBeProcessed.get(index);
+            String idNum= entry[0];
             String name = entry[1];
             System.out.println(Arrays.toString(entry));
             for (int entryIndex = 2 ; entryIndex < entry.length; entryIndex = entryIndex + 3){
@@ -29,18 +35,23 @@ public class GraphBuilder {
                 edge[1] = entry[entryIndex];
                 edge[2] = entry[entryIndex+1];
                 edge[3] = entry[entryIndex+2];
+                linesToBeProcessed.add(entry[entryIndex]);
                 edgesToBeProcessed.add(edge);
                 System.out.println("edge: " + Arrays.toString(edge));
-
             }
+
             Node newNode = new Station(idNum);
             newNode.setName(name);
-            stationsNodes.put(idNum,newNode);
+            stationsNodesById.put(idNum,newNode);
+            stationsNodesByName.put(name,idNum);
+
         }
-        return new Line();
+        System.out.println(linesToBeProcessed.toString());
+        return new Line("line");
     }
     /**
-     * @return An Arraylist of the file, each line split into an array
+     * @param filepath String is the path to the file with graph details
+     * @return An Arraylist of the file lines, each line split into an array by whitespace
      * */
     private ArrayList<String[]> readFile(String filepath){
 
@@ -63,6 +74,9 @@ public class GraphBuilder {
         return fileLines;
     }
 
+    /**
+     * TESTING method, remove later
+     */
     public void printLineEdges(int i,String value){
         for (int index = 0; index < edgesToBeProcessed.size(); index++){
             String[] node = edgesToBeProcessed.get(index);
