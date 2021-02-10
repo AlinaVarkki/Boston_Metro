@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * Covers Line for each colour including the letter branches
@@ -9,10 +10,11 @@ public class Line implements Graph{
 
     String name;
     ArrayList<Edge> connections;
-    ArrayList<Node> stations;
+    HashSet<Node> stations;
 
     public Line(String name){
         this.name = name;
+        stations = new HashSet<>();
     }
 
     public void addEdge(Edge edge ){
@@ -23,7 +25,7 @@ public class Line implements Graph{
         this.stations.add(node);
     }
 
-    public ArrayList<Node> nextNodes() {
+    public HashSet<Node> nextNodes() {
         return stations;
     }
 }

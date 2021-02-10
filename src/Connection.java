@@ -5,7 +5,7 @@ public class Connection implements Edge {
     public Connection(){
     }
 
-    public Connection(Node nxt, Node prv){
+    public Connection(Node prv,Node nxt){
         this.next = nxt;
         this.prev = prv;
     }

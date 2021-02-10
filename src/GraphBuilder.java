@@ -6,15 +6,18 @@ public class GraphBuilder {
     ArrayList<String[]> arrsToBeProcessed;
     ArrayList<String[]> edgesToBeProcessed;
     HashSet<String> linesToBeProcessed;
+
     HashMap<String,Node> stationsNodesById;
     HashMap<String,String> stationsNodesByName;
+    HashMap<String,Line> linesByName;
+    ArrayList<Graph> lines;
 
 
 
     public GraphBuilder() {}
 
 
-    public Graph readInGraph (String filepath){
+    public void readInGraph (String filepath){
 
         arrsToBeProcessed = this.readFile(filepath);
         edgesToBeProcessed = new ArrayList<>();
@@ -44,10 +47,15 @@ public class GraphBuilder {
             newNode.setName(name);
             stationsNodesById.put(idNum,newNode);
             stationsNodesByName.put(name,idNum);
-
         }
-        System.out.println(linesToBeProcessed.toString());
-        return new Line("line");
+
+        for (String lineName : linesToBeProcessed){
+            Line line = new Line(lineName);
+            lines.add(line);
+            linesByName.putIfAbsent(lineName,line);
+        }
+        putEdgesInLines();
+
     }
     /**
      * @param filepath String is the path to the file with graph details
@@ -74,6 +82,18 @@ public class GraphBuilder {
         return fileLines;
     }
 
+    private void putEdgesInLines (){
+        for(String[] edge : edgesToBeProcessed){
+            Node thisStation = stationsNodesById.get(edge[0]);
+            Node prev = stationsNodesById.get(edge[2]);
+            Node next = stationsNodesById.get(edge[3]);
+            Edge edge1 = new Connection(prev,thisStation);
+            Edge edge2 = new Connection(thisStation,next);
+            Line line = linesByName.get(edge[1]);
+            line.addEdge(edge1);
+            line.addEdge(edge2);
+        }
+    }
     /**
      * TESTING method, remove later
      */
