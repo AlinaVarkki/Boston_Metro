@@ -2,20 +2,43 @@ import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.util.*;
 
-public class GraphBuilder {
+public class FileReader {
     ArrayList<String[]> arrsToBeProcessed;
     ArrayList<String[]> edgesToBeProcessed;
     HashSet<String> linesToBeProcessed;
 
     HashMap<String,Node> stationsNodesById;
-    HashMap<String,String> stationsNodesByName;
+    HashMap<String,Station> stationsById;
     HashMap<String,Line> linesByName;
     ArrayList<Graph> lines;
+    List<Edge> connections;
 
 
+    public FileReader() {}
 
-    public GraphBuilder() {}
+    public List<Edge> getConnections(){
+        return connections;
+    }
 
+    public List<Node> getStations(){
+        List<Node> stations = new ArrayList<>();
+        for (String s: stationsNodesById.keySet()) stations.add(stationsById.get(s));
+        return stations;
+    }
+
+    public void createEdges(){
+        connections = new ArrayList<>();
+        for(String[] edgeArr: edgesToBeProcessed){
+            if(!edgeArr[2].equals("0")) {
+                Connection c1 = new Connection(stationsById.get(edgeArr[0]), stationsById.get(edgeArr[2]), edgeArr[1]);
+                connections.add(c1);
+            }
+            if(!edgeArr[3].equals("0")) {
+                Connection c2 = new Connection(stationsById.get(edgeArr[0]), stationsById.get(edgeArr[3]), edgeArr[1]);
+                connections.add(c2);
+            }
+        }
+    }
 
     public void readInGraph (String filepath){
 
@@ -24,14 +47,14 @@ public class GraphBuilder {
         linesToBeProcessed = new HashSet<>();
 
         stationsNodesById = new HashMap<>();
-        stationsNodesByName = new HashMap<>();
+        stationsById = new HashMap<>();
 
 
         for (int index = 0; index < arrsToBeProcessed.size(); index++) {
             String[] entry = arrsToBeProcessed.get(index);
             String idNum= entry[0];
             String name = entry[1];
-            System.out.println(Arrays.toString(entry));
+     //       System.out.println(Arrays.toString(entry));
             for (int entryIndex = 2 ; entryIndex < entry.length; entryIndex = entryIndex + 3){
                 String[] edge = new String[4];
                 edge[0] = entry[0];
@@ -40,21 +63,26 @@ public class GraphBuilder {
                 edge[3] = entry[entryIndex+2];
                 linesToBeProcessed.add(entry[entryIndex]);
                 edgesToBeProcessed.add(edge);
-                System.out.println("edge: " + Arrays.toString(edge));
+             //   System.out.println("edge: " + Arrays.toString(edge));
             }
 
             Node newNode = new Station(idNum);
             newNode.setName(name);
             stationsNodesById.put(idNum,newNode);
-            stationsNodesByName.put(name,idNum);
+//            stationsNodesByName.put(name,idNum);
+            stationsById.put(idNum, new Station(idNum, name));
+
         }
 
-        for (String lineName : linesToBeProcessed){
-            Line line = new Line(lineName);
-            lines.add(line);
-            linesByName.putIfAbsent(lineName,line);
-        }
-        putEdgesInLines();
+        //was throwing ann error, not relevant atm so commented
+//        for (String lineName : linesToBeProcessed){
+//            Line line = new Line(lineName);
+//            lines.add(line);
+//            linesByName.putIfAbsent(lineName,line);
+//        }
+//        putEdgesInLines();
+
+        createEdges();
 
     }
     /**
@@ -63,7 +91,7 @@ public class GraphBuilder {
      * */
     private ArrayList<String[]> readFile(String filepath){
 
-        ArrayList<String[]> fileLines = new ArrayList<String[]>();
+        ArrayList<String[]> fileLines = new ArrayList<>();
         try {
             File file = new File(filepath);
             Scanner reader = new Scanner(file);
@@ -73,7 +101,6 @@ public class GraphBuilder {
                 fileLines.add(line.split("\\s+"));
             }
             reader.close();
-
         } catch (FileNotFoundException e) {
             System.out.println("An error has occurred");
             e.printStackTrace();
@@ -104,7 +131,6 @@ public class GraphBuilder {
                 System.out.println(Arrays.toString(edgesToBeProcessed.get(index)));
             }
         }
-
     }
 
 }

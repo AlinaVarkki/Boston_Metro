@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Covers Line for each colour including the letter branches
@@ -27,5 +29,25 @@ public class Line implements Graph{
 
     public HashSet<Node> nextNodes() {
         return stations;
+    }
+
+    @Override
+    public List getPath(Object source, Object destination) {
+        return null;
+    }
+
+    @Override
+    public List reconstructPath(Map childParentMap, Object source, Object destination) {
+        return null;
+    }
+
+    @Override
+    public void addNode(Object node) {
+
+    }
+
+    @Override
+    public void addEdge(Object node) {
+
     }
 }

@@ -1,28 +1,45 @@
-public class Connection implements Edge {
-    Node   prev;
-    Node   next;
+public class Connection<N> implements Edge<N> {
+    private N node1;
+    private N node2;
+    private String label;
 
     public Connection(){
     }
 
-    public Connection(Node prv,Node nxt){
-        this.next = nxt;
-        this.prev = prv;
+    public Connection(N node1,N node2, String label){
+        this.node1 = node1;
+        this.node2 = node2;
+        this.label = label;
     }
 
-    public void setNext(Node next) {
-        this.next = next;
+    public Connection(N node1,N node2){
+        this.node1 = node1;
+        this.node2 = node2;
     }
 
-    public void setPrev(Node prev) {
-        this.prev = prev;
+    @Override
+    public String getLabel() {
+        return label;
     }
 
-    public Node getNext() {
-        return next;
+    public void setNode1(N node1) {
+        this.node1 = node1;
     }
 
-    public Node getPrev() {
-        return prev;
+    public void setNode2(N node2) {
+        this.node2 = node2;
+    }
+
+    public N getNode1() {
+        return node1;
+    }
+
+    public N getNode2() {
+        return node2;
+    }
+
+    @Override
+    public N getOppositeNode(N node) {
+        return ((node == node1) ? node2 : node1);
     }
 }
