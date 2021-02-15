@@ -14,12 +14,19 @@ public class App {
         for(Node n: stations) graph.addNode(n);
         for(Edge e: connections) graph.addEdge(e);
 
-        List<Station> path = graph.getPath(stations.get(26), stations.get(41));
+        List<Station> path = graph.getPath(getStationByName(stations, "Symphony"), getStationByName(stations, "Fenway"));
 
         for(Station s: path){
             System.out.println(s.name);
         }
 
+    }
+
+    public static Node getStationByName(List<Node> stations, String name){
+        for(Node s: stations){
+            if(s.name.equals(name)) return s;
+        }
+        return null;
     }
 
 }
