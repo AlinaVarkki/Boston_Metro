@@ -10,9 +10,6 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
         adjacencyMap = new HashMap<>();
     }
 
-    public MultiGraph(Map<N, List<E>>adjacencyMap) {
-        this.adjacencyMap = adjacencyMap;
-    }
 
     @Override
     public void addNode(N node){
@@ -28,7 +25,8 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
     }
 
     @Override
-    public List<N> getPath(N source, N destination) {
+    //public List<N> getPath(N source, N destination) {
+    public List<E> getPath(N source, N destination) {
         List<N> visited = new ArrayList<>();
         //contains a Node and edge that led to it(need to map nodes to the edge, not node, to see label of the node that lef to it and prioritize the path with less change)
         Map<N, E> childParentMap = new HashMap<>();
@@ -60,7 +58,7 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
             for(N n: nodesToEnqueueSameLabel) queue.add(n);
             for(N n: nodesToEnqueueDiffLabel) queue.add(n);
         }
-        return reconstructPath(childParentMap, source, destination);
+        return reconstructPathInEdges(childParentMap, source, destination);
     }
 
     @Override
@@ -76,6 +74,7 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
         return path;
     }
 
+    @Override
     public List<E> reconstructPathInEdges(Map<N, E> childParentMap, N source, N destination){
         List<E> path = new ArrayList<>();
         N currNode = destination;

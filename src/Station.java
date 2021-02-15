@@ -1,6 +1,7 @@
-import java.util.ArrayList;
+public class Station implements Node{
 
-public class Station extends Node {
+    String name;
+    String idNumber;
 
     public Station(String name){
         this.name = name;
@@ -12,7 +13,12 @@ public class Station extends Node {
     }
 
     @Override
-    public boolean isTransferStation() {
-        return true;
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
     }
 }
