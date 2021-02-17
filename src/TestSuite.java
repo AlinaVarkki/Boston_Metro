@@ -57,21 +57,13 @@ public class TestSuite {
     @org.junit.jupiter.api.Test
     void fileReader() {
         FileReader reader = new FileReader();
-        reader.readInGraph("src/TestData.txt");
+        reader.readInGraph("src/bostonmetro.txt");
         List<Node> testStations = reader.getStations();
         List<Edge> testConnections = reader.getConnections();
 
-
-        for (int i = 0; i < testConnections.size(); i++) {
-            Node a = (Node) testConnections.get(i).getNode1();
-            Node b = (Node) testConnections.get(i).getNode2();
-            System.out.println(i + " Node1:" + a.getName() + " Node2:" + b.getName() + " Line:" + testConnections.get(i).getLabel());
-        }
-
         // Tests Names Correctly Read in from Test Data from start of the file to the end
-        assertEquals("Glasgow", testStations.get(0).getName());
-        assertEquals("Inverness", testStations.get(5).getName());
-        assertEquals("Cardiff", testStations.get(9).getName());
+        assertEquals("FenwoodRoad", testStations.get(0).getName());
+        assertEquals("BrighamCircle", testStations.get(123).getName());
 
 
         /* Tests Connections Correctly Read in from Test Data (Bi-directional) */
@@ -79,44 +71,16 @@ public class TestSuite {
         // Tests Basic Case of Pink line between Glasgow and Stirling Read in Correctly
         Node a = (Node) testConnections.get(0).getNode1();
         Node b = (Node) testConnections.get(0).getNode2();
-        assertEquals("Glasgow", a.getName());
-        assertEquals("Stirling", b.getName());
-        assertEquals("Pink", testConnections.get(0).getLabel());
+        assertEquals("OakGrove", a.getName());
+        assertEquals("Malden", b.getName());
+        assertEquals("Orange", testConnections.get(0).getLabel());
 
         // Tests Bi-directional Case of Pink Line Back between Stirling and Glasgow Read in Correctly
         a = (Node) testConnections.get(1).getNode1();
         b = (Node) testConnections.get(1).getNode2();
-        assertEquals("Stirling", a.getName());
-        assertEquals("Glasgow", b.getName());
-        assertEquals("Pink", testConnections.get(1).getLabel());
-
-        // Tests 1st Line (Pink) From Edinburgh to Inverness Read in Correctly
-        a = (Node) testConnections.get(5).getNode1();
-        b = (Node) testConnections.get(5).getNode2();
-        assertEquals("Edinburgh", a.getName());
-        assertEquals("Inverness", b.getName());
-        assertEquals("Pink", testConnections.get(5).getLabel());
-
-        // Tests 2nd Line (Purple) From Edinburgh to Newcastle Read in Correctly
-        a = (Node) testConnections.get(7).getNode1();
-        b = (Node) testConnections.get(7).getNode2();
-        assertEquals("Edinburgh", a.getName());
-        assertEquals("Newcastle", b.getName());
-        assertEquals("Purple", testConnections.get(7).getLabel());
-
-        // Tests 1st Line (PurpleA) From Leeds to Manchester Read in Correctly
-        a = (Node) testConnections.get(12).getNode1();
-        b = (Node) testConnections.get(12).getNode2();
-        assertEquals("Leeds", a.getName());
-        assertEquals("Manchester", b.getName());
-        assertEquals("PurpleA", testConnections.get(12).getLabel());
-
-        // Tests 2nd Line (PurpleB) From Leeds to London Read in Correctly
-        a = (Node) testConnections.get(14).getNode1();
-        b = (Node) testConnections.get(14).getNode2();
-        assertEquals("Leeds", a.getName());
-        assertEquals("London", b.getName());
-        assertEquals("PurpleB", testConnections.get(14).getLabel());
+        assertEquals("Malden", a.getName());
+        assertEquals("OakGrove", b.getName());
+        assertEquals("Orange", testConnections.get(1).getLabel());
 
     }
 
@@ -232,16 +196,23 @@ public class TestSuite {
         assertEquals("JFK/UMass", redNode.getName());*/
 
         for (int i = 0; i < testStations.size(); i++) {
-            System.out.println(i + " Station:" + testStations.get(i).getName());
+            if (testStations.get(i).getName().equals("Davis")) {
+                System.out.println(i + " Station:" + testStations.get(i).getName());
+            }
         }
 
         for (int i = 0; i < testConnections.size(); i++) {
             Node a = (Node) testConnections.get(i).getNode1();
             Node b = (Node) testConnections.get(i).getNode2();
-            System.out.println(i + " Node1:" + a.getName() + " Node2:" + b.getName() + " Line:" + testConnections.get(i).getLabel());
+            if (a.getName().equals("Davis") || b.getName().equals("Davis")) {
+                System.out.println(i + " Node1:" + a.getName() + " Node2:" + b.getName() + " Line:" + testConnections.get(i).getLabel());
+            }
         }
 
-        App.printPath(testPath);
+        System.out.println(App.getStationByName(testStations,"Alewife").getName());
+        System.out.println(App.getStationByName(testStations,"JFK/UMass").getName());
+
+        /*App.printPath(testPath);*/
     }
 
     /* Tests MultiGraph getPath() of the RedA Line using Official Data */
