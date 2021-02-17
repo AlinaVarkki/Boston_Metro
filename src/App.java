@@ -11,12 +11,9 @@ public class App {
         for(Node n: stations) graph.addNode(n);
         for(Edge e: connections) graph.addEdge(e);
 
-        Station sourceS = (Station) getStationByName(stations, "Boylston");
-        Station destinationS = (Station) getStationByName(stations, "SouthStation");
+        List<Connection> path = graph.getPath(getStationByName(stations, "Alewife"), getStationByName(stations, "JFK/UMass"));
 
-        List<Connection> path = graph.getPath(sourceS, destinationS);
-
-        printPath(path, sourceS);
+        printPath(path);
 
     }
 
@@ -27,9 +24,9 @@ public class App {
         return null;
     }
 
-    public static void printPath(List<Connection> path, Station source){
+    public static void printPath(List<Connection> path){
         String label = path.get(0).getLabel();
-        Station fromStation = source;
+        Station fromStation = (Station) path.get(0).getNode1();
         System.out.println(fromStation.getName());
         for(Connection c: path){
             if(!c.getLabel().equals(label)){
