@@ -120,6 +120,7 @@ public class TestSuite {
     @org.junit.jupiter.api.Test
     void multiGraphOrangeLine() {
 
+        Station source = (Station) App.getStationByName(testStations, "OakGrove");
         // Tests Nodes and Edges Correctly Set Up for the Orange line
         testPath = testGraph.getPath(App.getStationByName(testStations, "OakGrove"), App.getStationByName(testStations, "ForestHills"));
         Node orangeNode = (Node) testPath.get(0).getNode1();
@@ -160,14 +161,17 @@ public class TestSuite {
         assertEquals("GreenStreet", orangeNodes.getName());
         orangeNodes = (Node) testPath.get(17).getNode2();
         assertEquals("ForestHills", orangeNodes.getName());
+
+        App.printPath(testPath,source);
     }
 
     /* Tests MultiGraph getPath() of the Red Line using Official Data */
     @org.junit.jupiter.api.Test
     void multiGraphRedLine() {
 
+        Station source = (Station) App.getStationByName(testStations, "Alewife");
         // Tests Nodes and Edges Correctly Set Up for the Red line
-        testPath = testGraph.getPath(App.getStationByName(testStations, "Alewife"), App.getStationByName(testStations, "JFK/UMass"));
+        testPath = testGraph.getPath(App.getStationByName(testStations, "Alewife"), App.getStationByName(testStations, "Porter"));
        /* Node redNode = (Node) testPath.get(0).getNode1();
         assertEquals("Alewife", redNode.getName());
         redNode = (Node) testPath.get(0).getNode2();
@@ -209,10 +213,10 @@ public class TestSuite {
             }
         }
 
-        System.out.println(App.getStationByName(testStations,"Alewife").getName());
-        System.out.println(App.getStationByName(testStations,"JFK/UMass").getName());
+        /*System.out.println(App.getStationByName(testStations,"Alewife").getName());
+        System.out.println(App.getStationByName(testStations,"Porter").getName());*/
 
-        /*App.printPath(testPath);*/
+        App.printPath(testPath,source);
     }
 
     /* Tests MultiGraph getPath() of the RedA Line using Official Data */
