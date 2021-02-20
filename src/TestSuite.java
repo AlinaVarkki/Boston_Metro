@@ -84,12 +84,24 @@ public class TestSuite {
 
     }
 
+    /**
+     * Below Test Correct Continuity of Stations on Each Line
+     * Blue, Orange, Red, RedA, Mattapan, Green, GreenB, GreenC, GreenD, GreenE
+     */
+
     /* Tests MultiGraph getPath() of the Blue Line using Official Data */
     @org.junit.jupiter.api.Test
     void multiGraphBlueLine() {
 
         // Tests Nodes and Edges Correctly Set Up for the Blue line
         testPath = testGraph.getPath(App.getStationByName(testStations, "Bowdoin"), App.getStationByName(testStations, "Wonderland"));
+        //Connection e  = testPath.get(0);
+        //Node A = e.getNode1();
+        //Node wrap = new Station(c);
+        //String name = wrap.getName();
+        //System.out.println(A);
+
+
         Node blueNode = (Node) testPath.get(0).getNode1();
         assertEquals("Bowdoin", blueNode.getName());
         Node blueNodes = (Node) testPath.get(1).getOppositeNode(blueNode);
@@ -171,11 +183,11 @@ public class TestSuite {
 
         Station source = (Station) App.getStationByName(testStations, "Alewife");
         // Tests Nodes and Edges Correctly Set Up for the Red line
-        testPath = testGraph.getPath(App.getStationByName(testStations, "Alewife"), App.getStationByName(testStations, "Porter"));
-       /* Node redNode = (Node) testPath.get(0).getNode1();
+        testPath = testGraph.getPath(App.getStationByName(testStations, "Alewife"), App.getStationByName(testStations, "JFK/UMass"));
+        Node redNode = (Node) testPath.get(0).getNode2();
         assertEquals("Alewife", redNode.getName());
-        redNode = (Node) testPath.get(0).getNode2();
-        assertEquals("Davis", redNode.getName());
+        Node redNodes = (Node) testPath.get(0).getOppositeNode(redNode);
+        assertEquals("Davis", redNodes.getName());
         redNode = (Node) testPath.get(1).getNode2();
         assertEquals("Porter", redNode.getName());
         redNode = (Node) testPath.get(2).getNode2();
@@ -197,7 +209,7 @@ public class TestSuite {
         redNode = (Node) testPath.get(10).getNode2();
         assertEquals("Andrew", redNode.getName());
         redNode = (Node) testPath.get(11).getNode2();
-        assertEquals("JFK/UMass", redNode.getName());*/
+        assertEquals("JFK/UMass", redNode.getName());
 
         for (int i = 0; i < testStations.size(); i++) {
             if (testStations.get(i).getName().equals("Davis")) {
@@ -213,13 +225,10 @@ public class TestSuite {
             }
         }
 
-        /*System.out.println(App.getStationByName(testStations,"Alewife").getName());
-        System.out.println(App.getStationByName(testStations,"Porter").getName());*/
-
         App.printPath(testPath,source);
     }
 
-    /* Tests MultiGraph getPath() of the RedA Line using Official Data */
+    /* Tests MultiGraph getPath() of the RedA Line */
     @org.junit.jupiter.api.Test
     void multiGraphRedALine() {
 
@@ -239,7 +248,7 @@ public class TestSuite {
         assertEquals("Braintree", redANode.getName());
     }
 
-    /* Tests MultiGraph getPath() of the Mattapan Line using Official Data */
+    /* Tests MultiGraph getPath() of the Mattapan Line */
     @org.junit.jupiter.api.Test
     void multiGraphMattapanLine() {
 
@@ -263,7 +272,7 @@ public class TestSuite {
         assertEquals("Mattapan", mattapanNode.getName());
     }
 
-    /* Tests MultiGraph getPath() of the Green Line using Official Data */
+    /* Tests MultiGraph getPath() of the Green Line */
     @org.junit.jupiter.api.Test
     void multiGraphGreenLine() {
 
@@ -289,7 +298,7 @@ public class TestSuite {
         assertEquals("Copley", greenNode.getName());
     }
 
-    /* Tests MultiGraph getPath() of the GreenB Line using Official Data */
+    /* Tests MultiGraph getPath() of the GreenB Line */
     @org.junit.jupiter.api.Test
     void multiGraphGreenBLine() {
 
@@ -347,7 +356,7 @@ public class TestSuite {
         assertEquals("BostonCollege", greenBNode.getName());
     }
 
-    /* Tests MultiGraph getPath() of the GreenC Line using Official Data */
+    /* Tests MultiGraph getPath() of the GreenC Line */
     @org.junit.jupiter.api.Test
     void multiGraphGreenCLine() {
 
@@ -383,7 +392,7 @@ public class TestSuite {
         assertEquals("ClevelandCircle", greenCNode.getName());
     }
 
-    /* Tests MultiGraph getPath() of the GreenD Line using Official Data */
+    /* Tests MultiGraph getPath() of the GreenD Line */
     @org.junit.jupiter.api.Test
     void multiGraphGreenDLine() {
 
@@ -420,7 +429,7 @@ public class TestSuite {
 
     }
 
-    /* Tests MultiGraph getPath() of the GreenE Line using Official Data */
+    /* Tests MultiGraph getPath() of the GreenE Line */
     @org.junit.jupiter.api.Test
     void multiGraphGreenELine() {
 
@@ -453,4 +462,131 @@ public class TestSuite {
 
     }
 
+    /**
+     * Below Test Correct Continuity between Key Junction Stations on Red and Green Line
+     * RedB to RedA, RedA to Mattapan,
+     */
+
+    /* Tests MultiGraph getPath() of the Red Junction Line between RedA and RedB */
+    @org.junit.jupiter.api.Test
+    void multiGraphRedJunctionLine() {
+
+        Station source = (Station) App.getStationByName(testStations, "Wollaston");
+
+        // Tests Obtained Route Correct for the Red Junction line from RedB to RedA
+        testPath = testGraph.getPath(App.getStationByName(testStations, "Wollaston"), App.getStationByName(testStations, "FieldsCorner"));
+        String label = testPath.get(0).getLabel();
+        assertEquals("RedB",label);
+
+        Node redJNode = (Node) testPath.get(0).getNode2();
+        assertEquals("Wollaston", redJNode.getName());
+        Node redJNodes = (Node) testPath.get(0).getOppositeNode(redJNode);
+        assertEquals("NorthQuincy", redJNodes.getName());
+        redJNode = (Node) testPath.get(1).getNode1();
+        assertEquals("JFK/UMass", redJNode.getName());
+
+        label = testPath.get(2).getLabel();
+        assertEquals("RedA",label);
+
+        redJNode = (Node) testPath.get(2).getNode2();
+        assertEquals("SavinHill", redJNode.getName());
+        redJNode = (Node) testPath.get(3).getNode2();
+        assertEquals("FieldsCorner", redJNode.getName());
+    }
+
+    /* Tests MultiGraph getPath() of the Mattapan Junction Line from RedA */
+    @org.junit.jupiter.api.Test
+    void multiGraphMattapanJunctionLine() {
+
+        Station source = (Station) App.getStationByName(testStations, "Shawmut");
+
+        // Tests Obtained Route Correct for the Red Junction line from RedA to Mattapan
+        testPath = testGraph.getPath(App.getStationByName(testStations, "Shawmut"), App.getStationByName(testStations, "CedarGrove"));
+        String label = testPath.get(0).getLabel();
+        assertEquals("RedA",label);
+
+        Node redJNode = (Node) testPath.get(0).getNode1();
+        assertEquals("Shawmut", redJNode.getName());
+        Node redJNodes = (Node) testPath.get(0).getOppositeNode(redJNode);
+        assertEquals("Ashmont", redJNodes.getName());
+
+        label = testPath.get(1).getLabel();
+        assertEquals("Mattapan",label);
+
+        redJNode = (Node) testPath.get(1).getNode2();
+        assertEquals("CedarGrove", redJNode.getName());
+    }
+
+    /* Tests MultiGraph getPath() of the Green Junction Line from GreenE to GreenB */
+    @org.junit.jupiter.api.Test
+    void multiGraphGreenEtoGreenBJunctionLine() {
+
+        Station source = (Station) App.getStationByName(testStations, "Prudential");
+
+        // Tests Obtained Route Correct for the Green Junction line from GreenE to GreenB
+        testPath = testGraph.getPath(App.getStationByName(testStations, "Prudential"), App.getStationByName(testStations, "Hynes/ICA"));
+        String label = testPath.get(0).getLabel();
+        assertEquals("GreenE",label);
+
+        Node greenJNode = (Node) testPath.get(0).getNode2();
+        assertEquals("Prudential", greenJNode.getName());
+        Node greenJNodes = (Node) testPath.get(0).getOppositeNode(greenJNode);
+        assertEquals("Copley", greenJNodes.getName());
+
+        label = testPath.get(1).getLabel();
+        assertEquals("GreenB",label);
+
+        greenJNode = (Node) testPath.get(1).getNode2();
+        assertEquals("Hynes/ICA", greenJNode.getName());
+    }
+
+    /* Tests MultiGraph getPath() of the Green Junction Line from GreenB to GreenC */
+    @org.junit.jupiter.api.Test
+    void multiGraphGreenBtoGreenCJunctionLine() {
+
+        Station source = (Station) App.getStationByName(testStations, "BlandfordStreet");
+
+        // Tests Obtained Route Correct for the Green Junction line from GreenB to GreenC
+        testPath = testGraph.getPath(App.getStationByName(testStations, "BlandfordStreet"), App.getStationByName(testStations, "St.Mary'sStreet"));
+        String label = testPath.get(0).getLabel();
+        assertEquals("GreenB",label);
+
+        Node greenJNode = (Node) testPath.get(0).getNode1();
+        assertEquals("BlandfordStreet", greenJNode.getName());
+        Node greenJNodes = (Node) testPath.get(0).getOppositeNode(greenJNode);
+        assertEquals("Kenmore", greenJNodes.getName());
+
+        label = testPath.get(1).getLabel();
+        assertEquals("GreenC",label);
+
+        greenJNode = (Node) testPath.get(1).getNode2();
+        assertEquals("St.Mary'sStreet", greenJNode.getName());
+    }
+
+    /* Tests MultiGraph getPath() of the Green Junction Line from GreenD to GreenB */
+    @org.junit.jupiter.api.Test
+    void multiGraphGreenDtoGreenBJunctionLine() {
+
+        Station source = (Station) App.getStationByName(testStations, "Fenway");
+
+        // Tests Obtained Route Correct for the Green Junction line from GreenD to GreenB
+        testPath = testGraph.getPath(App.getStationByName(testStations, "Fenway"), App.getStationByName(testStations, "Hynes/ICA"));
+        String label = testPath.get(0).getLabel();
+        assertEquals("GreenD",label);
+
+        Node greenJNode = (Node) testPath.get(0).getNode2();
+        assertEquals("Fenway", greenJNode.getName());
+        Node greenJNodes = (Node) testPath.get(0).getOppositeNode(greenJNode);
+        assertEquals("Kenmore", greenJNodes.getName());
+
+        label = testPath.get(1).getLabel();
+        assertEquals("GreenB",label);
+
+        greenJNode = (Node) testPath.get(1).getNode2();
+        assertEquals("Hynes/ICA", greenJNode.getName());
+    }
+
 }
+
+
+
