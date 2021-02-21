@@ -586,6 +586,192 @@ public class TestSuite {
         assertEquals("Hynes/ICA", greenJNode.getName());
     }
 
+    /**
+     * Below Test Optimal routes from a station on one coloured line to another
+     * Orange-Red, Orange-Orange, Orange-Green, Orange-Blue, Blue-Red, Blue-Orange/Green,
+     */
+
+    /* Tests MultiGraph getPath() optimal route from Orange ChinaTown to Red Charles/MGH */
+    @org.junit.jupiter.api.Test
+    void multiGraphOrangeToRed() {
+
+        Station source = (Station) App.getStationByName(testStations, "Chinatown");
+
+        // Tests Obtained Route Correct for the Orange ChinaTown to Red Charles/MGH
+        testPath = testGraph.getPath(App.getStationByName(testStations, "Chinatown"), App.getStationByName(testStations, "Charles/MGH"));
+        String label = testPath.get(0).getLabel();
+        assertEquals("Orange",label);
+
+        Node orangeNode = (Node) testPath.get(0).getNode2();
+        assertEquals("Chinatown", orangeNode.getName());
+        Node orangeNodes = (Node) testPath.get(0).getOppositeNode(orangeNode);
+        assertEquals("DowntownCrossing", orangeNodes.getName());
+
+        label = testPath.get(1).getLabel();
+        assertEquals("Red",label);
+
+        orangeNode = (Node) testPath.get(2).getNode2();
+        assertEquals("ParkStreet", orangeNode.getName());
+        orangeNode = (Node) testPath.get(2).getNode1();
+        assertEquals("Charles/MGH", orangeNode.getName());
+    }
+
+    /* Tests MultiGraph getPath() optimal route from Orange CommunityCollege to Orange Chinatown */
+    @org.junit.jupiter.api.Test
+    void multiGraphOrangeRemainsOrange() {
+
+        Station source = (Station) App.getStationByName(testStations, "CommunityCollege");
+
+        // Tests Obtained Route Correct for the Orange CommunityCollege to Orange Chinatown without any Line swaps
+        testPath = testGraph.getPath(App.getStationByName(testStations, "CommunityCollege"), App.getStationByName(testStations, "Chinatown"));
+        String label = testPath.get(0).getLabel();
+        assertEquals("Orange",label);
+
+        Node orangeNode = (Node) testPath.get(0).getNode1();
+        assertEquals("CommunityCollege", orangeNode.getName());
+        Node orangeNodes = (Node) testPath.get(0).getOppositeNode(orangeNode);
+        assertEquals("NorthStation", orangeNodes.getName());
+
+        //currently swaps to green the back again
+        label = testPath.get(1).getLabel();
+        assertEquals("Orange",label);
+
+        orangeNode = (Node) testPath.get(2).getNode1();
+        assertEquals("Haymarket", orangeNode.getName());
+        orangeNode = (Node) testPath.get(2).getNode2();
+        assertEquals("State", orangeNode.getName());
+
+        label = testPath.get(2).getLabel();
+        assertEquals("Orange",label);
+
+        orangeNode = (Node) testPath.get(3).getNode2();
+        assertEquals("DowntownCrossing", orangeNode.getName());
+        orangeNode = (Node) testPath.get(4).getNode2();
+        assertEquals("Chinatown", orangeNode.getName());
+    }
+
+    /* Tests MultiGraph getPath() optimal route from Orange Chinatown to Green Boylston swapping at Haymarket
+       for minimal train Transfers */
+    @org.junit.jupiter.api.Test
+    void multiGraphOrangeToGreen() {
+
+        Station source = (Station) App.getStationByName(testStations, "Chinatown");
+
+        // Tests Obtained Route Correct for the Orange Chinatown to Green Boylston swapping at Haymarket
+        testPath = testGraph.getPath(App.getStationByName(testStations, "Chinatown"), App.getStationByName(testStations, "Boylston"));
+        String label = testPath.get(0).getLabel();
+        assertEquals("Orange",label);
+
+        Node orangeNode = (Node) testPath.get(0).getNode2();
+        assertEquals("Chinatown", orangeNode.getName());
+        Node orangeNodes = (Node) testPath.get(0).getOppositeNode(orangeNode);
+        assertEquals("DowntownCrossing", orangeNodes.getName());
+
+        label = testPath.get(1).getLabel();
+        assertEquals("Orange",label);
+
+        orangeNode = (Node) testPath.get(2).getNode1();
+        assertEquals("State", orangeNode.getName());
+        orangeNode = (Node) testPath.get(2).getNode2();
+        assertEquals("Haymarket", orangeNode.getName());
+
+        label = testPath.get(2).getLabel();
+        assertEquals("Green",label);
+
+        Node greenNode = (Node) testPath.get(3).getNode2();
+        assertEquals("GovernmentCenter", greenNode.getName());
+        greenNode = (Node) testPath.get(4).getNode2();
+        assertEquals("ParkStreet", greenNode.getName());
+        greenNode = (Node) testPath.get(5).getNode2();
+        assertEquals("Boylston", greenNode.getName());
+
+        App.printPath(testPath,source);
+    }
+
+    /* Tests MultiGraph getPath() optimal route from Orange Chinatown to Blue Bowdoin swapping at State
+       for minimal train Transfers */
+    @org.junit.jupiter.api.Test
+    void multiGraphOrangeToBlue() {
+
+        Station source = (Station) App.getStationByName(testStations, "Chinatown");
+
+        // Tests Obtained Route Correct for the Orange Chinatown to Blue Bowdoin swapping at State
+        testPath = testGraph.getPath(App.getStationByName(testStations, "Chinatown"), App.getStationByName(testStations, "Bowdoin"));
+        String label = testPath.get(0).getLabel();
+        assertEquals("Orange",label);
+
+        Node orangeNode = (Node) testPath.get(0).getNode2();
+        assertEquals("Chinatown", orangeNode.getName());
+        Node orangeNodes = (Node) testPath.get(0).getOppositeNode(orangeNode);
+        assertEquals("DowntownCrossing", orangeNodes.getName());
+        orangeNode = (Node) testPath.get(1).getNode1();
+        assertEquals("State", orangeNode.getName());
+
+        label = testPath.get(2).getLabel();
+        assertEquals("Blue",label);
+
+        Node blueNode = (Node) testPath.get(2).getNode1();
+        assertEquals("GovernmentCenter", blueNode.getName());
+        blueNode = (Node) testPath.get(3).getNode1();
+        assertEquals("Bowdoin", blueNode.getName());
+    }
+
+    /* Tests MultiGraph getPath() optimal route from Blue Aquarium to Red Charles/MGH via GovernmentCenter and ParkStreet
+       for minimal train Transfers */
+    @org.junit.jupiter.api.Test
+    void multiGraphBlueToRed() {
+
+        Station source = (Station) App.getStationByName(testStations, "Aquarium");
+
+        // Tests Obtained Route Correct for the Blue Aquarium to Red Charles/MGH
+        testPath = testGraph.getPath(App.getStationByName(testStations, "Aquarium"), App.getStationByName(testStations, "Charles/MGH"));
+        String label = testPath.get(0).getLabel();
+        assertEquals("Blue",label);
+
+        Node blueNode = (Node) testPath.get(0).getNode1();
+        assertEquals("Aquarium", blueNode.getName());
+        Node blueNodes = (Node) testPath.get(0).getOppositeNode(blueNode);
+        assertEquals("State", blueNodes.getName());
+        blueNode = (Node) testPath.get(1).getNode1();
+        assertEquals("GovernmentCenter", blueNode.getName());
+
+        label = testPath.get(2).getLabel();
+        assertEquals("Green",label);
+
+        Node greenNode = (Node) testPath.get(2).getNode2();
+        assertEquals("ParkStreet", greenNode.getName());
+
+        label = testPath.get(3).getLabel();
+        assertEquals("Red",label);
+
+        Node redNode = (Node) testPath.get(3).getNode1();
+        assertEquals("Charles/MGH", redNode.getName());
+    }
+
+    /* Tests MultiGraph getPath() optimal route from Blue Aquarium to Orange/Green Haymarket via State
+       for minimal train Transfers */
+    @org.junit.jupiter.api.Test
+    void multiGraphBlueToOrangeGreen() {
+
+        Station source = (Station) App.getStationByName(testStations, "Aquarium");
+
+        // Tests Obtained Route Correct for the Blue Aquarium to Orange/Green Haymarket via State
+        testPath = testGraph.getPath(App.getStationByName(testStations, "Aquarium"), App.getStationByName(testStations, "Haymarket"));
+        String label = testPath.get(0).getLabel();
+        assertEquals("Blue",label);
+
+        Node blueNode = (Node) testPath.get(0).getNode1();
+        assertEquals("Aquarium", blueNode.getName());
+        Node blueNodes = (Node) testPath.get(0).getOppositeNode(blueNode);
+        assertEquals("State", blueNodes.getName());
+
+        label = testPath.get(1).getLabel();
+        assertEquals("Orange",label);
+
+        Node orangeNode = (Node) testPath.get(1).getNode1();
+        assertEquals("Haymarket", orangeNode.getName());
+    }
+
 }
 
 
