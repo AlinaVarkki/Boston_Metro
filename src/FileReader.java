@@ -9,12 +9,12 @@ public class FileReader {
 
     HashMap<String, Node> stationsNodesById;
     HashMap<String,Station> stationsById;
-    List<Edge> connections;
+    List<Edge<Node>> connections;
 
 
     public FileReader() {}
 
-    public List<Edge> getConnections(){
+    public List<Edge<Node>> getConnections(){
         return connections;
     }
 

@@ -5,14 +5,14 @@ public class App {
         FileReader g = new FileReader();
         g.readInGraph("src/bostonmetro.txt");
         List<Node> stations = g.getStations();
-        List<Edge> connections = g.getConnections();
+        List<Edge<Node>> connections = g.getConnections();
 
-        MultiGraph graph = new MultiGraph<>();
+        MultiGraph<Node, Edge<Node>> graph = new MultiGraph<>();
         for(Node n: stations) graph.addNode(n);
         for(Edge e: connections) graph.addEdge(e);
 
-        Station source = (Station) getStationByName(stations, "Alewife");
-        List<Connection> path = graph.getPath(getStationByName(stations, "Alewife"), getStationByName(stations, "JFK/UMass"));
+        Node source = getStationByName(stations, "Alewife");
+        List<Edge<Node>> path = graph.getPath(getStationByName(stations, "Alewife"), getStationByName(stations, "State"));
 
         printPath(path,source);
 
@@ -25,16 +25,16 @@ public class App {
         return null;
     }
 
-    public static void printPath(List<Connection> path, Station source){
+    public static void printPath(List<Edge<Node>> path, Node source){
         String label = path.get(0).getLabel();
-        Station fromStation = source;
+        Node fromStation = source;
         System.out.println(fromStation.getName());
-        for(Connection c: path){
+        for(Edge<Node> c: path){
             if(!c.getLabel().equals(label)){
                 System.out.println("SWITCH LINE TO: " + c.getLabel());
                 label = c.getLabel();
             }
-            Station s = (Station) c.getOppositeNode(fromStation);
+            Node s = c.getOppositeNode(fromStation);
             System.out.println(s.getName());
             fromStation = s;
         }
