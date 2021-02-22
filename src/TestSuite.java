@@ -93,12 +93,6 @@ public class TestSuite {
 
         // Tests Nodes and Edges Correctly Set Up for the Blue line
         testPath = testGraph.getPath(App.getStationByName(testStations, "Bowdoin"), App.getStationByName(testStations, "Wonderland"));
-        //Connection e  = testPath.get(0);
-        //Node A = e.getNode1();
-        //Node wrap = new Station(c);
-        //String name = wrap.getName();
-        //System.out.println(A);
-
 
         Node blueNode = testPath.get(0).getNode1();
         assertEquals("Bowdoin", blueNode.getName());
@@ -606,6 +600,8 @@ public class TestSuite {
     @org.junit.jupiter.api.Test
     void multiGraphOrangeRemainsOrange() {
 
+        Node source = App.getStationByName(testStations, "CommunityCollege");
+
         // Tests Obtained Route Correct for the Orange CommunityCollege to Orange Chinatown without any Line swaps
         testPath = testGraph.getPath(App.getStationByName(testStations, "CommunityCollege"), App.getStationByName(testStations, "Chinatown"));
         String label = testPath.get(0).getLabel();
@@ -632,10 +628,11 @@ public class TestSuite {
         assertEquals("DowntownCrossing", orangeNode.getName());
         orangeNode = testPath.get(4).getNode2();
         assertEquals("Chinatown", orangeNode.getName());
+
+        App.printPath(testPath,source);
     }
 
-    /* Tests MultiGraph getPath() optimal route from Orange Chinatown to Green Boylston swapping at Haymarket
-       for minimal train Transfers */
+    /* Tests MultiGraph getPath() optimal route from Orange Chinatown to Green Boylston swapping at Haymarket for minimal train Transfers */
     @org.junit.jupiter.api.Test
     void multiGraphOrangeToGreen() {
 
@@ -652,28 +649,18 @@ public class TestSuite {
         assertEquals("DowntownCrossing", orangeNodes.getName());
 
         label = testPath.get(1).getLabel();
-        assertEquals("Orange", label);
-
-        orangeNode = testPath.get(2).getNode1();
-        assertEquals("State", orangeNode.getName());
-        orangeNode = testPath.get(2).getNode2();
-        assertEquals("Haymarket", orangeNode.getName());
+        assertEquals("Red", label);
 
         label = testPath.get(2).getLabel();
         assertEquals("Green", label);
 
-        Node greenNode = testPath.get(3).getNode2();
-        assertEquals("GovernmentCenter", greenNode.getName());
-        greenNode = testPath.get(4).getNode2();
+        Node greenNode = testPath.get(2).getNode1();
         assertEquals("ParkStreet", greenNode.getName());
-        greenNode = testPath.get(5).getNode2();
+        greenNode = testPath.get(2).getNode2();
         assertEquals("Boylston", greenNode.getName());
-
-        App.printPath(testPath, source);
     }
 
-    /* Tests MultiGraph getPath() optimal route from Orange Chinatown to Blue Bowdoin swapping at State
-       for minimal train Transfers */
+    /* Tests MultiGraph getPath() optimal route from Orange Chinatown to Blue Bowdoin swapping at State for minimal train Transfers */
     @org.junit.jupiter.api.Test
     void multiGraphOrangeToBlue() {
 
@@ -698,8 +685,7 @@ public class TestSuite {
         assertEquals("Bowdoin", blueNode.getName());
     }
 
-    /* Tests MultiGraph getPath() optimal route from Blue Aquarium to Red Charles/MGH via GovernmentCenter and ParkStreet
-       for minimal train Transfers */
+    /* Tests MultiGraph getPath() optimal route from Blue Aquarium to Red Charles/MGH via GovernmentCenter and ParkStreet for minimal train Transfers */
     @org.junit.jupiter.api.Test
     void multiGraphBlueToRed() {
 
@@ -728,8 +714,7 @@ public class TestSuite {
         assertEquals("Charles/MGH", redNode.getName());
     }
 
-    /* Tests MultiGraph getPath() optimal route from Blue Aquarium to Orange/Green Haymarket via State
-       for minimal train Transfers */
+    /* Tests MultiGraph getPath() optimal route from Blue Aquarium to Orange/Green Haymarket via State for minimal train Transfers */
     @org.junit.jupiter.api.Test
     void multiGraphBlueToOrangeGreen() {
 
