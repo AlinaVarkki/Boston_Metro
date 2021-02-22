@@ -11,8 +11,9 @@ public class App {
         for(Node n: stations) graph.addNode(n);
         for(Edge e: connections) graph.addEdge(e);
 
-        Node source = getStationByName(stations, "Alewife");
-        List<Edge<Node>> path = graph.getPath(getStationByName(stations, "Alewife"), getStationByName(stations, "State"));
+        Node source = getStationByName(stations, "CommunityCollege");
+        Node destination = getStationByName(stations, "Chinatown");
+        List<Edge<Node>> path = graph.getPath(source, destination);
 
         printPath(path,source);
 
