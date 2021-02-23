@@ -107,12 +107,11 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
                         nodesToEnqueueDiffLabel.add(neighbourNode);
                     }
                     childParentMap.put(neighbourNode, edge);
-                    visited.add(currNode);
+                    visited.add(neighbourNode);
                 }
             }
             for(N n: nodesToEnqueueSameLabel) queue.add(n);
             for(N n: nodesToEnqueueDiffLabel) queue.add(n);
-
         }
         return reconstructPathInEdges(childParentMap, source, destination);
     }
