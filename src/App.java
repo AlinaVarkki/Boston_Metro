@@ -17,6 +17,11 @@ public class App {
 
         printPath(path,source);
 
+        System.out.println("with Tuples");
+        List<Edge<Node>> path2 = graph.getPathTuple(source, destination);
+        printPath(path2,source);
+
+
     }
 
     public static Node getStationByName(List<Node> stations, String name){

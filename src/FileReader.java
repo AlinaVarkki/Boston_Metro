@@ -21,6 +21,7 @@ public class FileReader {
     public List<Node> getStations(){
         List<Node> stations = new ArrayList<>();
         for (String s: stationsNodesById.keySet()) stations.add(stationsById.get(s));
+        System.out.println("Num of Stations (exp: 124):"+stations.size());
         return stations;
     }
 

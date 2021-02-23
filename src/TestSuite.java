@@ -175,7 +175,7 @@ public class TestSuite {
 
         Station source = (Station) App.getStationByName(testStations, "Alewife");
         // Tests Nodes and Edges Correctly Set Up for the Red line
-        testPath = testGraph.getPath(App.getStationByName(testStations, "Alewife"), App.getStationByName(testStations, "JFK/UMass"));
+        testPath = testGraph.getPath(App.getStationByName(testStations, "Alewife"), App.getStationByName(testStations, "Porter"));
         Node redNode = testPath.get(0).getNode2();
         assertEquals("Alewife", redNode.getName());
         Node redNodes = testPath.get(0).getOppositeNode(redNode);
