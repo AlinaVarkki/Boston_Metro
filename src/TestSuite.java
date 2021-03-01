@@ -92,32 +92,34 @@ public class TestSuite {
     void multiGraphBlueLine() {
 
         // Tests Nodes and Edges Correctly Set Up for the Blue line
-        testPath = testGraph.getPath(App.getStationByName(testStations, "Bowdoin"), App.getStationByName(testStations, "Wonderland"));
+        Node source = App.getStationByName(testStations, "Bowdoin");
+        Node destination = App.getStationByName(testStations, "Wonderland");
+        testPath = testGraph.getPath(source, destination);
 
-        Node blueNode = testPath.get(0).getNode1();
+        Node blueNode = source;
         assertEquals("Bowdoin", blueNode.getName());
-        Node blueNodes = testPath.get(1).getOppositeNode(blueNode);
-        assertEquals("GovernmentCenter", blueNodes.getName());
-        blueNode = testPath.get(2).getNode2();
+        blueNode = testPath.get(1).getOppositeNode(blueNode);
+        assertEquals("GovernmentCenter", blueNode.getName());
+        blueNode = testPath.get(2).getOppositeNode(blueNode);
         assertEquals("State", blueNode.getName());
-        blueNodes = testPath.get(3).getNode2();
-        assertEquals("Aquarium", blueNodes.getName());
-        blueNodes = testPath.get(4).getNode2();
-        assertEquals("Maverick", blueNodes.getName());
-        blueNodes = testPath.get(5).getNode2();
-        assertEquals("Airport", blueNodes.getName());
-        blueNodes = testPath.get(6).getNode2();
-        assertEquals("WoodIsland", blueNodes.getName());
-        blueNodes = testPath.get(7).getNode2();
-        assertEquals("OrientHeights", blueNodes.getName());
-        blueNodes = testPath.get(8).getNode2();
-        assertEquals("SuffolkDowns", blueNodes.getName());
-        blueNodes = testPath.get(9).getNode2();
-        assertEquals("Beachmont", blueNodes.getName());
-        blueNodes = testPath.get(10).getNode2();
-        assertEquals("RevereBeach", blueNodes.getName());
-        blueNodes = testPath.get(10).getNode1();
-        assertEquals("Wonderland", blueNodes.getName());
+        blueNode = testPath.get(3).getOppositeNode(blueNode);
+        assertEquals("Aquarium", blueNode.getName());
+        blueNode = testPath.get(4).getOppositeNode(blueNode);
+        assertEquals("Maverick", blueNode.getName());
+        blueNode = testPath.get(5).getOppositeNode(blueNode);
+        assertEquals("Airport", blueNode.getName());
+        blueNode = testPath.get(6).getOppositeNode(blueNode);
+        assertEquals("WoodIsland", blueNode.getName());
+        blueNode = testPath.get(7).getOppositeNode(blueNode);
+        assertEquals("OrientHeights", blueNode.getName());
+        blueNode = testPath.get(8).getOppositeNode(blueNode);
+        assertEquals("SuffolkDowns", blueNode.getName());
+        blueNode = testPath.get(9).getOppositeNode(blueNode);
+        assertEquals("Beachmont", blueNode.getName());
+        blueNode = testPath.get(10).getOppositeNode(blueNode);
+        assertEquals("RevereBeach", blueNode.getName());
+        blueNode = testPath.get(10).getOppositeNode(blueNode);
+        assertEquals("Wonderland", blueNode.getName());
     }
 
     /* Tests MultiGraph getPath() of the Orange Line using Official Data */
@@ -173,34 +175,35 @@ public class TestSuite {
     @org.junit.jupiter.api.Test
     void multiGraphRedLine() {
 
-        Station source = (Station) App.getStationByName(testStations, "Alewife");
+        Node source = App.getStationByName(testStations, "Alewife");
+        Node destination = App.getStationByName(testStations, "JFK/UMass");
         // Tests Nodes and Edges Correctly Set Up for the Red line
-        testPath = testGraph.getPath(App.getStationByName(testStations, "Alewife"), App.getStationByName(testStations, "Porter"));
-        Node redNode = testPath.get(0).getNode2();
+        testPath = testGraph.getPath(source, destination);
+        Node redNode = source;
         assertEquals("Alewife", redNode.getName());
-        Node redNodes = testPath.get(0).getOppositeNode(redNode);
-        assertEquals("Davis", redNodes.getName());
-        redNode = testPath.get(1).getNode2();
+        redNode = testPath.get(0).getOppositeNode(redNode);
+        assertEquals("Davis", redNode.getName());
+        redNode = testPath.get(1).getOppositeNode(redNode);
         assertEquals("Porter", redNode.getName());
-        redNode = testPath.get(2).getNode2();
+        redNode = testPath.get(2).getOppositeNode(redNode);
         assertEquals("Harvard", redNode.getName());
-        redNode = testPath.get(3).getNode2();
+        redNode = testPath.get(3).getOppositeNode(redNode);
         assertEquals("Central", redNode.getName());
-        redNode = testPath.get(4).getNode2();
+        redNode = testPath.get(4).getOppositeNode(redNode);
         assertEquals("Kendall", redNode.getName());
-        redNode = testPath.get(5).getNode2();
+        redNode = testPath.get(5).getOppositeNode(redNode);
         assertEquals("Charles/MGH", redNode.getName());
-        redNode = testPath.get(6).getNode2();
+        redNode = testPath.get(6).getOppositeNode(redNode);
         assertEquals("ParkStreet", redNode.getName());
-        redNode = testPath.get(7).getNode2();
+        redNode = testPath.get(7).getOppositeNode(redNode);
         assertEquals("DowntownCrossing", redNode.getName());
-        redNode = testPath.get(8).getNode2();
+        redNode = testPath.get(8).getOppositeNode(redNode);
         assertEquals("SouthStation", redNode.getName());
-        redNode = testPath.get(9).getNode2();
+        redNode = testPath.get(9).getOppositeNode(redNode);
         assertEquals("Broadway", redNode.getName());
-        redNode = testPath.get(10).getNode2();
+        redNode = testPath.get(10).getOppositeNode(redNode);
         assertEquals("Andrew", redNode.getName());
-        redNode = testPath.get(11).getNode2();
+        redNode = testPath.get(11).getOppositeNode(redNode);
         assertEquals("JFK/UMass", redNode.getName());
 
         for (int i = 0; i < testStations.size(); i++) {
@@ -295,56 +298,58 @@ public class TestSuite {
     void multiGraphGreenBLine() {
 
         // Tests Nodes and Edges Correctly Set Up for the GreenB line
-        testPath = testGraph.getPath(App.getStationByName(testStations, "Copley"), App.getStationByName(testStations, "BostonCollege"));
-        Node greenBNode = testPath.get(0).getNode1();
+        Node source = App.getStationByName(testStations, "Copley");
+        Node destination = App.getStationByName(testStations, "BostonCollege");
+        testPath = testGraph.getPath(source, destination);
+        Node greenBNode = source;
         assertEquals("Copley", greenBNode.getName());
-        Node greenBNodes = testPath.get(0).getOppositeNode(greenBNode);
-        assertEquals("Hynes/ICA", greenBNodes.getName());
-        greenBNode = testPath.get(1).getNode1();
+        greenBNode = testPath.get(0).getOppositeNode(greenBNode);
+        assertEquals("Hynes/ICA", greenBNode.getName());
+        greenBNode = testPath.get(1).getOppositeNode(greenBNode);
         assertEquals("Kenmore", greenBNode.getName());
-        greenBNode = testPath.get(2).getNode1();
+        greenBNode = testPath.get(2).getOppositeNode(greenBNode);
         assertEquals("BlandfordStreet", greenBNode.getName());
-        greenBNode = testPath.get(3).getNode1();
+        greenBNode = testPath.get(3).getOppositeNode(greenBNode);
         assertEquals("BostonUniversityEast", greenBNode.getName());
-        greenBNode = testPath.get(4).getNode1();
+        greenBNode = testPath.get(4).getOppositeNode(greenBNode);
         assertEquals("BostonUniversityCentral", greenBNode.getName());
-        greenBNode = testPath.get(5).getNode1();
+        greenBNode = testPath.get(5).getOppositeNode(greenBNode);
         assertEquals("BostonUniversityWest", greenBNode.getName());
-        greenBNode = testPath.get(6).getNode1();
+        greenBNode = testPath.get(6).getOppositeNode(greenBNode);
         assertEquals("St.PaulStreet", greenBNode.getName());
-        greenBNode = testPath.get(7).getNode1();
+        greenBNode = testPath.get(7).getOppositeNode(greenBNode);
         assertEquals("PleasantStreet", greenBNode.getName());
-        greenBNode = testPath.get(8).getNode1();
+        greenBNode = testPath.get(8).getOppositeNode(greenBNode);
         assertEquals("BabcockStreet", greenBNode.getName());
-        greenBNode = testPath.get(9).getNode2();
+        greenBNode = testPath.get(9).getOppositeNode(greenBNode);
         assertEquals("BrightonAvenue", greenBNode.getName());
-        greenBNode = testPath.get(10).getNode2();
+        greenBNode = testPath.get(10).getOppositeNode(greenBNode);
         assertEquals("FordhamRoad", greenBNode.getName());
-        greenBNode = testPath.get(11).getNode2();
+        greenBNode = testPath.get(11).getOppositeNode(greenBNode);
         assertEquals("HarvardAvenue", greenBNode.getName());
-        greenBNode = testPath.get(12).getNode2();
+        greenBNode = testPath.get(12).getOppositeNode(greenBNode);
         assertEquals("GriggsStreet/LongwoodAvenue", greenBNode.getName());
-        greenBNode = testPath.get(13).getNode2();
+        greenBNode = testPath.get(13).getOppositeNode(greenBNode);
         assertEquals("AllstonStreet", greenBNode.getName());
-        greenBNode = testPath.get(14).getNode1();
+        greenBNode = testPath.get(14).getOppositeNode(greenBNode);
         assertEquals("WarrenStreet", greenBNode.getName());
-        greenBNode = testPath.get(15).getNode2();
+        greenBNode = testPath.get(15).getOppositeNode(greenBNode);
         assertEquals("SummitAvenue", greenBNode.getName());
-        greenBNode = testPath.get(16).getNode2();
+        greenBNode = testPath.get(16).getOppositeNode(greenBNode);
         assertEquals("WashingtonStreet", greenBNode.getName());
-        greenBNode = testPath.get(17).getNode2();
+        greenBNode = testPath.get(17).getOppositeNode(greenBNode);
         assertEquals("MountHoodRoad", greenBNode.getName());
-        greenBNode = testPath.get(18).getNode2();
+        greenBNode = testPath.get(18).getOppositeNode(greenBNode);
         assertEquals("SutherlandRoad", greenBNode.getName());
-        greenBNode = testPath.get(19).getNode2();
+        greenBNode = testPath.get(19).getOppositeNode(greenBNode);
         assertEquals("ChiswickRoad", greenBNode.getName());
-        greenBNode = testPath.get(20).getNode2();
+        greenBNode = testPath.get(20).getOppositeNode(greenBNode);
         assertEquals("ChestnutHillAvenue", greenBNode.getName());
-        greenBNode = testPath.get(21).getNode1();
+        greenBNode = testPath.get(21).getOppositeNode(greenBNode);
         assertEquals("SouthStreet", greenBNode.getName());
-        greenBNode = testPath.get(22).getNode1();
+        greenBNode = testPath.get(22).getOppositeNode(greenBNode);
         assertEquals("GreycliffRoad", greenBNode.getName());
-        greenBNode = testPath.get(23).getNode1();
+        greenBNode = testPath.get(23).getOppositeNode(greenBNode);
         assertEquals("BostonCollege", greenBNode.getName());
     }
 
@@ -389,34 +394,36 @@ public class TestSuite {
     void multiGraphGreenDLine() {
 
         // Tests Nodes and Edges Correctly Set Up for the GreenD line
-        testPath = testGraph.getPath(App.getStationByName(testStations, "Kenmore"), App.getStationByName(testStations, "Riverside"));
-        Node greenDNode = testPath.get(0).getNode1();
+        Node source = App.getStationByName(testStations, "Kenmore");
+        Node destination = App.getStationByName(testStations, "Riverside");
+        testPath = testGraph.getPath(source, destination);
+        Node greenDNode = source;
         assertEquals("Kenmore", greenDNode.getName());
-        Node greenDNodes = testPath.get(0).getOppositeNode(greenDNode);
-        assertEquals("Fenway", greenDNodes.getName());
-        greenDNode = testPath.get(1).getNode2();
+        greenDNode = testPath.get(0).getOppositeNode(greenDNode);
+        assertEquals("Fenway", greenDNode.getName());
+        greenDNode = testPath.get(1).getOppositeNode(greenDNode);
         assertEquals("Longwood", greenDNode.getName());
-        greenDNode = testPath.get(2).getNode2();
+        greenDNode = testPath.get(2).getOppositeNode(greenDNode);
         assertEquals("BrooklineVillage", greenDNode.getName());
-        greenDNode = testPath.get(3).getNode2();
+        greenDNode = testPath.get(3).getOppositeNode(greenDNode);
         assertEquals("BrooklineHills", greenDNode.getName());
-        greenDNode = testPath.get(4).getNode1();
+        greenDNode = testPath.get(4).getOppositeNode(greenDNode);
         assertEquals("Beaconsfield", greenDNode.getName());
-        greenDNode = testPath.get(5).getNode2();
+        greenDNode = testPath.get(5).getOppositeNode(greenDNode);
         assertEquals("Reservoir", greenDNode.getName());
-        greenDNode = testPath.get(6).getNode2();
+        greenDNode = testPath.get(6).getOppositeNode(greenDNode);
         assertEquals("ChesnutHill", greenDNode.getName());
-        greenDNode = testPath.get(7).getNode2();
+        greenDNode = testPath.get(7).getOppositeNode(greenDNode);
         assertEquals("NewtonCenter", greenDNode.getName());
-        greenDNode = testPath.get(8).getNode2();
+        greenDNode = testPath.get(8).getOppositeNode(greenDNode);
         assertEquals("NewtonHighlands", greenDNode.getName());
-        greenDNode = testPath.get(9).getNode2();
+        greenDNode = testPath.get(9).getOppositeNode(greenDNode);
         assertEquals("Eliot", greenDNode.getName());
-        greenDNode = testPath.get(10).getNode2();
+        greenDNode = testPath.get(10).getOppositeNode(greenDNode);
         assertEquals("Waban", greenDNode.getName());
-        greenDNode = testPath.get(11).getNode2();
+        greenDNode = testPath.get(11).getOppositeNode(greenDNode);
         assertEquals("Woodland", greenDNode.getName());
-        greenDNode = testPath.get(12).getNode2();
+        greenDNode = testPath.get(12).getOppositeNode(greenDNode);
         assertEquals("Riverside", greenDNode.getName());
 
     }
@@ -464,23 +471,25 @@ public class TestSuite {
     void multiGraphRedJunctionLine() {
 
         // Tests Obtained Route Correct for the Red Junction line from RedB to RedA
-        testPath = testGraph.getPath(App.getStationByName(testStations, "Wollaston"), App.getStationByName(testStations, "FieldsCorner"));
+        Node source = App.getStationByName(testStations, "Wollaston");
+        Node destination = App.getStationByName(testStations, "FieldsCorner");
+        testPath = testGraph.getPath(source, destination);
         String label = testPath.get(0).getLabel();
         assertEquals("RedB", label);
 
-        Node redJNode = testPath.get(0).getNode2();
+        Node redJNode = source;
         assertEquals("Wollaston", redJNode.getName());
         Node redJNodes = testPath.get(0).getOppositeNode(redJNode);
         assertEquals("NorthQuincy", redJNodes.getName());
-        redJNode = testPath.get(1).getNode1();
+        redJNode = testPath.get(1).getOppositeNode(redJNodes);
         assertEquals("JFK/UMass", redJNode.getName());
 
         label = testPath.get(2).getLabel();
         assertEquals("RedA", label);
 
-        redJNode = testPath.get(2).getNode2();
+        redJNode = testPath.get(2).getOppositeNode(redJNode);
         assertEquals("SavinHill", redJNode.getName());
-        redJNode = testPath.get(3).getNode2();
+        redJNode = testPath.get(3).getOppositeNode(redJNode);
         assertEquals("FieldsCorner", redJNode.getName());
     }
 
@@ -510,19 +519,21 @@ public class TestSuite {
     void multiGraphGreenEtoGreenBJunctionLine() {
 
         // Tests Obtained Route Correct for the Green Junction line from GreenE to GreenB
-        testPath = testGraph.getPath(App.getStationByName(testStations, "Prudential"), App.getStationByName(testStations, "Hynes/ICA"));
+        Node source = App.getStationByName(testStations, "Prudential");
+        Node destination = App.getStationByName(testStations, "Hynes/ICA");
+        testPath = testGraph.getPath(source, destination);
         String label = testPath.get(0).getLabel();
         assertEquals("GreenE", label);
 
-        Node greenJNode = testPath.get(0).getNode2();
+        Node greenJNode = source;
         assertEquals("Prudential", greenJNode.getName());
-        Node greenJNodes = testPath.get(0).getOppositeNode(greenJNode);
-        assertEquals("Copley", greenJNodes.getName());
+        greenJNode = testPath.get(0).getOppositeNode(greenJNode);
+        assertEquals("Copley", greenJNode.getName());
 
         label = testPath.get(1).getLabel();
-        assertEquals("GreenB", label);
+        assertEquals("GreenD", label);
 
-        greenJNode = testPath.get(1).getNode2();
+        greenJNode = testPath.get(1).getOppositeNode(greenJNode);
         assertEquals("Hynes/ICA", greenJNode.getName());
     }
 
@@ -551,20 +562,23 @@ public class TestSuite {
     @org.junit.jupiter.api.Test
     void multiGraphGreenDtoGreenBJunctionLine() {
 
+        Node source = App.getStationByName(testStations, "Fenway");
+        Node destination = App.getStationByName(testStations, "Hynes/ICA");
+
         // Tests Obtained Route Correct for the Green Junction line from GreenD to GreenB
-        testPath = testGraph.getPath(App.getStationByName(testStations, "Fenway"), App.getStationByName(testStations, "Hynes/ICA"));
+        testPath = testGraph.getPath(source, destination);
         String label = testPath.get(0).getLabel();
         assertEquals("GreenD", label);
 
-        Node greenJNode = testPath.get(0).getNode2();
+        Node greenJNode = source;
         assertEquals("Fenway", greenJNode.getName());
-        Node greenJNodes = testPath.get(0).getOppositeNode(greenJNode);
-        assertEquals("Kenmore", greenJNodes.getName());
+        greenJNode = testPath.get(0).getOppositeNode(greenJNode);
+        assertEquals("Kenmore", greenJNode.getName());
 
         label = testPath.get(1).getLabel();
-        assertEquals("GreenB", label);
+        assertEquals("GreenD", label);
 
-        greenJNode = testPath.get(1).getNode2();
+        greenJNode = testPath.get(1).getOppositeNode(greenJNode);
         assertEquals("Hynes/ICA", greenJNode.getName());
     }
 
@@ -577,22 +591,25 @@ public class TestSuite {
     @org.junit.jupiter.api.Test
     void multiGraphOrangeToRed() {
 
+        Node source = App.getStationByName(testStations, "Chinatown");
+        Node destination = App.getStationByName(testStations, "Charles/MGH");
+
         // Tests Obtained Route Correct for the Orange ChinaTown to Red Charles/MGH
-        testPath = testGraph.getPath(App.getStationByName(testStations, "Chinatown"), App.getStationByName(testStations, "Charles/MGH"));
+        testPath = testGraph.getPath(source, destination);
         String label = testPath.get(0).getLabel();
         assertEquals("Orange", label);
 
-        Node orangeNode = testPath.get(0).getNode2();
+        Node orangeNode = source;
         assertEquals("Chinatown", orangeNode.getName());
-        Node orangeNodes = testPath.get(0).getOppositeNode(orangeNode);
-        assertEquals("DowntownCrossing", orangeNodes.getName());
+        orangeNode = testPath.get(0).getOppositeNode(orangeNode);
+        assertEquals("DowntownCrossing", orangeNode.getName());
 
         label = testPath.get(1).getLabel();
         assertEquals("Red", label);
 
-        orangeNode = testPath.get(2).getNode2();
+        orangeNode = testPath.get(2).getOppositeNode(orangeNode);
         assertEquals("ParkStreet", orangeNode.getName());
-        orangeNode = testPath.get(2).getNode1();
+        orangeNode = testPath.get(2).getOppositeNode(orangeNode);
         assertEquals("Charles/MGH", orangeNode.getName());
     }
 
@@ -636,17 +653,18 @@ public class TestSuite {
     @org.junit.jupiter.api.Test
     void multiGraphOrangeToGreen() {
 
-        Station source = (Station) App.getStationByName(testStations, "Chinatown");
+        Node source = App.getStationByName(testStations, "Chinatown");
+        Node destination = App.getStationByName(testStations, "Boylston");
 
         // Tests Obtained Route Correct for the Orange Chinatown to Green Boylston swapping at Haymarket
-        testPath = testGraph.getPath(App.getStationByName(testStations, "Chinatown"), App.getStationByName(testStations, "Boylston"));
+        testPath = testGraph.getPath(source, destination);
         String label = testPath.get(0).getLabel();
         assertEquals("Orange", label);
 
-        Node orangeNode = testPath.get(0).getNode2();
+        Node orangeNode = source;
         assertEquals("Chinatown", orangeNode.getName());
-        Node orangeNodes = testPath.get(0).getOppositeNode(orangeNode);
-        assertEquals("DowntownCrossing", orangeNodes.getName());
+        orangeNode = testPath.get(0).getOppositeNode(orangeNode);
+        assertEquals("DowntownCrossing", orangeNode.getName());
 
         label = testPath.get(1).getLabel();
         assertEquals("Red", label);
@@ -654,9 +672,9 @@ public class TestSuite {
         label = testPath.get(2).getLabel();
         assertEquals("Green", label);
 
-        Node greenNode = testPath.get(2).getNode1();
+        Node greenNode = testPath.get(2).getOppositeNode(orangeNode);
         assertEquals("ParkStreet", greenNode.getName());
-        greenNode = testPath.get(2).getNode2();
+        greenNode = testPath.get(2).getOppositeNode(greenNode);
         assertEquals("Boylston", greenNode.getName());
     }
 
@@ -664,24 +682,27 @@ public class TestSuite {
     @org.junit.jupiter.api.Test
     void multiGraphOrangeToBlue() {
 
+        Node source = App.getStationByName(testStations, "Chinatown");
+        Node destination = App.getStationByName(testStations, "Bowdoin");
+
         // Tests Obtained Route Correct for the Orange Chinatown to Blue Bowdoin swapping at State
-        testPath = testGraph.getPath(App.getStationByName(testStations, "Chinatown"), App.getStationByName(testStations, "Bowdoin"));
+        testPath = testGraph.getPath(source, destination);
         String label = testPath.get(0).getLabel();
         assertEquals("Orange", label);
 
-        Node orangeNode = testPath.get(0).getNode2();
+        Node orangeNode = source;
         assertEquals("Chinatown", orangeNode.getName());
-        Node orangeNodes = testPath.get(0).getOppositeNode(orangeNode);
-        assertEquals("DowntownCrossing", orangeNodes.getName());
-        orangeNode = testPath.get(1).getNode1();
+        orangeNode = testPath.get(0).getOppositeNode(orangeNode);
+        assertEquals("DowntownCrossing", orangeNode.getName());
+        orangeNode = testPath.get(1).getOppositeNode(orangeNode);
         assertEquals("State", orangeNode.getName());
 
         label = testPath.get(2).getLabel();
         assertEquals("Blue", label);
 
-        Node blueNode = testPath.get(2).getNode1();
+        Node blueNode = testPath.get(2).getOppositeNode(orangeNode);
         assertEquals("GovernmentCenter", blueNode.getName());
-        blueNode = testPath.get(3).getNode1();
+        blueNode = testPath.get(3).getOppositeNode(blueNode);
         assertEquals("Bowdoin", blueNode.getName());
     }
 
@@ -689,28 +710,32 @@ public class TestSuite {
     @org.junit.jupiter.api.Test
     void multiGraphBlueToRed() {
 
+
+        Node source = App.getStationByName(testStations, "Aquarium");
+        Node destination = App.getStationByName(testStations, "Charles/MGH");
+
         // Tests Obtained Route Correct for the Blue Aquarium to Red Charles/MGH
-        testPath = testGraph.getPath(App.getStationByName(testStations, "Aquarium"), App.getStationByName(testStations, "Charles/MGH"));
+        testPath = testGraph.getPath(source, destination);
         String label = testPath.get(0).getLabel();
         assertEquals("Blue", label);
 
-        Node blueNode = testPath.get(0).getNode1();
+        Node blueNode = source;
         assertEquals("Aquarium", blueNode.getName());
-        Node blueNodes = testPath.get(0).getOppositeNode(blueNode);
-        assertEquals("State", blueNodes.getName());
-        blueNode = testPath.get(1).getNode1();
+        blueNode = testPath.get(0).getOppositeNode(blueNode);
+        assertEquals("State", blueNode.getName());
+        blueNode = testPath.get(1).getOppositeNode(blueNode);
         assertEquals("GovernmentCenter", blueNode.getName());
 
         label = testPath.get(2).getLabel();
         assertEquals("Green", label);
 
-        Node greenNode = testPath.get(2).getNode2();
+        Node greenNode = testPath.get(2).getOppositeNode(blueNode);
         assertEquals("ParkStreet", greenNode.getName());
 
         label = testPath.get(3).getLabel();
         assertEquals("Red", label);
 
-        Node redNode = testPath.get(3).getNode1();
+        Node redNode = testPath.get(3).getOppositeNode(greenNode);
         assertEquals("Charles/MGH", redNode.getName());
     }
 
@@ -719,19 +744,23 @@ public class TestSuite {
     void multiGraphBlueToOrangeGreen() {
 
         // Tests Obtained Route Correct for the Blue Aquarium to Orange/Green Haymarket via State
-        testPath = testGraph.getPath(App.getStationByName(testStations, "Aquarium"), App.getStationByName(testStations, "Haymarket"));
+        Node source = App.getStationByName(testStations, "Aquarium");
+        Node destination = App.getStationByName(testStations, "Haymarket");
+
+        testPath = testGraph.getPath(source, destination);
+
         String label = testPath.get(0).getLabel();
         assertEquals("Blue", label);
 
-        Node blueNode = testPath.get(0).getNode1();
+        Node blueNode = source;
         assertEquals("Aquarium", blueNode.getName());
-        Node blueNodes = testPath.get(0).getOppositeNode(blueNode);
-        assertEquals("State", blueNodes.getName());
+        blueNode = testPath.get(0).getOppositeNode(blueNode);
+        assertEquals("State", blueNode.getName());
 
         label = testPath.get(1).getLabel();
         assertEquals("Orange", label);
 
-        Node orangeNode = testPath.get(1).getNode1();
+        Node orangeNode = testPath.get(1).getOppositeNode(blueNode);
         assertEquals("Haymarket", orangeNode.getName());
     }
 

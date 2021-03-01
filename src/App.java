@@ -11,15 +11,15 @@ public class App {
         for(Node n: stations) graph.addNode(n);
         for(Edge e: connections) graph.addEdge(e);
 
-        Node source = getStationByName(stations, "CommunityCollege");
-        Node destination = getStationByName(stations, "Chinatown");
-        List<Edge<Node>> path = graph.getPath(source, destination);
+        Node source = getStationByName(stations, "Prudential");
+        Node destination = getStationByName(stations, "BostonUniversityEast");
 
+        List<Edge<Node>> path = graph.getPath(source, destination);
         printPath(path,source);
 
-        System.out.println("with Tuples");
-        List<Edge<Node>> path2 = graph.getPathTuple(source, destination);
-        printPath(path2,source);
+//        System.out.println("with Tuples");
+//        List<Edge<Node>> path2 = graph.getPathTuple(source, destination);
+//        printPath(path2,source);
 
 
     }

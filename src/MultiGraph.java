@@ -19,9 +19,9 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
     @Override
     public void addEdge(E edge){
         List<E> node1Adj = adjacencyMap.get(edge.getNode1());
-        List<E> node2Adj = adjacencyMap.get(edge.getNode2());
+        //List<E> node2Adj = adjacencyMap.get(edge.getNode2());
         if(node1Adj != null) node1Adj.add(edge);
-        if(node2Adj != null) node2Adj.add(edge);
+        //if(node2Adj != null) node2Adj.add(edge);
     }
 
     public List<E> getPathTuple(N source, N destination) {
@@ -87,7 +87,6 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
         Map<N, E> childParentMap = new HashMap<>();
         Queue<N> queue = new LinkedList<>();
         queue.add(source);
-        visited.add(source);
         N currNode;
         N neighbourNode;
         //adding not seen neighbour nodes into different lists according to the label colours
@@ -98,16 +97,17 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
             nodesToEnqueueSameLabel = new ArrayList();
             nodesToEnqueueDiffLabel = new ArrayList();
             currNode = queue.poll();
-            for(E edge: adjacencyMap.get(currNode)){
+            visited.add(currNode);
+            List<E> adjEdges = adjacencyMap.get(currNode);
+            for(E edge: adjEdges){
                 neighbourNode = edge.getOppositeNode(currNode);
-                if(!visited.contains(neighbourNode)){
+                if(!visited.contains(neighbourNode) && !queue.contains(neighbourNode)){
                     if(childParentMap.containsKey(currNode) && edge.getLabel().equals(childParentMap.get(currNode).getLabel())){
                         nodesToEnqueueSameLabel.add(neighbourNode);
                     }else{
                         nodesToEnqueueDiffLabel.add(neighbourNode);
                     }
                     childParentMap.put(neighbourNode, edge);
-                    visited.add(neighbourNode);
                 }
             }
             for(N n: nodesToEnqueueSameLabel) queue.add(n);
