@@ -24,8 +24,7 @@ public class TestSuite {
         b = new Station("2", "StationB");
         c = new Connection<>(a, b, "Pink");
 
-        FileReader reader = new FileReader();
-        reader.readInGraph("src/bostonmetro.txt");
+        FileReader reader = new FileReader("src/bostonmetro.txt");
         testStations = reader.getStations();
         testConnections = reader.getConnections();
 
@@ -54,8 +53,7 @@ public class TestSuite {
     /* Tests fileRead */
     @org.junit.jupiter.api.Test
     void fileReader() {
-        FileReader reader = new FileReader();
-        reader.readInGraph("src/bostonmetro.txt");
+        FileReader reader = new FileReader("src/bostonmetro.txt");
         List<Node> testStations = reader.getStations();
         List<Edge<Node>> testConnections = reader.getConnections();
 

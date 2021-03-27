@@ -2,8 +2,7 @@ import java.util.List;
 
 public class App {
     public static void main(String[] args){
-        FileReader g = new FileReader();
-        g.readInGraph("src/bostonmetro.txt");
+        FileReader g = new FileReader("src/bostonmetro.txt");
         List<Node> stations = g.getStations();
         List<Edge<Node>> connections = g.getConnections();
 
@@ -11,8 +10,8 @@ public class App {
         for(Node n: stations) graph.addNode(n);
         for(Edge e: connections) graph.addEdge(e);
 
-        Node source = getStationByName(stations, "Prudential");
-        Node destination = getStationByName(stations, "BostonUniversityEast");
+        Node source = getStationByName(stations, "Bowdoin");
+        Node destination = getStationByName(stations, "Wonderland");
 
         List<Edge<Node>> path = graph.getPath(source, destination);
         printPath(path,source);

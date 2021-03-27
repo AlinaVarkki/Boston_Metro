@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 public class FileReader {
-    ArrayList<String[]> arrsToBeProcessed;
+
     ArrayList<String[]> edgesToBeProcessed;
     HashSet<String> linesToBeProcessed;
 
@@ -12,7 +12,11 @@ public class FileReader {
     List<Edge<Node>> connections;
 
 
-    public FileReader() {}
+    public FileReader(String filepath) {
+        readInGraph(filepath);
+        System.out.println(connections.size());
+
+    }
 
     public List<Edge<Node>> getConnections(){
         return connections;
@@ -29,19 +33,46 @@ public class FileReader {
         connections = new ArrayList<>();
         for(String[] edgeArr: edgesToBeProcessed){
             if(!edgeArr[2].equals("0")) {
-                Connection c1 = new Connection(stationsById.get(edgeArr[0]), stationsById.get(edgeArr[2]), edgeArr[1]);
-                connections.add(c1);
+                Connection<Node> new_connection = new Connection<>(stationsById.get(edgeArr[0]), stationsById.get(edgeArr[2]), edgeArr[1]);
+                boolean isDuplicate = false;
+                /*for(Edge<Node> edge: connections){
+                    if(edge.getNode1() == new_connection.getNode1() && edge.getNode2() == new_connection.getNode2() && edge.getLabel().equals(new_connection.getLabel())) {
+                        isDuplicate = true;
+                        break;
+                    }
+                    if (edge.getNode1() == new_connection.getNode2() && edge.getNode2() == new_connection.getNode1() && edge.getLabel().equals(new_connection.getLabel())) {
+                        isDuplicate = true;
+                        break;
+                    }
+                }*/
+                if(!isDuplicate) {
+                    connections.add(new_connection);
+                }
             }
             if(!edgeArr[3].equals("0")) {
-                Connection c2 = new Connection(stationsById.get(edgeArr[0]), stationsById.get(edgeArr[3]), edgeArr[1]);
-                connections.add(c2);
+                Connection<Node> new_connection = new Connection<>(stationsById.get(edgeArr[0]), stationsById.get(edgeArr[3]), edgeArr[1]);
+                boolean isDuplicate = false;
+                /*for(Edge<Node> edge: connections){
+                    if(edge.getNode1() == new_connection.getNode1() && edge.getNode2() == new_connection.getNode2() && edge.getLabel().equals(new_connection.getLabel())) {
+                        isDuplicate = true;
+                        break;
+                    }
+                    if (edge.getNode1() == new_connection.getNode2() && edge.getNode2() == new_connection.getNode1() && edge.getLabel().equals(new_connection.getLabel())) {
+                        isDuplicate = true;
+                        break;
+                    }
+                }*/
+                if(!isDuplicate) {
+                    connections.add(new_connection);
+                }
             }
+
         }
     }
 
     public void readInGraph (String filepath){
 
-        arrsToBeProcessed = this.readFile(filepath);
+        ArrayList<String[]> arrsToBeProcessed = this.readFile(filepath);
         edgesToBeProcessed = new ArrayList<>();
         linesToBeProcessed = new HashSet<>();
 
@@ -72,7 +103,7 @@ public class FileReader {
 
     }
     /**
-     * @param filepath String is the path to the file with graph details
+     * @param filepath String is the path to the file with metro details
      * @return An Arraylist of the file lines, each line split into an array by whitespace
      * */
     private ArrayList<String[]> readFile(String filepath){
