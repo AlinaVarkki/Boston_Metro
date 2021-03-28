@@ -261,12 +261,5 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
 
         return newQueue;
     }
-    public class Tuple<X, Y> {
-        public final X first;
-        public final Y second;
-        public Tuple(X first, Y second) {
-            this.first = first;
-            this.second = second;
-        }
-    }
+
 }
