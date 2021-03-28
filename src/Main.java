@@ -1,11 +1,9 @@
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
@@ -20,7 +18,6 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.scene.control.Label;
 import javafx.stage.StageStyle;
 
 import java.util.ArrayList;
@@ -36,6 +33,7 @@ public class Main extends Application {
     private Color orange = Color.rgb(245,153,35);
     private Color red = Color.rgb(245,61,61);
     private Color white = Color.rgb(255,255,255);
+
     private HashMap<String, Color> colorMappings = new HashMap<>();
     private int circleRadius = 15;
 
@@ -139,7 +137,6 @@ public class Main extends Application {
                 int end = start + chunkSize*lineLength;
                 currentEnd = end;
 
-
                 //creates line
                 Line line = new Line(x,start,x,end);
                 line.setStroke(colorMappings.get(currentColor));
@@ -153,7 +150,6 @@ public class Main extends Application {
 
                     circles.getChildren().add(makeDoubleCircle(x,end,currentColor,stations.get(i+1).first));
                     nextColor = stations.get(i+1).first;
-
 
                 } else {
                     circles.getChildren().add(makeTripleCircle(x,end,currentColor));
@@ -354,7 +350,7 @@ public class Main extends Application {
             s2.add("Station Green "+i);
         }
 
-        stations.add(new Tuple<>("Red", s2));
+        stations.add(new Tuple<>("Mattapan", s2));
 
 
 
