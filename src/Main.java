@@ -19,7 +19,7 @@ public class Main extends Application{
         window.setTitle("Boston Metro System");
         Parent root = FXMLLoader.load(getClass().getResource("FirstScreen.fxml"));
         primaryStage.setTitle("Boston Metro System");
-        primaryStage.setScene(new Scene(root, 640, 400, Color.WHITE));
+        primaryStage.setScene(new Scene(root, 600, 400, Color.WHITE));
         primaryStage.show();
 
 
