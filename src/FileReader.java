@@ -8,14 +8,12 @@ public class FileReader {
     HashSet<String> linesToBeProcessed;
 
     HashMap<String, Node> stationsNodesById;
-    HashMap<String,Station> stationsById;
+    HashMap<String,Node> stationsById;
     List<Edge<Node>> connections;
 
 
     public FileReader(String filepath) {
         readInGraph(filepath);
-        System.out.println(connections.size());
-
     }
 
     public List<Edge<Node>> getConnections(){
@@ -93,8 +91,8 @@ public class FileReader {
                 edgesToBeProcessed.add(edge);
             }
 
-            Node newNode = new Station(idNum);
-            ((Station) newNode).setName(name);
+            Station newNode = new Station(idNum);
+            newNode.setName(name);
             stationsNodesById.put(idNum, newNode);
             stationsById.put(idNum, new Station(idNum, name));
 

@@ -24,7 +24,7 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
         //if(node2Adj != null) node2Adj.add(edge);
     }
 
-    public List<E> getPathTuple(N source, N destination) {
+    /*public List<E> getPathTuple(N source, N destination) {
         List<N> visited = new ArrayList<>();
         Map<N, E> childParentMap = new HashMap<>();
 
@@ -70,37 +70,41 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
             }
         }
         return reconstructPathInEdges(childParentMap, source, destination);
-    }
+    }*/
 
     @Override
     public List<E> getPath(N source, N destination) {
         List<N> visited = new ArrayList<>();
-        Queue<Tuple<N,List<E>>> queue = new LinkedList<>();
+        Queue<Triple<N,List<E>,Integer>> queue = new LinkedList<>();
+        Queue<Triple<N,List<E>,Integer>> nextQueue = new LinkedList<>();
 
-        queue.add(new Tuple<>(source,new LinkedList<>()));
-        Tuple<N,List<E>> currTuple;
+        queue.add(new Triple<>(source,new LinkedList<>(),0));
+        Triple<N,List<E>,Integer> currTuple;
         N currNode;
         List<E> currPath;
+        Integer transitions;
         N neighbourNode;
 
-        ArrayList<Tuple<N,List<E>>> nodesToEnqueueSameLabel;
-        ArrayList<Tuple<N,List<E>>> nodesToEnqueueDiffLabel;
+        ArrayList<Triple<N,List<E>,Integer>> nodesToEnqueueSameLabel;
+        ArrayList<Triple<N,List<E>,Integer>> nodesToEnqueueDiffLabel;
 
         while(!queue.isEmpty()){
 
-            nodesToEnqueueSameLabel = new ArrayList();
-            nodesToEnqueueDiffLabel = new ArrayList();
+            nodesToEnqueueSameLabel = new ArrayList<>();
+            nodesToEnqueueDiffLabel = new ArrayList<>();
 
             currTuple = queue.poll();
             currNode = currTuple.first;
             currPath = currTuple.second;
+            transitions = currTuple.third;
+
             if(currNode == destination){
                 queue.clear();
                 visited.add(currNode);
                 return currPath;
             }
 
-            if(!visited.contains(currNode)) {
+            if(true) {
                 visited.add(currNode);
                 List<E> adjEdges = adjacencyMap.get(currNode);
                 for(E edge: adjEdges){
@@ -109,16 +113,21 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
                         if(currPath.size() > 0 && edge.getLabel().equals(currPath.get(currPath.size()-1).getLabel())){
                             List<E> newPath = new LinkedList<>(currPath);
                             newPath.add(edge);
-                            nodesToEnqueueSameLabel.add(new Tuple<>(neighbourNode,newPath));
+                            nodesToEnqueueSameLabel.add(new Triple<>(neighbourNode,newPath,transitions));
                         }else{
                             List<E> newPath = new LinkedList<>(currPath);
                             newPath.add(edge);
-                            nodesToEnqueueDiffLabel.add(new Tuple<>(neighbourNode,newPath));
+                            nodesToEnqueueDiffLabel.add(new Triple<>(neighbourNode,newPath,transitions+1));
                         }
                     }
                 }
-                queue.addAll(nodesToEnqueueSameLabel);
-                queue.addAll(nodesToEnqueueDiffLabel);
+                nextQueue = this.addOrdered(nextQueue,nodesToEnqueueSameLabel);
+                nextQueue = this.addOrdered(nextQueue,nodesToEnqueueDiffLabel);
+
+                if(queue.isEmpty()){
+                    queue.addAll(nextQueue);
+                    nextQueue.clear();
+                }
             }
         }
         System.out.println("No path found");
@@ -126,8 +135,7 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
 
     }
 
-    /*
-    * public List<E> getPath(N source, N destination) {
+    /*public List<E> getPath(N source, N destination) {
         List<N> visited = new ArrayList<>();
         //contains a Node and edge that led to it(need to map nodes to the edge, not node, to see label of the node that led to it and prioritize the path with less change)
         Map<N, E> childParentMap = new HashMap<>();
@@ -230,30 +238,30 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
         return path;
     }
 
-    private List<Tuple<N,Integer>> nodesToTuples(List<N> list,Integer num){
-        List<Tuple<N,Integer>> newList = new ArrayList<>();
-        for(N n: list) newList.add(new Tuple(n,num));
+    private List<Triple<N,List<E>,Integer>> nodesToTriples(List<N> list,List<E> path,Integer num){
+        List<Triple<N,List<E>,Integer>> newList = new ArrayList<>();
+        for(N n: list) newList.add(new Triple(n,path,num));
         return newList;
     }
 
-    private Queue<Tuple<N,Integer>> addOrdered(Queue<Tuple<N,Integer>> queue, List<Tuple<N,Integer>> toadd){
-        if(toadd.isEmpty()){
+    private Queue<Triple<N,List<E>,Integer>> addOrdered(Queue<Triple<N,List<E>,Integer>> queue, List<Triple<N,List<E>,Integer>> toAdd){
+        if(toAdd.isEmpty()){
             return queue;
         }
 
 
-        Queue<Tuple<N,Integer>> newQueue = new LinkedList<>();
-        Iterator<Tuple<N,Integer>> iterator = queue.iterator();
-        Integer transitions = toadd.get(0).second;
+        Queue<Triple<N,List<E>,Integer>> newQueue = new LinkedList<>();
+        Iterator<Triple<N,List<E>,Integer>> iterator = queue.iterator();
+        Integer transitions = toAdd.get(0).third;
 
         if(queue.isEmpty()){
-            newQueue.addAll(toadd);
+            newQueue.addAll(toAdd);
         }
 
         while (iterator.hasNext()){
-            Tuple<N,Integer> node = iterator.next();
-            if(node.second > transitions || !iterator.hasNext()){
-                newQueue.addAll(toadd);
+            Triple<N,List<E>,Integer> node = iterator.next();
+            if(node.third > transitions || !iterator.hasNext()){
+                newQueue.addAll(toAdd);
                 iterator.forEachRemaining(newQueue::add);
             }
             newQueue.add(node);

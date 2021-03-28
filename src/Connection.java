@@ -29,4 +29,9 @@ public class Connection<N> implements Edge<N> {
     public N getOppositeNode(N node) {
         return ((node == node1) ? node2 : node1);
     }
+
+    @Override
+    public String toString() {
+        return this.label + ": "+ node1.toString()+" to "+node2.toString();
+    }
 }

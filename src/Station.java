@@ -14,11 +14,22 @@ public class Station implements Node{
 
     @Override
     public String getName() {
-        return name;
+        return this.name;
     }
 
     @Override
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String getID(){return this.idNumber;}
+
+    @Override
+    public void setID(String id){this.idNumber = id;}
+
+    @Override
+    public String toString(){
+        return this.idNumber+" "+this.name;
     }
 }
