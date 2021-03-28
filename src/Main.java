@@ -3,6 +3,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -36,7 +37,7 @@ public class Main extends Application {
     private Color red = Color.rgb(245,61,61);
     private Color white = Color.rgb(255,255,255);
     private HashMap<String, Color> colorMappings = new HashMap<>();
-    private int circleRadius = 10;
+    private int circleRadius = 15;
 
 
 
@@ -48,8 +49,6 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         initialiseColorMappings();
 
-
-//        Parent root = FXMLLoader.load(getClass().getResource("javafx.fxml"));
         VBox root = new VBox();
         root.setSpacing(20);
         root.setStyle("-fx-background-color: #0B132B;");
@@ -64,10 +63,6 @@ public class Main extends Application {
         btn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-//                ArrayList<Text> textStations = printOutColoredStations(getStations());
-//                for (Text station : textStations) {
-//                    root.getChildren().add(station);
-//                }
 
                 HBox line = createLine(getStations());
                 root.getChildren().add(line);
@@ -80,7 +75,7 @@ public class Main extends Application {
 
 
         stage.setScene(scene);
-//        stage.initStyle(StageStyle.UTILITY);
+        stage.initStyle(StageStyle.UTILITY);
 
 
         stage.show();
@@ -88,92 +83,90 @@ public class Main extends Application {
 
 
 
-    public ArrayList<Text> printOutColoredStations(ArrayList<Tuple<String, String>> stations) {
-        ArrayList<Text> stationNames = new ArrayList<>();
-        for (Tuple<String,String> station : stations) {
-            Text text = new Text();
-            text.setText(station.first);
-            switch (station.second) {
-                case "Red":
-                    text.setFill(red);
-                    break;
-                case "Blue":
-                    text.setFill(blue);
-                    break;
-                case "Orange":
-                    text.setFill(orange);
-                    break;
-                default:
-                    text.setFill(green);
-                    break;
-            }
-            stationNames.add(text);
-        }
-
-        return stationNames;
-    }
-
-    public HBox createLine(ArrayList<Tuple<String, String>> stations) {
+    public HBox createLine(ArrayList<Tuple<String, ArrayList<String>>> stations) {
         Group lines = new Group();
         Group circles = new Group();
         VBox names = new VBox();
 
         int x = 30;
 
+
         if (!stations.isEmpty()) {
 
-            int chunkSize = 0;
-            int lineLength = 550 / stations.size();
-            Tuple<String, String> previous = stations.get(0);
-//            names.setSpacing(lineLength);
+            int currentEnd = 0;
+            int chunkSize;
 
-            circles.getChildren().add(makeTripleCircle(x,0,previous.second));
+            int countLen = 0;
 
-            for (int i = 1; i < stations.size(); i++) {
-
-                Tuple<String, String> current = stations.get(i);
-
-                if (!previous.second.equals(current.second) || i == stations.size() - 1) {
-
-
-                    double start = (i-1)*lineLength - chunkSize;
-                    double end = i*lineLength;
-                    int arrStart = i - chunkSize/lineLength -1;
-
-                    if (i != stations.size() - 1) {
-                        circles.getChildren().add(makeDoubleCircle(x,end,previous.second,current.second));
-
-                    } else {
-                        circles.getChildren().add(makeTripleCircle(x,end,previous.second));
-
-
-                    }
-
-
-                    VBox chunkOfStations = displayChunkOfStations(stations.subList(arrStart,i), lineLength);
-                    names.setMargin(chunkOfStations, new Insets(circleRadius/3,0,0,circleRadius*2));
-                    names.getChildren().add(chunkOfStations);
-
-                    Line line = new Line(x,start,x,end);
-                    line.setStroke(colorMappings.get(previous.second));
-                    line.setStyle("-fx-stroke-width: 5;");
-                    lines.getChildren().add(line);
-
-
-                    chunkSize = 0;
+            for (Tuple<String, ArrayList<String>> line : stations) {
+                if (line.second.size() > 10) {
+                    countLen += 10;
                 } else {
-                    chunkSize += lineLength;
+                    countLen += line.second.size();
                 }
-
-                previous = current;
 
             }
 
-            Text name =displayBiggerStationName(stations.get(stations.size()-1).first, lineLength);
-            names.setMargin(name, new Insets(-circleRadius/3,0,0,circleRadius*2));
-            names.getChildren().add(name);
+            int lineLength = 500 / countLen;
+
+            String currentColor = stations.get(0).first;
+            ArrayList<String> currentLine = stations.get(0).second;
+
+            circles.getChildren().add(makeTripleCircle(x,0,currentColor));
+
+            HBox titleLine = displayLineLabel(currentLine.get(0),currentColor,"Take");
+
+            names.setMargin(titleLine, new Insets(circleRadius/3,0,0,circleRadius*2));
+            names.getChildren().add(titleLine);
+
+            stations.get(0).second.remove(0);
+
+            for (int i = 0; i < stations.size(); i++) {
+
+                //gets current color and arraylist of stations
+                currentColor = stations.get(i).first;
+                currentLine = stations.get(i).second;
+
+                //figures out the length of line to draw
+                if (currentLine.size()>10) {
+                    chunkSize = 10;
+                } else {
+                    chunkSize = currentLine.size();
+                }
+
+                //sets up the points
+                int start = currentEnd;
+                int end = start + chunkSize*lineLength;
+                currentEnd = end;
 
 
+                //creates line
+                Line line = new Line(x,start,x,end);
+                line.setStroke(colorMappings.get(currentColor));
+                line.setStyle("-fx-stroke-width: 5;");
+                lines.getChildren().add(line);
+
+
+                String nextColor;
+                //creates circle
+                if (i+1 < stations.size()) {
+
+                    circles.getChildren().add(makeDoubleCircle(x,end,currentColor,stations.get(i+1).first));
+                    nextColor = stations.get(i+1).first;
+
+
+                } else {
+                    circles.getChildren().add(makeTripleCircle(x,end,currentColor));
+                    nextColor = "";
+
+                }
+
+                //creates text
+                VBox chunkOfStations = displayChunkOfStations(currentLine, lineLength, nextColor);
+                names.setMargin(chunkOfStations, new Insets(0,0,0,circleRadius*2));
+                names.getChildren().add(chunkOfStations);
+
+            }
         }
 
         Group finalGroup = new Group();
@@ -188,22 +181,53 @@ public class Main extends Application {
     }
 
 
-    private VBox displayChunkOfStations(List<Tuple<String,String>> stations, int lineHeight) {
+    //text methods
+    private VBox displayChunkOfStations(ArrayList<String> stations, int lineHeight, String nextColor) {
         VBox chunk = new VBox();
-//        chunk.setSpacing(lineHeight);
-
-        Text title = displayBiggerStationName(stations.get(0).first, lineHeight);
-        chunk.getChildren().add(title);
 
         if (stations.size()>1) {
-            chunk.getChildren().add(displaySmallerStationNames(stations, lineHeight));
+            chunk.getChildren().add(displaySmallerStationNamesImproved(stations, lineHeight));
+        }
+
+        if (nextColor.equals("")) {
+            Text title = displayBiggerStationName(stations.get(stations.size()-1));
+            chunk.getChildren().add(title);
+        } else {
+            HBox titleLine = displayLineLabel(stations.get(stations.size()-1),nextColor,"Switch to");
+            chunk.getChildren().add(titleLine);
+
         }
 
         return chunk;
     }
 
-    private Text displayBiggerStationName(String name, int lineHeight) {
-        int fontHeight = circleRadius*2;
+    private HBox displayLineLabel(String name, String previousColor, String label) {
+        Text title = displayBiggerStationName(name);
+        Text switchLine = displaySwitchLine(label,previousColor);
+
+        HBox titleLine = new HBox();
+        titleLine.setSpacing(circleRadius*2);
+        titleLine.getChildren().addAll(title, switchLine);
+        titleLine.setAlignment(Pos.BASELINE_LEFT);
+
+        return titleLine;
+    }
+
+    private Text displaySwitchLine(String label, String lineColor) {
+        int fontHeight = circleRadius;
+
+        Text text = new Text();
+        text.setText(label + " " + lineColor);
+        text.setFill(colorMappings.get(lineColor));
+
+        text.setFont(Font.font("Arial", FontWeight.EXTRA_LIGHT, FontPosture.ITALIC,fontHeight));
+
+
+        return text;
+    }
+
+    private Text displayBiggerStationName(String name) {
+        int fontHeight = 3*circleRadius/2;
 
         Text text = new Text();
         text.setText(name.toUpperCase());
@@ -213,17 +237,50 @@ public class Main extends Application {
         return text;
     }
 
-    private VBox displaySmallerStationNames(List<Tuple<String,String>> stations, int lineHeight) {
-        int fontHeight = 3*circleRadius/2;
+    private VBox displaySmallerStationNames(List<String> stations, int lineHeight) {
+        int fontHeight = circleRadius;
         VBox names = new VBox();
-        int padding = (lineHeight*(stations.size()) - circleRadius*2 - (stations.size())*fontHeight)/2;
 
-        names.setPadding(new Insets(padding,0,padding,0));
 
-        for (int i = 1; i < stations.size(); i++) {
-            Text statName = displaySmallerStationName(stations.get(i).first, fontHeight);
+        for (int i = 0; i < stations.size()-1; i++) {
+            Text statName = displaySmallerStationName(stations.get(i), fontHeight);
             names.setMargin(statName, new Insets(0,0,0,circleRadius*3));
             names.getChildren().add(statName);
+        }
+
+        return names;
+    }
+
+    private HBox displaySmallerStationNamesImproved(List<String> stations, int lineHeight) {
+        HBox names = new HBox();
+
+        int fontHeight = circleRadius;
+
+        int height = Math.min(stations.size(),10);
+        int padding = (lineHeight*(height) - circleRadius*2 - (height)*fontHeight)/2 + +circleRadius/height;
+        names.setPadding(new Insets(padding,0,padding ,0));
+
+
+        int numberOfLines = 10;
+
+
+
+        if (stations.size() > numberOfLines) {
+            int diff = stations.size() - numberOfLines;
+            int index = 0;
+            while (diff > 0) {
+                VBox column = displaySmallerStationNames(stations.subList(index, index+numberOfLines),lineHeight);
+                names.getChildren().add(column);
+                index += numberOfLines-1;
+                diff -= index;
+            }
+            VBox column = displaySmallerStationNames(stations.subList(index, stations.size()),lineHeight);
+            names.getChildren().add(column);
+
+        } else {
+
+           names.getChildren().add(displaySmallerStationNames(stations,lineHeight));
+
         }
 
         return names;
@@ -256,8 +313,8 @@ public class Main extends Application {
     private Group makeDoubleCircle(double x, double y, String color1, String color2) {
         Group circleGroup = new Group();
 
-        circleGroup.getChildren().add(makeCircle(x,y,circleRadius*1.5,"BG","BG"));
-        circleGroup.getChildren().add(makeCircle(x,y,circleRadius*1.05,color1,color2));
+        circleGroup.getChildren().add(makeCircle(x,y,circleRadius,"BG","BG"));
+        circleGroup.getChildren().add(makeCircle(x,y,circleRadius*0.75,color1,color2));
 
         return circleGroup;
     }
@@ -265,9 +322,9 @@ public class Main extends Application {
     private Group makeTripleCircle(double x, double y, String color) {
         Group circleGroup = new Group();
 
-        circleGroup.getChildren().add(makeCircle(x,y,circleRadius*1.5,color, color));
-        circleGroup.getChildren().add(makeCircle(x,y,circleRadius*1.2,"BG","BG"));
-        circleGroup.getChildren().add(makeCircle(x,y,circleRadius*0.75,color, color));
+        circleGroup.getChildren().add(makeCircle(x,y,circleRadius,color, color));
+        circleGroup.getChildren().add(makeCircle(x,y,circleRadius*0.8,"BG","BG"));
+        circleGroup.getChildren().add(makeCircle(x,y,circleRadius*0.5,color, color));
 
 
         return circleGroup;
@@ -275,47 +332,31 @@ public class Main extends Application {
 
 
 
-    public ArrayList<Tuple<String, String>> getStations() {
-        ArrayList<Tuple<String, String>> stations = new ArrayList<>();
+    public ArrayList<Tuple<String, ArrayList<String>>> getStations() {
+        ArrayList<Tuple<String, ArrayList<String>>> stations = new ArrayList<>();
+
+        ArrayList<String> s = new ArrayList<>();
+        for (int i = 0; i< 23; i++) {
+            s.add("Station Orange "+ i);
+        }
+
+        stations.add(new Tuple<>("GreenB", s));
+
+        ArrayList<String> s3 = new ArrayList<>();
+        for (int i = 0; i< 2; i++) {
+            s3.add("Station Blue "+i);
+        }
+
+        stations.add(new Tuple<>("Blue", s3));
+
+        ArrayList<String> s2 = new ArrayList<>();
+        for (int i = 0; i< 15; i++) {
+            s2.add("Station Green "+i);
+        }
+
+        stations.add(new Tuple<>("Red", s2));
 
 
-        stations.add(new Tuple("Start", "Orange"));
-        stations.add(new Tuple("station", "Orange"));
-
-        stations.add(new Tuple("Change 1", "Green"));
-        stations.add(new Tuple("station1", "Green"));
-        stations.add(new Tuple("station2", "Green"));
-        stations.add(new Tuple("station3", "Green"));
-//        stations.add(new Tuple("station4", "Green"));
-//        stations.add(new Tuple("station5", "Green"));
-//        stations.add(new Tuple("station6", "Green"));
-//        stations.add(new Tuple("station7", "Green"));
-//        stations.add(new Tuple("station8", "Green"));
-//        stations.add(new Tuple("station9", "Green"));
-//        stations.add(new Tuple("station10", "Green"));
-//        stations.add(new Tuple("station11", "Green"));
-//        stations.add(new Tuple("station12", "Green"));
-//        stations.add(new Tuple("station13", "Green"));
-//        stations.add(new Tuple("station14", "Green"));
-//        stations.add(new Tuple("station15", "Green"));
-//        stations.add(new Tuple("station5", "Green"));
-//        stations.add(new Tuple("station6", "Green"));
-//        stations.add(new Tuple("station7", "Green"));
-//        stations.add(new Tuple("station8", "Green"));
-//        stations.add(new Tuple("station9", "Green"));
-//        stations.add(new Tuple("station10", "Green"));
-//        stations.add(new Tuple("station11", "Green"));
-//        stations.add(new Tuple("station12", "Green"));
-//        stations.add(new Tuple("station13", "Green"));
-//        stations.add(new Tuple("station14", "Green"));
-//        stations.add(new Tuple("station15", "Green"));
-
-        stations.add(new Tuple("Change 2", "Blue"));
-        stations.add(new Tuple("station", "Blue"));
-        stations.add(new Tuple("station", "Blue"));
-        stations.add(new Tuple("station", "Blue"));
-
-        stations.add(new Tuple("End", "Blue"));
 
 
         return stations;
@@ -339,5 +380,4 @@ public class Main extends Application {
 }
 
 
-// [(station, color)]
 
