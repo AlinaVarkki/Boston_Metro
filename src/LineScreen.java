@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 
 
-public class Main extends Application {
+public class LineScreen extends Application {
 
     private Color background = Color.rgb(11,19,43);
     private Color blue = Color.rgb(18,126,188);
@@ -333,7 +333,7 @@ public class Main extends Application {
 
         ArrayList<String> s = new ArrayList<>();
         for (int i = 0; i< 23; i++) {
-            s.add("Station Orange "+ i);
+            s.add("Station GreenB "+ i);
         }
 
         stations.add(new Tuple<>("GreenB", s));
@@ -343,16 +343,14 @@ public class Main extends Application {
             s3.add("Station Blue "+i);
         }
 
-        stations.add(new Tuple<>("Blue", s3));
+//        stations.add(new Tuple<>("Blue", s3));
 
         ArrayList<String> s2 = new ArrayList<>();
-        for (int i = 0; i< 15; i++) {
-            s2.add("Station Green "+i);
+        for (int i = 0; i< 5; i++) {
+            s2.add("Station Mattapan "+i);
         }
 
         stations.add(new Tuple<>("Mattapan", s2));
-
-
 
 
         return stations;
