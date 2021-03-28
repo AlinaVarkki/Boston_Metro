@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.List;
 
 public class App {
@@ -10,9 +11,8 @@ public class App {
         for(Node n: stations) graph.addNode(n);
         for(Edge e: connections) graph.addEdge(e);
 
-        Node source = getStationByName(stations, "Bowdoin");
-        Node destination = getStationByName(stations, "Wonderland");
-
+        Node source = getStationByName(stations, "State");
+        Node destination = getStationByName(stations, "OakGrove");
         List<Edge<Node>> path = graph.getPath(source, destination);
         printPath(path,source);
 

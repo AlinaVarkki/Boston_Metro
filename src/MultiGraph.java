@@ -26,8 +26,8 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
 
     public List<E> getPathTuple(N source, N destination) {
         List<N> visited = new ArrayList<>();
-        //contains a Node and edge that led to it(need to map nodes to the edge, not node, to see label of the node that led to it and prioritize the path with less change)
         Map<N, E> childParentMap = new HashMap<>();
+
         Queue<Tuple<N,Integer>> queue = new LinkedList<>();
         Queue<Tuple<N,Integer>> nextQueue = new LinkedList<>();
         queue.add(new Tuple<>(source,0));
@@ -36,8 +36,6 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
         N neighbourNode;
         Tuple<N,Integer> currTuple;
         Integer transitions;
-        //adding not seen neighbour nodes into different lists according to the label colours
-        //when adding neighbours to the queue the ones with the same label are prioritized so the first path found would be with the least station changes
         ArrayList<N> nodesToEnqueueSameLabel;
         ArrayList<N> nodesToEnqueueDiffLabel;
 
@@ -71,17 +69,108 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
                 nextQueue.clear();
             }
         }
-
-
-
-
-
-
         return reconstructPathInEdges(childParentMap, source, destination);
     }
 
     @Override
     public List<E> getPath(N source, N destination) {
+        List<N> visited = new ArrayList<>();
+        Queue<Tuple<N,List<E>>> queue = new LinkedList<>();
+
+        queue.add(new Tuple<>(source,new LinkedList<>()));
+        Tuple<N,List<E>> currTuple;
+        N currNode;
+        List<E> currPath;
+        N neighbourNode;
+
+        ArrayList<Tuple<N,List<E>>> nodesToEnqueueSameLabel;
+        ArrayList<Tuple<N,List<E>>> nodesToEnqueueDiffLabel;
+
+        while(!queue.isEmpty()){
+
+            nodesToEnqueueSameLabel = new ArrayList();
+            nodesToEnqueueDiffLabel = new ArrayList();
+
+            currTuple = queue.poll();
+            currNode = currTuple.first;
+            currPath = currTuple.second;
+            if(currNode == destination){
+                queue.clear();
+                visited.add(currNode);
+                return currPath;
+            }
+
+            if(!visited.contains(currNode)) {
+                visited.add(currNode);
+                List<E> adjEdges = adjacencyMap.get(currNode);
+                for(E edge: adjEdges){
+                    neighbourNode = edge.getOppositeNode(currNode);
+                    if(!visited.contains(neighbourNode)){
+                        if(currPath.size() > 0 && edge.getLabel().equals(currPath.get(currPath.size()-1).getLabel())){
+                            List<E> newPath = new LinkedList<>(currPath);
+                            newPath.add(edge);
+                            nodesToEnqueueSameLabel.add(new Tuple<>(neighbourNode,newPath));
+                        }else{
+                            List<E> newPath = new LinkedList<>(currPath);
+                            newPath.add(edge);
+                            nodesToEnqueueDiffLabel.add(new Tuple<>(neighbourNode,newPath));
+                        }
+                    }
+                }
+                queue.addAll(nodesToEnqueueSameLabel);
+                queue.addAll(nodesToEnqueueDiffLabel);
+            }
+        }
+        System.out.println("No path found");
+        return new LinkedList<E>();
+
+    }
+
+    /*
+    * public List<E> getPath(N source, N destination) {
+        List<N> visited = new ArrayList<>();
+        //contains a Node and edge that led to it(need to map nodes to the edge, not node, to see label of the node that led to it and prioritize the path with less change)
+        Map<N, E> childParentMap = new HashMap<>();
+        Queue<N> queue = new LinkedList<>();
+        queue.add(source);
+        N currNode;
+        N neighbourNode;
+        //adding not seen neighbour nodes into different lists according to the label colours
+        //when adding neighbours to the queue the ones with the same label are prioritized so the first path found would be with the least station changes
+        ArrayList<N> nodesToEnqueueSameLabel;
+        ArrayList<N> nodesToEnqueueDiffLabel;
+
+        while(!queue.isEmpty()){
+            nodesToEnqueueSameLabel = new ArrayList();
+            nodesToEnqueueDiffLabel = new ArrayList();
+            currNode = queue.poll();
+            if(currNode == destination){
+                queue.clear();
+                visited.add(currNode);
+            }
+
+
+            if(!visited.contains(currNode)) {
+                visited.add(currNode);
+                List<E> adjEdges = adjacencyMap.get(currNode);
+                for (E edge : adjEdges) {
+                    neighbourNode = edge.getOppositeNode(currNode);
+                    if (childParentMap.containsKey(currNode) && edge.getLabel().equals(childParentMap.get(currNode).getLabel())) {
+                        nodesToEnqueueSameLabel.add(neighbourNode);
+                    } else {
+                        nodesToEnqueueDiffLabel.add(neighbourNode);
+                    }
+                    if(!childParentMap.containsKey(neighbourNode)){
+                    childParentMap.put(neighbourNode, edge);}
+                }
+                queue.addAll(nodesToEnqueueSameLabel);
+                queue.addAll(nodesToEnqueueDiffLabel);
+            }
+            }
+        return reconstructPathInEdges(childParentMap, source, destination);
+    }*/
+
+    /*public List<E> getPath(N source, N destination) {
         List<N> visited = new ArrayList<>();
         //contains a Node and edge that led to it(need to map nodes to the edge, not node, to see label of the node that led to it and prioritize the path with less change)
         Map<N, E> childParentMap = new HashMap<>();
@@ -114,7 +203,7 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
             for(N n: nodesToEnqueueDiffLabel) queue.add(n);
         }
         return reconstructPathInEdges(childParentMap, source, destination);
-    }
+    }*/
 
     @Override
     public List<N> reconstructPath(Map<N, E> childParentMap, N source, N destination){

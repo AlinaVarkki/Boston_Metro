@@ -529,7 +529,7 @@ public class TestSuite {
         assertEquals("Copley", greenJNode.getName());
 
         label = testPath.get(1).getLabel();
-        assertEquals("GreenD", label);
+        assertTrue(label.equals("GreenB")||label.equals("GreenC")||label.equals("GreenD") );
 
         greenJNode = testPath.get(1).getOppositeNode(greenJNode);
         assertEquals("Hynes/ICA", greenJNode.getName());
