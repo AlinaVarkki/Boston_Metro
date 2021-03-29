@@ -33,17 +33,22 @@
                 <Font size="13.0" />
             </font>
         </Text>
-
-        <ComboBox fx:id="endDestSelector" promptText="END DESTINATION" layoutX="426.0" layoutY="252.0" prefHeight="29.0" prefWidth="154.0" style="-fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;" >
-
-        </ComboBox>
-        <Button  fx:id="findButton" onAction="#findButtonClicked" layoutX="426.0" layoutY="315.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="154.0" style="-fx-background-color: #0B132B; -fx-background-radius: 10;" text="FIND A ROUTE" textFill="WHITE">
+        <Text fx:id="startStationErrorMsg" text = "please choose start station" layoutX="425.0" layoutY="203.0" style="-fx-fill: red;" visible="false">
+            <font>
+                <Font size="11.0" />
+            </font>
+        </Text>
+        <ComboBox fx:id="startDestSelector" promptText="START DESTINATION" layoutX="425.0" layoutY="210.0" prefHeight="29.0" prefWidth="154.0" style="-fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;" onAction="#setDefaultStyleStartSelector"/>
+        <Text fx:id="endStationErrorMsg" text = "please choose end station" layoutX="426.0" layoutY="252.0" style="-fx-fill: red;" visible="false">
+            <font>
+                <Font size="11.0" />
+            </font>
+        </Text>
+        <ComboBox fx:id="endDestSelector" promptText="END DESTINATION" layoutX="426.0" layoutY="259.0" prefHeight="29.0" prefWidth="154.0" style="-fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;" onAction="#setDefaultStyleEndSelector"/>
+        <Button  fx:id="findButton" onAction="#findButtonClicked" layoutX="426.0" layoutY="320.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="154.0" style="-fx-background-color: #0B132B; -fx-background-radius: 10;" text="FIND A ROUTE" textFill="WHITE" >
             <font>
                 <Font name="System Bold" size="13.0" />
             </font>
         </Button>
-        <ComboBox fx:id="startDestSelector" promptText="START DESTINATION" layoutX="425.0" layoutY="216.0" prefHeight="29.0" prefWidth="154.0" style="-fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;">
-
-        </ComboBox>
     </children>
 </AnchorPane>
