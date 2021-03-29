@@ -12,7 +12,9 @@ public class FileReader {
     List<Edge<Node>> connections;
 
 
-    public FileReader() {}
+    public FileReader() {
+        readInGraph("src/bostonmetro.txt");
+    }
 
     public List<Edge<Node>> getConnections(){
         return connections;
