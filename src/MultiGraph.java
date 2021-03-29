@@ -1,3 +1,5 @@
+import javafx.util.Pair;
+
 import java.util.*;
 
 public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
@@ -135,6 +137,51 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
 
     }
 
+
+    @Override
+    public List<E> getPathDFS(N source, N destination) {
+        List<N> visited = new ArrayList<>();
+        Deque<Pair<N, List<E>>> deque = new LinkedList<>();
+
+        deque.add(new Pair<N, List<E>>(source,new LinkedList<>()));
+        Pair<N,List<E>> currPair;
+        N currNode;
+        List<E> currPath;
+        N neighbourNode;
+
+        while(!deque.isEmpty()){
+            currPair = deque.poll();
+            currNode = currPair.getKey();
+            currPath = currPair.getValue();
+
+            if(currNode == destination){
+                deque.clear();
+                visited.add(currNode);
+                return currPath;
+            }
+
+            if(true){
+                visited.add(currNode);
+                List<E> adjEdges = adjacencyMap.get(currNode);
+                for(E edge: adjEdges){
+                    neighbourNode = edge.getOppositeNode(currNode);
+                    if(!visited.contains(neighbourNode)){
+                        List<E> newPath = new LinkedList<>(currPath);
+                        newPath.add(edge);
+                        //always put in front the edges that have the same label so the line would get explored first
+                        if(currPath.size() > 0 && edge.getLabel().equals(currPath.get(currPath.size()-1).getLabel())){
+                            deque.addFirst(new Pair<>(neighbourNode, newPath));
+                        }else{
+                            deque.add(new Pair<>(neighbourNode, newPath));
+                        }
+                    }
+                }
+            }
+        }
+        System.out.println("No path found");
+        return new LinkedList<E>();
+    }
+
     /*public List<E> getPath(N source, N destination) {
         List<N> visited = new ArrayList<>();
         //contains a Node and edge that led to it(need to map nodes to the edge, not node, to see label of the node that led to it and prioritize the path with less change)
@@ -237,6 +284,7 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
         Collections.reverse(path);
         return path;
     }
+
 
     private List<Triple<N,List<E>,Integer>> nodesToTriples(List<N> list,List<E> path,Integer num){
         List<Triple<N,List<E>,Integer>> newList = new ArrayList<>();

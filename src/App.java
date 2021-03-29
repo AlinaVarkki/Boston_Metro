@@ -11,9 +11,9 @@ public class App {
         for(Node n: stations) graph.addNode(n);
         for(Edge e: connections) graph.addEdge(e);
 
-        Node source = getStationByName(stations, "State");
-        Node destination = getStationByName(stations, "OakGrove");
-        List<Edge<Node>> path = graph.getPath(source, destination);
+        Node source = getStationByName(stations, "Kendall");
+        Node destination = getStationByName(stations, "CommunityCollege");
+        List<Edge<Node>> path = graph.getPathDFS(source, destination);
         printPath(path,source);
 
 //        System.out.println("with Tuples");
