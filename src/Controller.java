@@ -1,8 +1,7 @@
  import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
- import javafx.scene.control.MenuButton;
- import javafx.scene.control.MenuItem;
+ import javafx.scene.control.*;
+ import javafx.util.Callback;
 
  import java.util.List;
 
@@ -10,42 +9,31 @@ import javafx.scene.control.Button;
     @FXML
     Button findButton;
     @FXML
-    MenuButton startDestSelector;
+    ComboBox startDestSelector;
     @FXML
-    MenuButton endDestSelector;
+    ComboBox endDestSelector;
 
     @FXML
     public void initialize(){
         fillStationsOptions();
 
+        
     }
-
 
     public void fillStationsOptions(){
         FileReader fileReader = new FileReader();
         List<Node> stations = fileReader.getStations();
 
-        MenuItem menuItem;
-        MenuItem menuItem2;
         for(Node station: stations){
             String name = station.getName();
-            menuItem = new MenuItem(name);
-            startDestSelector.getItems().add(menuItem);
-            menuItem2 = new MenuItem(name);
-            endDestSelector.getItems().add(menuItem2);
+            startDestSelector.getItems().add(name);
+            endDestSelector.getItems().add(name);
         }
-
     }
 
 
     @FXML
     public void findButtonClicked(Event e){
         System.out.println("Button clicked");
-    }
-
-    @FXML
-    public void loadStations(){
-        System.out.println("shown");
-
     }
 }
