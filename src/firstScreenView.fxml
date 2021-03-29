@@ -45,7 +45,7 @@
             </font>
         </Text>
         <ComboBox fx:id="endDestSelector" promptText="END DESTINATION" layoutX="426.0" layoutY="259.0" prefHeight="29.0" prefWidth="154.0" style="-fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;" onAction="#setDefaultStyleEndSelector"/>
-        <Button  fx:id="findButton" onAction="#findButtonClicked" layoutX="426.0" layoutY="320.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="154.0" style="-fx-background-color: #0B132B; -fx-background-radius: 10;" text="FIND A ROUTE" textFill="WHITE" >
+        <Button  fx:id="findButton" onAction="#findPathBtnClicked" layoutX="426.0" layoutY="320.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="154.0" style="-fx-background-color: #0B132B; -fx-background-radius: 10;" text="FIND A ROUTE" textFill="WHITE" >
             <font>
                 <Font name="System Bold" size="13.0" />
             </font>

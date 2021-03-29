@@ -1,11 +1,7 @@
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -21,7 +17,7 @@ public class Main extends Application{
     public void start(Stage primaryStage) throws Exception {
         window = primaryStage;
         window.setTitle("Boston Metro System");
-        Parent root = FXMLLoader.load(getClass().getResource("FirstScreen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("firstScreenView.fxml"));
         primaryStage.setTitle("Boston Metro System");
         primaryStage.setScene(new Scene(root, 600, 400, Color.WHITE));
         primaryStage.show();
