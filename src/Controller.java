@@ -38,8 +38,9 @@ public class Controller {
         String from = stations.get(random.nextInt(stations.size()-1));//view.getFromStation();
         String to = stations.get(random.nextInt(stations.size()-1));//view.getToStation();
 
-        from = "34 Arlington";
-        to = "30 DowntownCrossing";
+//        from = "69 BostonCollege";
+//        from = "111 CapenStreet";
+//        to = "112 Mattapan";
 
         ArrayList<Tuple<String, ArrayList<String>>> path = model.runSearch(from,to);
         /*for(Tuple<String, ArrayList<String>> tuple : path){

@@ -62,7 +62,7 @@ public class View {
 
             }
 
-            int lineLength = 500 / countLen;
+            int lineLength = 600 / countLen;
 
             String currentColor = stations.get(0).first;
             ArrayList<String> currentLine = stations.get(0).second;
@@ -71,7 +71,7 @@ public class View {
 
             HBox titleLine = displayLineLabel(currentLine.get(0),currentColor,"Take");
 
-            names.setMargin(titleLine, new Insets(circleRadius/3,0,0,circleRadius*2));
+            names.setMargin(titleLine, new Insets(0,0,0,circleRadius*2));
             names.getChildren().add(titleLine);
 
             stations.get(0).second.remove(0);
@@ -174,6 +174,8 @@ public class View {
         titleLine.getChildren().addAll(title, switchLine);
         titleLine.setAlignment(Pos.BASELINE_LEFT);
 
+        titleLine.setPadding(new Insets(circleRadius/3,0,circleRadius/3,0));
+
         return titleLine;
     }
 
@@ -221,7 +223,7 @@ public class View {
         int fontHeight = circleRadius;
 
         int height = Math.min(stations.size(),10);
-        int padding = (lineHeight*(height) - circleRadius*2 - (height)*fontHeight)/2 + +circleRadius/height;
+        int padding = (lineHeight*(height) - circleRadius*2 - (height)*fontHeight)/2 ;
         names.setPadding(new Insets(padding,0,padding ,0));
 
 
