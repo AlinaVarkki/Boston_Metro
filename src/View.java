@@ -2,6 +2,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
@@ -138,6 +140,17 @@ public class View {
 
         if (stations.size()>1) {
             chunk.getChildren().add(displaySmallerStationNamesImproved(stations, lineHeight));
+        } else {
+
+
+            Text text = new Text();
+            text.setText("Empty");
+            text.setFill(white);
+            text.setFont(Font.font(0));
+            int padding =lineHeight/2 - circleRadius;
+            chunk.setMargin(text, new Insets(padding,0,padding ,0));
+
+            chunk.getChildren().add(text);
         }
 
         if (nextColor.equals("")) {
