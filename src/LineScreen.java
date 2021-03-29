@@ -54,7 +54,6 @@ public class LineScreen extends Application {
         stage.setTitle("Boston Metro System");
 
 
-
         Scene scene = new Scene(root, 600, 600, background);
 
         Button btn = new Button("Hello");
@@ -74,7 +73,6 @@ public class LineScreen extends Application {
 
         stage.setScene(scene);
         stage.initStyle(StageStyle.UTILITY);
-
 
         stage.show();
     }

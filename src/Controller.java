@@ -1,4 +1,7 @@
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -9,9 +12,12 @@ import java.util.List;
 public class Controller {
     Model model;
     View view;
-    public Controller(Model model,View view){
+    VBox root;
+
+    public Controller(Model model,View view, VBox root){
         this.model = model;
         this.view = view;
+        this.root = root;
     }
 
     public void run(){
@@ -32,8 +38,6 @@ public class Controller {
         String from = stations.get(random.nextInt(stations.size()-1));//view.getFromStation();
         String to = stations.get(random.nextInt(stations.size()-1));//view.getToStation();
 
-        to = "88 FenwoodRoad";
-        from = "65 Longwood";
         ArrayList<Tuple<String, ArrayList<String>>> path = model.runSearch(from,to);
         /*for(Tuple<String, ArrayList<String>> tuple : path){
             System.out.println(tuple.first);
@@ -41,6 +45,8 @@ public class Controller {
 
         }*/
         //view.displaySecondScreen(path);
+        root.getChildren().add(view.createLine(path));
+
     }
 
 }
