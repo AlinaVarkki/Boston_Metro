@@ -582,11 +582,11 @@ public class TestSuite {
     }
 
     //TODO FIX BELOW ACCORDING TO LECTURERS DESIRES
-    /* Tests MultiGraph getPath() of the Green Junction Line from GreenE to GreenB */
+    /* Tests MultiGraph getPath() of the Green Junction Line from GreenE to GreenD */
     @org.junit.jupiter.api.Test
     void multiGraphGreenEtoGreenDJunctionLine() {
 
-        // Tests Obtained Route Correct for the Green Junction line from GreenE to GreenB
+        // Tests Obtained Route Correct for the Green Junction line from GreenE to GreenD
         Node source = App.getStationByName(testStations, "Prudential");
         Node destination = App.getStationByName(testStations, "Fenway");
         testPath = testGraph.getPath(source, destination);
@@ -598,17 +598,14 @@ public class TestSuite {
         greenJNode = testPath.get(0).getOppositeNode(greenJNode);
         assertEquals("Copley", greenJNode.getName());
 
-        //D would be optimal here unless at Copley we must take B line untill Kenmore then change to D
         label = testPath.get(1).getLabel();
-       // assertTrue(label.equals("GreenD") );
-      assertTrue(label.equals("GreenB")||label.equals("GreenC")||label.equals("GreenD") );
+        assertTrue(label.equals("GreenB")||label.equals("GreenC")||label.equals("GreenD") );
 
         greenJNode = testPath.get(1).getOppositeNode(greenJNode);
         assertEquals("Hynes/ICA", greenJNode.getName());
 
-        //D would be optimal here but B is what the file has as this going one route??
         label = testPath.get(2).getLabel();
-        assertTrue(label.equals("GreenD") );
+        assertTrue(label.equals("GreenB") );
 
         greenJNode = testPath.get(2).getOppositeNode(greenJNode);
         assertEquals("Kenmore", greenJNode.getName());
@@ -882,7 +879,42 @@ public class TestSuite {
 
     }
 
+    /* Tests MultiGraph getPathDFS() optimal route with fewest transitions
+       of the Green Junction Line from GreenE to GreenD */
+    @org.junit.jupiter.api.Test
+    void multiGraphGreenEtoGreenDJunctionLineWithOnly2Transitions() {
 
+        // Previous test getPath() for route called - multiGraphGreenEtoGreenD
+        Node source = App.getStationByName(testStations, "Prudential");
+        Node destination = App.getStationByName(testStations, "Fenway");
+        testPath = testGraph.getPathDFS(source, destination);
+        String label = testPath.get(0).getLabel();
+        assertEquals("GreenE", label);
+
+        Node greenJNode = source;
+        assertEquals("Prudential", greenJNode.getName());
+        greenJNode = testPath.get(0).getOppositeNode(greenJNode);
+        assertEquals("Copley", greenJNode.getName());
+
+        // B would be optimal at this point in the junction
+        label = testPath.get(1).getLabel();
+        assertTrue(label.equals("GreenB") );
+
+        greenJNode = testPath.get(1).getOppositeNode(greenJNode);
+        assertEquals("Hynes/ICA", greenJNode.getName());
+
+        label = testPath.get(2).getLabel();
+        assertTrue(label.equals("GreenB") );
+
+        greenJNode = testPath.get(2).getOppositeNode(greenJNode);
+        assertEquals("Kenmore", greenJNode.getName());
+
+        label = testPath.get(3).getLabel();
+        assertTrue(label.equals("GreenD") );
+
+        greenJNode = testPath.get(3).getOppositeNode(greenJNode);
+        assertEquals("Fenway", greenJNode.getName());
+    }
 }
 
 
