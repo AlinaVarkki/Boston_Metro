@@ -3,9 +3,12 @@ import javafx.util.Pair;
 import java.util.*;
 
 public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
-    //This class contains types N(node) and E(edge) that represent stations and edges using generics
 
-    //map that stores the nodes and edges adjacent to it
+    /**
+     * This class contains types N(node) and E(edge) that represent Stations and Connections using Generics
+     * Map stores the Nodes and Edges
+     * */
+
     private Map<N, List<E>> adjacencyMap;
 
     public MultiGraph() {
@@ -74,6 +77,13 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
         return reconstructPathInEdges(childParentMap, source, destination);
     }*/
 
+    /**
+     * @param source,destination used as Start and Finish points for Path Construction
+     * Triple's are used for storing Node's, number of Connections and List of Edges
+     * Method builds all possible paths from source to destination
+     * Calls addOrdered
+     * @return LinkedList of Edges for the current Path
+     * */
     @Override
     public List<E> getPath(N source, N destination) {
         List<N> visited = new ArrayList<>();
@@ -317,11 +327,16 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
         return newList;
     }
 
+    /**
+     * @param queue is a Queue of Triple elements - Node, List of Edges and number of Edges
+     * @param toAdd is a List with the same construct
+     * Method add's all elements from the List to a new Queue for getPath to loop through
+     * @return Queue
+     * */
     private Queue<Triple<N,List<E>,Integer>> addOrdered(Queue<Triple<N,List<E>,Integer>> queue, List<Triple<N,List<E>,Integer>> toAdd){
         if(toAdd.isEmpty()){
             return queue;
         }
-
 
         Queue<Triple<N,List<E>,Integer>> newQueue = new LinkedList<>();
         Iterator<Triple<N,List<E>,Integer>> iterator = queue.iterator();
@@ -339,7 +354,6 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
             }
             newQueue.add(node);
         }
-
         return newQueue;
     }
 
