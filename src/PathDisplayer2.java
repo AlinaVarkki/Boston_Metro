@@ -2,8 +2,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
@@ -20,7 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class View {
+public class PathDisplayer2 {
 
     private Color background = Color.rgb(11,19,43);
     private Color blue = Color.rgb(18,126,188);
@@ -32,7 +30,7 @@ public class View {
     private HashMap<String, Color> colorMappings = new HashMap<>();
     private int circleRadius = 15;
 
-    public View(){
+    public PathDisplayer2(){
 
         initialiseColorMappings();
 
@@ -40,11 +38,10 @@ public class View {
 
     /**
      * @param stations contains the Best Suited Path Found By the Model
-     * Method sets the standard Size of the Line and Creates it.
-     * Calls makeDoubleCircle,makeTripleCircle,displayLineLabel,displayChunkOfStations
+     *
      * @return Hbox with the Line element and all corresponding labels appropriately Styled and Sized
      * */
-    public HBox createLine(ArrayList<Tuple<String, ArrayList<String>>> stations) {
+    public HBox showRouteWithoutStationNames(ArrayList<Tuple<String, ArrayList<String>>> stations) {
         Group lines = new Group();
         Group circles = new Group();
         VBox names = new VBox();
@@ -54,14 +51,6 @@ public class View {
             int currentEnd = 0;
             int chunkSize;
             int countLen = 0;
-
-            for (Tuple<String, ArrayList<String>> line : stations) {
-                if (line.second.size() > 10) {
-                    countLen += 10;
-                } else {
-                    countLen += line.second.size();
-                }
-            }
 
             int lineLength = 600 / countLen;
             String currentColor = stations.get(0).first;
@@ -127,6 +116,8 @@ public class View {
 
         return finalBox;
     }
+
+
 
 
     /**
@@ -284,6 +275,10 @@ public class View {
         return text;
     }
 
+
+
+
+
     /**
      * @param x,y,color are the Dimensions and Colour of desired Circle's
      * Generates circleGroup and fills with 3 Circles for the Start and End Stations
@@ -334,31 +329,6 @@ public class View {
         return circle;
     }
 
-    public ArrayList<Tuple<String, ArrayList<String>>> getStations() {
-        ArrayList<Tuple<String, ArrayList<String>>> stations = new ArrayList<>();
-
-        ArrayList<String> s = new ArrayList<>();
-        for (int i = 0; i< 23; i++) {
-            s.add("Station GreenB "+ i);
-        }
-
-        stations.add(new Tuple<>("GreenB", s));
-
-        ArrayList<String> s3 = new ArrayList<>();
-        for (int i = 0; i< 2; i++) {
-            s3.add("Station Blue "+i);
-        }
-
-//        stations.add(new Tuple<>("Blue", s3));
-        ArrayList<String> s2 = new ArrayList<>();
-        for (int i = 0; i< 5; i++) {
-            s2.add("Station Mattapan "+i);
-        }
-
-        stations.add(new Tuple<>("Mattapan", s2));
-
-        return stations;
-    }
 
     /**
      * Initializes mappings of line name to Color for rendering
