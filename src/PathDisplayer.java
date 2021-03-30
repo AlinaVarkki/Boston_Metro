@@ -46,35 +46,6 @@ public class PathDisplayer {
      * */
 
 
-    public Pane createLineTest(List<Tuple<String, List<String>>> stations) {
-        VBox box = new VBox();
-
-        HBox linebox = new HBox();
-        Line l = new Line(circleRadius,10,circleRadius,100);
-        l.setStroke(white);
-        Text text = new Text("hello");
-        text.setFill(white);
-
-        linebox.getChildren().addAll(l, text);
-        linebox.setMargin(l, new Insets(0,5*circleRadius,0,circleRadius));
-        linebox.setAlignment(Pos.CENTER_LEFT);
-
-        box.getChildren().add(displayLineLabel("Line name", "Red", "Switch to", makeTripleCircle(0,10,"Red")));
-        box.getChildren().add(linebox);
-        box.getChildren().add(displayLineLabel("Line name", "Green", "Switch to", makeTripleCircle(0,100,"Green")));
-        box.getChildren().add(displayLineLabel("Lineeeeeeeee name", "Red", "Switch to", makeTripleCircle(0,200,"Red")));
-        box.getChildren().add(displayLineLabel("Line name", "Red", "Switch to", makeTripleCircle(0,300,"Red")));
-
-        box.setAlignment(Pos.CENTER_LEFT);
-
-
-        box.setStyle("-fx-background-color: #0B132B;");
-
-
-
-        return box;
-    }
-
     public Pane createLine(List<Tuple<String, List<String>>> stations) {
 
         VBox thingy = new VBox();
@@ -147,19 +118,19 @@ public class PathDisplayer {
 
     private HBox createStartingStation(String name, String color, double x, double y) {
 
-        return displayLineLabel(name, color, "Take", makeTripleCircle(x,y,color));
+        return displayLineLabel(name, color, "Take", makeTripleCircle(x,y,color, true));
 
     }
 
     private HBox createEndingStation(String name, String color, double x, double y) {
 
-        return displayLineLabel(name, color, "", makeTripleCircle(x,y,color));
+        return displayLineLabel(name, "", "", makeTripleCircle(x,y,color, false));
 
     }
 
     private HBox createMiddleStation(String name, String color1, String color2, double x, double y) {
 
-        return displayLineLabel(name, color1, "Switch to", makeDoubleCircle(x,y,color1,color2));
+        return displayLineLabel(name, color2, "Switch to", makeDoubleCircle(x,y,color1,color2));
 
     }
 
@@ -172,7 +143,7 @@ public class PathDisplayer {
 
 
         linebox.getChildren().addAll(line, miniStationsWithButton(stations));
-        linebox.setMargin(line, new Insets(0,4*circleRadius,0,circleRadius-2.5));   //- half line width
+        linebox.setMargin(line, new Insets(0,4*circleRadius,0,circleRadius*1.25-2.5));   //- half line width
         linebox.setAlignment(Pos.CENTER_LEFT);
 
         return linebox;
@@ -208,7 +179,7 @@ public class PathDisplayer {
      * Calls displaySwitchLine to get the required label style and content for train transitions
      * @return Hbox with elements added
      * */
-    private HBox displayLineLabel(String name, String previousColor, String label, Group circle) {
+    private HBox displayLineLabel(String name, String previousColor, String label, StackPane circle) {
         Text title = displayBiggerStationName(name);
         Text switchLine = displaySwitchLine(label,previousColor);
 
@@ -301,12 +272,15 @@ public class PathDisplayer {
      * Calls makeCircle
      * @return Group containing the standardised Circle style
      * */
-    private Group makeTripleCircle(double x, double y, String color) {
-        Group circleGroup = new Group();
+    private StackPane makeTripleCircle(double x, double y, String color, boolean start) {
+        StackPane circleGroup = new StackPane();
 
-        circleGroup.getChildren().add(makeCircle(x,y,circleRadius,color, color));
-        circleGroup.getChildren().add(makeCircle(x,y,circleRadius*0.8,"BG","BG"));
-        circleGroup.getChildren().add(makeCircle(x,y,circleRadius*0.5,color, color));
+        //1 0.8 0.5
+        circleGroup.getChildren().add(makeCircle(x,y,circleRadius*1.25,color, color));
+        circleGroup.getChildren().add(makeCircle(x,y,circleRadius,"BG","BG"));
+        circleGroup.getChildren().add(makeCircle(x,y,circleRadius*0.7,color, color));
+        if (start)
+            circleGroup.getChildren().add(makeLetter(color));
 
         return circleGroup;
     }
@@ -317,11 +291,13 @@ public class PathDisplayer {
      * Calls makeCircle
      * @return Group containing the standardised Circle style for display
      * */
-    private Group makeDoubleCircle(double x, double y, String color1, String color2) {
-        Group circleGroup = new Group();
+    private StackPane makeDoubleCircle(double x, double y, String color1, String color2) {
+        StackPane circleGroup = new StackPane();
 
-        circleGroup.getChildren().add(makeCircle(x,y,circleRadius,"BG","BG"));
-        circleGroup.getChildren().add(makeCircle(x,y,circleRadius*0.75,color1,color2));
+        //1 0.75
+        circleGroup.getChildren().add(makeCircle(x,y,circleRadius*1.25,"BG","BG"));
+        circleGroup.getChildren().add(makeCircle(x,y,circleRadius*0.95,color1,color2));
+        circleGroup.getChildren().add(makeLetter(color2));
 
         return circleGroup;
     }
@@ -342,7 +318,29 @@ public class PathDisplayer {
         LinearGradient linear = new LinearGradient(0, 0, 0, 1, true, CycleMethod.NO_CYCLE, stops);
         circle.setFill(linear);
 
+
         return circle;
+    }
+
+    private Text makeLetter(String color2) {
+
+        Text letter = new Text();
+
+        char last = color2.charAt(color2.length()-1);
+        if (Character.isUpperCase(last)) {
+            letter.setText(Character.toString(last));
+        } else if (color2.equals("Mattapan")) {
+            letter.setText("M");
+        } else {
+//            letter.setText(Character.toString(color2.charAt(0)));
+            letter.setText("");
+        }
+
+        letter.setFill(background);
+        letter.setFont(Font.font("Arial", FontWeight.BOLD, FontPosture.REGULAR, 1.1*circleRadius)); //4/5
+
+        return letter;
+
     }
 
 
