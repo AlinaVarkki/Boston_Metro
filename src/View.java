@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.util.List;
 import java.util.function.Function;
@@ -39,7 +40,44 @@ public class View {
 
     @FXML
     public void initialize(){
+        customizeDropDown(startDestSelector);
+        customizeDropDown(endDestSelector);
         pathDisplayer = new PathDisplayer();
+    }
+
+    public void customizeDropDown(ComboBox comboBox){
+        comboBox.setCellFactory(
+                new Callback<ListView<String>, ListCell<String>>() {
+                    @Override public ListCell<String> call(ListView<String> param) {
+                        final ListCell<String> cell = new ListCell<>() {
+                            {
+                                super.setPrefWidth(100);
+                            }
+                            @Override public void updateItem(String item,
+                                                             boolean empty) {
+                                super.updateItem(item, empty);
+                                if (item != null) {
+                                    setText(item + "   🔴");
+//                                    setGraphic();
+                                    if (item.contains("A")) {
+                                        setTextFill(Color.RED);
+                                    }
+                                    else if (item.contains("B")){
+                                        setTextFill(Color.ORANGE);
+                                    }
+                                    else {
+                                        setTextFill(Color.GREEN);
+                                    }
+                                }
+                                else {
+                                    setText(null);
+                                }
+                            }
+                        };
+                        return cell;
+                    }
+
+                });
     }
 
     public void fillStationsOptions(List<String> stations){
