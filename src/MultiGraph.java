@@ -140,10 +140,10 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
 
     @Override
     public List<E> getPathDFS(N source, N destination) {
-        List<N> visited = new ArrayList<>();
+        List<String> visited = new ArrayList<>();
         Deque<Pair<N, List<E>>> deque = new LinkedList<>();
 
-        deque.add(new Pair<N, List<E>>(source,new LinkedList<>()));
+        deque.add(new Pair<>(source,new LinkedList<>()));
         Pair<N,List<E>> currPair;
         N currNode;
         List<E> currPath;
@@ -156,16 +156,23 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
 
             if(currNode == destination){
                 deque.clear();
-                visited.add(currNode);
-                return currPath;
+//                visited.add(currNode);
+                return removeCycle(currPath);
             }
 
             if(true){
-                visited.add(currNode);
+                if(currPath.size() > 0){
+                    String labelFrom = currPath.get(currPath.size()-1).getLabel();
+                    visited.add(currNode.toString() + labelFrom);
+                }else{
+                    visited.add(currNode.toString() + "any");
+                }
                 List<E> adjEdges = adjacencyMap.get(currNode);
                 for(E edge: adjEdges){
                     neighbourNode = edge.getOppositeNode(currNode);
-                    if(!visited.contains(neighbourNode)){
+                    String p1 = neighbourNode.toString() + edge.getLabel();
+                    String p2 = neighbourNode.toString() + "any";
+                    if(!visited.contains(p1) && !visited.contains(p2)){
                         List<E> newPath = new LinkedList<>(currPath);
                         newPath.add(edge);
                         //always put in front the edges that have the same label so the line would get explored first
@@ -180,6 +187,21 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
         }
         System.out.println("No path found");
         return new LinkedList<E>();
+    }
+
+    public List<E> removeCycle(List<E> path){
+        List<E> pathNoCycle = new ArrayList<>();
+        List<String> edges = new ArrayList<>();
+        for(E edge: path){
+            String currReversePath = edge.getNode2() + edge.getLabel() + edge.getNode1();
+            if(!edges.contains(currReversePath)){
+                pathNoCycle.add(edge);
+                edges.add(edge.getNode1() + edge.getLabel() + edge.getNode2());
+            }else{
+                pathNoCycle.remove(pathNoCycle.size() - 1);
+            }
+        }
+        return pathNoCycle;
     }
 
     /*public List<E> getPath(N source, N destination) {
