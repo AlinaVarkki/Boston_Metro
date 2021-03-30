@@ -19,17 +19,17 @@ public class Model {
 
     }
 
-    public ArrayList<Tuple<String,ArrayList<String>>> runSearch(String start,String destination){
+    public List<Tuple<String,List<String>>> runSearch(String start,String destination){
         Node from = this.find(start);
         Node to = this.find(destination);
 
-        ArrayList<Tuple<String,ArrayList<String>>> processedForView = new ArrayList<>();
+        List<Tuple<String,List<String>>> processedForView = new ArrayList<>();
 
         List<Edge<Node>> path = multiGraph.getPath(from,to);
 
         Node station = from;
         String lineColour = path.get(0).getLabel();
-        Tuple<String,ArrayList<String>> line = new Tuple<>(lineColour,new ArrayList<>());
+        Tuple<String,List<String>> line = new Tuple<>(lineColour,new ArrayList<>());
         line.second.add(station.toString());
 
         for(Edge<Node> edge: path){

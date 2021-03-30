@@ -30,7 +30,7 @@ public class PathDisplayer {
     private Color white = Color.rgb(255,255,255);
 
     private HashMap<String, Color> colorMappings = new HashMap<>();
-    private int circleRadius = 15;
+    private int circleRadius = 10;
 
     public PathDisplayer(){
 
@@ -38,7 +38,7 @@ public class PathDisplayer {
 
     }
 
-    public HBox createLine(ArrayList<Tuple<String, ArrayList<String>>> stations) {
+    public HBox createLine(List<Tuple<String, List<String>>> stations) {
         Group lines = new Group();
         Group circles = new Group();
         VBox names = new VBox();
@@ -53,7 +53,7 @@ public class PathDisplayer {
 
             int countLen = 0;
 
-            for (Tuple<String, ArrayList<String>> line : stations) {
+            for (Tuple<String, List<String>> line : stations) {
                 if (line.second.size() > 10) {
                     countLen += 10;
                 } else {
@@ -62,10 +62,10 @@ public class PathDisplayer {
 
             }
 
-            int lineLength = 600 / countLen;
+            int lineLength = 400 / countLen;
 
             String currentColor = stations.get(0).first;
-            ArrayList<String> currentLine = stations.get(0).second;
+            List<String> currentLine = stations.get(0).second;
 
             circles.getChildren().add(makeTripleCircle(x,0,currentColor));
 
@@ -130,12 +130,13 @@ public class PathDisplayer {
         finalBox.getChildren().add(finalGroup);
         finalBox.getChildren().add(names);
 
+        finalBox.setStyle("-fx-background-color: #0B132B;");
         return finalBox;
     }
 
 
     //text methods
-    private VBox displayChunkOfStations(ArrayList<String> stations, int lineHeight, String nextColor) {
+    private VBox displayChunkOfStations(List<String> stations, int lineHeight, String nextColor) {
         VBox chunk = new VBox();
 
         if (stations.size()>1) {
