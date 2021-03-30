@@ -1,0 +1,1056 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="746.0" prefWidth="1171.0" style="-fx-background-color: #16249e;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapController">
+   <children>
+      <Group layoutX="185.0" layoutY="3.0">
+         <children>
+            <ImageView fitHeight="754.0" fitWidth="847.0" layoutX="-21.0" layoutY="-7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@boston-map.jpg" />
+               </image>
+            </ImageView>
+            <Button fx:id="Riverside" layoutX="31.0" layoutY="427.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #149f6a;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="ChesnutHill" layoutX="55.0" layoutY="427.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #149f6a;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Reservoir" layoutX="89.0" layoutY="427.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #149f6a;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Beaconsfield" layoutX="114.0" layoutY="448.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #149f6a;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="BrooklineHills" layoutX="130.0" layoutY="463.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #149f6a;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="FenwoodRoad" layoutX="193.0" layoutY="435.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #149f6a;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="BrooklineVillage" layoutX="161.0" layoutY="463.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #149f6a;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Longwood" layoutX="177.0" layoutY="448.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #149f6a;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Hynes" layoutX="291.0" layoutY="420.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #149f6a;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Kenmore" layoutX="253.0" layoutY="420.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #149f6a;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="BostonCollege" layoutX="89.0" layoutY="376.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #149f6a;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="FenwoodRoad" layoutX="185.0" layoutY="569.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #149f6a;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="MissionPark" layoutX="169.0" layoutY="584.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #149f6a;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Riverway" layoutX="153.0" layoutY="599.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #149f6a;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="BackOfTheHill" layoutX="130.0" layoutY="622.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #149f6a;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="HeathStreet" layoutX="114.0" layoutY="644.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #149f6a;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="MuseumofFineArts" layoutX="245.0" layoutY="511.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #149f6a;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="LongwoodMedicalArea" layoutX="231.0" layoutY="526.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #149f6a;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="BrighamCircle" layoutX="209.0" layoutY="547.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #149f6a;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Prudential" layoutX="315.0" layoutY="441.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #149f6a;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Symphony" layoutX="291.0" layoutY="463.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #149f6a;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="NortheasternUniversity" layoutX="269.0" layoutY="489.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #149f6a;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Boylston" layoutX="399.0" layoutY="355.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #149f6a;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Arlington" layoutX="374.0" layoutY="384.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #149f6a;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Copley" layoutX="347.0" layoutY="405.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #149f6a;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Riverside112" layoutX="106.0" layoutY="420.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #149f6a;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="SciencePark" layoutX="391.0" layoutY="158.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #149f6a;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Lechmere" layoutX="374.0" layoutY="136.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #149f6a;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="FieldsCorner" layoutX="623.0" layoutY="489.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #de142c;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Shawmut" layoutX="623.0" layoutY="526.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #de142c;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Ashmont" layoutX="623.0" layoutY="569.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #de142c;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="CedarGrove" layoutX="623.0" layoutY="599.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #de142c;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="ButlerStreet" layoutX="607.0" layoutY="615.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #de142c;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Milton" layoutX="585.0" layoutY="637.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #de142c;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="CentralAvenue" layoutX="569.0" layoutY="659.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #de142c;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="ValleyRoad" layoutX="547.0" layoutY="674.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #de142c;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="CapenStreet" layoutX="531.0" layoutY="696.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #de142c;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Mattapan" layoutX="508.0" layoutY="718.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #de142c;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Wollaston" layoutX="680.0" layoutY="471.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #de142c;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="QuincyCenter" layoutX="702.0" layoutY="497.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #de142c;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="QuincyAdams" layoutX="729.0" layoutY="526.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #de142c;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Braintree" layoutX="753.0" layoutY="547.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #de142c;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Alewife" layoutX="201.0" layoutY="158.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #de142c;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="JFK" layoutX="615.0" layoutY="405.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #de142c;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="SavinHill" layoutX="623.0" layoutY="457.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #de142c;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="NorthQuincy" layoutX="657.0" layoutY="449.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #de142c;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Charles" layoutX="355.0" layoutY="310.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #de142c;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="SouthStation" layoutX="508.0" layoutY="317.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #de142c;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Broadway" layoutX="555.0" layoutY="348.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #de142c;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Andrew" layoutX="585.0" layoutY="377.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #de142c;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Central" layoutX="291.0" layoutY="251.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #de142c;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Kendall" layoutX="323.0" layoutY="281.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #de142c;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Porter" layoutX="245.0" layoutY="204.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #de142c;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Harvard" layoutX="269.0" layoutY="229.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #de142c;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Davis" layoutX="223.0" layoutY="180.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #de142c;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="ForestHills" layoutX="307.0" layoutY="659.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #f5ac00;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="SullivanSquare" layoutX="421.0" layoutY="111.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #f5ac00;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Wellington" layoutX="421.0" layoutY="70.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #f5ac00;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Malden" layoutX="421.0" layoutY="35.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #f5ac00;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="OakGrove" layoutX="421.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #f5ac00;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="BackBay" layoutX="457.0" layoutY="456.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #f5ac00;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="NewEnglandMedicalCenter" layoutX="457.0" layoutY="405.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #f5ac00;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Chinatown" layoutX="457.0" layoutY="370.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #f5ac00;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="CommunityCollege" layoutX="421.0" layoutY="144.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #f5ac00;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Ruggles" layoutX="441.0" layoutY="519.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #f5ac00;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="MassachusettsAvenue" layoutX="457.0" layoutY="482.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #f5ac00;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="StonyBrook" layoutX="363.0" layoutY="599.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #f5ac00;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="JacksonSquare" layoutX="391.0" layoutY="569.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #f5ac00;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="RoxburyCrossing" layoutX="421.0" layoutY="540.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #f5ac00;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="GreenStreet" layoutX="339.0" layoutY="623.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #f5ac00;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Wonderland" layoutX="710.0" layoutY="78.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #4764f5;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="WoodIsland" layoutX="585.0" layoutY="197.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #4764f5;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="OrientHeights" layoutX="615.0" layoutY="173.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #4764f5;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="SuffolkDowns" layoutX="639.0" layoutY="144.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #4764f5;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Beachmont" layoutX="665.0" layoutY="119.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #4764f5;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="RevereBeach" layoutX="688.0" layoutY="96.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #4764f5;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Aquarium" layoutX="516.0" layoutY="266.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #4764f5;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Maverick" layoutX="539.0" layoutY="244.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #4764f5;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Airport" layoutX="561.0" layoutY="222.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #4764f5;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="NorthStation" layoutX="413.0" layoutY="188.0" mnemonicParsing="false" onAction="#getName" prefHeight="18.0" prefWidth="21.0" style="-fx-background-color: #cdfa5c;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Haymarket" layoutX="413.0" layoutY="221.0" mnemonicParsing="false" onAction="#getName" prefHeight="18.0" prefWidth="21.0" style="-fx-background-color: #cdfa5c;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="Bowdoin" layoutX="374.0" layoutY="274.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0" style="-fx-background-color: #4764f5;">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="ParkStreet" layoutX="413.0" layoutY="317.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="GovernmentCenter" layoutX="413.0" layoutY="274.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="DowntownCrossing" layoutX="457.0" layoutY="318.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+            <Button fx:id="State" layoutX="457.0" layoutY="274.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="16.0">
+               <font>
+                  <Font size="7.0" />
+               </font>
+               <effect>
+                  <InnerShadow height="10.0" radius="4.5" width="10.0">
+                     <color>
+                        <Color red="0.15436160564422607" green="0.18421052396297455" blue="0.1583414524793625" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </Button>
+         </children>
+      </Group>
+   </children>
+</AnchorPane>

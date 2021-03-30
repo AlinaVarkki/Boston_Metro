@@ -5,25 +5,20 @@ import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-
-public class Main extends Application{
-    Stage window;
+public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        window = primaryStage;
-        window.setTitle("Boston Metro System");
-        Parent root = FXMLLoader.load(getClass().getResource("firstScreenView.fxml"));
-        primaryStage.setTitle("Boston Metro System");
-        primaryStage.setScene(new Scene(root, 600, 400, Color.WHITE));
-        primaryStage.show();
+    public void start(Stage stage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("map1.fxml"));
 
-        window.show();
+        Scene scene = new Scene(root,  1171.0, 746.0);
 
-
+        stage.setTitle("FXML Welcome");
+        stage.setScene(scene);
+        stage.show();
     }
 }

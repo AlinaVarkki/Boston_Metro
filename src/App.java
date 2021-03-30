@@ -16,7 +16,7 @@ public class App {
         List<Edge<Node>> path = graph.getPathDFS(source, destination);
         printPath(path,source);
 
-        //some paths that are different for the algorithm that serches for the least switches path
+        //some paths that are different for the algorithm that searches for the least switches path
         // Boylston -> Chinatown
         // SouthStation -> SciencePark
         // Aquarium -> SciencePark

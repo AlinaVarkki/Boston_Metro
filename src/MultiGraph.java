@@ -3,15 +3,17 @@ import javafx.util.Pair;
 import java.util.*;
 
 public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
-    //This class contains types N(node) and E(edge) that represent stations and edges using generics
 
-    //map that stores the nodes and edges adjacent to it
+    /**
+     * This class contains types N(node) and E(edge) that represent Stations and Connections using Generics
+     * Map stores the Nodes and Edges
+     * */
+
     private Map<N, List<E>> adjacencyMap;
 
     public MultiGraph() {
         adjacencyMap = new HashMap<>();
     }
-
 
     @Override
     public void addNode(N node){
@@ -74,6 +76,13 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
         return reconstructPathInEdges(childParentMap, source, destination);
     }*/
 
+    /**
+     * @param source,destination used as Start and Finish points for Path Construction
+     * Triple's are used for storing Node's, number of Connections and List of Edges
+     * Builds all possible paths from source to destination prioritizing fewest stations along the way
+     * Calls addOrdered
+     * @return LinkedList of Edges for the current Path
+     * */
     @Override
     public List<E> getPath(N source, N destination) {
         List<N> visited = new ArrayList<>();
@@ -137,10 +146,44 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
 
     }
 
+    /**
+     * @param queue is a Queue of Triple elements - Node, List of Edges and number of Edges
+     * @param toAdd is a List with the same construct
+     * Method add's all elements from the List to a new Queue for getPath to loop through
+     * @return Queue
+     * */
+    private Queue<Triple<N,List<E>,Integer>> addOrdered(Queue<Triple<N,List<E>,Integer>> queue, List<Triple<N,List<E>,Integer>> toAdd){
+        if(toAdd.isEmpty()){
+            return queue;
+        }
 
-    //return a path with the least switches by always prioritizing exploring the line that the last explored node is on
-    //to continue exploring he nodes that have been seen before, visited list keeps track of the line it has been visited from along with the node
-    //because of the way the algorithm is implemented, it needs to sometimes saves the edges that have not been visited in the specific path so cycles need to be removed before returning the path
+        Queue<Triple<N,List<E>,Integer>> newQueue = new LinkedList<>();
+        Iterator<Triple<N,List<E>,Integer>> iterator = queue.iterator();
+        Integer transitions = toAdd.get(0).third;
+
+        if(queue.isEmpty()){
+            newQueue.addAll(toAdd);
+        }
+
+        while (iterator.hasNext()){
+            Triple<N,List<E>,Integer> node = iterator.next();
+            if(node.third > transitions || !iterator.hasNext()){
+                newQueue.addAll(toAdd);
+                iterator.forEachRemaining(newQueue::add);
+            }
+            newQueue.add(node);
+        }
+        return newQueue;
+    }
+
+
+    /**
+     * @param source,destination used as Start and Finish points for Path Construction
+     * visited list keeps track of the line it has been visited from along with the node
+     * Builds all possible paths from source to destination prioritizing exploring line that the last explored node is on
+     * Calls removeCycle
+     * @return LinkedList of Edges for the current Path
+     * */
     @Override
     public List<E> getPathDFS(N source, N destination) {
         List<String> visited = new ArrayList<>();
@@ -192,6 +235,11 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
         return new LinkedList<E>();
     }
 
+    /**
+     * @param path is a List of Edges
+     * Method works through list of edges not visited in specific path and removes cycles present to return
+     * @return List
+     * */
     public List<E> removeCycle(List<E> path){
         List<E> pathNoCycle = new ArrayList<>();
         List<String> edges = new ArrayList<>();
@@ -315,32 +363,6 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
         List<Triple<N,List<E>,Integer>> newList = new ArrayList<>();
         for(N n: list) newList.add(new Triple(n,path,num));
         return newList;
-    }
-
-    private Queue<Triple<N,List<E>,Integer>> addOrdered(Queue<Triple<N,List<E>,Integer>> queue, List<Triple<N,List<E>,Integer>> toAdd){
-        if(toAdd.isEmpty()){
-            return queue;
-        }
-
-
-        Queue<Triple<N,List<E>,Integer>> newQueue = new LinkedList<>();
-        Iterator<Triple<N,List<E>,Integer>> iterator = queue.iterator();
-        Integer transitions = toAdd.get(0).third;
-
-        if(queue.isEmpty()){
-            newQueue.addAll(toAdd);
-        }
-
-        while (iterator.hasNext()){
-            Triple<N,List<E>,Integer> node = iterator.next();
-            if(node.third > transitions || !iterator.hasNext()){
-                newQueue.addAll(toAdd);
-                iterator.forEachRemaining(newQueue::add);
-            }
-            newQueue.add(node);
-        }
-
-        return newQueue;
     }
 
 }
