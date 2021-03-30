@@ -11,10 +11,10 @@ import java.util.List;
 
 public class Controller {
     Model model;
-    View view;
+    PathDisplayer2 view;
     VBox root;
 
-    public Controller(Model model,View view, VBox root){
+    public Controller(Model model,PathDisplayer2 view, VBox root){
         this.model = model;
         this.view = view;
         this.root = root;
@@ -53,7 +53,7 @@ public class Controller {
 
         }*/
         //view.displaySecondScreen(path);
-        root.getChildren().add(view.createLine(path));
+        root.getChildren().add(view.showRouteWithoutStationNames(path));
 
     }
 

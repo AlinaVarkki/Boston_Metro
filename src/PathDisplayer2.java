@@ -48,17 +48,15 @@ public class PathDisplayer2 {
         int x = 30;
 
         if (!stations.isEmpty()) {
-            int currentEnd = 0;
+            int currentEnd = circleRadius;
             int chunkSize;
-            int countLen = 0;
 
-            int lineLength = 600 / countLen;
             String currentColor = stations.get(0).first;
             ArrayList<String> currentLine = stations.get(0).second;
 
             circles.getChildren().add(makeTripleCircle(x,0,currentColor));
 
-            HBox titleLine = displayLineLabel(currentLine.get(0),currentColor,"Take");
+            HBox titleLine = displayLineLabel(currentLine.get(0), currentColor,"Take");
 
             names.setMargin(titleLine, new Insets(0,0,0,circleRadius*2));
             names.getChildren().add(titleLine);
@@ -80,7 +78,7 @@ public class PathDisplayer2 {
 
                 //sets up the points
                 int start = currentEnd;
-                int end = start + chunkSize*lineLength;
+                int end = start + chunkSize*circleRadius + 4*circleRadius;
                 currentEnd = end;
 
                 //creates line
@@ -100,7 +98,7 @@ public class PathDisplayer2 {
                 }
 
                 //creates text
-                VBox chunkOfStations = displayChunkOfStations(currentLine, lineLength, nextColor);
+                VBox chunkOfStations = displayChunkOfStations(currentLine, nextColor);
                 names.setMargin(chunkOfStations, new Insets(0,0,0,circleRadius*2));
                 names.getChildren().add(chunkOfStations);
 
@@ -135,7 +133,7 @@ public class PathDisplayer2 {
         titleLine.getChildren().addAll(title, switchLine);
         titleLine.setAlignment(Pos.BASELINE_LEFT);
 
-        titleLine.setPadding(new Insets(circleRadius/3,0,circleRadius/3,0));
+        titleLine.setPadding(new Insets(0,0,0,0));
 
         return titleLine;
     }
@@ -179,18 +177,18 @@ public class PathDisplayer2 {
      * Method sets the standard Size of the Line and Creates it.
      * @return Vbox with the columns of station names from optimal path
      * */
-    private VBox displayChunkOfStations(ArrayList<String> stations, int lineHeight, String nextColor) {
+    private VBox displayChunkOfStations(ArrayList<String> stations, String nextColor) {
         VBox chunk = new VBox();
 
         if (stations.size()>1) {
-            chunk.getChildren().add(displaySmallerStationNamesImproved(stations, lineHeight));
+            chunk.getChildren().add(displaySmallerStationNamesImproved(stations));
         } else {
 
             Text text = new Text();
             text.setText("Empty");
             text.setFill(white);
             text.setFont(Font.font("Arial", FontWeight.NORMAL, FontPosture.REGULAR,0));
-            int padding =lineHeight/2 - circleRadius;
+            int padding =2*circleRadius;
             chunk.setMargin(text, new Insets(padding,0,padding ,0));
 
             chunk.getChildren().add(text);
@@ -213,12 +211,12 @@ public class PathDisplayer2 {
      * Calls displaySmallerStationNames if their are more then 10 station names to display
      * @return HBox of station names
      * */
-    private HBox displaySmallerStationNamesImproved(List<String> stations, int lineHeight) {
+    private HBox displaySmallerStationNamesImproved(List<String> stations) {
         HBox names = new HBox();
         int fontHeight = circleRadius;
 
         int height = Math.min(stations.size(),10);
-        int padding = (lineHeight*(height) - circleRadius*2 - (height)*fontHeight)/2 ;
+        int padding = 2*circleRadius;
         names.setPadding(new Insets(padding,0,padding ,0));
 
         int numberOfLines = 10;
@@ -227,16 +225,16 @@ public class PathDisplayer2 {
             int diff = stations.size() - numberOfLines;
             int index = 0;
             while (diff > 0) {
-                VBox column = displaySmallerStationNames(stations.subList(index, index+numberOfLines),lineHeight);
+                VBox column = displaySmallerStationNames(stations.subList(index, index+numberOfLines));
                 names.getChildren().add(column);
                 index += numberOfLines-1;
                 diff -= index;
             }
-            VBox column = displaySmallerStationNames(stations.subList(index, stations.size()),lineHeight);
+            VBox column = displaySmallerStationNames(stations.subList(index, stations.size()));
             names.getChildren().add(column);
 
         } else {
-            names.getChildren().add(displaySmallerStationNames(stations,lineHeight));
+            names.getChildren().add(displaySmallerStationNames(stations));
         }
 
         return names;
@@ -248,7 +246,7 @@ public class PathDisplayer2 {
      * Calls displaySmallerStationName to format each line for display
      * @return VBox of station names
      * */
-    private VBox displaySmallerStationNames(List<String> stations, int lineHeight) {
+    private VBox displaySmallerStationNames(List<String> stations) {
         int fontHeight = circleRadius;
         VBox names = new VBox();
 
