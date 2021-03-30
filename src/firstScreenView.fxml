@@ -13,41 +13,41 @@
 <?import javafx.scene.control.ChoiceBox?>
 <AnchorPane fx:controller="View" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <ImageView fx:id="titleImage" fitHeight="414.0" fitWidth="397.0" layoutY="-7.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="titleImage" fitWidth="686.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="map.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="141.0" fitWidth="141.0" layoutX="428.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="175.0" fitWidth="175.0" layoutX="758.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="boston_logo.png" />
             </image>
         </ImageView>
-        <Text fill="WHITE" layoutX="14.0" layoutY="363.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" WELCOME TO THE BOSTON METRO">
+        <Text fx:id="titleText1" fill="WHITE" layoutX="20.0" layoutY="475.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WELCOME TO THE BOSTON METRO">
             <font>
-                <Font name="Tahoma Bold" size="19.0" />
+                <Font name="Tahoma Bold" size="33.0" />
             </font>
         </Text>
-        <Text fill="WHITE" layoutX="20.0" layoutY="382.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Find the fastest away around the city on a hill with ease!">
+        <Text fx:id="titleText2" fill="WHITE" layoutX="20.0" layoutY="510.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Find the fastest away around the city on a hill with ease!">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Text>
+        <Text fx:id="startStationErrorMsg" text = "please choose start station" layoutX="743.0" layoutY="245.0" style="-fx-fill: red;" visible="false">
             <font>
                 <Font size="13.0" />
             </font>
         </Text>
-        <Text fx:id="startStationErrorMsg" text = "please choose start station" layoutX="425.0" layoutY="203.0" style="-fx-fill: red;" visible="false">
+        <ComboBox fx:id="startDestSelector" minHeight="40" minWidth="200" promptText="START DESTINATION" layoutX="743.0" layoutY="250.0" prefHeight="29.0" prefWidth="154.0" style="-fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;" onAction="#setDefaultStyleStartSelector"/>
+        <Text fx:id="endStationErrorMsg" text = "please choose end station" layoutX="743.0" layoutY="315.0" style="-fx-fill: red;" visible="false">
             <font>
-                <Font size="11.0" />
+                <Font size="13.0" />
             </font>
         </Text>
-        <ComboBox fx:id="startDestSelector" promptText="START DESTINATION" layoutX="425.0" layoutY="210.0" prefHeight="29.0" prefWidth="154.0" style="-fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;" onAction="#setDefaultStyleStartSelector"/>
-        <Text fx:id="endStationErrorMsg" text = "please choose end station" layoutX="426.0" layoutY="252.0" style="-fx-fill: red;" visible="false">
+        <ComboBox fx:id="endDestSelector" minHeight="40" minWidth="200" promptText="END DESTINATION" layoutX="743.0" layoutY="320.0" prefHeight="29.0" prefWidth="154.0" style="-fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;" onAction="#setDefaultStyleEndSelector"/>
+        <Button  fx:id="findButton" minHeight="50" minWidth="200"  onAction="#findPathBtnClicked" layoutX="743.0" layoutY="450.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="154.0" style="-fx-background-color: #0B132B; -fx-background-radius: 10;" text="FIND A ROUTE" textFill="WHITE" >
             <font>
-                <Font size="11.0" />
-            </font>
-        </Text>
-        <ComboBox fx:id="endDestSelector" promptText="END DESTINATION" layoutX="426.0" layoutY="259.0" prefHeight="29.0" prefWidth="154.0" style="-fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;" onAction="#setDefaultStyleEndSelector"/>
-        <Button  fx:id="findButton" onAction="#findPathBtnClicked" layoutX="426.0" layoutY="320.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="154.0" style="-fx-background-color: #0B132B; -fx-background-radius: 10;" text="FIND A ROUTE" textFill="WHITE" >
-            <font>
-                <Font name="System Bold" size="13.0" />
+                <Font name="System Bold" size="16.0" />
             </font>
         </Button>
     </children>

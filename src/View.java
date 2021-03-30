@@ -8,7 +8,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -19,7 +21,9 @@ import java.util.function.Function;
 public class View {
 
     PathDisplayer pathDisplayer;
+    Pane pathDisplayed;
     AnchorPane root ;
+    private Color background = Color.rgb(11,19,43);
 
 
     @FXML
@@ -37,6 +41,12 @@ public class View {
 
     @FXML
     ImageView titleImage;
+
+    @FXML
+    Text titleText1;
+
+    @FXML
+    Text titleText2;
 
     @FXML
     public void initialize(){
@@ -146,11 +156,25 @@ public class View {
     }
 
     public void displayFoundPath(List<Tuple<String,List<String>>> path){
-        titleImage.setVisible(false);
+        this.setTitleVisibility(false);
+        if(this.pathDisplayed != null){
+            this.pathDisplayed.setVisible(false);
+        }
         root.getChildren().add(pathDisplayer.createLine(path));
+
+    }
+
+    public void setTitleVisibility(boolean visible){
+        titleImage.setVisible(visible);
+        titleText1.setVisible(visible);
+        titleText2.setVisible(visible);
     }
 
     public void setRoot(AnchorPane root){
         this.root = root;
+        Rectangle bg = new Rectangle(686, 550);
+        bg.setFill(background);
+        root.getChildren().add(bg);
+        bg.toBack();
     }
 }
