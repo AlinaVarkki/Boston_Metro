@@ -1,29 +1,36 @@
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class App2 extends Application {
+    Stage window;
 
     public static void main(String[] args){
         launch(args);
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage window) throws Exception {
 
+        window.setTitle("Boston Metro System");
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("firstScreenView.fxml"));
+        AnchorPane root = loader.load();
+        window.setScene(new Scene(root, 1000, 700, Color.WHITE));
+        window.show();
+
+
+        View view = loader.<View>getController();
+        view.setRoot(root);
         Model model = new Model("src/bostonmetro.txt");
-        View view = new View();
-        VBox root = new VBox();
-        root.setSpacing(20);
-        root.setStyle("-fx-background-color: #0B132B;");
+        Controller controller = new Controller(model, view);
 
-        Scene scene = new Scene(root, 700, 700);
-
-        Controller controller = new Controller(model,view, root);
         controller.run();
-        stage.setScene(scene);
 
-        stage.show();
     }
 }
