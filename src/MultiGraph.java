@@ -15,7 +15,6 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
         adjacencyMap = new HashMap<>();
     }
 
-
     @Override
     public void addNode(N node){
         adjacencyMap.put(node, new ArrayList<>());
