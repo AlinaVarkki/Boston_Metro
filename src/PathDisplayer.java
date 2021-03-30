@@ -1,12 +1,10 @@
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
@@ -17,15 +15,12 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-
-public class LineScreen extends Application {
+public class PathDisplayer {
 
     private Color background = Color.rgb(11,19,43);
     private Color blue = Color.rgb(18,126,188);
@@ -35,51 +30,15 @@ public class LineScreen extends Application {
     private Color white = Color.rgb(255,255,255);
 
     private HashMap<String, Color> colorMappings = new HashMap<>();
-    private int circleRadius = 15;
+    private int circleRadius = 10;
 
+    public PathDisplayer(){
 
-
-    public static void main(String[] args) {
-        launch(args);
-    }
-
-    @Override
-    public void start(Stage stage) throws Exception {
         initialiseColorMappings();
 
-        VBox root = new VBox();
-        root.setSpacing(20);
-        root.setStyle("-fx-background-color: #0B132B;");
-
-        stage.setTitle("Boston Metro System");
-
-
-        Scene scene = new Scene(root, 600, 600, background);
-
-        Button btn = new Button("Hello");
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-
-                HBox line = createLine(getStations());
-                root.getChildren().add(line);
-
-            }
-        });
-
-        root.getChildren().add(btn);
-
-
-
-        stage.setScene(scene);
-        stage.initStyle(StageStyle.UTILITY);
-
-        stage.show();
     }
 
-
-
-    public HBox createLine(ArrayList<Tuple<String, ArrayList<String>>> stations) {
+    public HBox createLine(List<Tuple<String, List<String>>> stations) {
         Group lines = new Group();
         Group circles = new Group();
         VBox names = new VBox();
@@ -94,7 +53,7 @@ public class LineScreen extends Application {
 
             int countLen = 0;
 
-            for (Tuple<String, ArrayList<String>> line : stations) {
+            for (Tuple<String, List<String>> line : stations) {
                 if (line.second.size() > 10) {
                     countLen += 10;
                 } else {
@@ -103,16 +62,16 @@ public class LineScreen extends Application {
 
             }
 
-            int lineLength = 500 / countLen;
+            int lineLength = 400 / countLen;
 
             String currentColor = stations.get(0).first;
-            ArrayList<String> currentLine = stations.get(0).second;
+            List<String> currentLine = stations.get(0).second;
 
             circles.getChildren().add(makeTripleCircle(x,0,currentColor));
 
             HBox titleLine = displayLineLabel(currentLine.get(0),currentColor,"Take");
 
-            names.setMargin(titleLine, new Insets(circleRadius/3,0,0,circleRadius*2));
+            names.setMargin(titleLine, new Insets(0,0,0,circleRadius*2));
             names.getChildren().add(titleLine);
 
             stations.get(0).second.remove(0);
@@ -171,16 +130,28 @@ public class LineScreen extends Application {
         finalBox.getChildren().add(finalGroup);
         finalBox.getChildren().add(names);
 
+        finalBox.setStyle("-fx-background-color: #0B132B;");
         return finalBox;
     }
 
 
     //text methods
-    private VBox displayChunkOfStations(ArrayList<String> stations, int lineHeight, String nextColor) {
+    private VBox displayChunkOfStations(List<String> stations, int lineHeight, String nextColor) {
         VBox chunk = new VBox();
 
         if (stations.size()>1) {
             chunk.getChildren().add(displaySmallerStationNamesImproved(stations, lineHeight));
+        } else {
+
+
+            Text text = new Text();
+            text.setText("Empty");
+            text.setFill(white);
+            text.setFont(Font.font(0));
+            int padding =lineHeight/2 - circleRadius;
+            chunk.setMargin(text, new Insets(padding,0,padding ,0));
+
+            chunk.getChildren().add(text);
         }
 
         if (nextColor.equals("")) {
@@ -203,6 +174,8 @@ public class LineScreen extends Application {
         titleLine.setSpacing(circleRadius*2);
         titleLine.getChildren().addAll(title, switchLine);
         titleLine.setAlignment(Pos.BASELINE_LEFT);
+
+        titleLine.setPadding(new Insets(circleRadius/3,0,circleRadius/3,0));
 
         return titleLine;
     }
@@ -251,7 +224,7 @@ public class LineScreen extends Application {
         int fontHeight = circleRadius;
 
         int height = Math.min(stations.size(),10);
-        int padding = (lineHeight*(height) - circleRadius*2 - (height)*fontHeight)/2 + +circleRadius/height;
+        int padding = (lineHeight*(height) - circleRadius*2 - (height)*fontHeight)/2 ;
         names.setPadding(new Insets(padding,0,padding ,0));
 
 
@@ -273,7 +246,7 @@ public class LineScreen extends Application {
 
         } else {
 
-           names.getChildren().add(displaySmallerStationNames(stations,lineHeight));
+            names.getChildren().add(displaySmallerStationNames(stations,lineHeight));
 
         }
 
@@ -368,8 +341,4 @@ public class LineScreen extends Application {
         colorMappings.put("GreenD",green);
         colorMappings.put("GreenE",green);
     }
-
 }
-
-
-
