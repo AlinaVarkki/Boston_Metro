@@ -2,13 +2,13 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -23,6 +23,8 @@ public class View {
     PathDisplayer pathDisplayer;
     Pane pathDisplayed;
     AnchorPane root ;
+    BorderPane container;
+
     private Color background = Color.rgb(11,19,43);
 
 
@@ -158,9 +160,12 @@ public class View {
     public void displayFoundPath(List<Tuple<String,List<String>>> path){
         this.setTitleVisibility(false);
         if(this.pathDisplayed != null){
-            this.pathDisplayed.setVisible(false);
+            root.getChildren().remove(pathDisplayed);
         }
-        root.getChildren().add(pathDisplayer.createLine(path));
+        pathDisplayed = pathDisplayer.createLine(path);
+//        root.getChildren().add(pathDisplayed);
+
+        container.setCenter(pathDisplayed);
 
     }
 
@@ -172,9 +177,14 @@ public class View {
 
     public void setRoot(AnchorPane root){
         this.root = root;
+        container = new BorderPane();
+        container.setMinWidth(686);
+        container.setMinHeight(550);
         Rectangle bg = new Rectangle(686, 550);
         bg.setFill(background);
+        root.getChildren().add(container);
         root.getChildren().add(bg);
         bg.toBack();
+
     }
 }

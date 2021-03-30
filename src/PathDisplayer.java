@@ -70,6 +70,8 @@ public class PathDisplayer {
 
         box.setStyle("-fx-background-color: #0B132B;");
 
+
+
         return box;
     }
 
@@ -120,10 +122,26 @@ public class PathDisplayer {
             }
         }
 
-        HBox finalBox = new HBox();
-        finalBox.getChildren().add(thingy);
+        VBox almostFinalBox = new VBox();
+        almostFinalBox.getChildren().add(thingy);
+        almostFinalBox.setAlignment(Pos.CENTER);
 
-        finalBox.setStyle("-fx-background-color: #0B132B;");
+        HBox finalBox = new HBox();
+//        finalBox.setCenter(thingy);
+        finalBox.getChildren().add(almostFinalBox);
+        finalBox.setAlignment(Pos.CENTER);
+
+
+
+
+//        stack.setStyle("-fx-background-color: #0B132B;");
+
+//        StackPane stack = new StackPane();
+//        stack.getChildren().add(thingy);
+//        stack.setStyle("-fx-background-color: #0B132B;");
+//        stack.setAlignment(Pos.CENTER);
+
+
         return finalBox;
     }
 
