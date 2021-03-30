@@ -14,11 +14,39 @@ public class Model {
 
     }
 
+    /**
+     * @param filepath passed to FileReader
+     * MultiGraph initialised with Nodes and Edges
+     * */
+    private void setMultiGraph(String filepath){
+        FileReader reader = new FileReader(filepath);
+
+        multiGraph = new MultiGraph<>();
+        stations = reader.getStations();
+        List<Edge<Node>> connections = reader.getConnections();
+
+        for(Node n: stations) multiGraph.addNode(n);
+        for(Edge<Node> e: connections) multiGraph.addEdge(e);
+
+    }
+
+    private void setStationsHashMap(){
+        stationsHashMap = new HashMap<>();
+        for(Node station : stations){
+            this.stationsHashMap.put(station.toString(),station);
+        }
+    }
+
     public ArrayList<String> getListOfStations(){
         return new ArrayList<>(stationsHashMap.keySet());
 
     }
 
+    /**
+     * @param start,destination stored as Nodes and passed to MultiGraph
+     * Tuple used to store Line-Colour and Station's
+     * @return Arraylist of Tuples for optimal Route
+     * */
     public ArrayList<Tuple<String,ArrayList<String>>> runSearch(String start,String destination){
         Node from = this.find(start);
         Node to = this.find(destination);
@@ -46,25 +74,6 @@ public class Model {
         processedForView.add(line);
 
         return processedForView;
-    }
-
-    private void setMultiGraph(String filepath){
-        FileReader reader = new FileReader(filepath);
-
-        multiGraph = new MultiGraph<>();
-        stations = reader.getStations();
-        List<Edge<Node>> connections = reader.getConnections();
-
-        for(Node n: stations) multiGraph.addNode(n);
-        for(Edge<Node> e: connections) multiGraph.addEdge(e);
-
-    }
-
-    private void setStationsHashMap(){
-        stationsHashMap = new HashMap<>();
-        for(Node station : stations){
-            this.stationsHashMap.put(station.toString(),station);
-        }
     }
 
     private Node find(String name){

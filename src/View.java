@@ -38,19 +38,21 @@ public class View {
 
     }
 
+    /**
+     * @param stations contains the Best Suited Path Found By the Model
+     * Method sets the standard Size of the Line and Creates it.
+     * Calls makeDoubleCircle,makeTripleCircle,displayLineLabel,displayChunkOfStations
+     * @return Hbox with the Line element and all corresponding labels appropriately Styled and Sized
+     * */
     public HBox createLine(ArrayList<Tuple<String, ArrayList<String>>> stations) {
         Group lines = new Group();
         Group circles = new Group();
         VBox names = new VBox();
-
         int x = 30;
 
-
         if (!stations.isEmpty()) {
-
             int currentEnd = 0;
             int chunkSize;
-
             int countLen = 0;
 
             for (Tuple<String, ArrayList<String>> line : stations) {
@@ -59,11 +61,9 @@ public class View {
                 } else {
                     countLen += line.second.size();
                 }
-
             }
 
             int lineLength = 600 / countLen;
-
             String currentColor = stations.get(0).first;
             ArrayList<String> currentLine = stations.get(0).second;
 
@@ -100,18 +100,14 @@ public class View {
                 line.setStyle("-fx-stroke-width: 5;");
                 lines.getChildren().add(line);
 
-
                 String nextColor;
                 //creates circle
                 if (i+1 < stations.size()) {
-
                     circles.getChildren().add(makeDoubleCircle(x,end,currentColor,stations.get(i+1).first));
                     nextColor = stations.get(i+1).first;
-
                 } else {
                     circles.getChildren().add(makeTripleCircle(x,end,currentColor));
                     nextColor = "";
-
                 }
 
                 //creates text
@@ -121,7 +117,6 @@ public class View {
 
             }
         }
-
         Group finalGroup = new Group();
         finalGroup.getChildren().add(lines);
         finalGroup.getChildren().add(circles);
@@ -133,15 +128,71 @@ public class View {
         return finalBox;
     }
 
+    /**
+     * @param name,previousColor,label
+     * Calls displayBiggerStationName to get final Size and Style for key Station name
+     * Calls displaySwitchLine to get the required label style and content for train transitions
+     * @return Hbox with elements added
+     * */
+    private HBox displayLineLabel(String name, String previousColor, String label) {
+        Text title = displayBiggerStationName(name);
+        Text switchLine = displaySwitchLine(label,previousColor);
 
-    //text methods
+        HBox titleLine = new HBox();
+        titleLine.setSpacing(circleRadius*2);
+        titleLine.getChildren().addAll(title, switchLine);
+        titleLine.setAlignment(Pos.BASELINE_LEFT);
+
+        titleLine.setPadding(new Insets(circleRadius/3,0,circleRadius/3,0));
+
+        return titleLine;
+    }
+
+    /**
+     * @param label,lineColor
+     * completes the "Take" label with the corresponding line colour
+     * @return Text in standardised format and required colour for users readability
+     * */
+    private Text displaySwitchLine(String label, String lineColor) {
+        int fontHeight = circleRadius;
+
+        Text text = new Text();
+        text.setText(label + " " + lineColor);
+        text.setFill(colorMappings.get(lineColor));
+
+        text.setFont(Font.font("Arial", FontWeight.EXTRA_LIGHT, FontPosture.ITALIC,fontHeight));
+
+
+        return text;
+    }
+
+    /**
+     * @param name of major stations to display in a more eye catching format
+     * Styles name and sizes it
+     * @return Text
+     * */
+    private Text displayBiggerStationName(String name) {
+        int fontHeight = 3*circleRadius/2;
+
+        Text text = new Text();
+        text.setText(name.toUpperCase());
+        text.setFill(white);
+        text.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, FontPosture.REGULAR,fontHeight));
+
+        return text;
+    }
+
+    /**
+     * @param stations,lineHeight,nextColor
+     * Method sets the standard Size of the Line and Creates it.
+     * @return Hbox with the columns of station names from optimal path
+     * */
     private VBox displayChunkOfStations(ArrayList<String> stations, int lineHeight, String nextColor) {
         VBox chunk = new VBox();
 
         if (stations.size()>1) {
             chunk.getChildren().add(displaySmallerStationNamesImproved(stations, lineHeight));
         } else {
-
 
             Text text = new Text();
             text.setText("Empty");
@@ -165,71 +216,20 @@ public class View {
         return chunk;
     }
 
-    private HBox displayLineLabel(String name, String previousColor, String label) {
-        Text title = displayBiggerStationName(name);
-        Text switchLine = displaySwitchLine(label,previousColor);
-
-        HBox titleLine = new HBox();
-        titleLine.setSpacing(circleRadius*2);
-        titleLine.getChildren().addAll(title, switchLine);
-        titleLine.setAlignment(Pos.BASELINE_LEFT);
-
-        titleLine.setPadding(new Insets(circleRadius/3,0,circleRadius/3,0));
-
-        return titleLine;
-    }
-
-    private Text displaySwitchLine(String label, String lineColor) {
-        int fontHeight = circleRadius;
-
-        Text text = new Text();
-        text.setText(label + " " + lineColor);
-        text.setFill(colorMappings.get(lineColor));
-
-        text.setFont(Font.font("Arial", FontWeight.EXTRA_LIGHT, FontPosture.ITALIC,fontHeight));
-
-
-        return text;
-    }
-
-    private Text displayBiggerStationName(String name) {
-        int fontHeight = 3*circleRadius/2;
-
-        Text text = new Text();
-        text.setText(name.toUpperCase());
-        text.setFill(white);
-        text.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, FontPosture.REGULAR,fontHeight));
-
-        return text;
-    }
-
-    private VBox displaySmallerStationNames(List<String> stations, int lineHeight) {
-        int fontHeight = circleRadius;
-        VBox names = new VBox();
-
-
-        for (int i = 0; i < stations.size()-1; i++) {
-            Text statName = displaySmallerStationName(stations.get(i), fontHeight);
-            names.setMargin(statName, new Insets(0,0,0,circleRadius*3));
-            names.getChildren().add(statName);
-        }
-
-        return names;
-    }
-
+    /**
+     * @param stations,lineHeight passed form displayChunkOfStations
+     * Calls displaySmallerStationNames if their are more then 10 station names to display
+     * @return HBox of station names
+     * */
     private HBox displaySmallerStationNamesImproved(List<String> stations, int lineHeight) {
         HBox names = new HBox();
-
         int fontHeight = circleRadius;
 
         int height = Math.min(stations.size(),10);
         int padding = (lineHeight*(height) - circleRadius*2 - (height)*fontHeight)/2 ;
         names.setPadding(new Insets(padding,0,padding ,0));
 
-
         int numberOfLines = 10;
-
-
 
         if (stations.size() > numberOfLines) {
             int diff = stations.size() - numberOfLines;
@@ -244,14 +244,36 @@ public class View {
             names.getChildren().add(column);
 
         } else {
-
             names.getChildren().add(displaySmallerStationNames(stations,lineHeight));
-
         }
 
         return names;
     }
 
+    /**
+     * @param stations,lineHeight passed from displaySmallerStationNamesImproved
+     * Calculate the display size and spacing of overflow stations to maintain clean display
+     * Calls displaySmallerStationName to format each line for display
+     * @return VBox of station names
+     * */
+    private VBox displaySmallerStationNames(List<String> stations, int lineHeight) {
+        int fontHeight = circleRadius;
+        VBox names = new VBox();
+
+        for (int i = 0; i < stations.size()-1; i++) {
+            Text statName = displaySmallerStationName(stations.get(i), fontHeight);
+            names.setMargin(statName, new Insets(0,0,0,circleRadius*3));
+            names.getChildren().add(statName);
+        }
+
+        return names;
+    }
+
+    /**
+     * @param name,lineHeight passed form displaySmallerStationNames
+     * Formats each station name to same space and style for displaying
+     * @return Text of station name in standardised format
+     * */
     private Text displaySmallerStationName(String name, int fontHeight) {
         Text text = new Text();
         text.setText(name);
@@ -261,7 +283,43 @@ public class View {
         return text;
     }
 
-    //circle methods
+    /**
+     * @param x,y,color are the Dimensions and Colour of desired Circle's
+     * Generates circleGroup and fills with 3 Circles for the Start and End Stations
+     * Calls makeCircle
+     * @return Group containing the standardised Circle style
+     * */
+    private Group makeTripleCircle(double x, double y, String color) {
+        Group circleGroup = new Group();
+
+        circleGroup.getChildren().add(makeCircle(x,y,circleRadius,color, color));
+        circleGroup.getChildren().add(makeCircle(x,y,circleRadius*0.8,"BG","BG"));
+        circleGroup.getChildren().add(makeCircle(x,y,circleRadius*0.5,color, color));
+
+        return circleGroup;
+    }
+
+    /**
+     * @param x,y,color1,color2 are the Dimensions and Colour of desired Circle's
+     * Generates circleGroup and fills with 2 Circles for Transition Stations
+     * Calls makeCircle
+     * @return Group containing the standardised Circle style for display
+     * */
+    private Group makeDoubleCircle(double x, double y, String color1, String color2) {
+        Group circleGroup = new Group();
+
+        circleGroup.getChildren().add(makeCircle(x,y,circleRadius,"BG","BG"));
+        circleGroup.getChildren().add(makeCircle(x,y,circleRadius*0.75,color1,color2));
+
+        return circleGroup;
+    }
+
+    /**
+     * @param x,y,radius,color1,color2 are the Dimensions,Radius and Colour/s of desired Circle
+     * Generates Standardised Circle with desired properties form parameters
+     * Add's Colour Gradient for transition between Line Colours
+     * @return Circle
+     * */
     private Circle makeCircle(double x, double y, double radius, String color1, String color2) {
 
         Circle circle = new Circle();
@@ -272,31 +330,8 @@ public class View {
         LinearGradient linear = new LinearGradient(0, 0, 0, 1, true, CycleMethod.NO_CYCLE, stops);
         circle.setFill(linear);
 
-
         return circle;
     }
-
-    private Group makeDoubleCircle(double x, double y, String color1, String color2) {
-        Group circleGroup = new Group();
-
-        circleGroup.getChildren().add(makeCircle(x,y,circleRadius,"BG","BG"));
-        circleGroup.getChildren().add(makeCircle(x,y,circleRadius*0.75,color1,color2));
-
-        return circleGroup;
-    }
-
-    private Group makeTripleCircle(double x, double y, String color) {
-        Group circleGroup = new Group();
-
-        circleGroup.getChildren().add(makeCircle(x,y,circleRadius,color, color));
-        circleGroup.getChildren().add(makeCircle(x,y,circleRadius*0.8,"BG","BG"));
-        circleGroup.getChildren().add(makeCircle(x,y,circleRadius*0.5,color, color));
-
-
-        return circleGroup;
-    }
-
-
 
     public ArrayList<Tuple<String, ArrayList<String>>> getStations() {
         ArrayList<Tuple<String, ArrayList<String>>> stations = new ArrayList<>();
@@ -314,14 +349,12 @@ public class View {
         }
 
 //        stations.add(new Tuple<>("Blue", s3));
-
         ArrayList<String> s2 = new ArrayList<>();
         for (int i = 0; i< 5; i++) {
             s2.add("Station Mattapan "+i);
         }
 
         stations.add(new Tuple<>("Mattapan", s2));
-
 
         return stations;
     }
