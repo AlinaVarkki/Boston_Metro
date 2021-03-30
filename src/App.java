@@ -11,10 +11,16 @@ public class App {
         for(Node n: stations) graph.addNode(n);
         for(Edge e: connections) graph.addEdge(e);
 
-        Node source = getStationByName(stations, "Kendall");
-        Node destination = getStationByName(stations, "CommunityCollege");
+        Node source = getStationByName(stations, "Aquarium");
+        Node destination = getStationByName(stations, "SciencePark");
         List<Edge<Node>> path = graph.getPathDFS(source, destination);
         printPath(path,source);
+
+        //some paths that are different for the algorithm that serches for the least switches path
+        // Boylston -> Chinatown
+        // SouthStation -> SciencePark
+        // Aquarium -> SciencePark
+        // Kendall -> CommunityCollege
 
 //        System.out.println("with Tuples");
 //        List<Edge<Node>> path2 = graph.getPathTuple(source, destination);

@@ -138,6 +138,9 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
     }
 
 
+    //return a path with the least switches by always prioritizing exploring the line that the last explored node is on
+    //to continue exploring he nodes that have been seen before, visited list keeps track of the line it has been visited from along with the node
+    //because of the way the algorithm is implemented, it needs to sometimes saves the edges that have not been visited in the specific path so cycles need to be removed before returning the path
     @Override
     public List<E> getPathDFS(N source, N destination) {
         List<String> visited = new ArrayList<>();
