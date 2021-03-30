@@ -13,14 +13,14 @@ public class App2 extends Application {
     public void start(Stage stage) throws Exception {
 
         Model model = new Model("src/bostonmetro.txt");
-        View view = new View();
+        PathDisplayer pathDisplayer = new PathDisplayer();
         VBox root = new VBox();
         root.setSpacing(20);
         root.setStyle("-fx-background-color: #0B132B;");
 
         Scene scene = new Scene(root, 700, 700);
 
-        Controller controller = new Controller(model,view, root);
+        Controller controller = new Controller(model, pathDisplayer, root);
         controller.run();
         stage.setScene(scene);
 

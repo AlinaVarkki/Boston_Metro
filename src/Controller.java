@@ -1,9 +1,5 @@
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import java.util.Arrays;
 import java.util.Random;
 
 import java.util.ArrayList;
@@ -11,12 +7,12 @@ import java.util.List;
 
 public class Controller {
     Model model;
-    View view;
+    PathDisplayer pathDisplayer;
     VBox root;
 
-    public Controller(Model model,View view, VBox root){
+    public Controller(Model model, PathDisplayer pathDisplayer, VBox root){
         this.model = model;
-        this.view = view;
+        this.pathDisplayer = pathDisplayer;
         this.root = root;
     }
 
@@ -49,7 +45,7 @@ public class Controller {
 
         }*/
         //view.displaySecondScreen(path);
-        root.getChildren().add(view.createLine(path));
+        root.getChildren().add(pathDisplayer.createLine(path));
 
     }
 

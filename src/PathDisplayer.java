@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class View {
+public class PathDisplayer {
 
     private Color background = Color.rgb(11,19,43);
     private Color blue = Color.rgb(18,126,188);
@@ -32,7 +32,7 @@ public class View {
     private HashMap<String, Color> colorMappings = new HashMap<>();
     private int circleRadius = 15;
 
-    public View(){
+    public PathDisplayer(){
 
         initialiseColorMappings();
 
