@@ -22,6 +22,7 @@ public class View {
     AnchorPane root ;
     BorderPane container;
     Map<String, String> stationColorMap;
+    String algorithmSelected;
 
     private Color background = Color.rgb(11,19,43);
 
@@ -55,8 +56,16 @@ public class View {
     ImageView circleEnd;
 
     @FXML
+    Button searchLength;
+
+    @FXML
+    Button searchTransitions;
+
+    @FXML
     public void initialize(){
         pathDisplayer = new PathDisplayer();
+        algorithmSelected = "Length";
+        this.setupAlgorithmSelectorEventHandler();
     }
 
     public void customizeDropDowns(Map<String, String> stationColorMap){
@@ -266,5 +275,26 @@ public class View {
         root.getChildren().add(bg);
         bg.toBack();
 
+    }
+
+    public void setupAlgorithmSelectorEventHandler(){
+        searchLength.setOnAction(actionEvent ->
+        {algorithmSelected = "Length";
+        searchLength.setStyle("-fx-background-color: #0B132B; -fx-background-radius: 10;-fx-border-color: #0B132B;-fx-border-radius: 10;");
+        searchLength.setTextFill(Color.WHITE);
+        searchTransitions.setStyle("-fx-background-color: #fff; -fx-background-radius: 10;-fx-border-color: #0B132B;-fx-border-radius: 10;");
+        searchTransitions.setTextFill(background);
+        });
+        searchTransitions.setOnAction(actionEvent -> {
+            algorithmSelected = "Transitions";
+            searchLength.setStyle("-fx-background-color: #fff; -fx-background-radius: 10;-fx-border-color: #0B132B;-fx-border-radius: 10;");
+            searchLength.setTextFill(background);
+            searchTransitions.setStyle("-fx-background-color: #0B132B; -fx-background-radius: 10;-fx-border-color: #0B132B;-fx-border-radius: 10;");
+            searchTransitions.setTextFill(Color.WHITE);
+        });
+    }
+
+    public String getAlgorithmSelected(){
+        return algorithmSelected;
     }
 }

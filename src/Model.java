@@ -55,13 +55,19 @@ public class Model {
      * Tuple used to store Line-Colour and Station's
      * @return List of Tuples for optimal Route
      * */
-    public List<Tuple<String,List<String>>> runSearch(String start,String destination){
+    public List<Tuple<String,List<String>>> runSearch(String start,String destination,String algorithm){
         Node from = this.find(start);
         Node to = this.find(destination);
 
         List<Tuple<String,List<String>>> processedForView = new ArrayList<>();
+        List<Edge<Node>> path;
+        if (algorithm.equals("Transitions")) {
+            path = multiGraph.getPath(from, to);
+        }
 
-        List<Edge<Node>> path = multiGraph.getPath(from,to);
+        else{
+            path = multiGraph.getPathDFS(from, to);
+        }
 
         Node station = from;
         String lineColour = path.get(0).getLabel();
