@@ -2,21 +2,24 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.stage.PopupWindow;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
+import java.util.Map;
 
 public class View {
 
@@ -24,6 +27,7 @@ public class View {
     Pane pathDisplayed;
     AnchorPane root ;
     BorderPane container;
+    Map<String, String> stationColorMap;
 
     private Color background = Color.rgb(11,19,43);
 
@@ -51,14 +55,25 @@ public class View {
     Text titleText2;
 
     @FXML
+    ImageView circleStart;
+
+    @FXML
+    ImageView circleEnd;
+
+    @FXML
     public void initialize(){
-        customizeDropDown(startDestSelector);
-        customizeDropDown(endDestSelector);
         pathDisplayer = new PathDisplayer();
+    }
+
+    public void customizeDropDowns(Map<String, String> stationColorMap){
+        this.stationColorMap = stationColorMap;
+        setOptionsColours(startDestSelector);
+        setOptionsColours(endDestSelector);
 
     }
 
-    public void customizeDropDown(ComboBox comboBox){
+    public void setOptionsColours(ComboBox comboBox){
+
         comboBox.setCellFactory(
                 new Callback<ListView<String>, ListCell<String>>() {
                     @Override public ListCell<String> call(ListView<String> param) {
@@ -71,14 +86,20 @@ public class View {
                                 super.updateItem(item, empty);
                                 if (item != null) {
                                     setText(item + "   🔴");
-                                    if (item.contains("A")) {
+                                    String label = stationColorMap.get(item);
+
+                                    if (label.equals("Red") || label.equals("RedA") ||label.equals("RedB")) {
                                         setTextFill(Color.RED);
                                     }
-                                    else if (item.contains("B")){
+                                    else if (label.equals("Orange")){
                                         setTextFill(Color.ORANGE);
+                                    }else if (label.equals("Blue")){
+                                        setTextFill(Color.BLUE);
                                     }
-                                    else {
+                                    else if (label.equals("Green") || label.equals("GreenB") || label.equals("GreenC") || label.equals("GreenD") ||label.equals("GreenE")){
                                         setTextFill(Color.GREEN);
+                                    }else{
+                                        setTextFill(Color.BLACK);
                                     }
                                 }
                                 else {
@@ -92,9 +113,75 @@ public class View {
                 });
     }
 
+    public void changeSelectorColourStart(){
+        String selectedStation = startDestSelector.getValue();
+        if(selectedStation != null){
+            circleStart.setVisible(true);
+            Image image = new Image("Images/whiteCircle.png");
+            if(stationColorMap.get(selectedStation).equals("Green")){
+                image = new Image("Images/greenCircle.png");
+            }else if(stationColorMap.get(selectedStation).equals("Red")){
+                image = new Image("Images/redCircle.png");
+            }else if(stationColorMap.get(selectedStation).equals("Orange")){
+                image = new Image("Images/yellowCircle.png");
+            }else if(stationColorMap.get(selectedStation).equals("Blue")){
+                image = new Image("Images/blueCircle.png");
+            }
+            circleStart.setImage(image);
+        }
+    }
+
+    public void changeSelectorColourEnd(){
+        String selectedStation = endDestSelector.getValue();
+        circleEnd.setVisible(true);
+        if(selectedStation != null){
+            circleStart.setVisible(true);
+            Image image = new Image("Images/whiteCircle.png");
+            if(stationColorMap.get(selectedStation).equals("Green")){
+                image = new Image("Images/greenCircle.png");
+            }else if(stationColorMap.get(selectedStation).equals("Red")){
+                image = new Image("Images/redCircle.png");
+            }else if(stationColorMap.get(selectedStation).equals("Orange")){
+                image = new Image("Images/yellowCircle.png");
+            }else if(stationColorMap.get(selectedStation).equals("Blue")){
+                image = new Image("Images/blueCircle.png");
+            }
+            circleEnd.setImage(image);
+        }
+    }
+
     public void fillStationsOptions(List<String> stations){
-        startDestSelector.getItems().addAll(stations);
-        endDestSelector.getItems().addAll(stations);
+
+        List<String> sortedStations = new ArrayList<>();
+        List<String> greenStations = new ArrayList<>();
+        List<String> orangeStations = new ArrayList<>();
+        List<String> redStations = new ArrayList<>();
+        List<String> blueStations = new ArrayList<>();
+        List<String> restStations = new ArrayList<>();
+
+        for (String station: stations){
+            if(stationColorMap.get(station).equals("Green")){
+                greenStations.add(station);
+            }else if(stationColorMap.get(station).equals("Orange")){
+                orangeStations.add(station);
+            }else if(stationColorMap.get(station).equals("Red")){
+                redStations.add(station);
+            }else if(stationColorMap.get(station).equals("Blue")){
+                blueStations.add(station);
+            }else{
+                restStations.add(station);
+            }
+        }
+
+        sortedStations.addAll(blueStations);
+        sortedStations.addAll(redStations);
+        sortedStations.addAll(greenStations);
+        sortedStations.addAll(orangeStations);
+        sortedStations.addAll(restStations);
+
+//        startDestSelector.getItems().add("Riverside");
+        startDestSelector.getItems().addAll(sortedStations);
+        endDestSelector.getItems().addAll(sortedStations);
     }
 
     @FXML
@@ -186,5 +273,45 @@ public class View {
         root.getChildren().add(bg);
         bg.toBack();
 
+    }
+
+
+    public void mapButtonStartClicked() throws IOException {
+
+        Stage stage = new Stage();
+
+        System.out.println("clicked");
+        Parent root = FXMLLoader.load(getClass().getResource("mapView.fxml"));
+
+        Scene scene = new Scene(root,  1171.0, 746.0);
+
+        stage.setTitle("FXML Welcome");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    private void getName(ActionEvent event){
+        Button button = (Button) event.getSource();
+
+        String stationName = button.getId();
+
+        //button ids used to identify stations cannot use '/' so names containing it don't have the full name assignes to it
+        if(stationName.equals("Hynes")){
+            stationName = "Hynes/ICA";
+        }else if(stationName.equals("Charles")){
+            stationName = "Charles/MGH";
+        }else if(stationName.equals("JFK")){
+            stationName = "JFK/UMass";
+        }else if(stationName.equals("BackBay")){
+            stationName = "BackBay/SouthEnd";
+        }
+
+
+        Stage stage = (Stage) button.getScene().getWindow();
+        stage.close();
+        System.out.println(stationName); // prints out button's text
+//        startDestSelector.setValue(stationName);
+//        startDestSelector.setId(stationName);
     }
 }

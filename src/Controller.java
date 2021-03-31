@@ -2,6 +2,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
 import java.util.List;
+import java.util.Map;
 
 public class Controller {
     Model model;
@@ -14,13 +15,13 @@ public class Controller {
 
    public void run(){
         this.setUpDropDowns();
-
         this.setupButtonEventHandler(this);
-
     }
 
     private void setUpDropDowns(){
         List<String> stations = model.getListOfStations();
+        Map<String, String> stationColorMap = model.getStationColorMap();
+        view.customizeDropDowns(stationColorMap);
         view.fillStationsOptions(stations);
     }
 

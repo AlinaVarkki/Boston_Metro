@@ -365,4 +365,8 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
         return newList;
     }
 
+    public Map<N, List<E>> getAdjMap(){
+        return adjacencyMap;
+    }
+
 }
