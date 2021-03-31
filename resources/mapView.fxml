@@ -9,7 +9,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="746.0" prefWidth="1171.0" style="-fx-background-color: #000b59;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapController">
+<AnchorPane prefHeight="746.0" prefWidth="1171.0" style="-fx-background-color: #0B132B;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View">
    <children>
       <Group layoutX="185.0" layoutY="3.0">
          <children>
