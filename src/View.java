@@ -3,6 +3,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -45,6 +46,12 @@ public class View {
 
     @FXML
     Text titleText2;
+
+    @FXML
+    ImageView circleStart;
+
+    @FXML
+    ImageView circleEnd;
 
     @FXML
     public void initialize(){
@@ -102,30 +109,37 @@ public class View {
     public void changeSelectorColourStart(){
         String selectedStation = startDestSelector.getValue();
         if(selectedStation != null){
+            circleStart.setVisible(true);
+            Image image = new Image("Images/whiteCircle.png");
             if(stationColorMap.get(selectedStation).equals("Green")){
-                startDestSelector.setStyle("-fx-background-radius: 10; -fx-background-color: #e1ffdb; -fx-border-color: #0B132B;");
+                image = new Image("Images/greenCircle.png");
             }else if(stationColorMap.get(selectedStation).equals("Red")){
-                startDestSelector.setStyle("-fx-background-radius: 10; -fx-background-color: #fcc5ce; -fx-border-color: #0B132B;");
+                image = new Image("Images/redCircle.png");
             }else if(stationColorMap.get(selectedStation).equals("Orange")){
-                startDestSelector.setStyle("-fx-background-radius: 10; -fx-background-color: #fce6c5; -fx-border-color: #0B132B;");
+                image = new Image("Images/yellowCircle.png");
             }else if(stationColorMap.get(selectedStation).equals("Blue")){
-                startDestSelector.setStyle("-fx-background-radius: 10; -fx-background-color: #9cafff; -fx-border-color: #0B132B;");
+                image = new Image("Images/blueCircle.png");
             }
+            circleStart.setImage(image);
         }
     }
 
     public void changeSelectorColourEnd(){
         String selectedStation = endDestSelector.getValue();
+        circleEnd.setVisible(true);
         if(selectedStation != null){
+            circleStart.setVisible(true);
+            Image image = new Image("Images/whiteCircle.png");
             if(stationColorMap.get(selectedStation).equals("Green")){
-                endDestSelector.setStyle("-fx-background-radius: 10; -fx-background-color: #e1ffdb; -fx-border-color: #0B132B;");
+                image = new Image("Images/greenCircle.png");
             }else if(stationColorMap.get(selectedStation).equals("Red")){
-                endDestSelector.setStyle("-fx-background-radius: 10; -fx-background-color: #fcc5ce; -fx-border-color: #0B132B;");
+                image = new Image("Images/redCircle.png");
             }else if(stationColorMap.get(selectedStation).equals("Orange")){
-                endDestSelector.setStyle("-fx-background-radius: 10; -fx-background-color: #fce6c5; -fx-border-color: #0B132B;");
+                image = new Image("Images/yellowCircle.png");
             }else if(stationColorMap.get(selectedStation).equals("Blue")){
-                endDestSelector.setStyle("-fx-background-radius: 10; -fx-background-color: #9cafff; -fx-border-color: #0B132B;");
+                image = new Image("Images/blueCircle.png");
             }
+            circleEnd.setImage(image);
         }
     }
 
