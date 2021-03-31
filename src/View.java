@@ -58,7 +58,7 @@ public class View {
 
     }
 
-    public void setOptionsColours(ComboBox comboBox){
+    public void setOptionsColours(ComboBox<String> comboBox){
 
         comboBox.setCellFactory(
                 new Callback<ListView<String>, ListCell<String>>() {
@@ -99,39 +99,42 @@ public class View {
                 });
     }
 
-    public void changeSelectorColourStart(){
-        String selectedStation = startDestSelector.getValue();
-        if(selectedStation != null){
-            if(stationColorMap.get(selectedStation).equals("Green")){
-                startDestSelector.setStyle("-fx-background-radius: 10; -fx-background-color: #e1ffdb; -fx-border-color: #0B132B;");
-            }else if(stationColorMap.get(selectedStation).equals("Red")){
-                startDestSelector.setStyle("-fx-background-radius: 10; -fx-background-color: #fcc5ce; -fx-border-color: #0B132B;");
-            }else if(stationColorMap.get(selectedStation).equals("Orange")){
-                startDestSelector.setStyle("-fx-background-radius: 10; -fx-background-color: #fce6c5; -fx-border-color: #0B132B;");
-            }else if(stationColorMap.get(selectedStation).equals("Blue")){
-                startDestSelector.setStyle("-fx-background-radius: 10; -fx-background-color: #9cafff; -fx-border-color: #0B132B;");
-            }
-        }
-    }
+//    public void changeSelectorColourStart(){
+//        String selectedStation = startDestSelector.getValue();
+////        if(selectedStation != null){
+////            if(stationColorMap.get(selectedStation).equals("Green")){
+////                startDestSelector.setStyle("-fx-background-radius: 10; -fx-background-color: #e1ffdb; -fx-border-color: #0B132B;");
+////            }else if(stationColorMap.get(selectedStation).equals("Red")){
+////                startDestSelector.setStyle("-fx-background-radius: 10; -fx-background-color: #fcc5ce; -fx-border-color: #0B132B;");
+////            }else if(stationColorMap.get(selectedStation).equals("Orange")){
+////                startDestSelector.setStyle("-fx-background-radius: 10; -fx-background-color: #fce6c5; -fx-border-color: #0B132B;");
+////            }else if(stationColorMap.get(selectedStation).equals("Blue")){
+////                startDestSelector.setStyle("-fx-background-radius: 10; -fx-background-color: #9cafff; -fx-border-color: #0B132B;");
+////            }
+////        }
+//    }
 
-    public void changeSelectorColourEnd(){
-        String selectedStation = endDestSelector.getValue();
-        if(selectedStation != null){
-            if(stationColorMap.get(selectedStation).equals("Green")){
-                endDestSelector.setStyle("-fx-background-radius: 10; -fx-background-color: #e1ffdb; -fx-border-color: #0B132B;");
-            }else if(stationColorMap.get(selectedStation).equals("Red")){
-                endDestSelector.setStyle("-fx-background-radius: 10; -fx-background-color: #fcc5ce; -fx-border-color: #0B132B;");
-            }else if(stationColorMap.get(selectedStation).equals("Orange")){
-                endDestSelector.setStyle("-fx-background-radius: 10; -fx-background-color: #fce6c5; -fx-border-color: #0B132B;");
-            }else if(stationColorMap.get(selectedStation).equals("Blue")){
-                endDestSelector.setStyle("-fx-background-radius: 10; -fx-background-color: #9cafff; -fx-border-color: #0B132B;");
-            }
-        }
-    }
+//    public void changeSelectorColourEnd(){
+//        String selectedStation = endDestSelector.getValue();
+//        if(selectedStation != null){
+//            if(stationColorMap.get(selectedStation).equals("Green")){
+//                endDestSelector.setStyle("-fx-background-radius: 10; -fx-background-color: #e1ffdb; -fx-border-color: #0B132B;");
+//            }else if(stationColorMap.get(selectedStation).equals("Red")){
+//                endDestSelector.setStyle("-fx-background-radius: 10; -fx-background-color: #fcc5ce; -fx-border-color: #0B132B;");
+//            }else if(stationColorMap.get(selectedStation).equals("Orange")){
+//                endDestSelector.setStyle("-fx-background-radius: 10; -fx-background-color: #fce6c5; -fx-border-color: #0B132B;");
+//            }else if(stationColorMap.get(selectedStation).equals("Blue")){
+//                endDestSelector.setStyle("-fx-background-radius: 10; -fx-background-color: #9cafff; -fx-border-color: #0B132B;");
+//            }
+//        }
+//    }
 
     public void fillStationsOptions(List<String> stations){
         startDestSelector.getItems().addAll(stations);
         endDestSelector.getItems().addAll(stations);
+        startDestSelector.setStyle("-fx-font-family: Arial; -fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;");
+        endDestSelector.setStyle("-fx-font-family: Arial; -fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;");
+
     }
 
     @FXML
@@ -157,12 +160,12 @@ public class View {
 
     public void setDefaultStyleEndSelector(){
         endStationErrorMsg.setVisible(false);
-        endDestSelector.setStyle(" -fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;");
+        endDestSelector.setStyle("-fx-font-family: Arial; -fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;");
     }
 
     public void setDefaultStyleStartSelector(){
         startStationErrorMsg.setVisible(false);
-        startDestSelector.setStyle(" -fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;");
+        startDestSelector.setStyle(" -fx-font-family: Arial; -fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;");
     }
 
     public String getDestinationStation(){
@@ -197,7 +200,7 @@ public class View {
     public void displayFoundPath(List<Tuple<String,List<String>>> path){
         this.setTitleVisibility(false);
         if(this.pathDisplayed != null){
-            root.getChildren().remove(pathDisplayed);
+            container.getChildren().remove(pathDisplayed);
         }
         pathDisplayed = pathDisplayer.createLine(path);
 //        root.getChildren().add(pathDisplayed);
