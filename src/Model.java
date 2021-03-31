@@ -70,22 +70,25 @@ public class Model {
         }
 
         Node station = from;
-        String lineColour = path.get(0).getLabel();
-        Tuple<String,List<String>> line = new Tuple<>(lineColour,new ArrayList<>());
-        line.second.add(station.toString());
 
-        for(Edge<Node> edge: path){
-            System.out.println(edge.toString());
-            lineColour = edge.getLabel();
-            if(!lineColour.equals(line.first)){
-                processedForView.add(line);
-                line = new Tuple<>(lineColour,new ArrayList<>());
-            }
-            station = edge.getOppositeNode(station);
+        if (path.size() != 0) {
+            String lineColour = path.get(0).getLabel();
+            Tuple<String, List<String>> line = new Tuple<>(lineColour, new ArrayList<>());
             line.second.add(station.toString());
-        }
 
-        processedForView.add(line);
+            for (Edge<Node> edge : path) {
+                System.out.println(edge.toString());
+                lineColour = edge.getLabel();
+                if (!lineColour.equals(line.first)) {
+                    processedForView.add(line);
+                    line = new Tuple<>(lineColour, new ArrayList<>());
+                }
+                station = edge.getOppositeNode(station);
+                line.second.add(station.toString());
+            }
+
+            processedForView.add(line);
+        }
 
         return processedForView;
     }

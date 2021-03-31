@@ -66,6 +66,11 @@
                 <Font name="Arial" size="13.0" />
             </font>
         </Text>
+        <Text fx:id="matchingStationErrorMsg" text = "sorry these stations match" layoutX="743.0" layoutY="315.0" style="-fx-fill: #ff0000;" visible="false">
+            <font>
+                <Font name="Arial" size="13.0" />
+            </font>
+        </Text>
         <ImageView fx:id="circleEnd" fitHeight="50" fitWidth="50" layoutX="723.0" layoutY="315.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="Images/whiteCircle.png"/>
