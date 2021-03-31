@@ -1,9 +1,7 @@
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -27,7 +25,7 @@ public class App2 extends Application {
 
         View view = loader.<View>getController();
         view.setRoot(root);
-        Model model = new Model("src/bostonmetro.txt");
+        Model model = new Model("resources/bostonmetro.txt");
         Controller controller = new Controller(model, view);
 
         controller.run();

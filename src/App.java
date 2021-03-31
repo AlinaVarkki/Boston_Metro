@@ -3,7 +3,7 @@ import java.util.List;
 
 public class App {
     public static void main(String[] args){
-        FileReader g = new FileReader("src/bostonmetro.txt");
+        FileReader g = new FileReader("resources/bostonmetro.txt");
         List<Node> stations = g.getStations();
         List<Edge<Node>> connections = g.getConnections();
 
