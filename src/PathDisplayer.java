@@ -43,6 +43,7 @@ public class PathDisplayer {
     private List<String> showingStations = null;
     private HBox finalBox;
     private Pane sideStations;
+    private Random random = new Random();
 
     public PathDisplayer(){
 
@@ -64,7 +65,6 @@ public class PathDisplayer {
 //        sideStations = new Pane();
 
         VBox thingy = new VBox();
-        int trainLength = 20;
 
         if (!stations.isEmpty()) {
             int currentEnd = 2*circleRadius;
@@ -73,8 +73,7 @@ public class PathDisplayer {
             String currentColor = stations.get(0).first;
             List<String> currentLine = stations.get(0).second;
 
-
-            thingy.getChildren().add(createStartingStation(currentLine.get(0),currentColor,x,y));
+            thingy.getChildren().add(createStartingStation(currentLine.get(0),currentColor,x,y,4));
 
             stations.get(0).second.remove(0);
 
@@ -99,21 +98,19 @@ public class PathDisplayer {
                 String lastStation = currentLine.get(currentLine.size()-1);
                 //creates circle depending on whether this is the last station or nah
                 if (i+1 < stations.size()) {
-                    thingy.getChildren().add(createMiddleStation(lastStation,currentColor,stations.get(i+1).first,x,y+start));
+                    thingy.getChildren().add(createMiddleStation(lastStation,currentColor,stations.get(i+1).first,x,y+start,20));
 
                 } else {
-                    thingy.getChildren().add(createEndingStation(lastStation,currentColor,x,y+start));
+                    thingy.getChildren().add(createEndingStation(lastStation,currentColor,x,y+start,25));
                 }
             }
         }
         Circle train = makeCircle(x,y,circleRadius,"White","White");
-       // train.relocate(100,200);
 
         VBox almostFinalBox = new VBox();
         almostFinalBox.getChildren().add(thingy);
         almostFinalBox.setAlignment(Pos.CENTER);
         almostFinalBox.setPadding(new Insets(0,0,0, 5*circleRadius));
-
 
 //        HBox finalBox = new HBox();
         finalBox.getChildren().add(almostFinalBox);
@@ -126,16 +123,15 @@ public class PathDisplayer {
         train.setVisible(true);
         animation.setAlignment(Pos.BASELINE_LEFT);
         StackPane.setMargin(train,new Insets(10,10,10,10));
-        visible(train);
+        animationActive(train);
 
 //        if (showingStations != null) {
 //            finalBox.getChildren().add(showAllSmallStations(showingStations));
 //        }
-
         return animation;
     }
 
-    private void visible(Circle train) {
+    private void animationActive(Circle train) {
         Duration duration = Duration.seconds(7);
         TranslateTransition transition = new TranslateTransition(duration,train);
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2.9), ev -> {
@@ -148,21 +144,21 @@ public class PathDisplayer {
         timeline.play();
     }
 
-    private HBox createStartingStation(String name, String color, double x, double y) {
+    private HBox createStartingStation(String name, String color, double x, double y, int timeBound) {
 
-        return displayLineLabel(name, makeTripleCircle(x,y,color, true));
-
-    }
-
-    private HBox createEndingStation(String name, String color, double x, double y) {
-
-        return displayLineLabel(name, makeTripleCircle(x,y,color, false));
+        return displayLineLabel(name, timeBound, makeTripleCircle(x,y,color, true));
 
     }
 
-    private HBox createMiddleStation(String name, String color1, String color2, double x, double y) {
+    private HBox createEndingStation(String name, String color, double x, double y, int timeBound) {
 
-        return displayLineLabel(name, makeDoubleCircle(x,y,color1,color2));
+        return displayLineLabel(name, timeBound, makeTripleCircle(x,y,color, false));
+
+    }
+
+    private HBox createMiddleStation(String name, String color1, String color2, double x, double y, int timeBound) {
+
+        return displayLineLabel(name, timeBound, makeDoubleCircle(x,y,color1,color2));
 
     }
 
@@ -194,23 +190,19 @@ public class PathDisplayer {
             button.setStyle("-fx-background-color: #0B132B; -fx-text-fill: #FFFFFF");
             this.setMoreButton(finalBox, button, stations);
 
-
             stats.getChildren().add(button);
             stats.setMargin(button, new Insets(0, 0,0,circleRadius));
-
 
         }
         stats.setAlignment(Pos.CENTER_LEFT);
 
         return stats;
-
     }
 
     private Pane showAllSmallStations(List<String> stations) {
 
         VBox stats = displaySmallerStationNames(stations);
         return stats;
-
     }
 
 
@@ -220,8 +212,10 @@ public class PathDisplayer {
      * Calls displaySwitchLine to get the required label style and content for train transitions
      * @return Hbox with elements added
      * */
-    private HBox displayLineLabel(String name, StackPane circle) {
-        Text title = displayBiggerStationName(name);
+    private HBox displayLineLabel(String name, int timeBound, StackPane circle) {
+        int timeStart = random.nextInt(timeBound)+1;
+
+        Text title = displayBiggerStationName(name + "   Leaves in " +timeStart+"mins");
         //Text switchLine = displaySwitchLine(label,previousColor);
 
         HBox titleLine = new HBox();
@@ -229,7 +223,6 @@ public class PathDisplayer {
         titleLine.getChildren().addAll(circle, title);
 
         titleLine.setAlignment(Pos.CENTER_LEFT);
-
 
         return titleLine;
     }
@@ -247,7 +240,6 @@ public class PathDisplayer {
         text.setFill(colorMappings.get(lineColor));
 
         text.setFont(Font.font("Arial", FontWeight.EXTRA_LIGHT, FontPosture.ITALIC,fontHeight));
-
 
         return text;
     }
@@ -302,10 +294,6 @@ public class PathDisplayer {
 
         return text;
     }
-
-
-
-
 
     /**
      * @param x,y,color are the Dimensions and Colour of desired Circle's
