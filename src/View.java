@@ -211,11 +211,9 @@ public class View {
     }
 
     public void fillStationsOptions(List<String> stations){
-        startDestSelector.getItems().addAll(stations);
-        endDestSelector.getItems().addAll(stations);
+
         startDestSelector.setStyle("-fx-font-family: Arial; -fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;");
         endDestSelector.setStyle("-fx-font-family: Arial; -fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;");
-
 
         List<String> sortedStations = new ArrayList<>();
         List<String> greenStations = new ArrayList<>();
