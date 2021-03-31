@@ -145,19 +145,19 @@ public class View {
                                                              boolean empty) {
                                 super.updateItem(item, empty);
                                 if (item != null) {
-                                    setText(item + "   🔴");
+                                    setText(item + "");
                                     String label = stationColorMap.get(item);
 
                                     if (label.equals("Red") || label.equals("RedA") ||label.equals("RedB")) {
-                                        setTextFill(Color.RED);
+                                        setTextFill(Color.rgb(245,61,61));
                                     }
                                     else if (label.equals("Orange")){
-                                        setTextFill(Color.ORANGE);
+                                        setTextFill(Color.rgb(245,153,35));
                                     }else if (label.equals("Blue")){
-                                        setTextFill(Color.BLUE);
+                                        setTextFill(Color.rgb(18,126,188));
                                     }
                                     else if (label.equals("Green") || label.equals("GreenB") || label.equals("GreenC") || label.equals("GreenD") ||label.equals("GreenE")){
-                                        setTextFill(Color.GREEN);
+                                        setTextFill(Color.rgb(20,158,106));
                                     }else{
                                         setTextFill(Color.BLACK);
                                     }
