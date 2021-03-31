@@ -1,3 +1,6 @@
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -29,13 +32,17 @@ public class PathDisplayer {
 
     private HashMap<String, Color> colorMappings = new HashMap<>();
 
-    private int circleRadius = 15;
+    private int circleRadius = 10;
     private int x = 0;
     private int y = 0;
+    private List<String> showingStations = null;
+    private HBox finalBox;
+    private Pane sideStations;
 
     public PathDisplayer(){
 
         initialiseColorMappings();
+//        finalBox = new HBox();
 
     }
 
@@ -47,6 +54,9 @@ public class PathDisplayer {
 
 
     public Pane createLine(List<Tuple<String, List<String>>> stations) {
+
+        finalBox = new HBox();
+//        sideStations = new Pane();
 
         VBox thingy = new VBox();
 
@@ -96,21 +106,16 @@ public class PathDisplayer {
         VBox almostFinalBox = new VBox();
         almostFinalBox.getChildren().add(thingy);
         almostFinalBox.setAlignment(Pos.CENTER);
+        almostFinalBox.setPadding(new Insets(0,0,0, 5*circleRadius));
 
-        HBox finalBox = new HBox();
-//        finalBox.setCenter(thingy);
+
+//        HBox finalBox = new HBox();
         finalBox.getChildren().add(almostFinalBox);
-        finalBox.setAlignment(Pos.CENTER);
+        finalBox.setAlignment(Pos.CENTER_LEFT);
 
-
-
-
-//        stack.setStyle("-fx-background-color: #0B132B;");
-
-//        StackPane stack = new StackPane();
-//        stack.getChildren().add(thingy);
-//        stack.setStyle("-fx-background-color: #0B132B;");
-//        stack.setAlignment(Pos.CENTER);
+//        if (showingStations != null) {
+//            finalBox.getChildren().add(showAllSmallStations(showingStations));
+//        }
 
 
         return finalBox;
@@ -118,19 +123,19 @@ public class PathDisplayer {
 
     private HBox createStartingStation(String name, String color, double x, double y) {
 
-        return displayLineLabel(name, color, "Take", makeTripleCircle(x,y,color, true));
+        return displayLineLabel(name, makeTripleCircle(x,y,color, true));
 
     }
 
     private HBox createEndingStation(String name, String color, double x, double y) {
 
-        return displayLineLabel(name, "", "", makeTripleCircle(x,y,color, false));
+        return displayLineLabel(name, makeTripleCircle(x,y,color, false));
 
     }
 
     private HBox createMiddleStation(String name, String color1, String color2, double x, double y) {
 
-        return displayLineLabel(name, color2, "Switch to", makeDoubleCircle(x,y,color1,color2));
+        return displayLineLabel(name, makeDoubleCircle(x,y,color1,color2));
 
     }
 
@@ -152,14 +157,16 @@ public class PathDisplayer {
     private VBox miniStationsWithButton(List<String> stations) {
 
         VBox stats;
-        if (stations.size() <= 3) {
+        if (stations.size() <= 4) {
             stats = displaySmallerStationNames(stations);
         } else {
             stats = displaySmallerStationNames(stations.subList(0,3));
-            String buttonLabel = "... " + (stations.size()-3) + " more " + (stations.size()-3 == 1 ? "station" : "stations");
+            String buttonLabel = "... " + (stations.size()-3) + " more stations";
             Button button = new Button(buttonLabel);
             button.setFont(Font.font("Arial", FontWeight.NORMAL, FontPosture.ITALIC,circleRadius));
             button.setStyle("-fx-background-color: #0B132B; -fx-text-fill: #FFFFFF");
+            this.setMoreButton(finalBox, button, stations);
+
 
             stats.getChildren().add(button);
             stats.setMargin(button, new Insets(0, 0,0,circleRadius));
@@ -172,6 +179,13 @@ public class PathDisplayer {
 
     }
 
+    private Pane showAllSmallStations(List<String> stations) {
+
+        VBox stats = displaySmallerStationNames(stations);
+        return stats;
+
+    }
+
 
     /**
      * @param name,previousColor,label
@@ -179,13 +193,12 @@ public class PathDisplayer {
      * Calls displaySwitchLine to get the required label style and content for train transitions
      * @return Hbox with elements added
      * */
-    private HBox displayLineLabel(String name, String previousColor, String label, StackPane circle) {
+    private HBox displayLineLabel(String name, StackPane circle) {
         Text title = displayBiggerStationName(name);
-        Text switchLine = displaySwitchLine(label,previousColor);
 
         HBox titleLine = new HBox();
         titleLine.setSpacing(circleRadius*2);
-        titleLine.getChildren().addAll(circle, title, switchLine);
+        titleLine.getChildren().addAll(circle, title);
 
         titleLine.setAlignment(Pos.CENTER_LEFT);
 
@@ -193,23 +206,6 @@ public class PathDisplayer {
         return titleLine;
     }
 
-    /**
-     * @param label,lineColor
-     * completes the "Take"/"Switch to" label with the corresponding line colour
-     * @return Text in standardised format and required colour for users readability
-     * */
-    private Text displaySwitchLine(String label, String lineColor) {
-        int fontHeight = circleRadius;
-
-        Text text = new Text();
-        text.setText(label + " " + lineColor);
-        text.setFill(colorMappings.get(lineColor));
-
-        text.setFont(Font.font("Arial", FontWeight.EXTRA_LIGHT, FontPosture.ITALIC,fontHeight));
-
-
-        return text;
-    }
 
     /**
      * @param name of major stations to display in a more eye catching format
@@ -261,8 +257,6 @@ public class PathDisplayer {
 
         return text;
     }
-
-
 
 
 
@@ -332,7 +326,6 @@ public class PathDisplayer {
         } else if (color2.equals("Mattapan")) {
             letter.setText("M");
         } else {
-//            letter.setText(Character.toString(color2.charAt(0)));
             letter.setText("");
         }
 
@@ -361,4 +354,32 @@ public class PathDisplayer {
         colorMappings.put("GreenD",green);
         colorMappings.put("GreenE",green);
     }
+
+    private void setMoreButton(Pane pane,Button button,List<String> stations){
+        button.setOnAction(showStations(pane, button, stations));
+    }
+
+    private EventHandler<ActionEvent> showStations(Pane pane,Button button,List<String> stations) {
+        EventHandler<ActionEvent> handler = actionEvent -> {
+            if (sideStations != null) {
+                pane.getChildren().remove(sideStations);
+            }
+            sideStations = showAllSmallStations(stations);
+            pane.getChildren().add(sideStations);
+            button.setOnAction(closeStations( pane, button, stations));
+            };
+            return handler;
+        }
+
+        private EventHandler<ActionEvent> closeStations(Pane pane,Button button,List<String> stations) {
+            EventHandler<ActionEvent> handler = actionEvent -> {
+
+                if (sideStations != null) {
+                    pane.getChildren().remove(sideStations);
+                }
+
+                button.setOnAction(showStations( pane, button, stations));
+            };
+            return handler;
+        }
 }
