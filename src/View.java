@@ -89,7 +89,6 @@ public class View {
     public void initialize(){
         pathDisplayer = new PathDisplayer();
         algorithmSelected = "Length";
-        this.setupAlgorithmSelectorEventHandler();
     }
 
     public void customizeDropDowns(Map<String, String> stationColorMap){

@@ -16,6 +16,7 @@ public class Controller {
    public void run(){
         this.setUpDropDowns();
         this.setupButtonEventHandler(this);
+        view.setupAlgorithmSelectorEventHandler();
     }
 
     private void setUpDropDowns(){
