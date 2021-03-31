@@ -55,6 +55,7 @@ public class View {
         customizeDropDown(startDestSelector);
         customizeDropDown(endDestSelector);
         pathDisplayer = new PathDisplayer();
+
     }
 
     public void customizeDropDown(ComboBox comboBox){
@@ -70,7 +71,6 @@ public class View {
                                 super.updateItem(item, empty);
                                 if (item != null) {
                                     setText(item + "   🔴");
-//                                    setGraphic();
                                     if (item.contains("A")) {
                                         setTextFill(Color.RED);
                                     }

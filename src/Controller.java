@@ -1,11 +1,6 @@
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
-import java.util.Random;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class Controller {
