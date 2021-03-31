@@ -19,6 +19,7 @@ public class View {
     Pane pathDisplayed;
     AnchorPane root ;
     BorderPane container;
+    Map<String, String> stationColorMap;
 
     private Color background = Color.rgb(11,19,43);
 
@@ -51,13 +52,14 @@ public class View {
     }
 
     public void customizeDropDowns(Map<String, String> stationColorMap){
-
-        setOptionsColours(startDestSelector, stationColorMap);
-        setOptionsColours(endDestSelector, stationColorMap);
+        this.stationColorMap = stationColorMap;
+        setOptionsColours(startDestSelector);
+        setOptionsColours(endDestSelector);
 
     }
 
-    public void setOptionsColours(ComboBox comboBox, Map<String, String> stationColorMap){
+    public void setOptionsColours(ComboBox comboBox){
+
         comboBox.setCellFactory(
                 new Callback<ListView<String>, ListCell<String>>() {
                     @Override public ListCell<String> call(ListView<String> param) {
@@ -95,6 +97,36 @@ public class View {
                     }
 
                 });
+    }
+
+    public void changeSelectorColourStart(){
+        String selectedStation = startDestSelector.getValue();
+        if(selectedStation != null){
+            if(stationColorMap.get(selectedStation).equals("Green")){
+                startDestSelector.setStyle("-fx-background-radius: 10; -fx-background-color: #e1ffdb; -fx-border-color: #0B132B;");
+            }else if(stationColorMap.get(selectedStation).equals("Red")){
+                startDestSelector.setStyle("-fx-background-radius: 10; -fx-background-color: #fcc5ce; -fx-border-color: #0B132B;");
+            }else if(stationColorMap.get(selectedStation).equals("Orange")){
+                startDestSelector.setStyle("-fx-background-radius: 10; -fx-background-color: #fce6c5; -fx-border-color: #0B132B;");
+            }else if(stationColorMap.get(selectedStation).equals("Blue")){
+                startDestSelector.setStyle("-fx-background-radius: 10; -fx-background-color: #9cafff; -fx-border-color: #0B132B;");
+            }
+        }
+    }
+
+    public void changeSelectorColourEnd(){
+        String selectedStation = endDestSelector.getValue();
+        if(selectedStation != null){
+            if(stationColorMap.get(selectedStation).equals("Green")){
+                endDestSelector.setStyle("-fx-background-radius: 10; -fx-background-color: #e1ffdb; -fx-border-color: #0B132B;");
+            }else if(stationColorMap.get(selectedStation).equals("Red")){
+                endDestSelector.setStyle("-fx-background-radius: 10; -fx-background-color: #fcc5ce; -fx-border-color: #0B132B;");
+            }else if(stationColorMap.get(selectedStation).equals("Orange")){
+                endDestSelector.setStyle("-fx-background-radius: 10; -fx-background-color: #fce6c5; -fx-border-color: #0B132B;");
+            }else if(stationColorMap.get(selectedStation).equals("Blue")){
+                endDestSelector.setStyle("-fx-background-radius: 10; -fx-background-color: #9cafff; -fx-border-color: #0B132B;");
+            }
+        }
     }
 
     public void fillStationsOptions(List<String> stations){
