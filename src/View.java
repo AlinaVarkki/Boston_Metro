@@ -1,3 +1,5 @@
+import javafx.animation.FadeTransition;
+import javafx.animation.RotateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -15,6 +17,7 @@ import javafx.scene.text.Text;
 import javafx.stage.PopupWindow;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -49,6 +52,21 @@ public class View {
     ImageView titleImage;
 
     @FXML
+    ImageView yellowLine;
+
+    @FXML
+    ImageView redLine;
+
+    @FXML
+    ImageView greenLine;
+
+    @FXML
+    ImageView blueLine;
+
+    @FXML
+    ImageView circle;
+
+    @FXML
     Text titleText1;
 
     @FXML
@@ -69,6 +87,48 @@ public class View {
         this.stationColorMap = stationColorMap;
         setOptionsColours(startDestSelector);
         setOptionsColours(endDestSelector);
+
+        //tittleText1 fade in
+        FadeTransition fadeIn1 = new FadeTransition(Duration.seconds(4), titleText1);
+        fadeIn1.setFromValue(0.0);
+        fadeIn1.setToValue(1.0);
+        fadeIn1.play();
+
+        //tittleText2 fade in
+        FadeTransition fadeIn2 = new FadeTransition(Duration.seconds(4), titleText2);
+        fadeIn2.setFromValue(0.0);
+        fadeIn2.setToValue(1.0);
+        fadeIn2.play();
+
+        //yellow line fade in
+        FadeTransition fadeInY = new FadeTransition(Duration.seconds(2), yellowLine);
+        fadeInY.setFromValue(0.0);
+        fadeInY.setToValue(1.0);
+        fadeInY.play();
+
+        //red line fade in
+        FadeTransition fadeInR = new FadeTransition(Duration.seconds(3), redLine);
+        fadeInR.setFromValue(0.0);
+        fadeInR.setToValue(1.0);
+        fadeInR.play();
+
+        //green line fade in
+        FadeTransition fadeInG = new FadeTransition(Duration.seconds(4), greenLine);
+        fadeInG.setFromValue(0.0);
+        fadeInG.setToValue(1.0);
+        fadeInG.play();
+
+        //blue line fade in
+        FadeTransition fadeInB = new FadeTransition(Duration.seconds(5), blueLine);
+        fadeInB.setFromValue(0.0);
+        fadeInB.setToValue(1.0);
+        fadeInB.play();
+
+        //circle fade in
+        FadeTransition fadeInC = new FadeTransition(Duration.seconds(6), circle);
+        fadeInC.setFromValue(0.0);
+        fadeInC.setToValue(1.0);
+        fadeInC.play();
 
     }
 
@@ -253,6 +313,41 @@ public class View {
 //        root.getChildren().add(pathDisplayed);
 
         container.setCenter(pathDisplayed);
+
+        //yellow line rotation
+        RotateTransition rtY = new RotateTransition(Duration.seconds(2), yellowLine);
+        rtY.setByAngle(360);
+        rtY.setCycleCount(1);
+        //rtY.setAutoReverse(true);
+        rtY.play();
+
+        //red line rotation
+        RotateTransition rtR = new RotateTransition(Duration.seconds(2), redLine);
+        rtR.setByAngle(360);
+        rtR.setCycleCount(1);
+        //rtR.setAutoReverse(true);
+        rtR.play();
+
+        //green line rotation
+        RotateTransition rtG = new RotateTransition(Duration.seconds(2), greenLine);
+        rtG.setByAngle(360);
+        rtG.setCycleCount(1);
+        //rtG.setAutoReverse(true);
+        rtG.play();
+
+        //green line rotation
+        RotateTransition rtB = new RotateTransition(Duration.seconds(2), blueLine);
+        rtB.setByAngle(360);
+        rtB.setCycleCount(1);
+        //rtB.setAutoReverse(true);
+        rtB.play();
+
+        //circle rotation
+        RotateTransition rtC = new RotateTransition(Duration.seconds(2), circle);
+        rtC.setByAngle(360);
+        rtC.setCycleCount(1);
+        //rtC.setAutoReverse(true);
+        rtC.play();
 
     }
 
