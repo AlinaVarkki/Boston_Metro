@@ -1,6 +1,9 @@
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -9,8 +12,11 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.stage.PopupWindow;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -173,6 +179,7 @@ public class View {
         sortedStations.addAll(orangeStations);
         sortedStations.addAll(restStations);
 
+//        startDestSelector.getItems().add("Riverside");
         startDestSelector.getItems().addAll(sortedStations);
         endDestSelector.getItems().addAll(sortedStations);
     }
@@ -266,5 +273,45 @@ public class View {
         root.getChildren().add(bg);
         bg.toBack();
 
+    }
+
+
+    public void mapButtonStartClicked() throws IOException {
+
+        Stage stage = new Stage();
+
+        System.out.println("clicked");
+        Parent root = FXMLLoader.load(getClass().getResource("mapView.fxml"));
+
+        Scene scene = new Scene(root,  1171.0, 746.0);
+
+        stage.setTitle("FXML Welcome");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    private void getName(ActionEvent event){
+        Button button = (Button) event.getSource();
+
+        String stationName = button.getId();
+
+        //button ids used to identify stations cannot use '/' so names containing it don't have the full name assignes to it
+        if(stationName.equals("Hynes")){
+            stationName = "Hynes/ICA";
+        }else if(stationName.equals("Charles")){
+            stationName = "Charles/MGH";
+        }else if(stationName.equals("JFK")){
+            stationName = "JFK/UMass";
+        }else if(stationName.equals("BackBay")){
+            stationName = "BackBay/SouthEnd";
+        }
+
+
+        Stage stage = (Stage) button.getScene().getWindow();
+        stage.close();
+        System.out.println(stationName); // prints out button's text
+//        startDestSelector.setValue(stationName);
+//        startDestSelector.setId(stationName);
     }
 }
