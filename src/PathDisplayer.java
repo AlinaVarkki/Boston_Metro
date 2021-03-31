@@ -1,5 +1,7 @@
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -16,6 +18,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+
+import javafx.util.Duration;
+import java.util.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,6 +64,7 @@ public class PathDisplayer {
 //        sideStations = new Pane();
 
         VBox thingy = new VBox();
+        int trainLength = 20;
 
         if (!stations.isEmpty()) {
             int currentEnd = 2*circleRadius;
@@ -89,7 +95,7 @@ public class PathDisplayer {
                 //creates line with stations
                 thingy.getChildren().add(createLineWithMiniStations(currentLine,currentColor,start,end));
 
-//                String nextColor;
+                //String nextColor;
                 String lastStation = currentLine.get(currentLine.size()-1);
                 //creates circle depending on whether this is the last station or nah
                 if (i+1 < stations.size()) {
@@ -97,11 +103,11 @@ public class PathDisplayer {
 
                 } else {
                     thingy.getChildren().add(createEndingStation(lastStation,currentColor,x,y+start));
-
                 }
-
             }
         }
+        Circle train = makeCircle(x,y,circleRadius,"White","White");
+       // train.relocate(100,200);
 
         VBox almostFinalBox = new VBox();
         almostFinalBox.getChildren().add(thingy);
@@ -111,14 +117,35 @@ public class PathDisplayer {
 
 //        HBox finalBox = new HBox();
         finalBox.getChildren().add(almostFinalBox);
-        finalBox.setAlignment(Pos.CENTER_LEFT);
+        finalBox.setAlignment(Pos.CENTER);
+
+        StackPane animation = new StackPane();
+        animation.getChildren().add(finalBox);
+        animation.setAlignment(Pos.CENTER);
+        animation.getChildren().add(train);
+        train.setVisible(true);
+        animation.setAlignment(Pos.BASELINE_LEFT);
+        StackPane.setMargin(train,new Insets(10,10,10,10));
+        visible(train);
 
 //        if (showingStations != null) {
 //            finalBox.getChildren().add(showAllSmallStations(showingStations));
 //        }
 
+        return animation;
+    }
 
-        return finalBox;
+    private void visible(Circle train) {
+        Duration duration = Duration.seconds(7);
+        TranslateTransition transition = new TranslateTransition(duration,train);
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2.9), ev -> {
+            transition.setByX(647);
+            transition.setNode(train);
+            transition.setAutoReverse(true);
+            transition.setCycleCount(2);
+            transition.play();
+        }));
+        timeline.play();
     }
 
     private HBox createStartingStation(String name, String color, double x, double y) {
@@ -195,6 +222,7 @@ public class PathDisplayer {
      * */
     private HBox displayLineLabel(String name, StackPane circle) {
         Text title = displayBiggerStationName(name);
+        //Text switchLine = displaySwitchLine(label,previousColor);
 
         HBox titleLine = new HBox();
         titleLine.setSpacing(circleRadius*2);
@@ -206,6 +234,23 @@ public class PathDisplayer {
         return titleLine;
     }
 
+    /**
+     * @param label,lineColor
+     * completes the "Take"/"Switch to" label with the corresponding line colour
+     * @return Text in standardised format and required colour for users readability
+     * */
+    private Text displaySwitchLine(String label, String lineColor) {
+        int fontHeight = circleRadius;
+
+        Text text = new Text();
+        text.setText(label + " " + lineColor);
+        text.setFill(colorMappings.get(lineColor));
+
+        text.setFont(Font.font("Arial", FontWeight.EXTRA_LIGHT, FontPosture.ITALIC,fontHeight));
+
+
+        return text;
+    }
 
     /**
      * @param name of major stations to display in a more eye catching format
@@ -257,6 +302,8 @@ public class PathDisplayer {
 
         return text;
     }
+
+
 
 
 
@@ -326,6 +373,7 @@ public class PathDisplayer {
         } else if (color2.equals("Mattapan")) {
             letter.setText("M");
         } else {
+//            letter.setText(Character.toString(color2.charAt(0)));
             letter.setText("");
         }
 
@@ -341,6 +389,7 @@ public class PathDisplayer {
      * Initializes mappings of line name to Color for rendering
      */
     private void initialiseColorMappings() {
+        colorMappings.put("White",white);
         colorMappings.put("BG",background);
         colorMappings.put("Red",red);
         colorMappings.put("RedA",red);
@@ -359,7 +408,7 @@ public class PathDisplayer {
         button.setOnAction(showStations(pane, button, stations));
     }
 
-    private EventHandler<ActionEvent> showStations(Pane pane,Button button,List<String> stations) {
+    private EventHandler<ActionEvent> showStations(Pane pane, Button button, List<String> stations) {
         EventHandler<ActionEvent> handler = actionEvent -> {
             if (sideStations != null) {
                 pane.getChildren().remove(sideStations);
@@ -371,7 +420,7 @@ public class PathDisplayer {
             return handler;
         }
 
-        private EventHandler<ActionEvent> closeStations(Pane pane,Button button,List<String> stations) {
+        private EventHandler<ActionEvent> closeStations(Pane pane, Button button, List<String> stations) {
             EventHandler<ActionEvent> handler = actionEvent -> {
 
                 if (sideStations != null) {
