@@ -11,6 +11,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -144,8 +145,36 @@ public class View {
     }
 
     public void fillStationsOptions(List<String> stations){
-        startDestSelector.getItems().addAll(stations);
-        endDestSelector.getItems().addAll(stations);
+
+        List<String> sortedStations = new ArrayList<>();
+        List<String> greenStations = new ArrayList<>();
+        List<String> orangeStations = new ArrayList<>();
+        List<String> redStations = new ArrayList<>();
+        List<String> blueStations = new ArrayList<>();
+        List<String> restStations = new ArrayList<>();
+
+        for (String station: stations){
+            if(stationColorMap.get(station).equals("Green")){
+                greenStations.add(station);
+            }else if(stationColorMap.get(station).equals("Orange")){
+                orangeStations.add(station);
+            }else if(stationColorMap.get(station).equals("Red")){
+                redStations.add(station);
+            }else if(stationColorMap.get(station).equals("Blue")){
+                blueStations.add(station);
+            }else{
+                restStations.add(station);
+            }
+        }
+
+        sortedStations.addAll(blueStations);
+        sortedStations.addAll(redStations);
+        sortedStations.addAll(greenStations);
+        sortedStations.addAll(orangeStations);
+        sortedStations.addAll(restStations);
+
+        startDestSelector.getItems().addAll(sortedStations);
+        endDestSelector.getItems().addAll(sortedStations);
     }
 
     @FXML
