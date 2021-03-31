@@ -46,24 +46,19 @@ public class PathDisplayer {
     private Random random = new Random();
 
     public PathDisplayer(){
-
         initialiseColorMappings();
 //        finalBox = new HBox();
-
     }
 
     /**
      * @param stations contains the Best Suited Path Found By the Model
-     *
      * @return Hbox with the Line element and all corresponding labels appropriately Styled and Sized
      * */
-
 
     public Pane createLine(List<Tuple<String, List<String>>> stations) {
 
         finalBox = new HBox();
 //        sideStations = new Pane();
-
         VBox thingy = new VBox();
 
         if (!stations.isEmpty()) {
@@ -205,7 +200,6 @@ public class PathDisplayer {
         return stats;
     }
 
-
     /**
      * @param name,previousColor,label
      * Calls displayBiggerStationName to get final Size and Style for key Station name
@@ -215,7 +209,8 @@ public class PathDisplayer {
     private HBox displayLineLabel(String name, int timeBound, StackPane circle) {
         int timeStart = random.nextInt(timeBound)+1;
 
-        Text title = displayBiggerStationName(name + "   Leaves in " +timeStart+"mins");
+        Text title = displayBiggerStationName(name);
+        //Text title = displayBiggerStationName(name + " in " +timeStart+"mins");
         //Text switchLine = displaySwitchLine(label,previousColor);
 
         HBox titleLine = new HBox();
@@ -260,8 +255,6 @@ public class PathDisplayer {
         return text;
     }
 
-
-
     /**
      * @param stations,lineHeight passed from displaySmallerStationNamesImproved
      * Calculate the display size and spacing of overflow stations to maintain clean display
@@ -277,7 +270,6 @@ public class PathDisplayer {
             Text statName = displaySmallerStationName(stations.get(i), fontHeight);
             names.getChildren().add(statName);
         }
-
         return names;
     }
 
@@ -371,7 +363,6 @@ public class PathDisplayer {
         return letter;
 
     }
-
 
     /**
      * Initializes mappings of line name to Color for rendering
