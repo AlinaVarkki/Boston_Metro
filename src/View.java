@@ -1,10 +1,6 @@
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
@@ -12,11 +8,10 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.util.List;
-import java.util.function.Function;
+import java.util.Map;
 
 public class View {
 
@@ -52,13 +47,17 @@ public class View {
 
     @FXML
     public void initialize(){
-        customizeDropDown(startDestSelector);
-        customizeDropDown(endDestSelector);
         pathDisplayer = new PathDisplayer();
+    }
+
+    public void customizeDropDowns(Map<String, String> stationColorMap){
+
+        setOptionsColours(startDestSelector, stationColorMap);
+        setOptionsColours(endDestSelector, stationColorMap);
 
     }
 
-    public void customizeDropDown(ComboBox comboBox){
+    public void setOptionsColours(ComboBox comboBox, Map<String, String> stationColorMap){
         comboBox.setCellFactory(
                 new Callback<ListView<String>, ListCell<String>>() {
                     @Override public ListCell<String> call(ListView<String> param) {
@@ -71,14 +70,20 @@ public class View {
                                 super.updateItem(item, empty);
                                 if (item != null) {
                                     setText(item + "   🔴");
-                                    if (item.contains("A")) {
+                                    String label = stationColorMap.get(item);
+
+                                    if (label.equals("Red") || label.equals("RedA") ||label.equals("RedB")) {
                                         setTextFill(Color.RED);
                                     }
-                                    else if (item.contains("B")){
+                                    else if (label.equals("Orange")){
                                         setTextFill(Color.ORANGE);
+                                    }else if (label.equals("Blue")){
+                                        setTextFill(Color.BLUE);
                                     }
-                                    else {
+                                    else if (label.equals("Green") || label.equals("GreenB") || label.equals("GreenC") || label.equals("GreenD") ||label.equals("GreenE")){
                                         setTextFill(Color.GREEN);
+                                    }else{
+                                        setTextFill(Color.BLACK);
                                     }
                                 }
                                 else {

@@ -1,17 +1,22 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Model {
 
     MultiGraph<Node, Edge<Node>> multiGraph;
     HashMap<String,Node> stationsHashMap;
     List<Node> stations;
+    Map<Node, List<Edge<Node>>> adjMap;
+    private Map<String, String> stationColorMap;
 
     public Model(String filepath){
         this.setMultiGraph(filepath);
         this.setStationsHashMap();
-
+        stationColorMap = new HashMap<>();
+        getAdjMap();
+        fillStationColorMap(adjMap);
     }
 
     /**
@@ -28,6 +33,10 @@ public class Model {
         for(Node n: stations) multiGraph.addNode(n);
         for(Edge<Node> e: connections) multiGraph.addEdge(e);
 
+    }
+
+    public void getAdjMap(){
+        adjMap = multiGraph.getAdjMap();
     }
 
     private void setStationsHashMap(){
@@ -77,5 +86,35 @@ public class Model {
 
     private Node find(String name){
         return stationsHashMap.get(name);
+    }
+
+    private void fillStationColorMap(Map<Node, List<Edge<Node>>> adjMap){
+        List<Edge<Node>> adjEdges;
+        Boolean sameEdges;
+        for(Node n: adjMap.keySet()){
+            sameEdges = true;
+            adjEdges = adjMap.get(n);
+
+            String label = toBaseColor(adjEdges.get(0).getLabel());
+            for(Edge<Node> e: adjEdges){
+                String currLabel = toBaseColor(e.getLabel());
+                if(!currLabel.equals(label)){
+                    sameEdges = false;
+                }
+            }
+
+            if(sameEdges) stationColorMap.put(n.toString(), label);
+            else stationColorMap.put(n.toString(), "Black");
+        }
+    }
+
+    public String toBaseColor(String label){
+        if(label.equals("GreenB") || label.equals("GreenC") || label.equals("GreenD") || label.equals("GreenE")) return "Green";
+        if(label.equals("RedA") || label.equals("RedB")) return "Red";
+        return label;
+    }
+
+    public Map<String, String> getStationColorMap(){
+        return stationColorMap;
     }
 }
