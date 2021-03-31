@@ -56,9 +56,9 @@
             </image>
         </ImageView>
         <ComboBox fx:id="startDestSelector" onHidden="#changeSelectorColourStart" minHeight="40" minWidth="200" promptText="START DESTINATION" layoutX="743.0" layoutY="250.0" prefHeight="29.0" prefWidth="154.0" style="-fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;" onAction="#setDefaultStyleStartSelector"/>
-        <ImageView fx:id="mapButtonStart" onMouseClicked="#mapButtonStartClicked" fitHeight="50" fitWidth="50" layoutX="960.0" layoutY="235.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="mapButtonStart" onMouseClicked="#mapButtonStartClicked" fitHeight="45" fitWidth="45" layoutX="960.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true">
             <image >
-                <Image url="Images/mapIcon.png" />
+                <Image url="Images/mapIcon2.png" />
             </image>
         </ImageView>
         <Text fx:id="endStationErrorMsg" text = "please choose end station" layoutX="743.0" layoutY="315.0" style="-fx-fill: red;" visible="false">
@@ -72,9 +72,9 @@
             </image>
         </ImageView>
         <ComboBox fx:id="endDestSelector" onHidden="#changeSelectorColourEnd" minHeight="40" minWidth="200" promptText="END DESTINATION" layoutX="743.0" layoutY="320.0" prefHeight="29.0" prefWidth="154.0" style="-fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;" onAction="#setDefaultStyleEndSelector"/>
-        <ImageView fx:id="mapButtonEnd" fitHeight="50" fitWidth="50" layoutX="960.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="mapButtonEnd" fitHeight="45" fitWidth="45" layoutX="960.0" layoutY="317.0" pickOnBounds="true" preserveRatio="true">
             <image >
-                <Image url="Images/mapIcon.png" />
+                <Image url="Images/mapIcon2.png" />
             </image>
         </ImageView>
         <Button  fx:id="findButton" minHeight="50" minWidth="200"  onAction="#findPathBtnClicked" layoutX="743.0" layoutY="450.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="154.0" style="-fx-background-color: #0B132B; -fx-background-radius: 10;" text="FIND A ROUTE" textFill="WHITE" >
