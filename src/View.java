@@ -245,11 +245,12 @@ public class View {
         List<String> restStations = new ArrayList<>();
 
         for (String station: stations){
-            switch (stationColorMap.get(station).get(0)) {
-                case "Green" -> greenStations.add(station);
-                case "Orange" -> orangeStations.add(station);
-                case "Red" -> redStations.add(station);
-                case "Blue" -> blueStations.add(station);
+            switch (stationColorMap.get(station).get(0).charAt(0)) {
+                case 'G' -> greenStations.add(station);
+                case 'O' -> orangeStations.add(station);
+                case 'R' -> redStations.add(station);
+                case 'M' -> redStations.add(station);
+                case 'B' -> blueStations.add(station);
                 default -> restStations.add(station);
             }
         }
