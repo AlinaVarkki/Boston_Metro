@@ -412,12 +412,33 @@ public class View {
         mapController mapController = loader.getController();
 
         mapController.setView(this);
+        mapController.setDestinationDirection("START");
 
+    }
+
+    public void mapButtonEndClicked() throws IOException {
+
+        Stage window = new Stage();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("mapView.fxml"));
+        AnchorPane root = loader.load();
+        window.setScene(new Scene(root, 1171.0, 746.0, Color.WHITE));
+        window.show();
+
+        mapController mapController = loader.getController();
+
+        mapController.setView(this);
+        mapController.setDestinationDirection("END");
     }
 
     public void setStartDest(String stationName){
         System.out.println("setting start dest" + stationName);
         startDestSelector.setValue(stationName);
+    }
+
+    public void setEndDest(String stationName){
+        System.out.println("setting start dest" + stationName);
+        endDestSelector.setValue(stationName);
     }
 
     public void setupAlgorithmSelectorEventHandler(){

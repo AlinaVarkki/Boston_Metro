@@ -6,11 +6,12 @@ import javafx.stage.Stage;
 public class mapController {
 
     View view;
+    String destinationDirection;
 
     @FXML
     private void getName(ActionEvent event){
-        Button button = (Button) event.getSource();
 
+        Button button = (Button) event.getSource();
         String stationName = button.getId();
 
         //button ids used to identify stations cannot use '/' so names containing it don't have the full name assignes to it
@@ -28,13 +29,17 @@ public class mapController {
         stage.close();
         System.out.println(stationName); // prints out button's text
 
-        view.setStartDest(stationName);
+        if(destinationDirection == "START") view.setStartDest(stationName);
+        else view.setEndDest(stationName);
     }
 
     public void setView(View view){
         this.view = view;
     }
 
+    public void setDestinationDirection(String destinationDirection){
+        this.destinationDirection = destinationDirection;
+    }
 
 
 }
