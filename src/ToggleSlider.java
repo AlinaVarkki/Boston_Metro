@@ -15,12 +15,11 @@ import javafx.util.Duration;
 
 public class ToggleSlider extends Parent {
 
-        private BooleanProperty switchOn = new SimpleBooleanProperty(false);
-
         private TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(0.10));
         private FillTransition fillTransition = new FillTransition(Duration.seconds(0.15));
-
         public ParallelTransition animate = new ParallelTransition(translateTransition,fillTransition);
+
+        private BooleanProperty switchOn = new SimpleBooleanProperty(false);
 
         public ToggleSlider() {
 
@@ -92,10 +91,6 @@ public class ToggleSlider extends Parent {
                 switchOn.set(!switchOn.get());
             });
         }
-
-    public BooleanProperty getSwitchOn() {
-        return switchOn;
-    }
 
 }
 

@@ -301,13 +301,13 @@ public class getPathJunctionTests {
         assertEquals("DowntownCrossing", orangeNode.getName());
 
         label = testPath.get(1).getLabel();
-        assertEquals("Red", label);
+        assertEquals("Orange", label);
 
         orangeNode = testPath.get(1).getOppositeNode(orangeNode);
-        assertEquals("ParkStreet", orangeNode.getName());
+        assertEquals("State", orangeNode.getName());
 
         label = testPath.get(2).getLabel();
-        assertEquals("Green", label);
+        assertEquals("Blue", label);
 
         Node blueNode = testPath.get(2).getOppositeNode(orangeNode);
         assertEquals("GovernmentCenter", blueNode.getName());
