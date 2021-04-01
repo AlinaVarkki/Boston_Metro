@@ -238,26 +238,50 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
     @Override
     public List<E> getPath(N source, N destination) {
         List<String> visited = new ArrayList<>();
-        Deque<Pair<N, List<E>>> deque = new LinkedList<>();
+        Deque<Triple<N, List<E>, Integer>> deque = new LinkedList<>();
 
-        deque.add(new Pair<>(source,new LinkedList<>()));
-        Pair<N,List<E>> currPair;
+        deque.add(new Triple<>(source,new LinkedList<>(), 0));
+        Triple<N,List<E>, Integer> currTriple;
         N currNode;
         List<E> currPath;
+        Integer currTransitions;
         N neighbourNode;
+        //when one path is found, finish searching through nodes one the queue, but no new ones
+        boolean stillSearching = true;
+        ArrayList<Triple<N,List<E>, Integer>> possiblePaths = new ArrayList<>();
 
         while(!deque.isEmpty()){
-            ArrayList<Pair<N,List<E>>> nodesToEnqueueSameLabel = new ArrayList<>();
-            ArrayList<Pair<N,List<E>>> nodesToEnqueueDiffLabel = new ArrayList<>();
+            ArrayList<Triple<N,List<E>, Integer>> nodesToEnqueueSameLabel = new ArrayList<>();
+            ArrayList<Triple<N,List<E>, Integer>> nodesToEnqueueDiffLabel = new ArrayList<>();
 
-            currPair = deque.poll();
-            currNode = currPair.getKey();
-            currPath = currPair.getValue();
+            currTriple = deque.poll();
+            currNode = currTriple.first;
+            currPath = currTriple.second;
+            currTransitions = currTriple.third;
 
             if(currNode == destination){
-                deque.clear();
+                List<E> bestPath = currPath;
+                Triple<N,List<E>, Integer> queueTriple;
+                N queueNode;
+                List<E> queuePath;
+                Integer queueTransitions;
+                while(!deque.isEmpty()){
+                    queueTriple = deque.poll();
+                    queueNode = queueTriple.first;
+                    queuePath = queueTriple.second;
+                    queueTransitions = queueTriple.third;
+                    if(queueNode == destination && queueTransitions < currTransitions){
+                        bestPath = queuePath;
+                    }
+
+                }
+                return bestPath;
+//                possiblePaths.add(currTriple);
+
+//                stillSearching = false;
+//                deque.clear();
 //                visited.add(currNode);
-                return removeCycle(currPath);
+//                return removeCycle(currPath);
             }
 
             if(true){
@@ -280,15 +304,18 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
                         //always put in front the edges that have the same label so the line would get explored first
                         if(currPath.size() > 0 && edge.getLabel().equals(currPath.get(currPath.size()-1).getLabel())){
 //                            deque.addFirst(new Pair<>(neighbourNode, newPath));
-                            nodesToEnqueueSameLabel.add(new Pair<>(neighbourNode, newPath));
+                            nodesToEnqueueSameLabel.add(new Triple<>(neighbourNode, newPath, currTransitions));
                         }else{
 //                            deque.add(new Pair<>(neighbourNode, newPath));
-                            nodesToEnqueueDiffLabel.add(new Pair<>(neighbourNode, newPath));
+                            nodesToEnqueueDiffLabel.add(new Triple<>(neighbourNode, newPath, currTransitions + 1));
                         }
                     }
                 }
-                deque.addAll(nodesToEnqueueSameLabel);
-                deque.addAll(nodesToEnqueueDiffLabel);
+                if(stillSearching){
+                    deque.addAll(nodesToEnqueueSameLabel);
+                    deque.addAll(nodesToEnqueueDiffLabel);
+                }
+
             }
         }
         System.out.println("No path found");
