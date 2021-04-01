@@ -399,7 +399,6 @@ public class View {
 
     }
 
-
     public void mapButtonStartClicked() throws IOException {
 
         Stage window = new Stage();
