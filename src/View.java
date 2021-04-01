@@ -223,9 +223,6 @@ public class View {
 
     public void fillStationsOptions(List<String> stations){
 
-        startDestSelector.setStyle("-fx-font-family: Arial; -fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;");
-        endDestSelector.setStyle("-fx-font-family: Arial; -fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;");
-
         List<String> sortedStations = new ArrayList<>();
         List<String> greenStations = new ArrayList<>();
         List<String> orangeStations = new ArrayList<>();
@@ -234,16 +231,12 @@ public class View {
         List<String> restStations = new ArrayList<>();
 
         for (String station: stations){
-            if(stationColorMap.get(station).equals("Green")){
-                greenStations.add(station);
-            }else if(stationColorMap.get(station).equals("Orange")){
-                orangeStations.add(station);
-            }else if(stationColorMap.get(station).equals("Red")){
-                redStations.add(station);
-            }else if(stationColorMap.get(station).equals("Blue")){
-                blueStations.add(station);
-            }else{
-                restStations.add(station);
+            switch (stationColorMap.get(station)) {
+                case "Green" -> greenStations.add(station);
+                case "Orange" -> orangeStations.add(station);
+                case "Red" -> redStations.add(station);
+                case "Blue" -> blueStations.add(station);
+                default -> restStations.add(station);
             }
         }
 
@@ -264,19 +257,19 @@ public class View {
         if(startDestSelector.getValue() == null || endDestSelector.getValue() == null){
             if(startDestSelector.getValue() == null){
                 startStationErrorMsg.setVisible(true);
-                startDestSelector.setStyle(" -fx-background-radius: 10; -fx-background-color: #fff0f0; -fx-border-color: #0B132B;");
+                this.changeStyle(startDestSelector,"-fx-background-color","#fff0f0");
             }
 
             if(endDestSelector.getValue() == null){
                 matchingStationErrorMsg.setVisible(false);
                 endStationErrorMsg.setVisible(true);
-                endDestSelector.setStyle(" -fx-background-radius: 10; -fx-background-color: #fff0f0; -fx-border-color: #0B132B;");
+                this.changeStyle(endDestSelector,"-fx-background-color","#fff0f0");
             }
         } else if (startDestSelector.getValue().equals(endDestSelector.getValue())) {
             System.out.println("startDestSelector.getValue()");
             endStationErrorMsg.setVisible(false);
             matchingStationErrorMsg.setVisible(true);
-            endDestSelector.setStyle(" -fx-background-radius: 10; -fx-background-color: #fff0f0; -fx-border-color: #0B132B;");
+            this.changeStyle(endDestSelector,"-fx-background-color","#fff0f0");
         } else {
             //find path
             System.out.println();
@@ -288,12 +281,12 @@ public class View {
     public void setDefaultStyleEndSelector(){
         endStationErrorMsg.setVisible(false);
         matchingStationErrorMsg.setVisible(false);
-        endDestSelector.setStyle("-fx-font-family: Arial; -fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;");
+        this.changeStyle(endDestSelector,"-fx-background-color", "#ffffff");
     }
 
     public void setDefaultStyleStartSelector(){
         startStationErrorMsg.setVisible(false);
-        startDestSelector.setStyle(" -fx-font-family: Arial; -fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;");
+        this.changeStyle(startDestSelector,"-fx-background-color","#ffffff");
     }
 
     public String getDestinationStation(){
@@ -305,26 +298,26 @@ public class View {
     }
 
     public boolean stationsSelected(){
-        if(startDestSelector.getValue() == null || endDestSelector.getValue() == null
-                || startDestSelector.getValue().equals(endDestSelector.getValue())){
+        if(startDestSelector.getValue() == null || endDestSelector.getValue() == null){
             if(startDestSelector.getValue() == null){
                 startStationErrorMsg.setVisible(true);
-                startDestSelector.setStyle(" -fx-background-radius: 10; -fx-background-color: #fff0f0; -fx-border-color: #0B132B;");
+                this.changeStyle(startDestSelector,"-fx-background-color", "#fff0f0");
             }
 
             if(endDestSelector.getValue() == null){
                 matchingStationErrorMsg.setVisible(false);
                 endStationErrorMsg.setVisible(true);
-                endDestSelector.setStyle(" -fx-background-radius: 10; -fx-background-color: #fff0f0; -fx-border-color: #0B132B;");
-            }
-
-            if (startDestSelector.getValue().equals(endDestSelector.getValue())) {
-                endStationErrorMsg.setVisible(false);
-                matchingStationErrorMsg.setVisible(true);
-                endDestSelector.setStyle(" -fx-background-radius: 10; -fx-background-color: #fff0f0; -fx-border-color: #0B132B;");
+                this.changeStyle(endDestSelector,"-fx-background-color", "#fff0f0");
             }
             return false;
-        }else{
+        }
+        else if(startDestSelector.getValue().equals(endDestSelector.getValue())){
+            endStationErrorMsg.setVisible(false);
+            matchingStationErrorMsg.setVisible(true);
+            this.changeStyle(endDestSelector,"-fx-background-color", "#fff0f0");
+            return false;
+        }
+        else{
             return true;
         }
     }
@@ -466,12 +459,21 @@ public class View {
      * This method is used during initialization to standardize all styling in one place
      * **/
     private void setStandardStyles(){
+        //Selection Toggle
         searchLength.setStyle("-fx-background-color: #fff; -fx-background-radius: 10;-fx-border-color: #0B132B;-fx-border-radius: 10;");
         searchLength.setTextFill(background);
         searchTransitions.setStyle("-fx-background-color: #0B132B; -fx-background-radius: 10;-fx-border-color: #0B132B;-fx-border-radius: 10;");
         searchTransitions.setTextFill(Color.WHITE);
         searchTransitions.setFont(Font.font("Arial"));
         searchLength.setFont(Font.font("Arial"));
+
+        //Station Selectors
+        endStationErrorMsg.setVisible(false);
+        matchingStationErrorMsg.setVisible(false);
+        startStationErrorMsg.setVisible(false);
+        startDestSelector.setStyle(" -fx-font-family: Arial; -fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;-fx-border-radius: 10;");
+        endDestSelector.setStyle(" -fx-font-family: Arial; -fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;-fx-border-radius: 10;");
+
 
     }
 

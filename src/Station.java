@@ -30,6 +30,17 @@ public class Station implements Node{
 
     @Override
     public String toString(){
-        return this.idNumber+" "+this.name;
+        String name = this.idNumber+" "+this.name;
+        StringBuilder newName = new StringBuilder();
+        for(int i = 0; i<name.length()-1; i++) {
+            char a = name.charAt(i);
+            char b = name.charAt(i+1);
+            newName.append(a);
+            if (Character.isLowerCase(a) && Character.isUpperCase(b)){
+                newName.append(" ");
+            }
+        }
+        newName.append(name.charAt(name.length()-1));
+        return newName.toString();
     }
 }
