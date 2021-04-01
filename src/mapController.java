@@ -1,8 +1,11 @@
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 public class mapController {
+
+    View view;
 
     @FXML
     private void getName(ActionEvent event){
@@ -21,6 +24,17 @@ public class mapController {
             stationName = "BackBay/SouthEnd";
         }
 
+        Stage stage = (Stage) button.getScene().getWindow();
+        stage.close();
         System.out.println(stationName); // prints out button's text
+
+        view.setStartDest(stationName);
     }
+
+    public void setView(View view){
+        this.view = view;
+    }
+
+
+
 }

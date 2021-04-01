@@ -22,13 +22,11 @@ public class App2 extends Application {
         window.setScene(new Scene(root, 1030, 550, Color.WHITE));
         window.show();
 
-
         View view = loader.<View>getController();
         view.setRoot(root);
         Model model = new Model("resources/bostonmetro.txt");
         Controller controller = new Controller(model, view);
 
         controller.run();
-
     }
 }

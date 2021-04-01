@@ -402,41 +402,22 @@ public class View {
 
     public void mapButtonStartClicked() throws IOException {
 
-        Stage stage = new Stage();
+        Stage window = new Stage();
 
-        System.out.println("clicked");
-        Parent root = FXMLLoader.load(getClass().getResource("mapView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("mapView.fxml"));
+        AnchorPane root = loader.load();
+        window.setScene(new Scene(root, 1171.0, 746.0, Color.WHITE));
+        window.show();
 
-        Scene scene = new Scene(root,  1171.0, 746.0);
+        mapController mapController = loader.getController();
 
-        stage.setTitle("FXML Welcome");
-        stage.setScene(scene);
-        stage.show();
+        mapController.setView(this);
+
     }
 
-    @FXML
-    private void getName(ActionEvent event){
-        Button button = (Button) event.getSource();
-
-        String stationName = button.getId();
-
-        //button ids used to identify stations cannot use '/' so names containing it don't have the full name assignes to it
-        if(stationName.equals("Hynes")){
-            stationName = "Hynes/ICA";
-        }else if(stationName.equals("Charles")){
-            stationName = "Charles/MGH";
-        }else if(stationName.equals("JFK")){
-            stationName = "JFK/UMass";
-        }else if(stationName.equals("BackBay")){
-            stationName = "BackBay/SouthEnd";
-        }
-
-
-        Stage stage = (Stage) button.getScene().getWindow();
-        stage.close();
-        System.out.println(stationName); // prints out button's text
-//        startDestSelector.setValue(stationName);
-//        startDestSelector.setId(stationName);
+    public void setStartDest(String stationName){
+        System.out.println("setting start dest" + stationName);
+        startDestSelector.setValue(stationName);
     }
 
     public void setupAlgorithmSelectorEventHandler(){
