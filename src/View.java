@@ -409,44 +409,45 @@ public class View {
 
     }
 
-
     public void mapButtonStartClicked() throws IOException {
 
-        Stage stage = new Stage();
+        Stage window = new Stage();
 
-        System.out.println("clicked");
-        Parent root = FXMLLoader.load(getClass().getResource("mapView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("mapView.fxml"));
+        AnchorPane root = loader.load();
+        window.setScene(new Scene(root, 1171.0, 746.0, Color.WHITE));
+        window.show();
 
-        Scene scene = new Scene(root,  1171.0, 746.0);
+        mapController mapController = loader.getController();
 
-        stage.setTitle("FXML Welcome");
-        stage.setScene(scene);
-        stage.show();
+        mapController.setView(this);
+        mapController.setDestinationDirection("START");
+
     }
 
-    @FXML
-    private void getName(ActionEvent event){
-        Button button = (Button) event.getSource();
+    public void mapButtonEndClicked() throws IOException {
 
-        String stationName = button.getId();
+        Stage window = new Stage();
 
-        //button ids used to identify stations cannot use '/' so names containing it don't have the full name assignes to it
-        if(stationName.equals("Hynes")){
-            stationName = "Hynes/ICA";
-        }else if(stationName.equals("Charles")){
-            stationName = "Charles/MGH";
-        }else if(stationName.equals("JFK")){
-            stationName = "JFK/UMass";
-        }else if(stationName.equals("BackBay")){
-            stationName = "BackBay/SouthEnd";
-        }
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("mapView.fxml"));
+        AnchorPane root = loader.load();
+        window.setScene(new Scene(root, 1171.0, 746.0, Color.WHITE));
+        window.show();
 
+        mapController mapController = loader.getController();
 
-        Stage stage = (Stage) button.getScene().getWindow();
-        stage.close();
-        System.out.println(stationName); // prints out button's text
-//        startDestSelector.setValue(stationName);
-//        startDestSelector.setId(stationName);
+        mapController.setView(this);
+        mapController.setDestinationDirection("END");
+    }
+
+    public void setStartDest(String stationName){
+        System.out.println("setting start dest" + stationName);
+        startDestSelector.setValue(stationName);
+    }
+
+    public void setEndDest(String stationName){
+        System.out.println("setting start dest" + stationName);
+        endDestSelector.setValue(stationName);
     }
 
     public void setupAlgorithmSelectorEventHandler(){

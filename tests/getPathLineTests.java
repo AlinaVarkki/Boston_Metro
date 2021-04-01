@@ -60,7 +60,6 @@ public class getPathLineTests {
         assertEquals("FenwoodRoad", testStations.get(0).getName());
         assertEquals("BrighamCircle", testStations.get(123).getName());
 
-
         /* Tests Connections Correctly Read in from Test Data (Bi-directional) */
 
         // Tests Basic Case of Pink line between Glasgow and Stirling Read in Correctly

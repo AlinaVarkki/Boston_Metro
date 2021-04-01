@@ -83,8 +83,8 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
      * Calls addOrdered
      * @return LinkedList of Edges for the current Path
      * */
-    @Override
-    public List<E> getPath(N source, N destination) {
+
+    public List<E> getPath2(N source, N destination) {
         List<N> visited = new ArrayList<>();
         Queue<Triple<N,List<E>,Integer>> queue = new LinkedList<>();
         Queue<Triple<N,List<E>,Integer>> nextQueue = new LinkedList<>();
@@ -229,6 +229,66 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
                         }
                     }
                 }
+            }
+        }
+        System.out.println("No path found");
+        return new LinkedList<E>();
+    }
+
+    @Override
+    public List<E> getPath(N source, N destination) {
+        List<String> visited = new ArrayList<>();
+        Deque<Pair<N, List<E>>> deque = new LinkedList<>();
+
+        deque.add(new Pair<>(source,new LinkedList<>()));
+        Pair<N,List<E>> currPair;
+        N currNode;
+        List<E> currPath;
+        N neighbourNode;
+
+        while(!deque.isEmpty()){
+            ArrayList<Pair<N,List<E>>> nodesToEnqueueSameLabel = new ArrayList<>();
+            ArrayList<Pair<N,List<E>>> nodesToEnqueueDiffLabel = new ArrayList<>();
+
+            currPair = deque.poll();
+            currNode = currPair.getKey();
+            currPath = currPair.getValue();
+
+            if(currNode == destination){
+                deque.clear();
+//                visited.add(currNode);
+                return removeCycle(currPath);
+            }
+
+            if(true){
+                if(currPath.size() > 0){
+                    String labelFrom = currPath.get(currPath.size()-1).getLabel();
+                    visited.add(currNode.toString() + labelFrom);
+                }else{
+                    visited.add(currNode.toString() + "any");
+                }
+                List<E> adjEdges = adjacencyMap.get(currNode);
+
+                for(E edge: adjEdges){
+                    neighbourNode = edge.getOppositeNode(currNode);
+                    String p1 = neighbourNode.toString() + edge.getLabel();
+                    String p2 = neighbourNode.toString() + "any";
+
+                    if(!visited.contains(p1) && !visited.contains(p2)){
+                        List<E> newPath = new LinkedList<>(currPath);
+                        newPath.add(edge);
+                        //always put in front the edges that have the same label so the line would get explored first
+                        if(currPath.size() > 0 && edge.getLabel().equals(currPath.get(currPath.size()-1).getLabel())){
+//                            deque.addFirst(new Pair<>(neighbourNode, newPath));
+                            nodesToEnqueueSameLabel.add(new Pair<>(neighbourNode, newPath));
+                        }else{
+//                            deque.add(new Pair<>(neighbourNode, newPath));
+                            nodesToEnqueueDiffLabel.add(new Pair<>(neighbourNode, newPath));
+                        }
+                    }
+                }
+                deque.addAll(nodesToEnqueueSameLabel);
+                deque.addAll(nodesToEnqueueDiffLabel);
             }
         }
         System.out.println("No path found");

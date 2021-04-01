@@ -1,3 +1,6 @@
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -16,6 +19,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+
+import javafx.util.Duration;
+import java.util.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,6 +44,8 @@ public class PathDisplayer {
     private String showingStations;
     private HBox finalBox;
     private Pane sideStations;
+    private Random random = new Random();
+    private ToggleSlider toggleSlider;
 
     public PathDisplayer(){
 
@@ -53,6 +61,8 @@ public class PathDisplayer {
 
 
     public Pane createLine(List<Tuple<String, List<String>>> stations) {
+
+        toggleSlider = new ToggleSlider();
 
         finalBox = new HBox();
         showingStations = "";
@@ -102,6 +112,10 @@ public class PathDisplayer {
             }
         }
 
+        Circle train = makeCircle(x,y,circleRadius,"White","White");
+
+        thingy.getChildren().add(toggleSlider);
+
         VBox almostFinalBox = new VBox();
         almostFinalBox.getChildren().add(thingy);
         almostFinalBox.setAlignment(Pos.CENTER);
@@ -110,7 +124,38 @@ public class PathDisplayer {
         finalBox.getChildren().add(almostFinalBox);
         finalBox.setAlignment(Pos.CENTER_LEFT);
 
-        return finalBox;
+        StackPane animation = new StackPane();
+        animation.getChildren().add(train);
+        animation.setAlignment(Pos.BASELINE_LEFT);
+        StackPane.setMargin(train,new Insets(10,10,10,10));
+        animationActive(train);
+
+        BorderPane border = new BorderPane();
+        HBox box = new HBox();
+        box.getChildren().add(toggleSlider);
+        box.setAlignment(Pos.TOP_RIGHT);
+        border.setTop(box);
+        border.setCenter(finalBox);
+        border.setBottom(animation);
+
+
+//        if (showingStations != null) {
+//            finalBox.getChildren().add(showAllSmallStations(showingStations));
+//        }
+        return border;
+    }
+
+    private void animationActive(Circle train) {
+        Duration duration = Duration.seconds(7);
+        TranslateTransition transition = new TranslateTransition(duration,train);
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2.9), ev -> {
+            transition.setByX(647);
+            transition.setNode(train);
+            transition.setAutoReverse(true);
+            transition.setCycleCount(2);
+            transition.play();
+        }));
+        timeline.play();
     }
 
     private HBox createStartingStation(String name, String color, double x, double y) {
@@ -159,16 +204,13 @@ public class PathDisplayer {
             button.setStyle("-fx-background-color: #0B132B; -fx-text-fill: #FFFFFF");
             this.setMoreButton(finalBox, button, stations);
 
-
             stats.getChildren().add(button);
             stats.setMargin(button, new Insets(0, 0,0,circleRadius));
-
 
         }
         stats.setAlignment(Pos.CENTER_LEFT);
 
         return stats;
-
     }
 
     private Pane showAllSmallStations(List<String> stations) {
@@ -192,7 +234,6 @@ public class PathDisplayer {
 
     }
 
-
     /**
      * @param name,previousColor,label
      * Calls displayBiggerStationName to get final Size and Style for key Station name
@@ -201,6 +242,8 @@ public class PathDisplayer {
      * */
     private HBox displayLineLabel(String name, StackPane circle) {
         Text title = displayBiggerStationName(name);
+        //Text title = displayBiggerStationName(name + " in " +timeStart+"mins");
+        //Text switchLine = displaySwitchLine(label,previousColor);
 
         HBox titleLine = new HBox();
         titleLine.setSpacing(circleRadius*2);
@@ -229,8 +272,6 @@ public class PathDisplayer {
         return text;
     }
 
-
-
     /**
      * @param stations passed from displaySmallerStationNamesImproved
      * Calculate the display size and spacing of overflow stations to maintain clean display
@@ -245,7 +286,6 @@ public class PathDisplayer {
             Text statName = displaySmallerStationName(stations.get(i));
             names.getChildren().add(statName);
         }
-
         return names;
     }
 
@@ -264,8 +304,6 @@ public class PathDisplayer {
 
         return text;
     }
-
-
 
     /**
      * @param x,y,color are the Dimensions and Colour of desired Circle's
@@ -388,6 +426,7 @@ public class PathDisplayer {
      * Initializes mappings of line name to Color for rendering
      */
     private void initialiseColorMappings() {
+        colorMappings.put("White",white);
         colorMappings.put("BG",background);
         colorMappings.put("Red",red);
         colorMappings.put("RedA",red);

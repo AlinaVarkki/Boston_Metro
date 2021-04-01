@@ -5,15 +5,25 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class getPathJunctionTests {
 
-    //Used to Test Station and Connection
-    Node a, b;
-    Edge<Node> c;
-
     //User for Testing MultiGraph Methods
     List<Edge<Node>> testConnections;
     List<Node> testStations;
     MultiGraph<Node, Edge<Node>> testGraph;
     List<Edge<Node>> testPath;
+
+    /* Creates a Connection & two new Stations and Reads in bostonmetro.txt*/
+    @org.junit.jupiter.api.BeforeEach
+    void setUp() {
+
+        FileReader reader = new FileReader("resources/bostonmetro.txt");
+        testStations = reader.getStations();
+        testConnections = reader.getConnections();
+
+        testGraph = new MultiGraph<>();
+        for (Node n : testStations) testGraph.addNode(n);
+        for (Edge e : testConnections) testGraph.addEdge(e);
+
+    }
 
     /**
      * Below Test Correct Continuity between Key Junction Stations on Red and Green Line
@@ -155,19 +165,20 @@ public class getPathJunctionTests {
         assertEquals("Copley", greenJNode.getName());
 
         label = testPath.get(1).getLabel();
-        assertTrue(label.equals("GreenB")||label.equals("GreenC")||label.equals("GreenD") );
+        //assertTrue(label.equals("GreenB")||label.equals("GreenC")||label.equals("GreenD") );
+        assertTrue(label.equals("GreenB"));
 
         greenJNode = testPath.get(1).getOppositeNode(greenJNode);
         assertEquals("Hynes/ICA", greenJNode.getName());
 
         label = testPath.get(2).getLabel();
-        assertTrue(label.equals("GreenB") );
+        assertTrue(label.equals("GreenB"));
 
         greenJNode = testPath.get(2).getOppositeNode(greenJNode);
         assertEquals("Kenmore", greenJNode.getName());
 
         label = testPath.get(3).getLabel();
-        assertTrue(label.equals("GreenD") );
+        assertTrue(label.equals("GreenD"));
 
         greenJNode = testPath.get(3).getOppositeNode(greenJNode);
         assertEquals("Fenway", greenJNode.getName());
@@ -290,13 +301,13 @@ public class getPathJunctionTests {
         assertEquals("DowntownCrossing", orangeNode.getName());
 
         label = testPath.get(1).getLabel();
-        assertEquals("Red", label);
+        assertEquals("Orange", label);
 
         orangeNode = testPath.get(1).getOppositeNode(orangeNode);
-        assertEquals("ParkStreet", orangeNode.getName());
+        assertEquals("State", orangeNode.getName());
 
         label = testPath.get(2).getLabel();
-        assertEquals("Green", label);
+        assertEquals("Blue", label);
 
         Node blueNode = testPath.get(2).getOppositeNode(orangeNode);
         assertEquals("GovernmentCenter", blueNode.getName());
