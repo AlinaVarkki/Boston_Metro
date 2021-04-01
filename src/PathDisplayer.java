@@ -35,7 +35,7 @@ public class PathDisplayer {
     private int circleRadius = 10;
     private int x = 0;
     private int y = 0;
-    private List<String> showingStations = null;
+    private String showingStations;
     private HBox finalBox;
     private Pane sideStations;
 
@@ -56,7 +56,7 @@ public class PathDisplayer {
     public Pane createLine(List<Tuple<String, List<String>>> stations) {
 
         finalBox = new HBox();
-//        sideStations = new Pane();
+        showingStations = "";
 
         VBox thingy = new VBox();
 
@@ -361,25 +361,23 @@ public class PathDisplayer {
 
     private EventHandler<ActionEvent> showStations(Pane pane,Button button,List<String> stations) {
         EventHandler<ActionEvent> handler = actionEvent -> {
-            if (sideStations != null) {
+
+            if (showingStations.equals(stations.get(0))) {
                 pane.getChildren().remove(sideStations);
-            }
-            sideStations = showAllSmallStations(stations);
-            pane.getChildren().add(sideStations);
-            button.setOnAction(closeStations( pane, button, stations));
-            };
-            return handler;
-        }
+                showingStations = "";
 
-        private EventHandler<ActionEvent> closeStations(Pane pane,Button button,List<String> stations) {
-            EventHandler<ActionEvent> handler = actionEvent -> {
-
+            } else {
                 if (sideStations != null) {
                     pane.getChildren().remove(sideStations);
                 }
+                sideStations = showAllSmallStations(stations);
+                showingStations = stations.get(0);
+                pane.getChildren().add(sideStations);
+            }
+            button.setOnAction(showStations(pane, button, stations));
 
-                button.setOnAction(showStations( pane, button, stations));
-            };
+        };
             return handler;
         }
+
 }

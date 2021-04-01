@@ -156,7 +156,7 @@ public class View {
                                     setText(item + "   🔴");
                                     String label = stationColorMap.get(item);
 
-                                    if (label.equals("Red") || label.equals("RedA") ||label.equals("RedB")) {
+                                    if (label.equals("Red") || label.equals("RedA") ||label.equals("RedB") || label.equals("Mattapan")) {
                                         setTextFill(Color.RED);
                                     }
                                     else if (label.equals("Orange")){
