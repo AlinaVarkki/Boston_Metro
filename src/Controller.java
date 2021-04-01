@@ -16,6 +16,7 @@ public class Controller {
    public void run(){
         this.setUpDropDowns();
         this.setupButtonEventHandler(this);
+        view.setupAlgorithmSelectorEventHandler();
     }
 
     private void setUpDropDowns(){
@@ -26,10 +27,7 @@ public class Controller {
     }
 
     private void setupButtonEventHandler(Controller controller){
-        view.setFindButtonEventHandler(new EventHandler<ActionEvent>() {
-            @Override public void handle(ActionEvent e) {
-                controller.performSearch();
-            }});
+        view.setFindButtonEventHandler(e -> controller.performSearch());
     }
 
     /**
@@ -42,11 +40,11 @@ public class Controller {
 
             String from = view.getSourceStation();
             String to = view.getDestinationStation();
+            String algorithm = view.getAlgorithmSelected();
 
-
-
-            List<Tuple<String, List<String>>> path = model.runSearch(from,to);
+            List<Tuple<String, List<String>>> path = model.runSearch(from, to,algorithm);
             view.displayFoundPath(path);
+
         }
     }
 

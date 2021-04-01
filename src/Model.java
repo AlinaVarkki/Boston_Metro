@@ -55,31 +55,40 @@ public class Model {
      * Tuple used to store Line-Colour and Station's
      * @return List of Tuples for optimal Route
      * */
-    public List<Tuple<String,List<String>>> runSearch(String start,String destination){
+    public List<Tuple<String,List<String>>> runSearch(String start,String destination,String algorithm){
         Node from = this.find(start);
         Node to = this.find(destination);
 
         List<Tuple<String,List<String>>> processedForView = new ArrayList<>();
-
-        List<Edge<Node>> path = multiGraph.getPath(from,to);
-
-        Node station = from;
-        String lineColour = path.get(0).getLabel();
-        Tuple<String,List<String>> line = new Tuple<>(lineColour,new ArrayList<>());
-        line.second.add(station.toString());
-
-        for(Edge<Node> edge: path){
-            System.out.println(edge.toString());
-            lineColour = edge.getLabel();
-            if(!lineColour.equals(line.first)){
-                processedForView.add(line);
-                line = new Tuple<>(lineColour,new ArrayList<>());
-            }
-            station = edge.getOppositeNode(station);
-            line.second.add(station.toString());
+        List<Edge<Node>> path;
+        if (algorithm.equals("Transitions")) {
+            path = multiGraph.getPath(from, to);
         }
 
-        processedForView.add(line);
+        else{
+            path = multiGraph.getPathDFS(from, to);
+        }
+
+        Node station = from;
+
+        if (path.size() != 0) {
+            String lineColour = path.get(0).getLabel();
+            Tuple<String, List<String>> line = new Tuple<>(lineColour, new ArrayList<>());
+            line.second.add(station.toString());
+
+            for (Edge<Node> edge : path) {
+                System.out.println(edge.toString());
+                lineColour = edge.getLabel();
+                if (!lineColour.equals(line.first)) {
+                    processedForView.add(line);
+                    line = new Tuple<>(lineColour, new ArrayList<>());
+                }
+                station = edge.getOppositeNode(station);
+                line.second.add(station.toString());
+            }
+
+            processedForView.add(line);
+        }
 
         return processedForView;
     }

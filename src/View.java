@@ -31,6 +31,7 @@ public class View {
     AnchorPane root ;
     BorderPane container;
     Map<String, String> stationColorMap;
+    String algorithmSelected;
 
     private Color background = Color.rgb(11,19,43);
 
@@ -47,6 +48,9 @@ public class View {
 
     @FXML
     Text endStationErrorMsg;
+
+    @FXML
+    Text matchingStationErrorMsg;
 
     @FXML
     ImageView titleImage;
@@ -79,8 +83,15 @@ public class View {
     ImageView circleEnd;
 
     @FXML
+    Button searchLength;
+
+    @FXML
+    Button searchTransitions;
+
+    @FXML
     public void initialize(){
         pathDisplayer = new PathDisplayer();
+        algorithmSelected = "Length";
     }
 
     public void customizeDropDowns(Map<String, String> stationColorMap){
@@ -145,19 +156,19 @@ public class View {
                                                              boolean empty) {
                                 super.updateItem(item, empty);
                                 if (item != null) {
-                                    setText(item + "");
+                                    setText(item + "   🔴");
                                     String label = stationColorMap.get(item);
 
-                                    if (label.equals("Red") || label.equals("RedA") ||label.equals("RedB")) {
-                                        setTextFill(Color.rgb(245,61,61));
+                                    if (label.equals("Red") || label.equals("RedA") ||label.equals("RedB") || label.equals("Mattapan")) {
+                                        setTextFill(Color.RED);
                                     }
                                     else if (label.equals("Orange")){
-                                        setTextFill(Color.rgb(245,153,35));
+                                        setTextFill(Color.ORANGE);
                                     }else if (label.equals("Blue")){
-                                        setTextFill(Color.rgb(18,126,188));
+                                        setTextFill(Color.BLUE);
                                     }
                                     else if (label.equals("Green") || label.equals("GreenB") || label.equals("GreenC") || label.equals("GreenD") ||label.equals("GreenE")){
-                                        setTextFill(Color.rgb(20,158,106));
+                                        setTextFill(Color.GREEN);
                                     }else{
                                         setTextFill(Color.BLACK);
                                     }
@@ -257,10 +268,16 @@ public class View {
             }
 
             if(endDestSelector.getValue() == null){
+                matchingStationErrorMsg.setVisible(false);
                 endStationErrorMsg.setVisible(true);
                 endDestSelector.setStyle(" -fx-background-radius: 10; -fx-background-color: #fff0f0; -fx-border-color: #0B132B;");
             }
-        }else{
+        } else if (startDestSelector.getValue().equals(endDestSelector.getValue())) {
+            System.out.println("startDestSelector.getValue()");
+            endStationErrorMsg.setVisible(false);
+            matchingStationErrorMsg.setVisible(true);
+            endDestSelector.setStyle(" -fx-background-radius: 10; -fx-background-color: #fff0f0; -fx-border-color: #0B132B;");
+        } else {
             //find path
             System.out.println();
             System.out.println(startDestSelector.getValue());
@@ -270,6 +287,7 @@ public class View {
 
     public void setDefaultStyleEndSelector(){
         endStationErrorMsg.setVisible(false);
+        matchingStationErrorMsg.setVisible(false);
         endDestSelector.setStyle("-fx-font-family: Arial; -fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;");
     }
 
@@ -287,14 +305,22 @@ public class View {
     }
 
     public boolean stationsSelected(){
-        if(startDestSelector.getValue() == null || endDestSelector.getValue() == null){
+        if(startDestSelector.getValue() == null || endDestSelector.getValue() == null
+                || startDestSelector.getValue().equals(endDestSelector.getValue())){
             if(startDestSelector.getValue() == null){
                 startStationErrorMsg.setVisible(true);
                 startDestSelector.setStyle(" -fx-background-radius: 10; -fx-background-color: #fff0f0; -fx-border-color: #0B132B;");
             }
 
             if(endDestSelector.getValue() == null){
+                matchingStationErrorMsg.setVisible(false);
                 endStationErrorMsg.setVisible(true);
+                endDestSelector.setStyle(" -fx-background-radius: 10; -fx-background-color: #fff0f0; -fx-border-color: #0B132B;");
+            }
+
+            if (startDestSelector.getValue().equals(endDestSelector.getValue())) {
+                endStationErrorMsg.setVisible(false);
+                matchingStationErrorMsg.setVisible(true);
                 endDestSelector.setStyle(" -fx-background-radius: 10; -fx-background-color: #fff0f0; -fx-border-color: #0B132B;");
             }
             return false;
@@ -411,5 +437,26 @@ public class View {
         System.out.println(stationName); // prints out button's text
 //        startDestSelector.setValue(stationName);
 //        startDestSelector.setId(stationName);
+    }
+
+    public void setupAlgorithmSelectorEventHandler(){
+        searchLength.setOnAction(actionEvent ->
+        {algorithmSelected = "Length";
+        searchLength.setStyle("-fx-background-color: #0B132B; -fx-background-radius: 10;-fx-border-color: #0B132B;-fx-border-radius: 10;");
+        searchLength.setTextFill(Color.WHITE);
+        searchTransitions.setStyle("-fx-background-color: #fff; -fx-background-radius: 10;-fx-border-color: #0B132B;-fx-border-radius: 10;");
+        searchTransitions.setTextFill(background);
+        });
+        searchTransitions.setOnAction(actionEvent -> {
+            algorithmSelected = "Transitions";
+            searchLength.setStyle("-fx-background-color: #fff; -fx-background-radius: 10;-fx-border-color: #0B132B;-fx-border-radius: 10;");
+            searchLength.setTextFill(background);
+            searchTransitions.setStyle("-fx-background-color: #0B132B; -fx-background-radius: 10;-fx-border-color: #0B132B;-fx-border-radius: 10;");
+            searchTransitions.setTextFill(Color.WHITE);
+        });
+    }
+
+    public String getAlgorithmSelected(){
+        return algorithmSelected;
     }
 }
