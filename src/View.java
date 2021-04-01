@@ -50,6 +50,9 @@ public class View {
     Text endStationErrorMsg;
 
     @FXML
+    Text matchingStationErrorMsg;
+
+    @FXML
     ImageView titleImage;
 
     @FXML
@@ -265,10 +268,16 @@ public class View {
             }
 
             if(endDestSelector.getValue() == null){
+                matchingStationErrorMsg.setVisible(false);
                 endStationErrorMsg.setVisible(true);
                 endDestSelector.setStyle(" -fx-background-radius: 10; -fx-background-color: #fff0f0; -fx-border-color: #0B132B;");
             }
-        }else{
+        } else if (startDestSelector.getValue().equals(endDestSelector.getValue())) {
+            System.out.println("startDestSelector.getValue()");
+            endStationErrorMsg.setVisible(false);
+            matchingStationErrorMsg.setVisible(true);
+            endDestSelector.setStyle(" -fx-background-radius: 10; -fx-background-color: #fff0f0; -fx-border-color: #0B132B;");
+        } else {
             //find path
             System.out.println();
             System.out.println(startDestSelector.getValue());
@@ -278,6 +287,7 @@ public class View {
 
     public void setDefaultStyleEndSelector(){
         endStationErrorMsg.setVisible(false);
+        matchingStationErrorMsg.setVisible(false);
         endDestSelector.setStyle("-fx-font-family: Arial; -fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;");
     }
 
@@ -295,14 +305,22 @@ public class View {
     }
 
     public boolean stationsSelected(){
-        if(startDestSelector.getValue() == null || endDestSelector.getValue() == null){
+        if(startDestSelector.getValue() == null || endDestSelector.getValue() == null
+                || startDestSelector.getValue().equals(endDestSelector.getValue())){
             if(startDestSelector.getValue() == null){
                 startStationErrorMsg.setVisible(true);
                 startDestSelector.setStyle(" -fx-background-radius: 10; -fx-background-color: #fff0f0; -fx-border-color: #0B132B;");
             }
 
             if(endDestSelector.getValue() == null){
+                matchingStationErrorMsg.setVisible(false);
                 endStationErrorMsg.setVisible(true);
+                endDestSelector.setStyle(" -fx-background-radius: 10; -fx-background-color: #fff0f0; -fx-border-color: #0B132B;");
+            }
+
+            if (startDestSelector.getValue().equals(endDestSelector.getValue())) {
+                endStationErrorMsg.setVisible(false);
+                matchingStationErrorMsg.setVisible(true);
                 endDestSelector.setStyle(" -fx-background-radius: 10; -fx-background-color: #fff0f0; -fx-border-color: #0B132B;");
             }
             return false;

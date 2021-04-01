@@ -37,6 +37,7 @@ public class Controller {
     private void performSearch(){
         if( view.stationsSelected() ){
 
+
             String from = view.getSourceStation();
             String to = view.getDestinationStation();
             String algorithm = view.getAlgorithmSelected();
