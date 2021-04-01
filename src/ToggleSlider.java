@@ -28,7 +28,7 @@ public class ToggleSlider extends Parent {
             background.setCenterY(20);
             background.setRadiusX(52);
             background.setRadiusY(36);
-            background.setFill(Color.rgb(11,19,43));
+            background.setFill(Color.rgb(245,61,61));
             background.setStroke(Color.rgb(11,19,43));
 
             Ellipse background2 = new Ellipse();
@@ -82,8 +82,8 @@ public class ToggleSlider extends Parent {
             switchOn.addListener((obs,oldState,newState) -> {
                 boolean mapOnCheck = newState.booleanValue();
                 translateTransition.setToX(mapOnCheck ? -2+52 : 0);
-                fillTransition.setFromValue(mapOnCheck ? Color.rgb(11,19,43) : Color.GREEN);
-                fillTransition.setFromValue(mapOnCheck ? Color.GREEN : Color.rgb(11,19,43));
+                fillTransition.setFromValue(mapOnCheck ? Color.rgb(245,61,61) : Color.rgb(20,158,106));
+                fillTransition.setFromValue(mapOnCheck ? Color.rgb(20,158,106) : Color.rgb(245,61,61));
                 animate.play();
             });
 
