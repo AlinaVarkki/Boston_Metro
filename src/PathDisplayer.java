@@ -310,8 +310,8 @@ public class PathDisplayer {
 
         //1 0.8 0.5
         circleGroup.getChildren().add(makeCircle(x,y,circleRadius*1.25,color, color));
-        circleGroup.getChildren().add(makeCircle(x,y,circleRadius,bgColor,bgColor));
-        circleGroup.getChildren().add(makeCircle(x,y,circleRadius*0.7,color, color));
+        circleGroup.getChildren().add(makeCircle(x,y,circleRadius*0.95,bgColor,bgColor));
+        circleGroup.getChildren().add(makeCircle(x,y,circleRadius*0.65,color, color));
         if (start)
             circleGroup.getChildren().add(makeLetter(color, bgColor));
 
