@@ -89,6 +89,9 @@ public class View {
     Button searchTransitions;
 
     @FXML
+    HBox startingCircles;
+
+    @FXML
     public void initialize(){
         pathDisplayer = new PathDisplayer();
         algorithmSelected = "Length";
@@ -186,20 +189,27 @@ public class View {
 
     public void changeSelectorColourStart(){
         String selectedStation = startDestSelector.getValue();
-        if(selectedStation != null){
-            circleStart.setVisible(true);
-            Image image = new Image("Images/whiteCircle.png");
-            if(stationColorMap.get(selectedStation).equals("Green")){
-                image = new Image("Images/greenCircle.png");
-            }else if(stationColorMap.get(selectedStation).equals("Red")){
-                image = new Image("Images/redCircle.png");
-            }else if(stationColorMap.get(selectedStation).equals("Orange")){
-                image = new Image("Images/yellowCircle.png");
-            }else if(stationColorMap.get(selectedStation).equals("Blue")){
-                image = new Image("Images/blueCircle.png");
+        if (selectedStation != null) {
+            if (startingCircles != null) {
+                startingCircles.getChildren().remove(0, startingCircles.getChildren().size());
             }
-            circleStart.setImage(image);
+            StackPane circles = pathDisplayer.makeTripleCircle(0,0,stationColorMap.get(selectedStation),true);
+            startingCircles.getChildren().add(circles);
         }
+//        if(selectedStation != null){
+//            circleStart.setVisible(true);
+//            Image image = new Image("Images/whiteCircle.png");
+//            if(stationColorMap.get(selectedStation).equals("Green")){
+//                image = new Image("Images/greenCircle.png");
+//            }else if(stationColorMap.get(selectedStation).equals("Red")){
+//                image = new Image("Images/redCircle.png");
+//            }else if(stationColorMap.get(selectedStation).equals("Orange")){
+//                image = new Image("Images/yellowCircle.png");
+//            }else if(stationColorMap.get(selectedStation).equals("Blue")){
+//                image = new Image("Images/blueCircle.png");
+//            }
+//            circleStart.setImage(image);
+//        }
     }
 
     public void changeSelectorColourEnd(){

@@ -110,9 +110,6 @@ public class PathDisplayer {
         finalBox.getChildren().add(almostFinalBox);
         finalBox.setAlignment(Pos.CENTER_LEFT);
 
-
-
-
         return finalBox;
     }
 
@@ -235,18 +232,17 @@ public class PathDisplayer {
 
 
     /**
-     * @param stations,lineHeight passed from displaySmallerStationNamesImproved
+     * @param stations passed from displaySmallerStationNamesImproved
      * Calculate the display size and spacing of overflow stations to maintain clean display
      * Calls displaySmallerStationName to format each line for display
      * @return VBox of station names
      * */
     private VBox displaySmallerStationNames(List<String> stations) {
-        int fontHeight = circleRadius;
         VBox names = new VBox();
         names.setSpacing(circleRadius/2);
 
         for (int i = 0; i < stations.size()-1; i++) {
-            Text statName = displaySmallerStationName(stations.get(i), fontHeight);
+            Text statName = displaySmallerStationName(stations.get(i));
             names.getChildren().add(statName);
         }
 
@@ -254,11 +250,13 @@ public class PathDisplayer {
     }
 
     /**
-     * @param name,lineHeight passed form displaySmallerStationNames
+     * @param name passed form displaySmallerStationNames
      * Formats each station name to same space and style for displaying
      * @return Text of station name in standardised format
      * */
-    private Text displaySmallerStationName(String name, int fontHeight) {
+    private Text displaySmallerStationName(String name) {
+        int fontHeight = circleRadius;
+
         Text text = new Text();
         text.setText(name);
         text.setFill(white);
@@ -275,7 +273,7 @@ public class PathDisplayer {
      * Calls makeCircle
      * @return Group containing the standardised Circle style
      * */
-    private StackPane makeTripleCircle(double x, double y, String color, boolean start) {
+    public StackPane makeTripleCircle(double x, double y, String color, boolean start) {
         StackPane circleGroup = new StackPane();
 
         //1 0.8 0.5
@@ -325,6 +323,11 @@ public class PathDisplayer {
         return circle;
     }
 
+    /**
+     * @param color2 name of the line
+     * creates a letter to show what line it is in the circle
+     * @return Text field with a single or no letters
+     */
     private Text makeLetter(String color2) {
 
         Text letter = new Text();
@@ -347,6 +350,41 @@ public class PathDisplayer {
 
 
     /**
+     * @param pane - place where the intermediate stations will be rendered
+     * @param button - the appropriate "more stations" button
+     * @param stations - list of station names to be displayed
+     * sets up event handlers for "more stations" buttons by calling showStations
+     */
+    private void setMoreButton(Pane pane,Button button,List<String> stations){
+        button.setOnAction(showStations(pane, stations));
+    }
+
+    /**
+     * @param pane - place where the intermediate stations will be rendered
+     * @param stations - list of station names to be displayed
+     * actual logic of handling the button clicks and toggling the sideStations correctly
+     * @return the event handler
+     */
+    private EventHandler<ActionEvent> showStations(Pane pane,List<String> stations) {
+        return actionEvent -> {
+
+            if (showingStations.equals(stations.get(0))) {
+                pane.getChildren().remove(sideStations);
+                showingStations = "";
+
+            } else {
+                if (sideStations != null) {
+                    pane.getChildren().remove(sideStations);
+                }
+                sideStations = showAllSmallStations(stations);
+                showingStations = stations.get(0);
+                pane.getChildren().add(sideStations);
+            }
+
+        };
+        }
+
+    /**
      * Initializes mappings of line name to Color for rendering
      */
     private void initialiseColorMappings() {
@@ -363,30 +401,5 @@ public class PathDisplayer {
         colorMappings.put("GreenD",green);
         colorMappings.put("GreenE",green);
     }
-
-    private void setMoreButton(Pane pane,Button button,List<String> stations){
-        button.setOnAction(showStations(pane, button, stations));
-    }
-
-    private EventHandler<ActionEvent> showStations(Pane pane,Button button,List<String> stations) {
-        EventHandler<ActionEvent> handler = actionEvent -> {
-
-            if (showingStations.equals(stations.get(0))) {
-                pane.getChildren().remove(sideStations);
-                showingStations = "";
-
-            } else {
-                if (sideStations != null) {
-                    pane.getChildren().remove(sideStations);
-                }
-                sideStations = showAllSmallStations(stations);
-                showingStations = stations.get(0);
-                pane.getChildren().add(sideStations);
-            }
-            button.setOnAction(showStations(pane, button, stations));
-
-        };
-            return handler;
-        }
 
 }

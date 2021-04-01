@@ -99,7 +99,7 @@ public class Model {
 
     private void fillStationColorMap(Map<Node, List<Edge<Node>>> adjMap){
         List<Edge<Node>> adjEdges;
-        Boolean sameEdges;
+        boolean sameEdges;
         for(Node n: adjMap.keySet()){
             sameEdges = true;
             adjEdges = adjMap.get(n);

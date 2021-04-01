@@ -8,6 +8,7 @@
 <?import javafx.scene.text.Text?>
 
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.layout.HBox?>
 <AnchorPane fx:controller="View" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <ImageView fx:id="titleImage" fitWidth="686.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true">
@@ -50,11 +51,13 @@
                 <Font name="Arial" size="13.0" />
             </font>
         </Text>
-        <ImageView fx:id="circleStart" fitHeight="50" fitWidth="50" layoutX="723.0" layoutY="245.0" pickOnBounds="true" preserveRatio="true">
-            <image >
-                <Image url="Images/whiteCircle.png" />
-            </image>
-        </ImageView>
+        <HBox fx:id="startingCircles">
+        </HBox>
+<!--        <ImageView fx:id="circleStart" fitHeight="50" fitWidth="50" layoutX="723.0" layoutY="245.0" pickOnBounds="true" preserveRatio="true">-->
+<!--            <image >-->
+<!--                <Image url="Images/whiteCircle.png" />-->
+<!--            </image>-->
+<!--        </ImageView>-->
         <ComboBox fx:id="startDestSelector" onHidden="#changeSelectorColourStart" minHeight="40" minWidth="200" promptText="START DESTINATION" layoutX="743.0" layoutY="250.0" prefHeight="29.0" prefWidth="154.0" style="-fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;" onAction="#setDefaultStyleStartSelector"/>
         <ImageView fx:id="mapButtonStart" onMouseClicked="#mapButtonStartClicked" fitHeight="45" fitWidth="45" layoutX="960.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true">
             <image >
