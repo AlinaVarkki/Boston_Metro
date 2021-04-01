@@ -114,8 +114,6 @@ public class PathDisplayer {
 
         Circle train = makeCircle(x,y,circleRadius,"White","White");
 
-        thingy.getChildren().add(toggleSlider);
-
         VBox almostFinalBox = new VBox();
         almostFinalBox.getChildren().add(thingy);
         almostFinalBox.setAlignment(Pos.CENTER);
@@ -127,11 +125,12 @@ public class PathDisplayer {
         StackPane animation = new StackPane();
         animation.getChildren().add(train);
         animation.setAlignment(Pos.BASELINE_LEFT);
-        StackPane.setMargin(train,new Insets(10,10,10,10));
+        StackPane.setMargin(train,new Insets(15,15,15,15));
         animationActive(train);
 
         BorderPane border = new BorderPane();
         HBox box = new HBox();
+        box.setPadding(new Insets(15,15,15,15));
         box.getChildren().add(toggleSlider);
         box.setAlignment(Pos.TOP_RIGHT);
         border.setTop(box);
