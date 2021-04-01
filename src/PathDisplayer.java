@@ -42,7 +42,6 @@ public class PathDisplayer {
     public PathDisplayer(){
 
         initialiseColorMappings();
-//        finalBox = new HBox();
 
     }
 
@@ -108,14 +107,10 @@ public class PathDisplayer {
         almostFinalBox.setAlignment(Pos.CENTER);
         almostFinalBox.setPadding(new Insets(0,0,0, 5*circleRadius));
 
-
-//        HBox finalBox = new HBox();
         finalBox.getChildren().add(almostFinalBox);
         finalBox.setAlignment(Pos.CENTER_LEFT);
 
-//        if (showingStations != null) {
-//            finalBox.getChildren().add(showAllSmallStations(showingStations));
-//        }
+
 
 
         return finalBox;
@@ -182,7 +177,21 @@ public class PathDisplayer {
     private Pane showAllSmallStations(List<String> stations) {
 
         VBox stats = displaySmallerStationNames(stations);
-        return stats;
+
+        Text title = new Text();
+        title.setText("Intermediate stations:");
+        title.setFill(white);
+        title.setFont(Font.font("Arial", FontWeight.NORMAL, FontPosture.ITALIC,4*circleRadius/3));
+
+
+        VBox boxy = new VBox();
+        boxy.getChildren().addAll(title,stats);
+
+        boxy.setAlignment(Pos.CENTER_LEFT);
+        boxy.setPadding(new Insets(0,0,0,4*circleRadius));
+        boxy.setMargin(stats, new Insets(circleRadius,0,0,circleRadius));
+
+        return boxy;
 
     }
 
