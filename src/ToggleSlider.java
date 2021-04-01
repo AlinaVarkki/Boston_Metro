@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Ellipse;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
@@ -78,6 +79,7 @@ public class ToggleSlider extends Parent {
             fillTransition.setShape(background);
 
             getChildren().addAll(background2,background,mapOn,map,mapOff,map2,circle);
+
 
             switchOn.addListener((obs,oldState,newState) -> {
                 boolean mapOnCheck = newState.booleanValue();

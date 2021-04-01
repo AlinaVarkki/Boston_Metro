@@ -53,7 +53,7 @@
                 <Font name="Arial" size="13.0" />
             </font>
         </Text>
-        <HBox fx:id="startingCircles">
+        <HBox fx:id="startingCircles" layoutX="683.0" layoutY="240.0">
         </HBox>
 <!--        <ImageView fx:id="circleStart" fitHeight="50" fitWidth="50" layoutX="723.0" layoutY="245.0" pickOnBounds="true" preserveRatio="true">-->
 <!--            <image >-->
@@ -76,11 +76,13 @@
                 <Font name="Arial" size="13.0" />
             </font>
         </Text>
-        <ImageView fx:id="circleEnd" fitHeight="50" fitWidth="50" layoutX="723.0" layoutY="315.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="Images/whiteCircle.png"/>
-            </image>
-        </ImageView>
+        <HBox fx:id="endingCircles" layoutX="683.0" layoutY="310.0">
+        </HBox>
+<!--        <ImageView fx:id="circleEnd" fitHeight="50" fitWidth="50" layoutX="723.0" layoutY="315.0" pickOnBounds="true" preserveRatio="true">-->
+<!--            <image>-->
+<!--                <Image url="Images/whiteCircle.png"/>-->
+<!--            </image>-->
+<!--        </ImageView>-->
         <ComboBox fx:id="endDestSelector" onHidden="#changeSelectorColourEnd" minHeight="40" minWidth="200" promptText="END DESTINATION" layoutX="743.0" layoutY="320.0" prefHeight="29.0" prefWidth="154.0" style="-fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;" onAction="#setDefaultStyleEndSelector"/>
         <ImageView fx:id="mapButtonEnd" onMouseClicked="#mapButtonEndClicked" fitHeight="45" fitWidth="45" layoutX="960.0" layoutY="317.0" pickOnBounds="true" preserveRatio="true">
             <image >

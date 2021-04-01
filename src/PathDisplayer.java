@@ -44,7 +44,6 @@ public class PathDisplayer {
     private String showingStations;
     private HBox finalBox;
     private Pane sideStations;
-    private Random random = new Random();
     private ToggleSlider toggleSlider;
 
     public PathDisplayer(){
@@ -98,7 +97,6 @@ public class PathDisplayer {
                 //creates line with stations
                 thingy.getChildren().add(createLineWithMiniStations(currentLine,currentColor,start,end));
 
-//                String nextColor;
                 String lastStation = currentLine.get(currentLine.size()-1);
                 //creates circle depending on whether this is the last station or nah
                 if (i+1 < stations.size()) {
@@ -138,9 +136,6 @@ public class PathDisplayer {
         border.setBottom(animation);
 
 
-//        if (showingStations != null) {
-//            finalBox.getChildren().add(showAllSmallStations(showingStations));
-//        }
         return border;
     }
 
@@ -159,13 +154,13 @@ public class PathDisplayer {
 
     private HBox createStartingStation(String name, String color, double x, double y) {
 
-        return displayLineLabel(name, makeTripleCircle(x,y,color, true));
+        return displayLineLabel(name, makeTripleCircle(x,y,color,"BG", true));
 
     }
 
     private HBox createEndingStation(String name, String color, double x, double y) {
 
-        return displayLineLabel(name, makeTripleCircle(x,y,color, false));
+        return displayLineLabel(name, makeTripleCircle(x,y,color,"BG", false));
 
     }
 
@@ -180,11 +175,11 @@ public class PathDisplayer {
 
         Line line = new Line(x,y+start,x,y+end);
         line.setStroke(colorMappings.get(color));
-        line.setStyle("-fx-stroke-width: 5;");
+        line.setStyle("-fx-stroke-width: 4;");
 
 
         linebox.getChildren().addAll(line, miniStationsWithButton(stations));
-        linebox.setMargin(line, new Insets(0,4*circleRadius,0,circleRadius*1.25-2.5));   //- half line width
+        linebox.setMargin(line, new Insets(0,4*circleRadius,0,circleRadius*1.25-2));   //- half line width
         linebox.setAlignment(Pos.CENTER_LEFT);
 
         return linebox;
@@ -310,15 +305,15 @@ public class PathDisplayer {
      * Calls makeCircle
      * @return Group containing the standardised Circle style
      * */
-    public StackPane makeTripleCircle(double x, double y, String color, boolean start) {
+    public StackPane makeTripleCircle(double x, double y, String color, String bgColor, boolean start) {
         StackPane circleGroup = new StackPane();
 
         //1 0.8 0.5
         circleGroup.getChildren().add(makeCircle(x,y,circleRadius*1.25,color, color));
-        circleGroup.getChildren().add(makeCircle(x,y,circleRadius,"BG","BG"));
+        circleGroup.getChildren().add(makeCircle(x,y,circleRadius,bgColor,bgColor));
         circleGroup.getChildren().add(makeCircle(x,y,circleRadius*0.7,color, color));
         if (start)
-            circleGroup.getChildren().add(makeLetter(color));
+            circleGroup.getChildren().add(makeLetter(color, bgColor));
 
         return circleGroup;
     }
@@ -335,7 +330,7 @@ public class PathDisplayer {
         //1 0.75
         circleGroup.getChildren().add(makeCircle(x,y,circleRadius*1.25,"BG","BG"));
         circleGroup.getChildren().add(makeCircle(x,y,circleRadius*0.95,color1,color2));
-        circleGroup.getChildren().add(makeLetter(color2));
+        circleGroup.getChildren().add(makeLetter(color2, "BG"));
 
         return circleGroup;
     }
@@ -365,7 +360,7 @@ public class PathDisplayer {
      * creates a letter to show what line it is in the circle
      * @return Text field with a single or no letters
      */
-    private Text makeLetter(String color2) {
+    private Text makeLetter(String color2, String fill) {
 
         Text letter = new Text();
 
@@ -378,7 +373,7 @@ public class PathDisplayer {
             letter.setText("");
         }
 
-        letter.setFill(background);
+        letter.setFill(colorMappings.get(fill));
         letter.setFont(Font.font("Arial", FontWeight.BOLD, FontPosture.REGULAR, 1.1*circleRadius)); //4/5
 
         return letter;
@@ -426,6 +421,7 @@ public class PathDisplayer {
      */
     private void initialiseColorMappings() {
         colorMappings.put("White",white);
+        colorMappings.put("Transparent", Color.TRANSPARENT);
         colorMappings.put("BG",background);
         colorMappings.put("Red",red);
         colorMappings.put("RedA",red);

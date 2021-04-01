@@ -4,6 +4,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.HPos;
+import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -90,6 +93,9 @@ public class View {
 
     @FXML
     HBox startingCircles;
+
+    @FXML
+    HBox endingCircles;
 
     @FXML
     public void initialize(){
@@ -187,49 +193,53 @@ public class View {
                 });
     }
 
-    public void changeSelectorColourStart(){
+    public void changeSelectorColourStart() {
         String selectedStation = startDestSelector.getValue();
         if (selectedStation != null) {
-            if (startingCircles != null) {
-                startingCircles.getChildren().remove(0, startingCircles.getChildren().size());
-            }
-            StackPane circles = pathDisplayer.makeTripleCircle(0,0,stationColorMap.get(selectedStation),true);
-            startingCircles.getChildren().add(circles);
+            startingCircles.getChildren().add(displayCircles(startingCircles));
         }
-//        if(selectedStation != null){
-//            circleStart.setVisible(true);
-//            Image image = new Image("Images/whiteCircle.png");
-//            if(stationColorMap.get(selectedStation).equals("Green")){
-//                image = new Image("Images/greenCircle.png");
-//            }else if(stationColorMap.get(selectedStation).equals("Red")){
-//                image = new Image("Images/redCircle.png");
-//            }else if(stationColorMap.get(selectedStation).equals("Orange")){
-//                image = new Image("Images/yellowCircle.png");
-//            }else if(stationColorMap.get(selectedStation).equals("Blue")){
-//                image = new Image("Images/blueCircle.png");
-//            }
-//            circleStart.setImage(image);
-//        }
     }
 
     public void changeSelectorColourEnd(){
         String selectedStation = endDestSelector.getValue();
-        circleEnd.setVisible(true);
-        if(selectedStation != null){
-            circleStart.setVisible(true);
-            Image image = new Image("Images/whiteCircle.png");
-            if(stationColorMap.get(selectedStation).equals("Green")){
-                image = new Image("Images/greenCircle.png");
-            }else if(stationColorMap.get(selectedStation).equals("Red")){
-                image = new Image("Images/redCircle.png");
-            }else if(stationColorMap.get(selectedStation).equals("Orange")){
-                image = new Image("Images/yellowCircle.png");
-            }else if(stationColorMap.get(selectedStation).equals("Blue")){
-                image = new Image("Images/blueCircle.png");
-            }
-            circleEnd.setImage(image);
+        if (selectedStation != null) {
+            endingCircles.getChildren().add(displayCircles(endingCircles));
         }
     }
+
+
+    /**
+     * @param circles place where you want your circles to be displayed
+     * @return flowpane with the required circles
+     */
+    private Pane displayCircles(HBox circles) {
+
+        if (circles != null) {
+            circles.getChildren().remove(0, circles.getChildren().size());
+        }
+
+        List<String> colors = new ArrayList<>();
+        colors.add("GreenB");
+        colors.add("GreenC");
+        colors.add("GreenD");
+        colors.add("GreenE");
+
+        FlowPane pane = new FlowPane();
+
+        for (String color : colors) {
+            pane.getChildren().add(pathDisplayer.makeTripleCircle(0,0,color,"White",true));
+        }
+
+        pane.setAlignment(Pos.CENTER);
+        pane.setPrefWrapLength(60);
+        pane.setPrefHeight(60);
+        pane.setHgap(3.5);
+        pane.setVgap(3.5);
+
+        return pane;
+    }
+
+
 
     public void fillStationsOptions(List<String> stations){
 
