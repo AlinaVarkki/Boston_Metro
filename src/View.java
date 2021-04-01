@@ -13,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.PopupWindow;
 import javafx.stage.Stage;
@@ -20,9 +21,7 @@ import javafx.util.Callback;
 import javafx.util.Duration;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class View {
 
@@ -92,6 +91,7 @@ public class View {
     public void initialize(){
         pathDisplayer = new PathDisplayer();
         algorithmSelected = "Length";
+        this.setStandardStyles();
     }
 
     public void customizeDropDowns(Map<String, String> stationColorMap){
@@ -443,21 +443,64 @@ public class View {
     public void setupAlgorithmSelectorEventHandler(){
         searchLength.setOnAction(actionEvent ->
         {algorithmSelected = "Length";
-        searchLength.setStyle("-fx-background-color: #0B132B; -fx-background-radius: 10;-fx-border-color: #0B132B;-fx-border-radius: 10;");
-        searchLength.setTextFill(Color.WHITE);
-        searchTransitions.setStyle("-fx-background-color: #fff; -fx-background-radius: 10;-fx-border-color: #0B132B;-fx-border-radius: 10;");
+        this.changeStyle(searchTransitions,"-fx-background-color","#fff");
         searchTransitions.setTextFill(background);
+        this.changeStyle(searchLength,"-fx-background-color","#0B132B");
+        searchLength.setTextFill(Color.WHITE);
+
         });
         searchTransitions.setOnAction(actionEvent -> {
             algorithmSelected = "Transitions";
-            searchLength.setStyle("-fx-background-color: #fff; -fx-background-radius: 10;-fx-border-color: #0B132B;-fx-border-radius: 10;");
+            this.changeStyle(searchLength,"-fx-background-color","#fff");
             searchLength.setTextFill(background);
-            searchTransitions.setStyle("-fx-background-color: #0B132B; -fx-background-radius: 10;-fx-border-color: #0B132B;-fx-border-radius: 10;");
+            this.changeStyle(searchTransitions,"-fx-background-color","#0B132B");
             searchTransitions.setTextFill(Color.WHITE);
         });
     }
 
     public String getAlgorithmSelected(){
         return algorithmSelected;
+    }
+
+    /**
+     * This method is used during initialization to standardize all styling in one place
+     * **/
+    private void setStandardStyles(){
+        searchLength.setStyle("-fx-background-color: #fff; -fx-background-radius: 10;-fx-border-color: #0B132B;-fx-border-radius: 10;");
+        searchLength.setTextFill(background);
+        searchTransitions.setStyle("-fx-background-color: #0B132B; -fx-background-radius: 10;-fx-border-color: #0B132B;-fx-border-radius: 10;");
+        searchTransitions.setTextFill(Color.WHITE);
+        searchTransitions.setFont(Font.font("Arial"));
+        searchLength.setFont(Font.font("Arial"));
+
+    }
+
+    /**
+     * This method is used to change FXML style property while keeping the rest of the style unchanged
+     * @param elem Control - FXML element we are changing the style
+     * @param newProperty String - This is the FXML style tag value of which we are changing
+     * @param newValue String - The new value we give to the FXML style tag
+     * **/
+    private void changeStyle(Control elem,String newProperty,String newValue){
+        HashMap<String,String> properties = new HashMap<>();
+        String style = elem.getStyle();
+        String[] styleProperties = style.split(";");
+        for(String pair : styleProperties){
+            String[] styleProperty = pair.split(":");
+            properties.put(styleProperty[0].trim(),styleProperty[1].trim());
+        }
+
+        properties.put(newProperty,newValue);
+
+        StringBuilder newStyle =  new StringBuilder();
+        for(String key : properties.keySet()){
+            newStyle.append(key);
+            newStyle.append(":");
+            newStyle.append(properties.get(key));
+            newStyle.append(";");
+        }
+        elem.setStyle(newStyle.toString());
+        System.out.println(newStyle.toString());
+
     }
 }
