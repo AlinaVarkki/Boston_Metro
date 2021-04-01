@@ -23,9 +23,7 @@ import javafx.util.Callback;
 import javafx.util.Duration;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class View {
 
@@ -33,8 +31,9 @@ public class View {
     Pane pathDisplayed;
     AnchorPane root ;
     BorderPane container;
-    Map<String, String> stationColorMap;
+    Map<String, List<String>> stationColorMap;
     String algorithmSelected;
+
 
     private Color background = Color.rgb(11,19,43);
 
@@ -103,7 +102,7 @@ public class View {
         algorithmSelected = "Length";
     }
 
-    public void customizeDropDowns(Map<String, String> stationColorMap){
+    public void customizeDropDowns(Map<String, List<String>> stationColorMap){
         this.stationColorMap = stationColorMap;
         setOptionsColours(startDestSelector);
         setOptionsColours(endDestSelector);
@@ -165,8 +164,9 @@ public class View {
                                                              boolean empty) {
                                 super.updateItem(item, empty);
                                 if (item != null) {
-                                    setText(item + "   🔴");
-                                    String label = stationColorMap.get(item);
+                                    setText(item);
+                                    String label = stationColorMap.get(item).get(0);
+//                                    setTextFill(Color.BLACK);
 
                                     if (label.equals("Red") || label.equals("RedA") ||label.equals("RedB") || label.equals("Mattapan")) {
                                         setTextFill(Color.RED);
@@ -196,14 +196,14 @@ public class View {
     public void changeSelectorColourStart() {
         String selectedStation = startDestSelector.getValue();
         if (selectedStation != null) {
-            startingCircles.getChildren().add(displayCircles(startingCircles));
+            startingCircles.getChildren().add(displayCircles(selectedStation, startingCircles));
         }
     }
 
     public void changeSelectorColourEnd(){
         String selectedStation = endDestSelector.getValue();
         if (selectedStation != null) {
-            endingCircles.getChildren().add(displayCircles(endingCircles));
+            endingCircles.getChildren().add(displayCircles(selectedStation, endingCircles));
         }
     }
 
@@ -212,21 +212,15 @@ public class View {
      * @param circles place where you want your circles to be displayed
      * @return flowpane with the required circles
      */
-    private Pane displayCircles(HBox circles) {
+    private Pane displayCircles(String selectedStation, HBox circles) {
 
         if (circles != null) {
             circles.getChildren().remove(0, circles.getChildren().size());
         }
 
-        List<String> colors = new ArrayList<>();
-        colors.add("GreenB");
-        colors.add("GreenC");
-        colors.add("GreenD");
-        colors.add("GreenE");
-
         FlowPane pane = new FlowPane();
 
-        for (String color : colors) {
+        for (String color : stationColorMap.get(selectedStation)) {
             pane.getChildren().add(pathDisplayer.makeTripleCircle(0,0,color,"White",true));
         }
 
@@ -254,13 +248,13 @@ public class View {
         List<String> restStations = new ArrayList<>();
 
         for (String station: stations){
-            if(stationColorMap.get(station).equals("Green")){
+            if(stationColorMap.get(station).get(0).equals("Green")){
                 greenStations.add(station);
-            }else if(stationColorMap.get(station).equals("Orange")){
+            }else if(stationColorMap.get(station).get(0).equals("Orange")){
                 orangeStations.add(station);
-            }else if(stationColorMap.get(station).equals("Red")){
+            }else if(stationColorMap.get(station).get(0).equals("Red")){
                 redStations.add(station);
-            }else if(stationColorMap.get(station).equals("Blue")){
+            }else if(stationColorMap.get(station).get(0).equals("Blue")){
                 blueStations.add(station);
             }else{
                 restStations.add(station);
@@ -273,9 +267,12 @@ public class View {
         sortedStations.addAll(orangeStations);
         sortedStations.addAll(restStations);
 
-//        startDestSelector.getItems().add("Riverside");
         startDestSelector.getItems().addAll(sortedStations);
         endDestSelector.getItems().addAll(sortedStations);
+
+//        Collections.sort(stations);
+//        startDestSelector.getItems().addAll(stations);
+//        endDestSelector.getItems().addAll(stations);
     }
 
     @FXML
@@ -359,10 +356,15 @@ public class View {
             container.getChildren().remove(pathDisplayed);
         }
         pathDisplayed = pathDisplayer.createLine(path);
-//        root.getChildren().add(pathDisplayed);
-
         container.setCenter(pathDisplayed);
 
+        runDisplayPathAnimation();
+    }
+
+    /**
+     * twists the logo when path is found
+     */
+    private void runDisplayPathAnimation() {
         //yellow line rotation
         RotateTransition rtY = new RotateTransition(Duration.seconds(2), yellowLine);
         rtY.setByAngle(360);
@@ -397,8 +399,8 @@ public class View {
         rtC.setCycleCount(1);
         //rtC.setAutoReverse(true);
         rtC.play();
-
     }
+
 
     public void setTitleVisibility(boolean visible){
         titleImage.setVisible(visible);
@@ -480,4 +482,6 @@ public class View {
     public String getAlgorithmSelected(){
         return algorithmSelected;
     }
+
+
 }

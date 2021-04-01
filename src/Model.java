@@ -9,7 +9,7 @@ public class Model {
     HashMap<String,Node> stationsHashMap;
     List<Node> stations;
     Map<Node, List<Edge<Node>>> adjMap;
-    private Map<String, String> stationColorMap;
+    private Map<String, List<String>> stationColorMap;
 
     public Model(String filepath){
         this.setMultiGraph(filepath);
@@ -99,31 +99,23 @@ public class Model {
 
     private void fillStationColorMap(Map<Node, List<Edge<Node>>> adjMap){
         List<Edge<Node>> adjEdges;
-        boolean sameEdges;
-        for(Node n: adjMap.keySet()){
-            sameEdges = true;
-            adjEdges = adjMap.get(n);
 
-            String label = toBaseColor(adjEdges.get(0).getLabel());
+        for(Node n: adjMap.keySet()){
+            adjEdges = adjMap.get(n);
+            List<String> colors = new ArrayList<>();
+
             for(Edge<Node> e: adjEdges){
-                String currLabel = toBaseColor(e.getLabel());
-                if(!currLabel.equals(label)){
-                    sameEdges = false;
+                String color = e.getLabel();
+                if (!colors.contains(color)) {
+                    colors.add(color);
                 }
             }
+            stationColorMap.put(n.toString(), colors);
 
-            if(sameEdges) stationColorMap.put(n.toString(), label);
-            else stationColorMap.put(n.toString(), "Black");
         }
     }
 
-    public String toBaseColor(String label){
-        if(label.equals("GreenB") || label.equals("GreenC") || label.equals("GreenD") || label.equals("GreenE")) return "Green";
-        if(label.equals("RedA") || label.equals("RedB")) return "Red";
-        return label;
-    }
-
-    public Map<String, String> getStationColorMap(){
+    public Map<String, List<String>> getStationColorMap(){
         return stationColorMap;
     }
 }

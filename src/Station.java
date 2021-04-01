@@ -32,4 +32,5 @@ public class Station implements Node{
     public String toString(){
         return this.idNumber+" "+this.name;
     }
+
 }

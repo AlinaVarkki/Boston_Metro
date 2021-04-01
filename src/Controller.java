@@ -21,7 +21,7 @@ public class Controller {
 
     private void setUpDropDowns(){
         List<String> stations = model.getListOfStations();
-        Map<String, String> stationColorMap = model.getStationColorMap();
+        Map<String, List<String>> stationColorMap = model.getStationColorMap();
         view.customizeDropDowns(stationColorMap);
         view.fillStationsOptions(stations);
     }
