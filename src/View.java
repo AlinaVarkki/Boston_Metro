@@ -1,5 +1,6 @@
 import javafx.animation.FadeTransition;
 import javafx.animation.RotateTransition;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -13,6 +14,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -476,6 +479,34 @@ public class View {
         });
     }
 
+    private void setupAutofill(ComboBox<String> element){
+        element.addEventHandler(KeyEvent.KEY_TYPED, t -> element.show());
+        element.addEventHandler(KeyEvent.KEY_PRESSED, t -> element.show());
+        element.addEventHandler(KeyEvent.KEY_RELEASED,new EventHandler<KeyEvent>(){
+
+            @Override
+            public void handle(KeyEvent event){
+                element.show();
+               String text =  element.getEditor().getText();
+               List<String> filteredList = new ArrayList<>();
+               for(String key : stationColorMap.keySet()){
+                   if(key.contains(text)){
+                       filteredList.add(key);
+                   }
+               }
+               element.getItems().clear();
+               element.getItems().addAll(filteredList);
+               //set visible rows if less than
+                // select if only one elem
+                //handle errors
+                //new error message
+                //fix styling
+                //lowercase
+            }
+        });
+
+    }
+
     public String getAlgorithmSelected(){
         return algorithmSelected;
     }
@@ -499,6 +530,13 @@ public class View {
         startDestSelector.setStyle(" -fx-font-family: Arial; -fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;-fx-border-radius: 10;");
         endDestSelector.setStyle(" -fx-font-family: Arial; -fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;-fx-border-radius: 10;");
 
+        //Autofill
+        startDestSelector.setEditable(true);
+        startDestSelector.getEditor().setStyle(" -fx-font-family: Arial; -fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #ffffff;-fx-border-radius: 10;");
+        this.setupAutofill(startDestSelector);
+        endDestSelector.setEditable(true);
+        endDestSelector.getEditor().setStyle(" -fx-font-family: Arial; -fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #ffffff;-fx-border-radius: 10;");
+        this.setupAutofill(endDestSelector);
     }
 
     /**
