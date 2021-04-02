@@ -84,7 +84,7 @@ public class PathDisplayer {
             String currentColor = stations.get(0).first;
             List<String> currentLine = stations.get(0).second;
 
-            train = new Rectangle(35,25);
+            train = new Rectangle(48,20);
             trainSelector(currentColor);
             ImagePattern imagePattern = new ImagePattern(image);
             train.setFill(imagePattern);
@@ -139,7 +139,7 @@ public class PathDisplayer {
         box.setPadding(new Insets(15,15,15,15));
         box.getChildren().add(toggleSlider);
         box.setAlignment(Pos.TOP_RIGHT);
-        border.setTop(box);
+        border.setRight(box);
         border.setCenter(finalBox);
         border.setBottom(animation);
 
@@ -151,7 +151,7 @@ public class PathDisplayer {
         Duration duration = Duration.seconds(7);
         TranslateTransition transition = new TranslateTransition(duration,train);
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2.9), ev -> {
-            transition.setByX(632);
+            transition.setByX(622);  //632
             transition.setNode(train);
             transition.setAutoReverse(true);
             transition.setCycleCount(2);
@@ -161,22 +161,14 @@ public class PathDisplayer {
     }
 
     private Image trainSelector(String colour) {
-        switch (colour) {
-            case "Blue" -> image = new Image("Images/bluesubwayboii.png");
-            case "Red" -> image = new Image("Images/redsubwayboii.png");
-            case "RedA" -> image = new Image("Images/redsubwayboii.png");
-            case "RedB" -> image = new Image("Images/redsubwayboii.png");
-            case "Mattapan" -> image = new Image("Images/redsubwayboii.png");
-            case "Orange" -> image = new Image("Images/yellowsubwayboii.png");
-            case "Green" -> image = new Image("Images/greensubwayboii.png");
-            case "GreenB" -> image = new Image("Images/greensubwayboii.png");
-            case "GreenC" -> image = new Image("Images/greensubwayboii.png");
-            case "GreenD" -> image = new Image("Images/greensubwayboii.png");
-            case "GreenE" -> image = new Image("Images/greensubwayboii.png");
+        switch (colour.charAt(0)) {
+            case 'B' -> image = new Image("Images/bluesubwayboii.png");
+            case 'R', 'M' -> image = new Image("Images/redsubwayboii.png");
+            case 'O' -> image = new Image("Images/yellowsubwayboii.png");
+            case 'G' -> image = new Image("Images/greensubwayboii.png");
             default -> image = new Image("Images/subwayboii.png");
         }
         return image;
-
     }
 
     private HBox createStartingStation(String name, String color, double x, double y) {

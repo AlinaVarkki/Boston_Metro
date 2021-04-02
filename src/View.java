@@ -168,20 +168,13 @@ public class View {
                                 if (item != null) {
                                     setText(item);
                                     String label = stationColorMap.get(item).get(0);
-//                                    setTextFill(Color.BLACK);
 
-                                    if (label.equals("Red") || label.equals("RedA") ||label.equals("RedB") || label.equals("Mattapan")) {
-                                        setTextFill(Color.RED);
-                                    }
-                                    else if (label.equals("Orange")){
-                                        setTextFill(Color.ORANGE);
-                                    }else if (label.equals("Blue")){
-                                        setTextFill(Color.BLUE);
-                                    }
-                                    else if (label.equals("Green") || label.equals("GreenB") || label.equals("GreenC") || label.equals("GreenD") ||label.equals("GreenE")){
-                                        setTextFill(Color.GREEN);
-                                    }else{
-                                        setTextFill(Color.BLACK);
+                                    switch (label.charAt(0)) {
+                                        case 'R','M' -> setTextFill(Color.RED);
+                                        case 'O' -> setTextFill(Color.ORANGE);
+                                        case 'B' -> setTextFill(Color.BLUE);
+                                        case 'G' -> setTextFill(Color.GREEN);
+                                        default -> setTextFill(Color.BLACK);
                                     }
                                 }
                                 else {
@@ -248,8 +241,7 @@ public class View {
             switch (stationColorMap.get(station).get(0).charAt(0)) {
                 case 'G' -> greenStations.add(station);
                 case 'O' -> orangeStations.add(station);
-                case 'R' -> redStations.add(station);
-                case 'M' -> redStations.add(station);
+                case 'R', 'M' -> redStations.add(station);
                 case 'B' -> blueStations.add(station);
                 default -> restStations.add(station);
             }
