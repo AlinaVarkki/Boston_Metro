@@ -235,7 +235,6 @@ public class View {
 
     public void fillStationsOptions(List<String> stations){
 
-
         List<String> greenStations = new ArrayList<>();
         List<String> orangeStations = new ArrayList<>();
         List<String> redStations = new ArrayList<>();
@@ -264,26 +263,18 @@ public class View {
         sortedStations.addAll(orangeStations);
         sortedStations.addAll(restStations);
 
-//        startDestSelector.getItems().add("Riverside");
         startDestSelector.getItems().addAll(sortedStations);
         endDestSelector.getItems().addAll(sortedStations);
 
-//        Collections.sort(stations);
-//        startDestSelector.getItems().addAll(stations);
-//        endDestSelector.getItems().addAll(stations);
     }
 
     private void sortByIds(List<String> stations) {
-        Collections.sort(stations, new Comparator<String>() {
-            @Override
-            public int compare(String o1, String o2) {
-
-                Integer id1 = Integer.parseInt(o1.split(" ")[0]);
-                Integer id2 = Integer.parseInt(o2.split(" ")[0]);
-                if (id1 > id2)
-                    return 1;
-                return -1;
-            }
+        stations.sort((o1, o2) -> {
+            int id1 = Integer.parseInt(o1.split(" ")[0]);
+            int id2 = Integer.parseInt(o2.split(" ")[0]);
+            if (id1 > id2)
+                return 1;
+            return -1;
         });
     }
 
