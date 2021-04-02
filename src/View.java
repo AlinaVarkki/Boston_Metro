@@ -499,7 +499,6 @@ public class View {
         startDestSelector.setStyle(" -fx-font-family: Arial; -fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;-fx-border-radius: 10;");
         endDestSelector.setStyle(" -fx-font-family: Arial; -fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;-fx-border-radius: 10;");
 
-
     }
 
     /**
@@ -527,7 +526,5 @@ public class View {
             newStyle.append(";");
         }
         elem.setStyle(newStyle.toString());
-        System.out.println(newStyle.toString());
-
     }
 }
