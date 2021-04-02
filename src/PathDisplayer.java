@@ -22,6 +22,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 import javafx.util.Duration;
+import javafx.util.Pair;
 
 import java.awt.*;
 import java.util.*;
@@ -64,7 +65,7 @@ public class PathDisplayer {
      * @return Hbox with the Line element and all corresponding labels appropriately Styled and Sized
      * */
 
-    public Pane createLine(List<Tuple<String, List<String>>> stations) {
+    public Pane createLine(List<Pair<String, List<String>>> stations) {
 
         toggleSlider = new ToggleSlider();
         VBox almostFinalBox = new VBox();
@@ -81,8 +82,8 @@ public class PathDisplayer {
             int currentEnd = 2*circleRadius;
             int chunkSize;
 
-            String currentColor = stations.get(0).first;
-            List<String> currentLine = stations.get(0).second;
+            String currentColor = stations.get(0).getKey();
+            List<String> currentLine = stations.get(0).getValue();
 
             train = new Rectangle(48,20);
             trainSelector(currentColor);
@@ -91,13 +92,13 @@ public class PathDisplayer {
 
             thingy.getChildren().add(createStartingStation(currentLine.get(0),currentColor,x,y));
 
-            stations.get(0).second.remove(0);
+            stations.get(0).getValue().remove(0);
 
             for (int i = 0; i < stations.size(); i++) {
 
                 //gets current color and arraylist of stations
-                currentColor = stations.get(i).first;
-                currentLine = stations.get(i).second;
+                currentColor = stations.get(i).getKey();
+                currentLine = stations.get(i).getValue();
 
                 //figures out the length of line to draw
                 chunkSize = Math.min(currentLine.size()-1, 5);
@@ -114,7 +115,7 @@ public class PathDisplayer {
                 String lastStation = currentLine.get(currentLine.size()-1);
                 //creates circle depending on whether this is the last station or nah
                 if (i+1 < stations.size()) {
-                    thingy.getChildren().add(createMiddleStation(lastStation,currentColor,stations.get(i+1).first,x,y+start));
+                    thingy.getChildren().add(createMiddleStation(lastStation,currentColor,stations.get(i+1).getKey(),x,y+start));
 
                 } else {
                     thingy.getChildren().add(createEndingStation(lastStation,currentColor,x,y+start));

@@ -22,6 +22,7 @@ import javafx.stage.PopupWindow;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.Duration;
+import javafx.util.Pair;
 
 import java.io.IOException;
 import java.util.*;
@@ -357,7 +358,7 @@ public class View {
         findButton.setOnAction(eventHandler);
     }
 
-    public void displayFoundPath(List<Tuple<String,List<String>>> path){
+    public void displayFoundPath(List<Pair<String,List<String>>> path){
         this.setTitleVisibility(false);
         if(this.pathDisplayed != null){
             container.getChildren().remove(pathDisplayed);

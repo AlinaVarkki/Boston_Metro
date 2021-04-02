@@ -1,3 +1,5 @@
+import javafx.util.Pair;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -55,11 +57,11 @@ public class Model {
      * Tuple used to store Line-Colour and Station's
      * @return List of Tuples for optimal Route
      * */
-    public List<Tuple<String,List<String>>> runSearch(String start,String destination,String algorithm){
+    public List<Pair<String,List<String>>> runSearch(String start,String destination,String algorithm){
         Node from = this.find(start);
         Node to = this.find(destination);
 
-        List<Tuple<String,List<String>>> processedForView = new ArrayList<>();
+        List<Pair<String,List<String>>> processedForView = new ArrayList<>();
         List<Edge<Node>> path;
         if (algorithm.equals("Transitions")) {
             path = multiGraph.getPath(from, to);
@@ -73,18 +75,18 @@ public class Model {
 
         if (path.size() != 0) {
             String lineColour = path.get(0).getLabel();
-            Tuple<String, List<String>> line = new Tuple<>(lineColour, new ArrayList<>());
-            line.second.add(station.toString());
+            Pair<String, List<String>> line = new Pair<>(lineColour, new ArrayList<>());
+            line.getValue().add(station.toString());
 
             for (Edge<Node> edge : path) {
                 System.out.println(edge.toString());
                 lineColour = edge.getLabel();
-                if (!lineColour.equals(line.first)) {
+                if (!lineColour.equals(line.getKey())) {
                     processedForView.add(line);
-                    line = new Tuple<>(lineColour, new ArrayList<>());
+                    line = new Pair<>(lineColour, new ArrayList<>());
                 }
                 station = edge.getOppositeNode(station);
-                line.second.add(station.toString());
+                line.getValue().add(station.toString());
             }
 
             processedForView.add(line);

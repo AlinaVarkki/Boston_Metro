@@ -1,5 +1,6 @@
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.util.Pair;
 
 import java.util.List;
 import java.util.Map;
@@ -41,7 +42,7 @@ public class Controller {
             String to = view.getDestinationStation();
             String algorithm = view.getAlgorithmSelected();
 
-            List<Tuple<String, List<String>>> path = model.runSearch(from, to,algorithm);
+            List<Pair<String, List<String>>> path = model.runSearch(from, to,algorithm);
             view.displayFoundPath(path);
 
         }
