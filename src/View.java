@@ -26,6 +26,7 @@ import javafx.stage.PopupWindow;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.Duration;
+import javafx.util.Pair;
 
 import java.io.IOException;
 import java.util.*;
@@ -252,6 +253,12 @@ public class View {
             }
         }
 
+        sortByIds(blueStations);
+        sortByIds(redStations);
+        sortByIds(greenStations);
+        sortByIds(orangeStations);
+        sortByIds(restStations);
+
         sortedStations.addAll(blueStations);
         sortedStations.addAll(redStations);
         sortedStations.addAll(greenStations);
@@ -265,6 +272,20 @@ public class View {
 //        Collections.sort(stations);
 //        startDestSelector.getItems().addAll(stations);
 //        endDestSelector.getItems().addAll(stations);
+    }
+
+    private void sortByIds(List<String> stations) {
+        Collections.sort(stations, new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+
+                Integer id1 = Integer.parseInt(o1.split(" ")[0]);
+                Integer id2 = Integer.parseInt(o2.split(" ")[0]);
+                if (id1 > id2)
+                    return 1;
+                return -1;
+            }
+        });
     }
 
     @FXML
@@ -342,7 +363,7 @@ public class View {
         findButton.setOnAction(eventHandler);
     }
 
-    public void displayFoundPath(List<Tuple<String,List<String>>> path){
+    public void displayFoundPath(List<Pair<String,List<String>>> path){
         this.setTitleVisibility(false);
         if(this.pathDisplayed != null){
             container.getChildren().remove(pathDisplayed);
