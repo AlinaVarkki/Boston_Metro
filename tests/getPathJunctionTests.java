@@ -147,8 +147,6 @@ public class getPathJunctionTests {
         assertEquals("Hynes/ICA", greenJNode.getName());
     }
 
-    //TODO FIX BELOW ACCORDING TO LECTURERS DESIRES
-    /* Tests MultiGraph getPath() of the Green Junction Line from GreenE to GreenD */
     @org.junit.jupiter.api.Test
     void multiGraphGreenEtoGreenDJunctionLine() {
 
@@ -165,7 +163,6 @@ public class getPathJunctionTests {
         assertEquals("Copley", greenJNode.getName());
 
         label = testPath.get(1).getLabel();
-        //assertTrue(label.equals("GreenB")||label.equals("GreenC")||label.equals("GreenD") );
         assertTrue(label.equals("GreenB"));
 
         greenJNode = testPath.get(1).getOppositeNode(greenJNode);
@@ -234,7 +231,7 @@ public class getPathJunctionTests {
 
         //currently swaps to green the back again
         label = testPath.get(1).getLabel();
-        assertEquals("Green", label);
+        assertEquals("Orange", label);
 
         orangeNode = testPath.get(2).getNode1();
         assertEquals("Haymarket", orangeNode.getName());

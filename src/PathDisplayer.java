@@ -8,19 +8,22 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.paint.*;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Stop;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 import javafx.util.Duration;
+
+import java.awt.*;
 import java.util.*;
 
 import java.util.ArrayList;
@@ -44,6 +47,7 @@ public class PathDisplayer {
     private String showingStations;
     private HBox finalBox;
     private Pane sideStations;
+    private Random random = new Random();
     private ToggleSlider toggleSlider;
 
     public PathDisplayer(){
@@ -58,12 +62,15 @@ public class PathDisplayer {
      * @return Hbox with the Line element and all corresponding labels appropriately Styled and Sized
      * */
 
-
     public Pane createLine(List<Tuple<String, List<String>>> stations) {
 
         toggleSlider = new ToggleSlider();
-
+        VBox almostFinalBox = new VBox();
+        HBox box = new HBox();
         finalBox = new HBox();
+
+        StackPane animation = new StackPane();
+        BorderPane border = new BorderPane();
         showingStations = "";
 
         VBox thingy = new VBox();
@@ -97,6 +104,7 @@ public class PathDisplayer {
                 //creates line with stations
                 thingy.getChildren().add(createLineWithMiniStations(currentLine,currentColor,start,end));
 
+//                String nextColor;
                 String lastStation = currentLine.get(currentLine.size()-1);
                 //creates circle depending on whether this is the last station or nah
                 if (i+1 < stations.size()) {
@@ -110,9 +118,11 @@ public class PathDisplayer {
             }
         }
 
-        Circle train = makeCircle(x,y,circleRadius,"White","White");
+        Rectangle train = new Rectangle(35,25);
+        Image image = new Image("Images/subwayboii.png");
+        ImagePattern imagePattern = new ImagePattern(image);
+        train.setFill(imagePattern);
 
-        VBox almostFinalBox = new VBox();
         almostFinalBox.getChildren().add(thingy);
         almostFinalBox.setAlignment(Pos.CENTER);
         almostFinalBox.setPadding(new Insets(0,0,0, 5*circleRadius));
@@ -120,14 +130,11 @@ public class PathDisplayer {
         finalBox.getChildren().add(almostFinalBox);
         finalBox.setAlignment(Pos.CENTER_LEFT);
 
-        StackPane animation = new StackPane();
         animation.getChildren().add(train);
         animation.setAlignment(Pos.BASELINE_LEFT);
-        StackPane.setMargin(train,new Insets(15,15,15,15));
+        StackPane.setMargin(train,new Insets(10,5,5,10));
         animationActive(train);
 
-        BorderPane border = new BorderPane();
-        HBox box = new HBox();
         box.setPadding(new Insets(15,15,15,15));
         box.getChildren().add(toggleSlider);
         box.setAlignment(Pos.TOP_RIGHT);
@@ -139,11 +146,11 @@ public class PathDisplayer {
         return border;
     }
 
-    private void animationActive(Circle train) {
+    private void animationActive(Rectangle train) {
         Duration duration = Duration.seconds(7);
         TranslateTransition transition = new TranslateTransition(duration,train);
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2.9), ev -> {
-            transition.setByX(647);
+            transition.setByX(632);
             transition.setNode(train);
             transition.setAutoReverse(true);
             transition.setCycleCount(2);
@@ -151,6 +158,7 @@ public class PathDisplayer {
         }));
         timeline.play();
     }
+
 
     private HBox createStartingStation(String name, String color, double x, double y) {
 
@@ -370,6 +378,7 @@ public class PathDisplayer {
         } else if (color2.equals("Mattapan")) {
             letter.setText("M");
         } else {
+//            letter.setText(Character.toString(color2.charAt(0)));
             letter.setText("");
         }
 

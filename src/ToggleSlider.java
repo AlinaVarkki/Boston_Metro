@@ -51,28 +51,28 @@ public class ToggleSlider extends Parent {
             map.setText("Map");
             map.setFill(Color.WHITE);
             map.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, FontPosture.REGULAR,9));
-            map.setX(-6);
+            map.setX(-2);
             map.setY(18);
 
             Text mapOn = new Text();
             mapOn.setText("On");
             mapOn.setFill(Color.WHITE);
             mapOn.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, FontPosture.REGULAR,9));
-            mapOn.setX(-4);
+            mapOn.setX(0);
             mapOn.setY(28);
 
             Text map2 = new Text();
             map2.setText("Map");
             map2.setFill(Color.WHITE);
             map2.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, FontPosture.REGULAR,9));
-            map2.setX(27);
+            map2.setX(25);
             map2.setY(18);
 
             Text mapOff = new Text();
             mapOff.setText("Off");
             mapOff.setFill(Color.WHITE);
             mapOff.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, FontPosture.REGULAR,9));
-            mapOff.setX(27);
+            mapOff.setX(25);
             mapOff.setY(28);
 
             translateTransition.setNode(circle);
