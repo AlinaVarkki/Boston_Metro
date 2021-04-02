@@ -83,12 +83,6 @@ public class View {
     Text titleText2;
 
     @FXML
-    ImageView circleStart;
-
-    @FXML
-    ImageView circleEnd;
-
-    @FXML
     Button searchLength;
 
     @FXML
@@ -106,12 +100,14 @@ public class View {
         this.algorithmSelected = "Length";
         this.setStandardStyles();
         this.sortedStations = new ArrayList<>();
-        this.setupAutofill(endDestSelector);
-        this.setupAutofill(startDestSelector);
+        //this.setupAutofill(endDestSelector);
+        //this.setupAutofill(startDestSelector);
+
     }
 
     public void customizeDropDowns(Map<String, List<String>> stationColorMap){
         this.stationColorMap = stationColorMap;
+
         setOptionsColours(startDestSelector);
         setOptionsColours(endDestSelector);
 
@@ -602,6 +598,8 @@ public class View {
         startDestSelector.getEditor().setStyle(" -fx-font-family: Arial; -fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #ffffff;-fx-border-radius: 10;");
         endDestSelector.setEditable(true);
         endDestSelector.getEditor().setStyle(" -fx-font-family: Arial; -fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #ffffff;-fx-border-radius: 10;");
+        startDestSelector.setFocusTraversable(false);
+        endDestSelector.setFocusTraversable(false);
 
     }
 
