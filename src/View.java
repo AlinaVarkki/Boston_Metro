@@ -108,6 +108,8 @@ public class View {
         this.pathDisplayer = new PathDisplayer();
         this.algorithmSelected = "Length";
         this.setStandardStyles();
+        this.setupAutofill(endDestSelector);
+        this.setupAutofill(startDestSelector);
     }
 
     public void customizeDropDowns(Map<String, List<String>> stationColorMap){
@@ -546,7 +548,7 @@ public class View {
                 element.show();
                 String text = element.getEditor().getText();
                 List<String> filteredList = new ArrayList<>();
-                for (String key : stationColorMap.keySet()) {
+                for (String key : sortedStations) {
                     if (key.toLowerCase().contains(text.toLowerCase())) {
                         filteredList.add(key);
                     }
@@ -602,10 +604,9 @@ public class View {
         //Autofill
         startDestSelector.setEditable(true);
         startDestSelector.getEditor().setStyle(" -fx-font-family: Arial; -fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #ffffff;-fx-border-radius: 10;");
-        this.setupAutofill(startDestSelector);
         endDestSelector.setEditable(true);
         endDestSelector.getEditor().setStyle(" -fx-font-family: Arial; -fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #ffffff;-fx-border-radius: 10;");
-        this.setupAutofill(endDestSelector);
+
     }
 
     /**
