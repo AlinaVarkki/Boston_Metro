@@ -59,9 +59,6 @@ public class View {
     Text endStationErrorMsg;
 
     @FXML
-    Text matchingStationErrorMsg;
-
-    @FXML
     ImageView titleImage;
 
     @FXML
@@ -108,6 +105,7 @@ public class View {
         this.pathDisplayer = new PathDisplayer();
         this.algorithmSelected = "Length";
         this.setStandardStyles();
+        this.sortedStations = new ArrayList<>();
     }
 
     public void customizeDropDowns(Map<String, List<String>> stationColorMap){
@@ -195,29 +193,32 @@ public class View {
     }
 
     public void changeSelectorColourStart() {
+
+        if (startingCircles != null ) {
+            startingCircles.getChildren().remove(0, startingCircles.getChildren().size());
+        }
         String selectedStation = startDestSelector.getValue();
         if (selectedStation != null && stationColorMap.containsKey(selectedStation)) {
-            startingCircles.getChildren().add(displayCircles(selectedStation, startingCircles));
+            startingCircles.getChildren().add(displayCircles(selectedStation));
         }
     }
 
     public void changeSelectorColourEnd(){
+        if (endingCircles != null ) {
+            endingCircles.getChildren().remove(0, endingCircles.getChildren().size());
+        }
+
         String selectedStation = endDestSelector.getValue();
         if (selectedStation != null && stationColorMap.containsKey(selectedStation)) {
-            endingCircles.getChildren().add(displayCircles(selectedStation, endingCircles));
+            endingCircles.getChildren().add(displayCircles(selectedStation));
         }
     }
 
 
     /**
-     * @param circles place where you want your circles to be displayed
      * @return flowpane with the required circles
      */
-    private Pane displayCircles(String selectedStation, HBox circles) {
-
-        if (circles != null) {
-            circles.getChildren().remove(0, circles.getChildren().size());
-        }
+    private Pane displayCircles(String selectedStation) {
 
         FlowPane pane = new FlowPane();
 
@@ -236,7 +237,7 @@ public class View {
 
     public void fillStationsOptions(List<String> stations){
 
-        List<String> sortedStations = new ArrayList<>();
+
         List<String> greenStations = new ArrayList<>();
         List<String> orangeStations = new ArrayList<>();
         List<String> redStations = new ArrayList<>();
@@ -288,36 +289,9 @@ public class View {
         });
     }
 
-    @FXML
-    public void findPathBtnClicked(){
-
-        if(startDestSelector.getValue() == null || endDestSelector.getValue() == null){
-            if(startDestSelector.getValue() == null){
-                startStationErrorMsg.setVisible(true);
-                this.changeStyle(startDestSelector,"-fx-background-color","#fff0f0");
-            }
-
-            if(endDestSelector.getValue() == null){
-                matchingStationErrorMsg.setVisible(false);
-                endStationErrorMsg.setVisible(true);
-                this.changeStyle(endDestSelector,"-fx-background-color","#fff0f0");
-            }
-        } else if (startDestSelector.getValue().equals(endDestSelector.getValue())) {
-            System.out.println("startDestSelector.getValue()");
-            endStationErrorMsg.setVisible(false);
-            matchingStationErrorMsg.setVisible(true);
-            this.changeStyle(endDestSelector,"-fx-background-color","#fff0f0");
-        } else {
-            //find path
-            System.out.println();
-            System.out.println(startDestSelector.getValue());
-        }
-
-    }
-
     public void setDefaultStyleEndSelector(){
         endStationErrorMsg.setVisible(false);
-        matchingStationErrorMsg.setVisible(false);
+//        matchingStationErrorMsg.setVisible(false);
         this.changeStyle(endDestSelector,"-fx-background-color", "#ffffff");
     }
 
@@ -335,28 +309,57 @@ public class View {
     }
 
     public boolean stationsSelected(){
-        if(startDestSelector.getValue() == null || endDestSelector.getValue() == null){
-            if(startDestSelector.getValue() == null){
-                startStationErrorMsg.setVisible(true);
-                this.changeStyle(startDestSelector,"-fx-background-color", "#fff0f0");
+        boolean valid = true;
+        String startStation = startDestSelector.getValue();
+        String endStation = endDestSelector.getValue();
+        String endStationError = "empty";
+        String startStationError = "empty";
+        startStationErrorMsg.setVisible(false);
+        endStationErrorMsg.setVisible(false);
+
+
+
+        if (startStation.equals(endStation)){
+            endStationError = "Sorry, you're already there.";
+        }
+
+        if (!sortedStations.contains(startStation)) {
+            startStationError = "That station doesn't exist.";
+        }
+
+        if (!sortedStations.contains(endStation)) {
+            endStationError ="That station doesn't exist.";
+        }
+
+        if(startStation == null || startStation.equals("")) {
+            startStationError = "Please select a starting station.";
             }
 
-            if(endDestSelector.getValue() == null){
-                matchingStationErrorMsg.setVisible(false);
-                endStationErrorMsg.setVisible(true);
-                this.changeStyle(endDestSelector,"-fx-background-color", "#fff0f0");
-            }
-            return false;
+        if(endStation == null || endStation.equals("")){
+            endStationError = "Please select a final station.";
         }
-        else if(startDestSelector.getValue().equals(endDestSelector.getValue())){
-            endStationErrorMsg.setVisible(false);
-            matchingStationErrorMsg.setVisible(true);
+
+        if (!startStationError.equals("empty")) {
+            startStationErrorMsg.setText(startStationError);
+            startStationErrorMsg.setVisible(true);
+            this.changeStyle(startDestSelector,"-fx-background-color", "#fff0f0");
+            valid = false;
+        }
+
+        if (!endStationError.equals("empty")) {
+            endStationErrorMsg.setText(endStationError);
+            endStationErrorMsg.setVisible(true);
             this.changeStyle(endDestSelector,"-fx-background-color", "#fff0f0");
-            return false;
+            valid = false;
         }
-        else{
-            return true;
-        }
+
+
+
+
+
+
+        return valid;
+
     }
 
     public void setFindButtonEventHandler(EventHandler<ActionEvent> eventHandler){
@@ -594,7 +597,7 @@ public class View {
 
         //Station Selectors
         endStationErrorMsg.setVisible(false);
-        matchingStationErrorMsg.setVisible(false);
+//        matchingStationErrorMsg.setVisible(false);
         startStationErrorMsg.setVisible(false);
         startDestSelector.setStyle(" -fx-font-family: Arial; -fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;-fx-border-radius: 10;");
         endDestSelector.setStyle(" -fx-font-family: Arial; -fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;-fx-border-radius: 10;");

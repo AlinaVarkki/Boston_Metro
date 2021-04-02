@@ -85,7 +85,7 @@ public class PathDisplayer {
             String currentColor = stations.get(0).getKey();
             List<String> currentLine = stations.get(0).getValue();
 
-            train = new Rectangle(48,20);
+            train = new Rectangle(44,20);
             trainSelector(currentColor);
             ImagePattern imagePattern = new ImagePattern(image);
             train.setFill(imagePattern);
