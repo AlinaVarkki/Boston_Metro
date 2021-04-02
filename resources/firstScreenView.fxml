@@ -15,7 +15,7 @@
     <children>
         <ImageView fx:id="titleImage" fitWidth="686.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="Images/abstractMap.png" />
+                <Image url="Images/abstractMap2.png" />
             </image>
         </ImageView>
         <ImageView fx:id="yellowLine" fitHeight="175.0" fitWidth="175.0" layoutX="758.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
@@ -60,7 +60,7 @@
 <!--                <Image url="Images/whiteCircle.png" />-->
 <!--            </image>-->
 <!--        </ImageView>-->
-        <ComboBox fx:id="startDestSelector" onHidden="#changeSelectorColourStart" minHeight="40" minWidth="200" promptText="START DESTINATION" layoutX="743.0" layoutY="250.0" prefHeight="29.0" prefWidth="154.0" style="-fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;" onAction="#setDefaultStyleStartSelector"/>
+        <ComboBox fx:id="startDestSelector" onHidden="#changeSelectorColourStart" minHeight="40" minWidth="200" promptText="START DESTINATION" layoutX="743.0" layoutY="250.0" prefHeight="29.0" prefWidth="154.0" style="-fx-background-radius: 10; -fx-background-color: #F4F4F4; -fx-border-color: #0B132B;" onAction="#setDefaultStyleStartSelector"/>
         <ImageView fx:id="mapButtonStart" onMouseClicked="#mapButtonStartClicked" fitHeight="45" fitWidth="45" layoutX="960.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true">
             <image >
                 <Image url="Images/mapIcon2.png" />
@@ -83,7 +83,7 @@
 <!--                <Image url="Images/whiteCircle.png"/>-->
 <!--            </image>-->
 <!--        </ImageView>-->
-        <ComboBox fx:id="endDestSelector" onHidden="#changeSelectorColourEnd" minHeight="40" minWidth="200" promptText="END DESTINATION" layoutX="743.0" layoutY="320.0" prefHeight="29.0" prefWidth="154.0" style="-fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;" onAction="#setDefaultStyleEndSelector"/>
+        <ComboBox fx:id="endDestSelector" onHidden="#changeSelectorColourEnd" minHeight="40" minWidth="200" promptText="END DESTINATION" layoutX="743.0" layoutY="320.0" prefHeight="29.0" prefWidth="154.0" style="-fx-background-radius: 10; -fx-background-color: #F4F4F4; -fx-border-color: #0B132B;" onAction="#setDefaultStyleEndSelector"/>
         <ImageView fx:id="mapButtonEnd" onMouseClicked="#mapButtonEndClicked" fitHeight="45" fitWidth="45" layoutX="960.0" layoutY="317.0" pickOnBounds="true" preserveRatio="true">
             <image >
                 <Image url="Images/mapIcon2.png" />
