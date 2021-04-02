@@ -151,10 +151,10 @@ public class PathDisplayer {
         Duration duration = Duration.seconds(7);
         TranslateTransition transition = new TranslateTransition(duration,train);
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2.9), ev -> {
-            transition.setByX(622);  //632
+            transition.setByX(622);
             transition.setNode(train);
             transition.setAutoReverse(true);
-            transition.setCycleCount(2);
+            transition.setCycleCount(10);
             transition.play();
         }));
         timeline.play();
