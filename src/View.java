@@ -1,6 +1,7 @@
 import javafx.animation.FadeTransition;
 import javafx.animation.RotateTransition;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -36,6 +37,7 @@ public class View {
     AnchorPane root ;
     BorderPane container;
     Map<String, List<String>> stationColorMap;
+    List<String> sortedStations;
     String algorithmSelected;
 
 
@@ -102,8 +104,8 @@ public class View {
 
     @FXML
     public void initialize(){
-        pathDisplayer = new PathDisplayer();
-        algorithmSelected = "Length";
+        this.pathDisplayer = new PathDisplayer();
+        this.algorithmSelected = "Length";
         this.setStandardStyles();
     }
 
@@ -193,14 +195,14 @@ public class View {
 
     public void changeSelectorColourStart() {
         String selectedStation = startDestSelector.getValue();
-        if (selectedStation != null) {
+        if (selectedStation != null && stationColorMap.containsKey(selectedStation)) {
             startingCircles.getChildren().add(displayCircles(selectedStation, startingCircles));
         }
     }
 
     public void changeSelectorColourEnd(){
         String selectedStation = endDestSelector.getValue();
-        if (selectedStation != null) {
+        if (selectedStation != null && stationColorMap.containsKey(selectedStation)) {
             endingCircles.getChildren().add(displayCircles(selectedStation, endingCircles));
         }
     }
@@ -476,25 +478,79 @@ public class View {
         element.addEventHandler(KeyEvent.KEY_PRESSED, t -> element.show());
         element.addEventHandler(KeyEvent.KEY_RELEASED,new EventHandler<KeyEvent>(){
 
+            private boolean moveCaretToPos = false;
+            private int caretPos;
+
             @Override
-            public void handle(KeyEvent event){
+            public void handle(KeyEvent event) {
+
+                //Following chunk of code to handle keyboard events has been provided from https://stackoverflow.com/questions/19924852/autocomplete-combobox-in-javafx
+                if (event.getCode() == KeyCode.UP) {
+                    caretPos = -1;
+                    if (element.getEditor().getText() != null) {
+                        moveCaret(element.getEditor().getText().length());
+                    }
+                    return;
+                } else if (event.getCode() == KeyCode.DOWN) {
+                    if (!element.isShowing()) {
+                        element.show();
+                    }
+                    caretPos = -1;
+                    if (element.getEditor().getText() != null) {
+                        moveCaret(element.getEditor().getText().length());
+                    }
+                    return;
+                } else if (event.getCode() == KeyCode.BACK_SPACE) {
+                    if (element.getEditor().getText() != null) {
+                        moveCaretToPos = true;
+                        caretPos = element.getEditor().getCaretPosition();
+                    }
+                } else if (event.getCode() == KeyCode.DELETE) {
+                    if (element.getEditor().getText() != null) {
+                        moveCaretToPos = true;
+                        caretPos = element.getEditor().getCaretPosition();
+                    }
+                } else if (event.getCode() == KeyCode.ENTER) {
+                    caretPos = element.getEditor().getCaretPosition();
+                    return;
+                }
+
+                if (event.getCode() == KeyCode.RIGHT || event.getCode() == KeyCode.LEFT || event.getCode().equals(KeyCode.SHIFT) || event.getCode().equals(KeyCode.CONTROL)
+                        || event.isControlDown() || event.getCode() == KeyCode.HOME
+                        || event.getCode() == KeyCode.END || event.getCode() == KeyCode.TAB) {
+                    return;
+                }
+                //the end of borrowed chunk of code
+
                 element.show();
-               String text =  element.getEditor().getText();
-               List<String> filteredList = new ArrayList<>();
-               for(String key : stationColorMap.keySet()){
-                   if(key.contains(text)){
-                       filteredList.add(key);
-                   }
-               }
-               element.getItems().clear();
-               element.getItems().addAll(filteredList);
-               //set visible rows if less than
-                // select if only one elem
-                //handle errors
-                //new error message
-                //fix styling
-                //lowercase
+                String text = element.getEditor().getText();
+                List<String> filteredList = new ArrayList<>();
+                for (String key : stationColorMap.keySet()) {
+                    if (key.toLowerCase().contains(text.toLowerCase())) {
+                        filteredList.add(key);
+                    }
+                }
+                element.hide();
+                element.getItems().clear();
+                element.getItems().addAll(filteredList);
+                int numOfStations = filteredList.size();
+                element.setVisibleRowCount(Math.min(numOfStations, 10));
+                element.show();
             }
+            //Following method is part of the borrowed code from https://stackoverflow.com/questions/19924852/autocomplete-combobox-in-javafx
+            private void moveCaret(int textLength) {
+                if (caretPos == -1) {
+                    element.getEditor().positionCaret(textLength);
+                } else {
+                    element.getEditor().positionCaret(caretPos);
+                }
+                moveCaretToPos = false;
+            }
+
+            //handle errors
+            //new error message
+            //fix styling in css
+
         });
 
     }
