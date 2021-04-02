@@ -49,6 +49,8 @@ public class PathDisplayer {
     private Pane sideStations;
     private Random random = new Random();
     private ToggleSlider toggleSlider;
+    private Image image;
+    private Rectangle train;
 
     public PathDisplayer(){
 
@@ -82,6 +84,10 @@ public class PathDisplayer {
             String currentColor = stations.get(0).first;
             List<String> currentLine = stations.get(0).second;
 
+            train = new Rectangle(35,25);
+            trainSelector(currentColor);
+            ImagePattern imagePattern = new ImagePattern(image);
+            train.setFill(imagePattern);
 
             thingy.getChildren().add(createStartingStation(currentLine.get(0),currentColor,x,y));
 
@@ -117,11 +123,6 @@ public class PathDisplayer {
 
             }
         }
-
-        Rectangle train = new Rectangle(35,25);
-        Image image = new Image("Images/subwayboii.png");
-        ImagePattern imagePattern = new ImagePattern(image);
-        train.setFill(imagePattern);
 
         almostFinalBox.getChildren().add(thingy);
         almostFinalBox.setAlignment(Pos.CENTER);
@@ -159,6 +160,24 @@ public class PathDisplayer {
         timeline.play();
     }
 
+    private Image trainSelector(String colour) {
+        switch (colour) {
+            case "Blue" -> image = new Image("Images/bluesubwayboii.png");
+            case "Red" -> image = new Image("Images/redsubwayboii.png");
+            case "RedA" -> image = new Image("Images/redsubwayboii.png");
+            case "RedB" -> image = new Image("Images/redsubwayboii.png");
+            case "Mattapan" -> image = new Image("Images/redsubwayboii.png");
+            case "Orange" -> image = new Image("Images/yellowsubwayboii.png");
+            case "Green" -> image = new Image("Images/greensubwayboii.png");
+            case "GreenB" -> image = new Image("Images/greensubwayboii.png");
+            case "GreenC" -> image = new Image("Images/greensubwayboii.png");
+            case "GreenD" -> image = new Image("Images/greensubwayboii.png");
+            case "GreenE" -> image = new Image("Images/greensubwayboii.png");
+            default -> image = new Image("Images/subwayboii.png");
+        }
+        return image;
+
+    }
 
     private HBox createStartingStation(String name, String color, double x, double y) {
 
