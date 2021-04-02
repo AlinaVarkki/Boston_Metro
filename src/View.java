@@ -106,6 +106,8 @@ public class View {
         this.algorithmSelected = "Length";
         this.setStandardStyles();
         this.sortedStations = new ArrayList<>();
+        this.setupAutofill(endDestSelector);
+        this.setupAutofill(startDestSelector);
     }
 
     public void customizeDropDowns(Map<String, List<String>> stationColorMap){
@@ -291,7 +293,6 @@ public class View {
 
     public void setDefaultStyleEndSelector(){
         endStationErrorMsg.setVisible(false);
-//        matchingStationErrorMsg.setVisible(false);
         this.changeStyle(endDestSelector,"-fx-background-color", "#ffffff");
     }
 
@@ -352,11 +353,6 @@ public class View {
             this.changeStyle(endDestSelector,"-fx-background-color", "#fff0f0");
             valid = false;
         }
-
-
-
-
-
 
         return valid;
 
@@ -549,7 +545,7 @@ public class View {
                 element.show();
                 String text = element.getEditor().getText();
                 List<String> filteredList = new ArrayList<>();
-                for (String key : stationColorMap.keySet()) {
+                for (String key : sortedStations) {
                     if (key.toLowerCase().contains(text.toLowerCase())) {
                         filteredList.add(key);
                     }
@@ -597,7 +593,6 @@ public class View {
 
         //Station Selectors
         endStationErrorMsg.setVisible(false);
-//        matchingStationErrorMsg.setVisible(false);
         startStationErrorMsg.setVisible(false);
         startDestSelector.setStyle(" -fx-font-family: Arial; -fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;-fx-border-radius: 10;");
         endDestSelector.setStyle(" -fx-font-family: Arial; -fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;-fx-border-radius: 10;");
@@ -605,10 +600,9 @@ public class View {
         //Autofill
         startDestSelector.setEditable(true);
         startDestSelector.getEditor().setStyle(" -fx-font-family: Arial; -fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #ffffff;-fx-border-radius: 10;");
-        this.setupAutofill(startDestSelector);
         endDestSelector.setEditable(true);
         endDestSelector.getEditor().setStyle(" -fx-font-family: Arial; -fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #ffffff;-fx-border-radius: 10;");
-        this.setupAutofill(endDestSelector);
+
     }
 
     /**
