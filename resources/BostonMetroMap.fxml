@@ -20,11 +20,12 @@
     </ImageView>
         <Group fx:id="mapView">
             <Button fx:id="BostonCollege" layoutX="81.0" layoutY="331.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10;">
+            <Button fx:id="a69BostonCollege" layoutX="81.0" layoutY="331.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10;">
                <font>
                   <Font size="3.0" />
                </font>
             </Button>
-            <Button fx:id="SouthStreet" layoutX="101.0" layoutY="321.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10;">
+            <Button fx:id="a75SouthStreet" layoutX="101.0" layoutY="321.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10;">
                <font>
                   <Font size="3.0" />
                </font>

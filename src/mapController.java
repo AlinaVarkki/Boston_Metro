@@ -1,4 +1,6 @@
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
@@ -18,6 +20,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class mapController {
 
@@ -27,32 +31,39 @@ public class mapController {
     ImageView mapImage;
 
     @FXML
-    Group mapView;
-
-    @FXML
-    private void getName(ActionEvent event) throws IOException {
+    private void getName(ActionEvent event){
 
 
 
         Button button = (Button) event.getSource();
-        String stationName = button.getId();
-
-        if(stationName.equals("BostonCollege")){
-            stationName = "69 Boston College";
-        }else if(stationName.equals("SouthStreet")){
-            stationName = "75 South Street";
-        }else if(stationName.equals("JFK")){
-            stationName = "JFK/UMass";
-        }else if(stationName.equals("BackBay")){
-            stationName = "BackBay/SouthEnd";
-        }
-
+        String stationName = parseString(button.getId());
 
         view.closeMap();
-        System.out.println(stationName); // prints out button's text
 
         if(destinationDirection == "START") view.setStartDest(stationName);
         else view.setEndDest(stationName);
+    }
+
+    private void getStationCoordinates(String station){
+
+    }
+
+    //method that parses the station name to the one we use for the search.
+    // Implemented because button ids cannot contain slashed and numbers at the start
+    public String parseString(String station){
+        StringBuilder stationParsed = new StringBuilder();
+
+        //starting with 1 because first character is a dummy as id cannot be started with a number
+        for(int i = 1; i < station.length(); i++){
+            char currChar = station.charAt(i);
+            if(Character.isUpperCase(currChar)){
+                stationParsed.append(" " + currChar);
+            }else{
+                stationParsed.append(currChar);
+            }
+        }
+
+        return stationParsed.toString();
     }
 
     public void setView(View view){
@@ -61,6 +72,10 @@ public class mapController {
 
     public void setDestinationDirection(String destinationDirection){
         this.destinationDirection = destinationDirection;
+    }
+
+    public String getDestinationDirection(){
+        return this.destinationDirection;
     }
 
 
