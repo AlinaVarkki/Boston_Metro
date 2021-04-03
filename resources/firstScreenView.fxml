@@ -61,7 +61,7 @@
         </ImageView>
         <ImageView fx:id="switchButton" onMouseClicked="#reverseButton" fitHeight="40.0" fitWidth="40.0" layoutX="825.0" layoutY="302.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="Images/switch.png" />
+                <Image url="Images/switch2.png" />
             </image>
         </ImageView>
         <Text fx:id="endStationErrorMsg" text = "hello" layoutX="743.0" layoutY="355.0" style="-fx-fill: red;" visible="false">
