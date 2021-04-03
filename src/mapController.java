@@ -24,9 +24,6 @@ public class mapController {
     ImageView mapImage;
 
     @FXML
-    FXCollections buttonList;
-
-    @FXML
     private void getName(ActionEvent event){
 
         Button button = (Button) event.getSource();
@@ -34,8 +31,14 @@ public class mapController {
 
         view.closeMap();
 
-        if(destinationDirection == "START") view.setStartDest(stationName);
-        else view.setEndDest(stationName);
+        if(destinationDirection.equals("START")){
+            view.setStartDest(stationName);
+            view.changeSelectorColourStart();
+        }
+        else{
+            view.setEndDest(stationName);
+            view.changeSelectorColourEnd();
+        }
     }
 
     private void getStationCoordinates(String station){

@@ -1,20 +1,13 @@
 import javafx.animation.FadeTransition;
 import javafx.animation.RotateTransition;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.HPos;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -23,8 +16,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.stage.PopupWindow;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.Duration;
 import javafx.util.Pair;
@@ -44,7 +35,7 @@ public class View {
     Pane map;
     mapController mapContr;
 
-    private Color background = Color.rgb(11,19,43);
+    private final Color background = Color.rgb(11,19,43);
 
     @FXML
     Button findButton;
@@ -110,7 +101,8 @@ public class View {
         this.setupAutofill(endDestSelector);
         this.setupAutofill(startDestSelector);
         try{
-        this.setupMap();}
+            this.setupMap();
+        }
         catch (Exception e){
             System.out.println("Map couldn't load");
         }
@@ -396,6 +388,9 @@ public class View {
      * Calls runDisplayPathAnimation to rotate the Main Logo
      */
     public void displayFoundPath(List<Pair<String,List<String>>> path){
+        if (root.getChildren().contains(map)){
+            this.closeMap();
+        }
         this.setTitleVisibility(false);
         if(this.pathDisplayed != null){
             container.getChildren().remove(pathDisplayed);
