@@ -40,8 +40,14 @@ public class mapController {
 
         view.closeMap();
 
-        if(destinationDirection == "START") view.setStartDest(stationName);
-        else view.setEndDest(stationName);
+        if(destinationDirection.equals("START")){
+            view.setStartDest(stationName);
+            view.changeSelectorColourStart();
+        }
+        else{
+            view.setEndDest(stationName);
+            view.changeSelectorColourEnd();
+        }
     }
 
     //method that parses the station name to the one we use for the search.
