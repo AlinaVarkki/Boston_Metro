@@ -35,12 +35,12 @@ public class View {
     Map<String, List<String>> stationColorMap;
     List<String> sortedStations;
     Map<String,String> idsToStations;
+    Map<String, double[]> stationToCoords;
 
     String algorithmSelected;
 
     Pane map;
     mapController mapContr;
-    HashMap<String, Integer[]> stationToCoords;
 
 
     private final Color background = Color.rgb(11,19,43);
@@ -104,16 +104,9 @@ public class View {
     public void initialize(){
         this.pathDisplayer = new PathDisplayer();
         this.algorithmSelected = "Length";
-        this.setStandardStyles();
         this.sortedStations = new ArrayList<>();
         this.setupAutofill(endDestSelector);
         this.setupAutofill(startDestSelector);
-        try{
-            this.setupMap();
-        }
-        catch (Exception e){
-            System.out.println("Map couldn't load");
-        }
 
     }
 
@@ -484,8 +477,10 @@ public class View {
 
     }
 
-    public void setupMap() throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("BostonMetroMap.fxml"));
+    public void setupMap() throws IOException {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("BostonMetroMap.fxml"));
+
         map = loader.load();
         map.setLayoutX(-25);
         map.setLayoutY(-25);
@@ -497,7 +492,22 @@ public class View {
         mapContr.setDestinationDirection("END");
 
         ObservableMap<String, Object> stationButtonsMap = loader.getNamespace();
-        System.out.println(stationButtonsMap);
+        Map<String, double[]> coordinateMap = new HashMap<>();
+        for(String id : this.idsToStations.keySet()){
+            String id2 = "a"+ id;
+            String station = idsToStations.get(id);
+            Button button = (Button) stationButtonsMap.get(id2);
+            double x = button.getLayoutX();
+            double y = button.getLayoutY();
+            double[] coordinates = {x,y};
+            coordinateMap.put(station,coordinates);
+        }
+        this.stationToCoords = coordinateMap;
+
+        }
+        catch (Exception e){
+            System.out.println("Map could not be loaded");
+        }
     }
 
     public void mapButtonStartClicked() {
@@ -697,7 +707,7 @@ public class View {
     /**
      * This method is used during initialization to standardize all styling in one place
      * **/
-    private void setStandardStyles(){
+    public void setStandardStyles(){
         //Selection Toggle
         searchLength.setStyle("-fx-background-color: #fff; -fx-background-radius: 10;-fx-border-color: #0B132B;-fx-border-radius: 10;");
         searchLength.setTextFill(background);
