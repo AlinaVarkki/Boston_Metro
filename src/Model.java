@@ -22,8 +22,10 @@ public class Model {
     }
 
     /**
+     * Called in Model Constructor
      * @param filepath passed to FileReader
      * MultiGraph initialised with Nodes and Edges
+     * Nodes representing Stations, Edges representing Connecting Lines
      * */
     private void setMultiGraph(String filepath){
         FileReader reader = new FileReader(filepath);
@@ -41,6 +43,18 @@ public class Model {
         adjMap = multiGraph.getAdjMap();
     }
 
+    public ArrayList<String> getListOfStations(){
+        return new ArrayList<>(stationsHashMap.keySet());
+    }
+
+    public Map<String, List<String>> getStationColorMap(){
+        return stationColorMap;
+    }
+
+    /**
+     * Called in Model Constructor
+     * Fills Hashmap with Station which can be easily Searched through
+     * */
     private void setStationsHashMap(){
         stationsHashMap = new HashMap<>();
         for(Node station : stations){
@@ -48,13 +62,9 @@ public class Model {
         }
     }
 
-    public ArrayList<String> getListOfStations(){
-        return new ArrayList<>(stationsHashMap.keySet());
-
-    }
     /**
      * @param start,destination stored as Nodes and passed to MultiGraph
-     * Tuple used to store Line-Colour and Station's
+     * Pair used to store Line-Colour and Station's
      * @return List of Tuples for optimal Route
      * */
     public List<Pair<String,List<String>>> runSearch(String start,String destination,String algorithm){
@@ -117,7 +127,4 @@ public class Model {
         }
     }
 
-    public Map<String, List<String>> getStationColorMap(){
-        return stationColorMap;
-    }
 }

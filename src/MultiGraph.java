@@ -16,6 +16,11 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
     }
 
     @Override
+    public Map<N, List<E>> getAdjMap(){
+        return adjacencyMap;
+    }
+
+    @Override
     public void addNode(N node){
         adjacencyMap.put(node, new ArrayList<>());
     }
@@ -166,7 +171,7 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
 
     /**
      * @param path is a List of Edges
-     * Method works through list of edges not visited in specific path and removes cycles present to return
+     * Method works through list of edges not visited in specific path and removes cycles present
      * @return List
      * */
     public List<E> removeCycle(List<E> path){
@@ -182,11 +187,6 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
             }
         }
         return pathNoCycle;
-    }
-
-    @Override
-    public Map<N, List<E>> getAdjMap(){
-        return adjacencyMap;
     }
 
 }

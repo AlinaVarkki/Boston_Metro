@@ -106,6 +106,11 @@ public class View {
 
     }
 
+    /**
+     * Called by Controller setUpDropDowns()
+     * @param stationColorMap initialised in Model, contains all possible Line colours
+     * Activates Fade Animation of Circular Logo
+     */
     public void customizeDropDowns(Map<String, List<String>> stationColorMap){
         this.stationColorMap = stationColorMap;
 
@@ -156,6 +161,11 @@ public class View {
 
     }
 
+    /**
+     * Called by View's customizeDropDowns()
+     * @param comboBox input from firstScreenView.fxml
+     * Sets the Combobox's colour according to corresponding colour in stationColourMap
+     */
     public void setOptionsColours(ComboBox<String> comboBox){
 
         comboBox.setCellFactory(
@@ -191,6 +201,9 @@ public class View {
                 });
     }
 
+    /**
+     * Enables Changing Icon Circles next to ComboBox's for startDestSelector
+     */
     public void changeSelectorColourStart() {
 
         if (startingCircles != null ) {
@@ -202,6 +215,9 @@ public class View {
         }
     }
 
+    /**
+     * Enables Changing Icon Circles next to ComboBox's for endDestSelector
+     */
     public void changeSelectorColourEnd(){
         if (endingCircles != null ) {
             endingCircles.getChildren().remove(0, endingCircles.getChildren().size());
@@ -213,6 +229,9 @@ public class View {
         }
     }
 
+    /**
+     * Activates animation of switch Button, swaps Source and Destination fields
+     */
     public void reverseButton() {
         // Button rotation
         RotateTransition rotate = new RotateTransition(Duration.seconds(1.3), switchButton);
@@ -231,9 +250,8 @@ public class View {
 
     }
 
-
     /**
-     * @return flowpane with the required circles
+     * @return flowpane with the required circles with respective styling
      */
     private Pane displayCircles(String selectedStation) {
 
@@ -315,6 +333,9 @@ public class View {
         return startDestSelector.getValue();
     }
 
+    /**
+     * Sets and Checks for appropriate Error Messages to display
+     */
     public boolean stationsSelected(){
         boolean valid = true;
         String startStation = startDestSelector.getValue();
@@ -368,6 +389,11 @@ public class View {
         findButton.setOnAction(eventHandler);
     }
 
+    /**
+     * Hides left hand Home screen to allow Path to be Displayed
+     * Calls createLine in PathDisplayer class to display the Route,Line,Stations and Transfers
+     * Calls runDisplayPathAnimation to rotate the Main Logo
+     */
     public void displayFoundPath(List<Pair<String,List<String>>> path){
         this.setTitleVisibility(false);
         if(this.pathDisplayed != null){
@@ -380,7 +406,7 @@ public class View {
     }
 
     /**
-     * twists the logo when path is found
+     * Rotates the Logo when path is found
      */
     private void runDisplayPathAnimation() {
         //yellow line rotation
@@ -419,13 +445,15 @@ public class View {
         rtC.play();
     }
 
-
     public void setTitleVisibility(boolean visible){
         titleImage.setVisible(visible);
         titleText1.setVisible(visible);
         titleText2.setVisible(visible);
     }
 
+    /**
+     * Sets Left Hand Side Pane Size
+     */
     public void setRoot(AnchorPane root){
         this.root = root;
         container = new BorderPane();
