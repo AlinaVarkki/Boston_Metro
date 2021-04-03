@@ -2,6 +2,7 @@ import javafx.animation.FadeTransition;
 import javafx.animation.RotateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -499,6 +500,10 @@ public class View {
 
         mapController.setView(this);
         mapController.setDestinationDirection("END");
+
+        ObservableMap<String, Object> stationButtonsMap = loader.getNamespace();
+        System.out.println(stationButtonsMap);
+
 
     }
 
