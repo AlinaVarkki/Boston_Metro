@@ -41,10 +41,6 @@ public class mapController {
         }
     }
 
-    private void getStationCoordinates(String station){
-
-    }
-
     //method that parses the station name to the one we use for the search.
     // Implemented because button ids cannot contain slashed and numbers at the start
     public String parseString(String station){
