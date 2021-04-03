@@ -8,12 +8,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
-
-<AnchorPane prefHeight="746.0" prefWidth="1171.0" style="-fx-background-color: #0B132B;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapController">
+<!--style="-fx-background-color: #0B132B;"-->
+<!-- fitHeight="754.0" fitWidth="904.0" layoutX="-21.0" layoutY="-7.0"-->
+<AnchorPane prefHeight="746.0" prefWidth="1171.0"  xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapController">
    <children>
       <Group layoutX="185.0" layoutY="3.0">
          <children>
-            <ImageView fitHeight="754.0" fitWidth="904.0" layoutX="-21.0" layoutY="-7.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="550.0" layoutX="-21.0" layoutY="-7.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Images/boston-map.jpg" />
                </image>

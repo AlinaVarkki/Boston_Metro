@@ -19,7 +19,7 @@ public class App2 extends Application {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("firstScreenView.fxml"));
         AnchorPane root = loader.load();
-        window.setScene(new Scene(root, 1030, 550, Color.WHITE));
+        window.setScene(new Scene(root, 1200, 700, Color.WHITE));
         window.show();
 
         View view = loader.<View>getController();

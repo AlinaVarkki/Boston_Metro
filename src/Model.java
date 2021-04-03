@@ -79,7 +79,6 @@ public class Model {
             line.getValue().add(station.toString());
 
             for (Edge<Node> edge : path) {
-                System.out.println(edge.toString());
                 lineColour = edge.getLabel();
                 if (!lineColour.equals(line.getKey())) {
                     processedForView.add(line);

@@ -9,13 +9,26 @@
 
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.BorderPane?>
 <AnchorPane fx:controller="View" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <children>
+        <BorderPane fx:id="displayArea">
         <ImageView fx:id="titleImage" fitWidth="686.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="Images/abstractMap2.png" />
             </image>
         </ImageView>
+            <Text fx:id="titleText1" fill="WHITE" layoutX="20.0" layoutY="475.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WELCOME TO THE BOSTON METRO">
+                <font>
+                    <Font name="Tahoma Bold" size="33.0" />
+                </font>
+            </Text>
+            <Text fx:id="titleText2" fill="WHITE" layoutX="20.0" layoutY="510.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Find the fastest away around the city on a hill with ease!">
+                <font>
+                    <Font name="Arial" size="20.0" />
+                </font>
+            </Text>
+        </BorderPane>
         <ImageView fx:id="yellowLine" fitHeight="175.0" fitWidth="175.0" layoutX="758.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="Images/yellow.png" />
@@ -36,16 +49,7 @@
                 <Image url="Images/boston_logo.png" />
             </image>
         </ImageView>
-        <Text fx:id="titleText1" fill="WHITE" layoutX="20.0" layoutY="475.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WELCOME TO THE BOSTON METRO">
-            <font>
-                <Font name="Tahoma Bold" size="33.0" />
-            </font>
-        </Text>
-        <Text fx:id="titleText2" fill="WHITE" layoutX="20.0" layoutY="510.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Find the fastest away around the city on a hill with ease!">
-            <font>
-                <Font name="Arial" size="20.0" />
-            </font>
-        </Text>
+
         <Text fx:id="startStationErrorMsg" text = "hello" layoutX="743.0" layoutY="245.0" style="-fx-fill: red;"  visible="false">
             <font>
                 <Font name="Arial" size="13.0" />
