@@ -49,8 +49,6 @@ public class PathDisplayer {
     private String showingStations;
     private HBox finalBox;
     private Pane sideStations;
-    private ToggleSlider toggleSlider;
-    private Image image;
     private Rectangle train;
 
     public PathDisplayer(){
@@ -67,7 +65,7 @@ public class PathDisplayer {
 
     public Pane createLine(List<Pair<String, List<String>>> stations) {
 
-        toggleSlider = new ToggleSlider();
+        ToggleSlider toggleSlider = new ToggleSlider();
         VBox almostFinalBox = new VBox();
         HBox box = new HBox();
         finalBox = new HBox();
@@ -86,8 +84,7 @@ public class PathDisplayer {
 
             //assigns train image and size based on the boarding station
             train = new Rectangle(44,20);
-            trainSelector(currentColor);
-            ImagePattern imagePattern = new ImagePattern(image);
+            ImagePattern imagePattern = new ImagePattern(trainSelector(currentColor));
             train.setFill(imagePattern);
 
             thingy.getChildren().add(createStartingStation(currentLine.get(0),currentColor,x,y));
@@ -166,6 +163,7 @@ public class PathDisplayer {
     }
 
     private Image trainSelector(String colour) {
+        Image image;
         switch (colour.charAt(0)) {
             case 'B' -> image = new Image("Images/bluesubwayboii.png");
             case 'R', 'M' -> image = new Image("Images/redsubwayboii.png");

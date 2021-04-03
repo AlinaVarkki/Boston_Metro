@@ -8,11 +8,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -38,6 +40,8 @@ public class View {
 
     Pane map;
     mapController mapContr;
+    HashMap<String, Integer[]> stationToCoords;
+
 
     private final Color background = Color.rgb(11,19,43);
 
@@ -244,12 +248,12 @@ public class View {
         FlowPane pane = new FlowPane();
 
         for (String color : stationColorMap.get(selectedStation)) {
-            pane.getChildren().add(pathDisplayer.makeTripleCircle(0,0,color,"OffWhite",true));
+            pane.getChildren().add(pathDisplayer.makeTripleCircle(0,0,8,color,"OffWhite",true));
         }
 
         pane.setAlignment(Pos.CENTER);
-        pane.setPrefWrapLength(70);
-        pane.setPrefHeight(70);
+        pane.setPrefWrapLength(55);
+        pane.setPrefHeight(55);
         pane.setHgap(3.5);
         pane.setVgap(3.5);
 
@@ -408,12 +412,12 @@ public class View {
         }
         this.setTitleVisibility(false);
         if(this.pathDisplayed != null){
-            displayArea.getChildren().remove(container);
+//            displayArea.getChildren().remove(container);
             container.getChildren().remove(pathDisplayed);
         }
         pathDisplayed = pathDisplayer.createLine(path);
         container.setCenter(pathDisplayed);
-        displayArea.setCenter(container);
+//        displayArea.setCenter(container);
 
         runDisplayPathAnimation();
     }
@@ -495,6 +499,7 @@ public class View {
         ObservableMap<String, Object> stationButtonsMap = loader.getNamespace();
         System.out.println(stationButtonsMap);
     }
+
     public void mapButtonStartClicked() {
         if(root.getChildren().contains(map)){
             if(this.mapContr.getDestinationDirection().equals("START")){
@@ -537,6 +542,41 @@ public class View {
     public void setEndDest(String stationId){
         String stationName = this.idsToStations.get(stationId);
         endDestSelector.setValue(stationName);
+    }
+
+
+
+
+
+    private void showMapWithRoute() {
+
+    }
+
+    private void createMap(List<Pair<String,List<String>>> path) {
+        Pane mapView = new Pane();
+        ImageView map =  new ImageView("Images/mapFontVectorised.png");
+        mapView.getChildren().add(map);
+        map.setFitHeight(820);
+        map.setLayoutX(-25);
+        map.setLayoutY(-25);
+
+
+
+        for (Pair<String,List<String>> currentLine : path) {
+            String color = currentLine.getKey();
+            List<String> stations = currentLine.getValue();
+
+            Integer[] firstCoords = stationToCoords.get(stations.get(0));
+
+            for (int i = 1; i < stations.size(); i++) {
+                Integer[] secondCoords = stationToCoords.get(stations.get(i));
+                Line segment = new Line(firstCoords[0],firstCoords[1],secondCoords[0],secondCoords[1]);
+                segment.setFill(Color.rgb(255,255,255));
+                mapView.getChildren().add(segment);
+            }
+
+        }
+
     }
 
     /**
@@ -712,4 +752,6 @@ public class View {
     public void setupIdsToStatioins(Map<String,String> map ) {
         this.idsToStations = map;
     }
+
+
 }

@@ -33,8 +33,6 @@ public class mapController {
     @FXML
     private void getName(ActionEvent event){
 
-
-
         Button button = (Button) event.getSource();
         String stationName = parseString(button.getId());
 
