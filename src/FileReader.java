@@ -10,6 +10,7 @@ public class FileReader {
     HashMap<String, Node> stationsNodesById;
     HashMap<String,Node> stationsById;
     List<Edge<Node>> connections;
+    int idNumCheck;
 
 
     public FileReader(String filepath) {
@@ -41,7 +42,7 @@ public class FileReader {
                     edge[2] = entry[entryIndex + 1];
                     edge[3] = entry[entryIndex + 2];
 
-                    int idNumCheck = Integer.parseInt(idNum);
+                    idNumCheck = Integer.parseInt(idNum);
                     idNumCheck = Integer.parseInt(edge[2]);
                     idNumCheck = Integer.parseInt(edge[3]);
 

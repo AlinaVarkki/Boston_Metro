@@ -41,9 +41,7 @@ public class View {
     List<String> sortedStations;
     String algorithmSelected;
 
-
     private Color background = Color.rgb(11,19,43);
-
 
     @FXML
     Button findButton;
@@ -72,6 +70,9 @@ public class View {
 
     @FXML
     ImageView blueLine;
+
+    @FXML
+    ImageView switchButton;
 
     @FXML
     ImageView circle;
@@ -210,6 +211,24 @@ public class View {
         if (selectedStation != null && stationColorMap.containsKey(selectedStation)) {
             endingCircles.getChildren().add(displayCircles(selectedStation));
         }
+    }
+
+    public void reverseButton() {
+        // Button rotation
+        RotateTransition rotate = new RotateTransition(Duration.seconds(1.3), switchButton);
+        rotate.setByAngle(180);
+        rotate.setCycleCount(1);
+        rotate.play();
+
+        String newDestination = getSourceStation();
+        String newSource = getDestinationStation();
+
+        setStartDest(newSource);
+        setEndDest(newDestination);
+
+        changeSelectorColourStart();
+        changeSelectorColourEnd();
+
     }
 
 
@@ -398,7 +417,6 @@ public class View {
         rtC.setCycleCount(1);
         //rtC.setAutoReverse(true);
         rtC.play();
-
     }
 
 

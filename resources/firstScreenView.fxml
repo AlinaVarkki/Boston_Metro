@@ -59,32 +59,37 @@
                 <Image url="Images/mapIcon2.png" />
             </image>
         </ImageView>
-        <Text fx:id="endStationErrorMsg" text = "hello" layoutX="743.0" layoutY="315.0" style="-fx-fill: red;" visible="false">
+        <ImageView fx:id="switchButton" onMouseClicked="#reverseButton" fitHeight="40.0" fitWidth="40.0" layoutX="825.0" layoutY="302.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="Images/switch.png" />
+            </image>
+        </ImageView>
+        <Text fx:id="endStationErrorMsg" text = "hello" layoutX="743.0" layoutY="355.0" style="-fx-fill: red;" visible="false">
             <font>
                 <Font name="Arial" size="13.0" />
             </font>
         </Text>
-        <HBox fx:id="endingCircles" layoutX="683.0" layoutY="310.0">
+        <HBox fx:id="endingCircles" layoutX="683.0" layoutY="350.0">
         </HBox>
-        <ComboBox fx:id="endDestSelector" onHidden="#changeSelectorColourEnd" minHeight="40" minWidth="200" promptText="END DESTINATION" layoutX="743.0" layoutY="320.0" prefHeight="29.0" prefWidth="154.0" style="-fx-background-radius: 10; -fx-background-color: #F4F4F4; -fx-border-color: #0B132B;" onAction="#setDefaultStyleEndSelector"/>
-        <ImageView fx:id="mapButtonEnd" onMouseClicked="#mapButtonEndClicked" fitHeight="45" fitWidth="45" layoutX="960.0" layoutY="317.0" pickOnBounds="true" preserveRatio="true">
+        <ComboBox fx:id="endDestSelector" onHidden="#changeSelectorColourEnd" minHeight="40" minWidth="200" promptText="END DESTINATION" layoutX="743.0" layoutY="360.0" prefHeight="29.0" prefWidth="154.0" style="-fx-background-radius: 10; -fx-background-color: #F4F4F4; -fx-border-color: #0B132B;" onAction="#setDefaultStyleEndSelector"/>
+        <ImageView fx:id="mapButtonEnd" onMouseClicked="#mapButtonEndClicked" fitHeight="45" fitWidth="45" layoutX="960.0" layoutY="357.0" pickOnBounds="true" preserveRatio="true">
             <image >
                 <Image url="Images/mapIcon2.png" />
             </image>
         </ImageView>
-        <Button  fx:id="findButton" minHeight="50" minWidth="200" layoutX="743.0" layoutY="450.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="154.0" style="-fx-background-color: #0B132B; -fx-background-radius: 10;" text="FIND A ROUTE" textFill="WHITE" >
+        <Button  fx:id="searchLength" minHeight="20" minWidth="70" layoutX="873.0" layoutY="430.0" mnemonicParsing="false" style="-fx-background-color: #0B132B; -fx-background-radius: 10;" text="TRANS" textFill="WHITE" >
+            <font>
+                <Font name="System Bold" size="13.0" />
+            </font>
+        </Button>
+        <Button  fx:id="searchTransitions" minHeight="20" minWidth="70" layoutX="743.0" layoutY="430.0" mnemonicParsing="false" style="-fx-background-color: #0B132B; -fx-background-radius: 10;" text="STOPS" textFill="WHITE" >
+            <font>
+                <Font name="System Bold" size="13.0" />
+            </font>
+        </Button>
+        <Button  fx:id="findButton" minHeight="50" minWidth="200" layoutX="743.0" layoutY="480.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="154.0" style="-fx-background-color: #0B132B; -fx-background-radius: 10;" text="FIND A ROUTE" textFill="WHITE" >
             <font>
                 <Font name="Arial" size="16.0" />
-            </font>
-        </Button>
-        <Button  fx:id="searchLength" minHeight="20" minWidth="70" layoutX="873.0" layoutY="390.0" mnemonicParsing="false" style="-fx-background-color: #0B132B; -fx-background-radius: 10;" text="TRANS" textFill="WHITE" >
-            <font>
-                <Font name="System Bold" size="13.0" />
-            </font>
-        </Button>
-        <Button  fx:id="searchTransitions" minHeight="20" minWidth="70" layoutX="743.0" layoutY="390.0" mnemonicParsing="false" style="-fx-background-color: #0B132B; -fx-background-radius: 10;" text="STOPS" textFill="WHITE" >
-            <font>
-                <Font name="System Bold" size="13.0" />
             </font>
         </Button>
     </children>

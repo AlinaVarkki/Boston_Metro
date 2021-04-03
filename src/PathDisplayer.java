@@ -62,7 +62,7 @@ public class PathDisplayer {
     /**
      * @param stations contains the Best Suited Path Found By the Model
      *
-     * @return Hbox with the Line element and all corresponding labels appropriately Styled and Sized
+     * @return Borderpane with all the elements, all corresponding labels and animations appropriately Styled and Sized
      * */
 
     public Pane createLine(List<Pair<String, List<String>>> stations) {
@@ -85,6 +85,7 @@ public class PathDisplayer {
             String currentColor = stations.get(0).getKey();
             List<String> currentLine = stations.get(0).getValue();
 
+            //assigns train image and size based on the boarding station
             train = new Rectangle(44,20);
             trainSelector(currentColor);
             ImagePattern imagePattern = new ImagePattern(image);
@@ -140,7 +141,7 @@ public class PathDisplayer {
         box.setPadding(new Insets(15,15,15,15));
         box.getChildren().add(toggleSlider);
         box.setAlignment(Pos.TOP_RIGHT);
-        border.setRight(box);
+        border.setTop(box);
         border.setCenter(finalBox);
         border.setBottom(animation);
 
@@ -152,10 +153,10 @@ public class PathDisplayer {
         Duration duration = Duration.seconds(7);
         TranslateTransition transition = new TranslateTransition(duration,train);
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2.9), ev -> {
-            transition.setByX(622);
+            transition.setByX(632);
             transition.setNode(train);
             transition.setAutoReverse(true);
-            transition.setCycleCount(10);
+            transition.setCycleCount(2);
             transition.play();
         }));
         timeline.play();
@@ -170,6 +171,7 @@ public class PathDisplayer {
             default -> image = new Image("Images/subwayboii.png");
         }
         return image;
+
     }
 
     private HBox createStartingStation(String name, String color, double x, double y) {
