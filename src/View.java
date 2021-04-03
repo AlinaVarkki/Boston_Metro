@@ -485,11 +485,11 @@ public class View {
         mapController.setDestinationDirection("START");
 
     }
-
+    Pane map;
     public void mapButtonEndClicked() throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("BostonMetroMap.fxml"));
-        Pane map = loader.load();
+        map = loader.load();
 
         this.root.getChildren().add(map);
         map.setLayoutX(-25);
@@ -500,14 +500,11 @@ public class View {
         mapController.setView(this);
         mapController.setDestinationDirection("END");
 
-        /*Stage window = new Stage();
+    }
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("mapView.fxml"));
-        AnchorPane root = loader.load();
-        window.setScene(new Scene(root, 1171.0, 746.0, Color.WHITE));
-        window.show();
-
-        */
+    public void closeMap(){
+//        map.getChildren().removeAll();
+        this.root.getChildren().remove(map);
     }
 
     public void setStartDest(String stationName){

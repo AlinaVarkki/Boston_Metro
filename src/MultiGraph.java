@@ -6,7 +6,7 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
 
     /**
      * This class contains types N(node) and E(edge) that represent Stations and Connections using Generics
-     * Map stores the Nodes and Edges
+     * Adjacency map stores the Nodes and Edges
      * */
 
     private Map<N, List<E>> adjacencyMap;
