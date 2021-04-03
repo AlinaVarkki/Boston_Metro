@@ -24,14 +24,18 @@ import java.io.IOException;
 import java.util.*;
 
 public class View {
+    AnchorPane root ;
+    BorderPane container;
 
     PathDisplayer pathDisplayer;
     Pane pathDisplayed;
-    AnchorPane root ;
-    BorderPane container;
+
     Map<String, List<String>> stationColorMap;
     List<String> sortedStations;
+    Map<String,String> idsToStations;
+
     String algorithmSelected;
+
     Pane map;
     mapController mapContr;
 
@@ -266,8 +270,8 @@ public class View {
         String newDestination = getSourceStation();
         String newSource = getDestinationStation();
 
-        setStartDest(newSource);
-        setEndDest(newDestination);
+        startDestSelector.setValue(newSource);
+        endDestSelector.setValue(newDestination);
 
         changeSelectorColourStart();
         changeSelectorColourEnd();
@@ -525,13 +529,13 @@ public class View {
         this.root.getChildren().remove(map);
     }
 
-    public void setStartDest(String stationName){
-        System.out.println("setting start dest" + stationName);
+    public void setStartDest(String stationId){
+        String stationName = this.idsToStations.get(stationId);
         startDestSelector.setValue(stationName);
     }
 
-    public void setEndDest(String stationName){
-        System.out.println("setting start dest" + stationName);
+    public void setEndDest(String stationId){
+        String stationName = this.idsToStations.get(stationId);
         endDestSelector.setValue(stationName);
     }
 
@@ -703,5 +707,9 @@ public class View {
             newStyle.append(";");
         }
         elem.setStyle(newStyle.toString());
+    }
+
+    public void setupIdsToStatioins(Map<String,String> map ) {
+        this.idsToStations = map;
     }
 }
