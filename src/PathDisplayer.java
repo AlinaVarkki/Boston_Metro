@@ -33,12 +33,13 @@ import java.util.List;
 
 public class PathDisplayer {
 
-    private Color background = Color.rgb(11,19,43);
-    private Color blue = Color.rgb(18,126,188);
-    private Color green = Color.rgb(20,158,106);
-    private Color orange = Color.rgb(245,153,35);
-    private Color red = Color.rgb(245,61,61);
-    private Color white = Color.rgb(255,255,255);
+    private final Color background = Color.rgb(11,19,43);
+    private final Color blue = Color.rgb(18,126,188);
+    private final Color green = Color.rgb(20,158,106);
+    private final Color orange = Color.rgb(245,153,35);
+    private final Color red = Color.rgb(245,61,61);
+    private final Color offWhite = Color.rgb(244, 244, 244);
+    private final Color white = Color.rgb(255,255,255);
 
     private HashMap<String, Color> colorMappings = new HashMap<>();
 
@@ -110,7 +111,6 @@ public class PathDisplayer {
                 //creates line with stations
                 thingy.getChildren().add(createLineWithMiniStations(currentLine,currentColor,start,end));
 
-//                String nextColor;
                 String lastStation = currentLine.get(currentLine.size()-1);
                 //creates circle depending on whether this is the last station or nah
                 if (i+1 < stations.size()) {
@@ -255,7 +255,6 @@ public class PathDisplayer {
     /**
      * @param name,previousColor,label
      * Calls displayBiggerStationName to get final Size and Style for key Station name
-     * Calls displaySwitchLine to get the required label style and content for train transitions
      * @return Hbox with elements added
      * */
     private HBox displayLineLabel(String name, StackPane circle) {
@@ -277,7 +276,7 @@ public class PathDisplayer {
     /**
      * @param name of major stations to display in a more eye catching format
      * Styles name and sizes it
-     * @return Text
+     * @return Text of station name in standardised format
      * */
     private Text displayBiggerStationName(String name) {
         int fontHeight = 3*circleRadius/2;
@@ -291,7 +290,7 @@ public class PathDisplayer {
     }
 
     /**
-     * @param stations passed from displaySmallerStationNamesImproved
+     * @param stations passed from miniStationsWithButton
      * Calculate the display size and spacing of overflow stations to maintain clean display
      * Calls displaySmallerStationName to format each line for display
      * @return VBox of station names
@@ -324,7 +323,7 @@ public class PathDisplayer {
     }
 
     /**
-     * @param x,y,color are the Dimensions and Colour of desired Circle's
+     * @param x,y,color are the Centre coordinates and Colour of desired Circles
      * Generates circleGroup and fills with 3 Circles for the Start and End Stations
      * Calls makeCircle
      * @return Group containing the standardised Circle style
@@ -343,7 +342,7 @@ public class PathDisplayer {
     }
 
     /**
-     * @param x,y,color1,color2 are the Dimensions and Colour of desired Circle's
+     * @param x,y,color1,color2 are the Centre coordinates and Colour of desired Circle's
      * Generates circleGroup and fills with 2 Circles for Transition Stations
      * Calls makeCircle
      * @return Group containing the standardised Circle style for display
@@ -360,7 +359,7 @@ public class PathDisplayer {
     }
 
     /**
-     * @param x,y,radius,color1,color2 are the Dimensions,Radius and Colour/s of desired Circle
+     * @param x,y,radius,color1,color2 are the Centre coordinates,Radius and Colour/s of desired Circle
      * Generates Standardised Circle with desired properties form parameters
      * Adds Colour Gradient for transition between Line Colours
      * @return Circle
@@ -446,7 +445,7 @@ public class PathDisplayer {
      */
     private void initialiseColorMappings() {
         colorMappings.put("White",white);
-        colorMappings.put("Transparent", Color.TRANSPARENT);
+        colorMappings.put("OffWhite", offWhite);
         colorMappings.put("BG",background);
         colorMappings.put("Red",red);
         colorMappings.put("RedA",red);

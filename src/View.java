@@ -2,6 +2,7 @@ import javafx.animation.FadeTransition;
 import javafx.animation.RotateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -233,6 +234,27 @@ public class View {
     }
 
     /**
+     * @return flowpane with the required circles with respective styling
+     */
+    private Pane displayCircles(String selectedStation) {
+
+        FlowPane pane = new FlowPane();
+
+        for (String color : stationColorMap.get(selectedStation)) {
+            pane.getChildren().add(pathDisplayer.makeTripleCircle(0,0,color,"OffWhite",true));
+        }
+
+        pane.setAlignment(Pos.CENTER);
+        pane.setPrefWrapLength(70);
+        pane.setPrefHeight(70);
+        pane.setHgap(3.5);
+        pane.setVgap(3.5);
+
+        return pane;
+    }
+
+
+    /**
      * Activates animation of switch Button, swaps Source and Destination fields
      */
     public void reverseButton() {
@@ -251,26 +273,6 @@ public class View {
         changeSelectorColourStart();
         changeSelectorColourEnd();
 
-    }
-
-    /**
-     * @return flowpane with the required circles with respective styling
-     */
-    private Pane displayCircles(String selectedStation) {
-
-        FlowPane pane = new FlowPane();
-
-        for (String color : stationColorMap.get(selectedStation)) {
-            pane.getChildren().add(pathDisplayer.makeTripleCircle(0,0,color,"White",true));
-        }
-
-        pane.setAlignment(Pos.CENTER);
-        pane.setPrefWrapLength(70);
-        pane.setPrefHeight(70);
-        pane.setHgap(3.5);
-        pane.setVgap(3.5);
-
-        return pane;
     }
 
     public void fillStationsOptions(List<String> stations){
@@ -400,10 +402,12 @@ public class View {
     public void displayFoundPath(List<Pair<String,List<String>>> path){
         this.setTitleVisibility(false);
         if(this.pathDisplayed != null){
+            displayArea.getChildren().remove(container);
             container.getChildren().remove(pathDisplayed);
         }
         pathDisplayed = pathDisplayer.createLine(path);
         container.setCenter(pathDisplayed);
+        displayArea.setCenter(container);
 
         runDisplayPathAnimation();
     }
@@ -499,6 +503,12 @@ public class View {
 
         mapController.setView(this);
         mapController.setDestinationDirection("END");
+
+        ObservableMap<String, Object> map = loader.getNamespace();
+        Button foo = (Button) loader.getNamespace().get("SouthStreet");
+        System.out.println(foo.getLayoutX());
+        System.out.println(foo.getLayoutY());
+        System.out.println(map);
 
     }
 
