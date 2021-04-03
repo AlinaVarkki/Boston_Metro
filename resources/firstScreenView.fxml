@@ -13,85 +13,85 @@
 <AnchorPane fx:controller="View" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <BorderPane fx:id="displayArea">
-        <ImageView fx:id="titleImage" fitWidth="686.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="titleImage" fitWidth="795.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="Images/abstractMap2.png" />
             </image>
         </ImageView>
-            <Text fx:id="titleText1" fill="WHITE" layoutX="20.0" layoutY="475.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WELCOME TO THE BOSTON METRO">
+            <Text fx:id="titleText1" fill="WHITE" layoutX="20.0" layoutY="645.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WELCOME TO THE BOSTON METRO">
                 <font>
-                    <Font name="Tahoma Bold" size="33.0" />
+                    <Font name="Tahoma Bold" size="37.0" />
                 </font>
             </Text>
-            <Text fx:id="titleText2" fill="WHITE" layoutX="20.0" layoutY="510.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Find the fastest away around the city on a hill with ease!">
+            <Text fx:id="titleText2" fill="WHITE" layoutX="20.0" layoutY="680.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Find the fastest away around the city on a hill with ease!">
                 <font>
-                    <Font name="Arial" size="20.0" />
+                    <Font name="Arial" size="24.0" />
                 </font>
             </Text>
         </BorderPane>
-        <ImageView fx:id="yellowLine" fitHeight="175.0" fitWidth="175.0" layoutX="758.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="yellowLine" fitHeight="175.0" fitWidth="175.0" layoutX="863.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="Images/yellow.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="redLine" fitHeight="175.0" fitWidth="175.0" layoutX="758.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="redLine" fitHeight="175.0" fitWidth="175.0" layoutX="863.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="Images/red.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="greenLine" fitHeight="175.0" fitWidth="175.0" layoutX="758.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="greenLine" fitHeight="175.0" fitWidth="175.0" layoutX="863.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="Images/green.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="blueLine" fitHeight="175.0" fitWidth="175.0" layoutX="758.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="blueLine" fitHeight="175.0" fitWidth="175.0" layoutX="863.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="Images/boston_logo.png" />
             </image>
         </ImageView>
 
-        <Text fx:id="startStationErrorMsg" text = "hello" layoutX="743.0" layoutY="245.0" style="-fx-fill: red;"  visible="false">
+        <Text fx:id="startStationErrorMsg" text = "hello" layoutX="858.0" layoutY="242.5" style="-fx-fill: red;"  visible="false">
             <font>
                 <Font name="Arial" size="13.0" />
             </font>
         </Text>
-        <HBox fx:id="startingCircles" layoutX="678.0" layoutY="235.0">
+        <HBox fx:id="startingCircles" layoutX="798.5" layoutY="250">
         </HBox>
-        <ComboBox fx:id="startDestSelector" onHidden="#changeSelectorColourStart" minHeight="40" minWidth="200" promptText="START DESTINATION" layoutX="743.0" layoutY="250.0" prefHeight="29.0" prefWidth="154.0" style="-fx-background-radius: 10; -fx-background-color: #F4F4F4; -fx-border-color: #0B132B;" onAction="#setDefaultStyleStartSelector"/>
-        <ImageView fx:id="mapButtonStart" onMouseClicked="#mapButtonStartClicked" fitHeight="45" fitWidth="45" layoutX="960.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true">
+        <ComboBox fx:id="startDestSelector" onHidden="#changeSelectorColourStart" minHeight="32" minWidth="180" promptText="START DESTINATION" layoutX="860.0" layoutY="262.5" prefHeight="29.0" prefWidth="154.0" style="-fx-background-radius: 10; -fx-background-color: #F4F4F4; -fx-border-color: #0B132B;" onAction="#setDefaultStyleStartSelector"/>
+        <ImageView fx:id="mapButtonStart" onMouseClicked="#mapButtonStartClicked" fitHeight="33" fitWidth="33" layoutX="1054.5" layoutY="262.5" pickOnBounds="true" preserveRatio="true">
             <image >
                 <Image url="Images/mapIcon2.png" />
             </image>
         </ImageView>
-        <ImageView fx:id="switchButton" onMouseClicked="#reverseButton" fitHeight="40.0" fitWidth="40.0" layoutX="825.0" layoutY="302.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="switchButton" onMouseClicked="#reverseButton" fitHeight="40" fitWidth="40" layoutX="930.0" layoutY="329.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="Images/switch2.png" />
             </image>
         </ImageView>
-        <Text fx:id="endStationErrorMsg" text = "hello" layoutX="743.0" layoutY="355.0" style="-fx-fill: red;" visible="false">
+        <Text fx:id="endStationErrorMsg" text = "hello" layoutX="858.0" layoutY="397.5" style="-fx-fill: red;" visible="false">
             <font>
                 <Font name="Arial" size="13.0" />
             </font>
         </Text>
-        <HBox fx:id="endingCircles" layoutX="678.0" layoutY="345.0">
+        <HBox fx:id="endingCircles" layoutX="798.5" layoutY="395.0">
         </HBox>
-        <ComboBox fx:id="endDestSelector" onHidden="#changeSelectorColourEnd" minHeight="40" minWidth="200" promptText="END DESTINATION" layoutX="743.0" layoutY="360.0" prefHeight="29.0" prefWidth="154.0" style="-fx-background-radius: 10; -fx-background-color: #F4F4F4; -fx-border-color: #0B132B;" onAction="#setDefaultStyleEndSelector"/>
-        <ImageView fx:id="mapButtonEnd" onMouseClicked="#mapButtonEndClicked" fitHeight="45" fitWidth="45" layoutX="960.0" layoutY="357.0" pickOnBounds="true" preserveRatio="true">
+        <ComboBox fx:id="endDestSelector" onHidden="#changeSelectorColourEnd" minHeight="32" minWidth="180" promptText="END DESTINATION" layoutX="860.0" layoutY="405.0" prefHeight="29.0" prefWidth="154.0" style="-fx-background-radius: 10; -fx-background-color: #F4F4F4; -fx-border-color: #0B132B;" onAction="#setDefaultStyleEndSelector"/>
+        <ImageView fx:id="mapButtonEnd" onMouseClicked="#mapButtonEndClicked" fitHeight="33" fitWidth="33" layoutX="1054.5" layoutY="405.0" pickOnBounds="true" preserveRatio="true">
             <image >
                 <Image url="Images/mapIcon2.png" />
             </image>
         </ImageView>
-        <Button  fx:id="searchLength" minHeight="20" minWidth="70" layoutX="873.0" layoutY="430.0" mnemonicParsing="false" style="-fx-background-color: #0B132B; -fx-background-radius: 10;" text="TRANS" textFill="WHITE" >
+        <Button  fx:id="searchLength" minHeight="30" minWidth="70" layoutX="969.0" layoutY="500.0" mnemonicParsing="false" style="-fx-background-color: #0B132B; -fx-background-radius: 10;" text="TRANS" textFill="WHITE" >
             <font>
                 <Font name="System Bold" size="13.0" />
             </font>
         </Button>
-        <Button  fx:id="searchTransitions" minHeight="20" minWidth="70" layoutX="743.0" layoutY="430.0" mnemonicParsing="false" style="-fx-background-color: #0B132B; -fx-background-radius: 10;" text="STOPS" textFill="WHITE" >
+        <Button  fx:id="searchTransitions" minHeight="30" minWidth="70" layoutX="860.0" layoutY="500.0" mnemonicParsing="false" style="-fx-background-color: #0B132B; -fx-background-radius: 10;" text="STOPS" textFill="WHITE" >
             <font>
                 <Font name="System Bold" size="13.0" />
             </font>
         </Button>
-        <Button  fx:id="findButton" minHeight="50" minWidth="200" layoutX="743.0" layoutY="480.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="154.0" style="-fx-background-color: #0B132B; -fx-background-radius: 10;" text="FIND A ROUTE" textFill="WHITE" >
+        <Button  fx:id="findButton" minHeight="60" minWidth="180" layoutX="860.0" layoutY="580.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="154.0" style="-fx-background-color: #0B132B; -fx-background-radius: 10;" text="FIND A ROUTE" textFill="WHITE" >
             <font>
                 <Font name="Arial" size="16.0" />
             </font>

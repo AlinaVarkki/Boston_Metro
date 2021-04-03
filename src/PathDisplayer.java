@@ -147,6 +147,7 @@ public class PathDisplayer {
         border.setCenter(finalBox);
         border.setBottom(animation);
         border.setPrefHeight(700);
+        //border.setPrefWidth(900);
 
         return border;
     }
@@ -155,7 +156,7 @@ public class PathDisplayer {
         Duration duration = Duration.seconds(7);
         TranslateTransition transition = new TranslateTransition(duration,train);
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2.9), ev -> {
-            transition.setByX(620);
+            transition.setByX(732);
             transition.setNode(train);
             transition.setAutoReverse(true);
             transition.setCycleCount(10);
@@ -178,13 +179,13 @@ public class PathDisplayer {
 
     private HBox createStartingStation(String name, String color, double x, double y) {
 
-        return displayLineLabel(name, makeTripleCircle(x,y,color,"BG", true));
+        return displayLineLabel(name, makeTripleCircle(x,y,circleRadius,color,"BG", true));
 
     }
 
     private HBox createEndingStation(String name, String color, double x, double y) {
 
-        return displayLineLabel(name, makeTripleCircle(x,y,color,"BG", false));
+        return displayLineLabel(name, makeTripleCircle(x,y,circleRadius,color,"BG", false));
 
     }
 
@@ -329,7 +330,7 @@ public class PathDisplayer {
      * Calls makeCircle
      * @return Group containing the standardised Circle style
      * */
-    public StackPane makeTripleCircle(double x, double y, String color, String bgColor, boolean start) {
+    public StackPane makeTripleCircle(double x, double y, double circleRadius, String color, String bgColor, boolean start) {
         StackPane circleGroup = new StackPane();
 
         //1 0.8 0.5
@@ -337,7 +338,7 @@ public class PathDisplayer {
         circleGroup.getChildren().add(makeCircle(x,y,circleRadius*0.95,bgColor,bgColor));
         circleGroup.getChildren().add(makeCircle(x,y,circleRadius*0.65,color, color));
         if (start)
-            circleGroup.getChildren().add(makeLetter(color, bgColor));
+            circleGroup.getChildren().add(makeLetter(color, bgColor,circleRadius));
 
         return circleGroup;
     }
@@ -354,7 +355,7 @@ public class PathDisplayer {
         //1 0.75
         circleGroup.getChildren().add(makeCircle(x,y,circleRadius*1.25,"BG","BG"));
         circleGroup.getChildren().add(makeCircle(x,y,circleRadius*0.95,color1,color2));
-        circleGroup.getChildren().add(makeLetter(color2, "BG"));
+        circleGroup.getChildren().add(makeLetter(color2, "BG",circleRadius));
 
         return circleGroup;
     }
@@ -384,7 +385,7 @@ public class PathDisplayer {
      * creates a letter to show what line it is in the circle
      * @return Text field with a single or no letters
      */
-    private Text makeLetter(String color2, String fill) {
+    private Text makeLetter(String color2, String fill, double circleRadius) {
 
         Text letter = new Text();
 
