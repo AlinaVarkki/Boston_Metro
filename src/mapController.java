@@ -1,3 +1,5 @@
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +13,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class mapController {
 
@@ -18,6 +22,9 @@ public class mapController {
     String destinationDirection;
     @FXML
     ImageView mapImage;
+
+    @FXML
+    FXCollections buttonList;
 
     @FXML
     private void getName(ActionEvent event){
@@ -59,6 +66,10 @@ public class mapController {
 
     public void setDestinationDirection(String destinationDirection){
         this.destinationDirection = destinationDirection;
+    }
+
+    public String getDestinationDirection(){
+        return this.destinationDirection;
     }
 
 

@@ -41,6 +41,8 @@ public class View {
     Map<String, List<String>> stationColorMap;
     List<String> sortedStations;
     String algorithmSelected;
+    Pane map;
+    mapController mapContr;
 
     private Color background = Color.rgb(11,19,43);
 
@@ -107,6 +109,11 @@ public class View {
         this.sortedStations = new ArrayList<>();
         this.setupAutofill(endDestSelector);
         this.setupAutofill(startDestSelector);
+        try{
+        this.setupMap();}
+        catch (Exception e){
+            System.out.println("Map couldn't load");
+        }
 
     }
 
@@ -471,44 +478,52 @@ public class View {
 
     }
 
-    public void mapButtonStartClicked() throws IOException {
-
-        Stage window = new Stage();
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("mapView.fxml"));
-        AnchorPane root = loader.load();
-        window.setScene(new Scene(root, 1171.0, 746.0, Color.WHITE));
-        window.show();
-
-        mapController mapController = loader.getController();
-
-        mapController.setView(this);
-        mapController.setDestinationDirection("START");
-
-    }
-    Pane map;
-    public void mapButtonEndClicked() throws IOException {
-
+    public void setupMap() throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("BostonMetroMap.fxml"));
         map = loader.load();
-
-        this.root.getChildren().add(map);
         map.setLayoutX(-25);
         map.setLayoutY(-25);
 
-        mapController mapController = loader.getController();
 
-        mapController.setView(this);
-        mapController.setDestinationDirection("END");
+        mapContr = loader.getController();
+
+        mapContr.setView(this);
+        mapContr.setDestinationDirection("END");
 
         ObservableMap<String, Object> stationButtonsMap = loader.getNamespace();
         System.out.println(stationButtonsMap);
+    }
+    public void mapButtonStartClicked() {
+        if(root.getChildren().contains(map)){
+            if(this.mapContr.getDestinationDirection().equals("START")){
+                this.closeMap();}
+            else{
+                this.mapContr.setDestinationDirection("START");
+            }
+        }
+        else {
+            this.mapContr.setDestinationDirection("START");
+            this.root.getChildren().add(map);
+        }
 
 
     }
 
+    public void mapButtonEndClicked() throws IOException {
+        if(root.getChildren().contains(map)){
+            if(this.mapContr.getDestinationDirection().equals("END")){
+                this.closeMap();}
+            else{
+                this.mapContr.setDestinationDirection("END");
+            }
+        }
+        else {
+            this.mapContr.setDestinationDirection("END");
+            this.root.getChildren().add(map);
+        }
+    }
+
     public void closeMap(){
-//        map.getChildren().removeAll();
         this.root.getChildren().remove(map);
     }
 
@@ -522,6 +537,9 @@ public class View {
         endDestSelector.setValue(stationName);
     }
 
+    /**
+     * This method will setup the event handlers for the algorithm selectors
+     * **/
     public void setupAlgorithmSelectorEventHandler(){
         searchLength.setOnAction(actionEvent ->
         {algorithmSelected = "Length";
@@ -540,6 +558,10 @@ public class View {
         });
     }
 
+    /**
+     * This method will setup event handlers on Key Events for the dropdown menu with stations
+     * @param element dropdown menu element
+     */
     private void setupAutofill(ComboBox<String> element){
         element.addEventHandler(KeyEvent.KEY_TYPED, t -> element.show());
         element.addEventHandler(KeyEvent.KEY_PRESSED, t -> element.show());
@@ -622,6 +644,10 @@ public class View {
 
     }
 
+    /**
+     * Method used to decide which type of search does the user want to use
+     * @return the selected algorithm, either "Length" or "Transitions"
+     */
     public String getAlgorithmSelected(){
         return algorithmSelected;
     }
