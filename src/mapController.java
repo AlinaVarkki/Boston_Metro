@@ -36,7 +36,7 @@ public class mapController {
         Button button = (Button) event.getSource();
         String stationName = parseString(button.getId());
 
-        view.closeMap();
+        //view.closeMap();
 
         if(destinationDirection.equals("START")){
             view.setStartDest(stationName);

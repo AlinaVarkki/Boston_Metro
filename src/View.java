@@ -477,36 +477,44 @@ public class View {
 
     }
 
-    public void setupMap() throws IOException {
+    public void setupMap(){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("BostonMetroMap.fxml"));
 
-        map = loader.load();
-        map.setLayoutX(-25);
-        map.setLayoutY(-25);
+            System.out.println("loading map");
+
+            map = loader.load();
+            map.setLayoutX(-25);
+            map.setLayoutY(-25);
 
 
-        mapContr = loader.getController();
+            mapContr = loader.getController();
 
-        mapContr.setView(this);
-        mapContr.setDestinationDirection("END");
+            mapContr.setView(this);
+            mapContr.setDestinationDirection("END");
 
-        ObservableMap<String, Object> stationButtonsMap = loader.getNamespace();
-        Map<String, double[]> coordinateMap = new HashMap<>();
-        for(String id : this.idsToStations.keySet()){
-            String id2 = "a"+ id;
-            String station = idsToStations.get(id);
-            Button button = (Button) stationButtonsMap.get(id2);
-            double x = button.getLayoutX();
-            double y = button.getLayoutY();
-            double[] coordinates = {x,y};
-            coordinateMap.put(station,coordinates);
-        }
-        this.stationToCoords = coordinateMap;
+            ObservableMap<String, Object> stationButtonsMap = loader.getNamespace();
+            Map<String, double[]> coordinateMap = new HashMap<>();
+            for(String id : this.idsToStations.keySet()) {
+                String id2 = "a" + id;
+                String station = idsToStations.get(id);
+                Button button = (Button) stationButtonsMap.get(id2);
+                if (button != null) {
+                    double x = button.getLayoutX();
+                    double y = button.getLayoutY();
+                    double[] coordinates = {x, y};
+                    coordinateMap.put(station, coordinates);
+                }
+                else{
+                    System.out.println(id);
+                }
+
+            }
+            this.stationToCoords = coordinateMap;
 
         }
         catch (Exception e){
-            System.out.println("Map could not be loaded");
+            System.out.println(e);
         }
     }
 
@@ -576,10 +584,10 @@ public class View {
             String color = currentLine.getKey();
             List<String> stations = currentLine.getValue();
 
-            Integer[] firstCoords = stationToCoords.get(stations.get(0));
+            double[] firstCoords = stationToCoords.get(stations.get(0));
 
             for (int i = 1; i < stations.size(); i++) {
-                Integer[] secondCoords = stationToCoords.get(stations.get(i));
+                double[] secondCoords = stationToCoords.get(stations.get(i));
                 Line segment = new Line(firstCoords[0],firstCoords[1],secondCoords[0],secondCoords[1]);
                 segment.setFill(Color.rgb(255,255,255));
                 mapView.getChildren().add(segment);

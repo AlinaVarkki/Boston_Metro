@@ -20,6 +20,7 @@ public class Controller {
         view.setupAlgorithmSelectorEventHandler();
         view.setupIdsToStatioins(model.getMapIdsToStation());
         view.setStandardStyles();
+        view.setupMap();
 
    }
 
