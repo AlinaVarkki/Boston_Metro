@@ -269,12 +269,12 @@ public class View {
         FlowPane pane = new FlowPane();
 
         for (String color : stationColorMap.get(selectedStation)) {
-            pane.getChildren().add(pathDisplayer.makeTripleCircle(0,0,color,"White",true));
+            pane.getChildren().add(pathDisplayer.makeTripleCircle(0,0,8,color,"White",true));
         }
 
         pane.setAlignment(Pos.CENTER);
-        pane.setPrefWrapLength(70);
-        pane.setPrefHeight(70);
+        pane.setPrefWrapLength(55);
+        pane.setPrefHeight(55);
         pane.setHgap(3.5);
         pane.setVgap(3.5);
 
@@ -356,26 +356,16 @@ public class View {
         startStationErrorMsg.setVisible(false);
         endStationErrorMsg.setVisible(false);
 
-
-
-        if (startStation.equals(endStation)){
-            endStationError = "Sorry, you're already there.";
-        }
-
-        if (!sortedStations.contains(startStation)) {
-            startStationError = "That station doesn't exist.";
-        }
-
-        if (!sortedStations.contains(endStation)) {
-            endStationError ="That station doesn't exist.";
-        }
-
         if(startStation == null || startStation.equals("")) {
             startStationError = "Please select a starting station.";
-            }
-
-        if(endStation == null || endStation.equals("")){
+        } else if(endStation == null || endStation.equals("")) {
             endStationError = "Please select a final station.";
+        } else if (startStation.equals(endStation)) {
+            endStationError = "Sorry, you're already there.";
+        } else if (!sortedStations.contains(startStation)) {
+            startStationError = "That station doesn't exist.";
+        } else if (!sortedStations.contains(endStation)) {
+            endStationError ="That station doesn't exist.";
         }
 
         if (!startStationError.equals("empty")) {
@@ -468,9 +458,9 @@ public class View {
     public void setRoot(AnchorPane root){
         this.root = root;
         container = new BorderPane();
-        container.setMinWidth(686);
+        container.setMinWidth(795);
         container.setMinHeight(550);
-        Rectangle bg = new Rectangle(686, 700);
+        Rectangle bg = new Rectangle(795, 700);
         bg.setFill(background);
         root.getChildren().add(container);
         root.getChildren().add(bg);
