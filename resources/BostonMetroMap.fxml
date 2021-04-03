@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapController">
+    <children>
+    <Group layoutX="0" layoutY="0">
+    <children>
+    <ImageView fx:id="mapImage" fitHeight="820" layoutX="0" layoutY="0" pickOnBounds="true" preserveRatio="true">
+        <image>
+            <Image url="@Images/mapFontVectorised.png" />
+        </image>
+    </ImageView>
+            <Button fx:id="BostonCollege" layoutX="81.0" layoutY="331.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="3.0" />
+               </font>
+            </Button>
+            <Button fx:id="SouthStreet" layoutX="101.0" layoutY="321.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="3.0" />
+               </font>
+            </Button>
+            <Button fx:id="BostonCollege11" layoutX="113.0" layoutY="311.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="3.0" />
+               </font>
+            </Button>
+            <Button fx:id="BostonCollege111" layoutX="124.0" layoutY="299.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="3.0" />
+               </font>
+            </Button>
+            <Button fx:id="BostonCollege1111" layoutX="134.0" layoutY="290.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="3.0" />
+               </font>
+            </Button>
+    </children>
+    </Group>
+    </children>
+</AnchorPane>

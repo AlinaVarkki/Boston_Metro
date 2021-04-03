@@ -96,6 +96,9 @@ public class View {
     HBox endingCircles;
 
     @FXML
+    BorderPane displayArea;
+
+    @FXML
     public void initialize(){
         this.pathDisplayer = new PathDisplayer();
         this.algorithmSelected = "Length";
@@ -482,20 +485,26 @@ public class View {
         mapController.setDestinationDirection("START");
 
     }
-
+    Pane map;
     public void mapButtonEndClicked() throws IOException {
 
-        Stage window = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("BostonMetroMap.fxml"));
+        map = loader.load();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("mapView.fxml"));
-        AnchorPane root = loader.load();
-        window.setScene(new Scene(root, 1171.0, 746.0, Color.WHITE));
-        window.show();
+        this.root.getChildren().add(map);
+        map.setLayoutX(-25);
+        map.setLayoutY(-25);
 
         mapController mapController = loader.getController();
 
         mapController.setView(this);
         mapController.setDestinationDirection("END");
+
+    }
+
+    public void closeMap(){
+//        map.getChildren().removeAll();
+        this.root.getChildren().remove(map);
     }
 
     public void setStartDest(String stationName){

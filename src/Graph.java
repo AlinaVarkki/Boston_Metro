@@ -7,5 +7,5 @@ interface Graph<N, E> {
     List<E> getPathDFS(N source, N destination);
     void addNode(N node);
     void addEdge(E node);
-    public Map<N, List<E>> getAdjMap();
+    Map<N, List<E>> getAdjMap();
 }
