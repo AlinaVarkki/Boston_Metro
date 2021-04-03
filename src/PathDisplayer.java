@@ -42,13 +42,12 @@ public class PathDisplayer {
 
     private HashMap<String, Color> colorMappings = new HashMap<>();
 
-    private int circleRadius = 10;
+    private int circleRadius = 12;
     private int x = 0;
     private int y = 0;
     private String showingStations;
     private HBox finalBox;
     private Pane sideStations;
-    private Random random = new Random();
     private ToggleSlider toggleSlider;
     private Image image;
     private Rectangle train;
@@ -72,8 +71,7 @@ public class PathDisplayer {
         HBox box = new HBox();
         finalBox = new HBox();
 
-        StackPane animation = new StackPane();
-        BorderPane border = new BorderPane();
+
         showingStations = "";
 
         VBox thingy = new VBox();
@@ -133,18 +131,22 @@ public class PathDisplayer {
         finalBox.getChildren().add(almostFinalBox);
         finalBox.setAlignment(Pos.CENTER_LEFT);
 
+
+        StackPane animation = new StackPane();
+        BorderPane border = new BorderPane();
+
         animation.getChildren().add(train);
         animation.setAlignment(Pos.BASELINE_LEFT);
-        StackPane.setMargin(train,new Insets(10,5,5,10));
+        StackPane.setMargin(train,new Insets(circleRadius,circleRadius/2,circleRadius/2,circleRadius));
         animationActive(train);
 
-        box.setPadding(new Insets(15,15,15,15));
+        box.setPadding(new Insets(circleRadius,circleRadius,circleRadius,0));
         box.getChildren().add(toggleSlider);
         box.setAlignment(Pos.TOP_RIGHT);
-        border.setTop(box);
+        border.setRight(box);
         border.setCenter(finalBox);
         border.setBottom(animation);
-
+        border.setPrefHeight(700);
 
         return border;
     }
@@ -153,10 +155,10 @@ public class PathDisplayer {
         Duration duration = Duration.seconds(7);
         TranslateTransition transition = new TranslateTransition(duration,train);
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2.9), ev -> {
-            transition.setByX(632);
+            transition.setByX(620);
             transition.setNode(train);
             transition.setAutoReverse(true);
-            transition.setCycleCount(2);
+            transition.setCycleCount(10);
             transition.play();
         }));
         timeline.play();

@@ -266,8 +266,8 @@ public class View {
         }
 
         pane.setAlignment(Pos.CENTER);
-        pane.setPrefWrapLength(60);
-        pane.setPrefHeight(60);
+        pane.setPrefWrapLength(70);
+        pane.setPrefHeight(70);
         pane.setHgap(3.5);
         pane.setVgap(3.5);
 
@@ -463,7 +463,7 @@ public class View {
         container = new BorderPane();
         container.setMinWidth(686);
         container.setMinHeight(550);
-        Rectangle bg = new Rectangle(686, 550);
+        Rectangle bg = new Rectangle(686, 700);
         bg.setFill(background);
         root.getChildren().add(container);
         root.getChildren().add(bg);
