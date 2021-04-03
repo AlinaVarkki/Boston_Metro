@@ -126,4 +126,16 @@ public class Model {
         }
     }
 
+    public Map<String,String> getMapIdsToStation(){
+        Map<String,String> idsToStations = new HashMap<>();
+        ArrayList<String> stations = new ArrayList<>(stationsHashMap.keySet());
+
+        for(String station : stations){
+            String id = station.split(" ")[0];
+            idsToStations.put(id,station);
+        }
+
+        return idsToStations;
+    }
+
 }
