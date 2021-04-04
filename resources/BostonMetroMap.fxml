@@ -10,7 +10,6 @@
 <AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mapController">
     <children>
     <Group layoutX="0" layoutY="0">
-    <children>
     <ImageView fx:id="mapImage" fitHeight="820.0" fitWidth="1189.0" pickOnBounds="true" preserveRatio="true">
         <image>
             <Image url="@Images/mapFinal.png" />
@@ -606,11 +605,6 @@
                   <Font size="3.0" />
                </font>
             </Button>
-            <Button fx:id="a510" layoutX="533.0" layoutY="120.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10;">
-               <font>
-                  <Font size="3.0" />
-               </font>
-            </Button>
             <Button fx:id="a44" layoutX="453.0" layoutY="395.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10;">
                <font>
                   <Font size="3.0" />
@@ -641,32 +635,6 @@
                   <Font size="3.0" />
                </font>
             </Button>
-            <Button fx:id="red1" layoutX="569.0" layoutY="386.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10;">
-               <font>
-                  <Font size="3.0" />
-               </font>
-            </Button>
-            <Button fx:id="green1" layoutX="545.0" layoutY="230.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10;">
-               <font>
-                  <Font size="3.0" />
-               </font>
-            </Button>
-            <Button fx:id="red2" layoutX="572.0" layoutY="529.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10;">
-               <font>
-                  <Font size="3.0" />
-               </font>
-            </Button>
-            <Button fx:id="orange1" layoutX="532.0" layoutY="312.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10;">
-               <font>
-                  <Font size="3.0" />
-               </font>
-            </Button>
-            <Button fx:id="green2" layoutX="365.0" layoutY="346.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10;">
-               <font>
-                  <Font size="3.0" />
-               </font>
-            </Button>
-    </children>
     </Group>
     </children>
 </AnchorPane>
