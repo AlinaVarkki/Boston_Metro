@@ -352,7 +352,7 @@ public class View {
 
 
 
-        if (startStation.equals(endStation)){
+        if (startStation!= null && startStation.equals(endStation)){
             endStationError = "Sorry, you're already there.";
         }
 
