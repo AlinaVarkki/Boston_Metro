@@ -616,27 +616,52 @@
                   <Font size="3.0" />
                </font>
             </Button>
-            <Button fx:id="a66" layoutX="140.0" layoutY="283.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10; -fx-background-color: ff9900;">
+            <Button fx:id="a66" layoutX="140.0" layoutY="283.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10; -fx-background-color: #8AC800;">
                <font>
                   <Font size="3.0" />
                </font>
             </Button>
-            <Button fx:id="a55" layoutX="153.0" layoutY="270.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10; -fx-background-color: ff9900;">
+            <Button fx:id="a55" layoutX="153.0" layoutY="270.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10; -fx-background-color: #8AC800;">
                <font>
                   <Font size="3.0" />
                </font>
             </Button>
-            <Button fx:id="a72" layoutX="92.0" layoutY="328.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10; -fx-background-color: ff9900;">
+            <Button fx:id="a72" layoutX="92.0" layoutY="328.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10; -fx-background-color: #8AC800;">
                <font>
                   <Font size="3.0" />
                </font>
             </Button>
-            <Button fx:id="a36" layoutX="223.0" layoutY="247.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10; -fx-background-color: ff9900;">
+            <Button fx:id="a36" layoutX="223.0" layoutY="247.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10; -fx-background-color: #8AC800;">
                <font>
                   <Font size="3.0" />
                </font>
             </Button>
-            <Button fx:id="a40" layoutX="213.0" layoutY="238.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10; -fx-background-color: ff9900;">
+            <Button fx:id="a40" layoutX="213.0" layoutY="238.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10; -fx-background-color: #8AC800;">
+               <font>
+                  <Font size="3.0" />
+               </font>
+            </Button>
+            <Button fx:id="red1" layoutX="569.0" layoutY="386.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="3.0" />
+               </font>
+            </Button>
+            <Button fx:id="green1" layoutX="545.0" layoutY="230.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="3.0" />
+               </font>
+            </Button>
+            <Button fx:id="red2" layoutX="572.0" layoutY="529.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="3.0" />
+               </font>
+            </Button>
+            <Button fx:id="orange1" layoutX="532.0" layoutY="312.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="3.0" />
+               </font>
+            </Button>
+            <Button fx:id="green2" layoutX="365.0" layoutY="346.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10;">
                <font>
                   <Font size="3.0" />
                </font>
