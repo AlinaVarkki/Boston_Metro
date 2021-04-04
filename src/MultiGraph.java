@@ -59,7 +59,7 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
                 return removeCycle(currPath);
             }
 
-            if(true){
+
                 if(currPath.size() > 0){
                     String labelFrom = currPath.get(currPath.size()-1).getLabel();
                     visited.add(currNode.toString() + labelFrom);
@@ -82,7 +82,7 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
                         }
                     }
                 }
-            }
+
         }
         System.out.println("No path found");
         return new LinkedList<E>();
@@ -99,9 +99,6 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
         List<E> currPath;
         Integer currTransitions;
         N neighbourNode;
-        //when one path is found, finish searching through nodes one the queue, but no new ones
-        boolean stillSearching = true;
-        ArrayList<Triple<N,List<E>, Integer>> possiblePaths = new ArrayList<>();
 
         while(!deque.isEmpty()){
             ArrayList<Triple<N,List<E>, Integer>> nodesToEnqueueSameLabel = new ArrayList<>();
@@ -123,15 +120,14 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
                     queueNode = queueTriple.first;
                     queuePath = queueTriple.second;
                     queueTransitions = queueTriple.third;
-                    if(queueNode == destination && queueTransitions < currTransitions){
+                    if(queueNode == destination && (queueTransitions < currTransitions && bestPath.size() == queuePath.size())){
                         bestPath = queuePath;
                     }
-
                 }
                 return bestPath;
             }
 
-            if(true){
+
                 if(currPath.size() > 0){
                     String labelFrom = currPath.get(currPath.size()-1).getLabel();
                     visited.add(currNode.toString() + labelFrom);
@@ -158,12 +154,10 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
                         }
                     }
                 }
-                if(stillSearching){
                     deque.addAll(nodesToEnqueueSameLabel);
                     deque.addAll(nodesToEnqueueDiffLabel);
-                }
 
-            }
+
         }
         System.out.println("No path found");
         return new LinkedList<E>();

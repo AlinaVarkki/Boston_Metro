@@ -36,7 +36,7 @@
                   <Font size="3.0" />
                </font>
             </Button>
-            <Button fx:id="a67" layoutX="134.0" layoutY="289.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10;">
+            <Button fx:id="a67" layoutX="132.0" layoutY="291.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10;">
                <font>
                   <Font size="3.0" />
                </font>
@@ -47,11 +47,6 @@
                </font>
             </Button>
             <Button fx:id="a35" layoutX="233.0" layoutY="255.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10;">
-               <font>
-                  <Font size="3.0" />
-               </font>
-            </Button>
-            <Button fx:id="a69BostonCollege111" layoutX="220.0" layoutY="244.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10; -fx-background-color: #f555;" textFill="#0a0000">
                <font>
                   <Font size="3.0" />
                </font>
@@ -71,7 +66,7 @@
                   <Font size="3.0" />
                </font>
             </Button>
-            <Button fx:id="a49" layoutX="157.0" layoutY="266.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10;">
+            <Button fx:id="a49" layoutX="159.0" layoutY="264.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10;">
                <font>
                   <Font size="3.0" />
                </font>
@@ -131,7 +126,7 @@
                   <Font size="3.0" />
                </font>
             </Button>
-            <Button fx:id="a55" layoutX="199.0" layoutY="331.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10;">
+            <Button fx:id="a68" layoutX="199.0" layoutY="331.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10;">
                <font>
                   <Font size="3.0" />
                </font>
@@ -531,11 +526,6 @@
                   <Font size="3.0" />
                </font>
             </Button>
-            <Button fx:id="a69BostonCollege1111" layoutX="453.0" layoutY="396.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10; -fx-background-color: #f555;" textFill="#0a0000">
-               <font>
-                  <Font size="3.0" />
-               </font>
-            </Button>
             <Button fx:id="a1" layoutX="533.0" layoutY="55.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10;">
                <font>
                   <Font size="3.0" />
@@ -617,6 +607,61 @@
                </font>
             </Button>
             <Button fx:id="a510" layoutX="533.0" layoutY="120.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="3.0" />
+               </font>
+            </Button>
+            <Button fx:id="a44" layoutX="453.0" layoutY="395.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="3.0" />
+               </font>
+            </Button>
+            <Button fx:id="a66" layoutX="140.0" layoutY="283.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10; -fx-background-color: #8AC800;">
+               <font>
+                  <Font size="3.0" />
+               </font>
+            </Button>
+            <Button fx:id="a55" layoutX="153.0" layoutY="270.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10; -fx-background-color: #8AC800;">
+               <font>
+                  <Font size="3.0" />
+               </font>
+            </Button>
+            <Button fx:id="a72" layoutX="92.0" layoutY="328.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10; -fx-background-color: #8AC800;">
+               <font>
+                  <Font size="3.0" />
+               </font>
+            </Button>
+            <Button fx:id="a36" layoutX="223.0" layoutY="247.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10; -fx-background-color: #8AC800;">
+               <font>
+                  <Font size="3.0" />
+               </font>
+            </Button>
+            <Button fx:id="a40" layoutX="213.0" layoutY="238.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10; -fx-background-color: #8AC800;">
+               <font>
+                  <Font size="3.0" />
+               </font>
+            </Button>
+            <Button fx:id="red1" layoutX="569.0" layoutY="386.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="3.0" />
+               </font>
+            </Button>
+            <Button fx:id="green1" layoutX="545.0" layoutY="230.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="3.0" />
+               </font>
+            </Button>
+            <Button fx:id="red2" layoutX="572.0" layoutY="529.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="3.0" />
+               </font>
+            </Button>
+            <Button fx:id="orange1" layoutX="532.0" layoutY="312.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="3.0" />
+               </font>
+            </Button>
+            <Button fx:id="green2" layoutX="365.0" layoutY="346.0" mnemonicParsing="false" onAction="#getName" prefHeight="10.0" prefWidth="10.0" style="-fx-background-radius: 10;">
                <font>
                   <Font size="3.0" />
                </font>
