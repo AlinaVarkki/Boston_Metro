@@ -587,36 +587,63 @@ public class View {
         map.setLayoutX(-25);
         map.setLayoutY(-25);
 
-
-        List<String> stations = new ArrayList<>();
-
-        for (Pair<String,List<String>> currentLine : path) {
-            stations.addAll(currentLine.getValue());
-        }
-
-        Double[] allPoints = new Double[stations.size()*2];
-        List<Double> points = new ArrayList<>();
-
         String[] stationsAroundCorners = {  "30 Downtown Crossing", "28 State",
                                             "20 North Station", "22 Haymarket",
                                             "41 Copley", "53 Prudential",
                                             "33 South Station", "60 Broadway",
-                                            "98 JFK/UMass", "100 Savin Hill",
-                                            "98 JFK/UMass", "120 North Quincy"};
+                                            "98 JFK/UMass", "100 Savin Hill", "120 North Quincy"};
 
-//        Map<String, Pair<>>
 
-        for (int i = 0; i < stations.size(); i++) {
-            double[] coords = this.stationToCoords.get(stations.get(i));
-            if (coords != null) {
 
-                allPoints[i*2] = coords[0]-20;
-                allPoints[i*2+1] = coords[1]-20;
+        List<Double> points = new ArrayList<Double>();
+
+        for (int line = 0; line < path.size(); line++) {
+            Pair<String,List<String>> currentLine = path.get(line);
+
+            List<String> stations = currentLine.getValue();
+            String color = currentLine.getKey();
+
+            for (int i = 0; i < stations.size(); i++) {
+                String currStation = stations.get(i);
+
+                double[] coords = this.stationToCoords.get(currStation);
+                if (coords != null) {
+                    points.add(coords[0]-20);
+                    points.add(coords[1]-20);
+                }
+
+                if (Arrays.asList(stationsAroundCorners).contains(currStation)) {
+                    if (i+1 < stations.size()) {
+                        String nextStation = stations.get(i+1);
+                        double[] midCoords = getMidCoords(currStation, nextStation,color);
+                        if (midCoords[0] != 0) {
+                            points.add(midCoords[0]-20);
+                            points.add(midCoords[1]-20);
+                        }
+                    } else if (line+1 < path.size()) {
+                        String nextStation = path.get(line+1).getValue().get(0);
+                        double[] midCoords = getMidCoords(currStation, nextStation,color);
+                        if (midCoords[0] != 0) {
+                            points.add(midCoords[0]-20);
+                            points.add(midCoords[1]-20);
+                        }
+                    }
+                }
             }
         }
 
+
+
+//allpoints to double[]
+
+
+//        double[] allpoints = points.stream().mapToDouble(i -> i).toArray();
+
+        Double[] allpoints = new Double[points.size()];
+        allpoints = points.toArray(allpoints);
+
         Polyline line = new Polyline();
-        line.getPoints().addAll(allPoints);
+        line.getPoints().addAll(allpoints);
         line.setStyle("-fx-stroke-width: 12;");
         line.setOpacity(0.75);
         line.setStrokeLineCap(StrokeLineCap.ROUND);
@@ -804,5 +831,73 @@ public class View {
         this.idsToStations = map;
     }
 
+
+    /**
+     * checks whether an intermediate point needs to be added to make the line fit a bit better
+     * @param station,nextStation stations between which we're checking
+     * @param color to determine whether green or orange needs to be taken at that one spot
+     * @return coordinates of the mid-point or [0,0] if none is needed
+     */
+    private double[] getMidCoords(String station, String nextStation, String color) {
+
+        if (station.equals("30 Downtown Crossing") && nextStation.equals("28 State")) {
+            return new double[]{532,312};
+            //layoutX="532.0" layoutY="312.0"
+        } else if (station.equals("28 State") && nextStation.equals("30 Downtown Crossing")) {
+            return new double[]{532,312};
+            //layoutX="532.0" layoutY="312.0"
+        } else if (color.equals("Green") && station.equals("20 North Station") && nextStation.equals("22 Haymarket")) {
+            return new double[]{545,230};
+
+            //layoutX="545.0" layoutY="230.0"
+        } else if (color.equals("Green") && station.equals("22 Haymarket") && nextStation.equals("20 North Station")) {
+            return new double[]{545,230};
+
+//layoutX="545.0" layoutY="230.0"
+        } else if (station.equals("41 Copley") && nextStation.equals("53 Prudential")) {
+            return new double[]{365,346};
+
+//layoutX="365.0" layoutY="346.0"
+        } else if (station.equals("53 Prudential") && nextStation.equals("41 Copley")) {
+            return new double[]{365,346};
+
+//layoutX="365.0" layoutY="346.0"
+        } else if (station.equals("33 South Station") && nextStation.equals("60 Broadway")) {
+            return new double[]{569,386};
+
+            //layoutX="569.0" layoutY="386.0"
+
+        } else if (station.equals("60 Broadway") && nextStation.equals("33 South Station")) {
+            return new double[]{569,386};
+
+            //layoutX="569.0" layoutY="386.0"
+        } else if (station.equals("98 JFK/UMass")) {
+
+//layoutX="572.0" layoutY="529.0"
+            if (nextStation.equals("100 Savin Hill")) {
+                return new double[]{572,529};
+
+
+            } else if (nextStation.equals("120 North Quincy")) {
+                return new double[]{572,529};
+
+            }
+
+        } else if (nextStation.equals("98 JFK/UMass")) {
+//layoutX="572.0" layoutY="529.0"
+
+            if (station.equals("100 Savin Hill")) {
+                return new double[]{572,529};
+
+            } else if (station.equals("120 North Quincy")) {
+                return new double[]{572,529};
+
+            }
+
+        }
+
+        return new double[]{0,0};
+
+    }
 
 }
