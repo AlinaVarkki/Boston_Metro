@@ -13,7 +13,7 @@ public class App {
 
         Node source = getStationByName(stations, "Aquarium");
         Node destination = getStationByName(stations, "SciencePark");
-        List<Edge<Node>> path = graph.getPathDFS(source, destination);
+        List<Edge<Node>> path = graph.getPath(source, destination);
         printPath(path,source);
 
         //some paths that are different for the algorithm that searches for the least switches path

@@ -46,6 +46,7 @@ public class mapController {
             view.setEndDest(stationName);
             view.changeSelectorColourEnd();
         }
+        view.closeMap();
     }
 
     //method that parses the station name to the one we use for the search.
