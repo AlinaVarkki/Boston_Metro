@@ -65,7 +65,6 @@ public class PathDisplayer {
 
     public Pane createLine(List<Pair<String, List<String>>> stations) {
 
-        ToggleSlider toggleSlider = new ToggleSlider();
         VBox almostFinalBox = new VBox();
         HBox box = new HBox();
         finalBox = new HBox();
@@ -138,7 +137,6 @@ public class PathDisplayer {
         animationActive(train);
 
         box.setPadding(new Insets(circleRadius,circleRadius,circleRadius,circleRadius));
-        box.getChildren().add(toggleSlider);
         box.setAlignment(Pos.TOP_LEFT);
         border.setLeft(box);
         border.setCenter(finalBox);

@@ -81,12 +81,12 @@
                 <Image url="Images/mapIcon2.png" />
             </image>
         </ImageView>
-        <Button  fx:id="searchLength" minHeight="30" minWidth="70" layoutX="969.0" layoutY="500.0" mnemonicParsing="false" style="-fx-background-color: #0B132B; -fx-background-radius: 10;" text="TRANS" textFill="WHITE" >
+        <Button  fx:id="searchTransitions" minHeight="30" minWidth="70" layoutX="969.0" layoutY="500.0" mnemonicParsing="false" style="-fx-background-color: #0B132B; -fx-background-radius: 10;" text="TRANS" textFill="WHITE" >
             <font>
                 <Font name="System Bold" size="13.0" />
             </font>
         </Button>
-        <Button  fx:id="searchTransitions" minHeight="30" minWidth="70" layoutX="860.0" layoutY="500.0" mnemonicParsing="false" style="-fx-background-color: #0B132B; -fx-background-radius: 10;" text="STOPS" textFill="WHITE" >
+        <Button  fx:id="searchLength" minHeight="30" minWidth="70" layoutX="860.0" layoutY="500.0" mnemonicParsing="false" style="-fx-background-color: #0B132B; -fx-background-radius: 10;" text="STOPS" textFill="WHITE" >
             <font>
                 <Font name="System Bold" size="13.0" />
             </font>

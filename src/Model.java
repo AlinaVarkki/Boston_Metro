@@ -73,7 +73,7 @@ public class Model {
 
         List<Pair<String,List<String>>> processedForView = new ArrayList<>();
         List<Edge<Node>> path;
-        if (algorithm.equals("Transitions")) {
+        if (algorithm.equals("Length")) {
             path = multiGraph.getPath(from, to);
         }
 

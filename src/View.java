@@ -8,7 +8,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -21,7 +20,6 @@ import javafx.util.Callback;
 import javafx.util.Duration;
 import javafx.util.Pair;
 
-import java.io.IOException;
 import java.util.*;
 
 public class View {
@@ -29,6 +27,7 @@ public class View {
     BorderPane container;
 
     PathDisplayer pathDisplayer;
+    Pane mapPath;
     Pane pathDisplayed;
 
     Map<String, List<String>> stationColorMap;
@@ -397,30 +396,74 @@ public class View {
      * Calls runDisplayPathAnimation to rotate the Main Logo
      */
     public void displayFoundPath(List<Pair<String,List<String>>> path){
+        if (root.getChildren().contains(map)){
+            this.closeMap();
+        }
+        this.setTitleVisibility(false);
+        container.getChildren().remove(mapPath);
+        container.setCenter(null);
+
+/*
+        if(container.getChildren().contains(pathDisplayed)){
+            container.setCenter(null);
+        }
+        else if(container.getChildren().contains(mapPath)){
+        }*/
+
+        this.mapPath = this.createMap(path);
+        this.pathDisplayed = pathDisplayer.createLine(path);
+
+        ToggleSlider togglik = new ToggleSlider();
+
+        container.getChildren().add(togglik);
+        togglik.setLayoutX(20);
+        togglik.setLayoutY(10);
+
+        container.setCenter(pathDisplayed);
+        togglik.toFront();
+
+
+
+        togglik.setClickHandler(event->{
+            if(container.getChildren().contains(pathDisplayed)){
+                container.setCenter(null);
+                container.getChildren().add(mapPath);
+                togglik.runSwitchOn();
+                togglik.toFront();
+            }
+            else if(container.getChildren().contains(mapPath)){
+                container.getChildren().remove(mapPath);
+                container.setCenter(pathDisplayed);
+                togglik.runSwitchOn();
+                togglik.toFront();
+            }
+        });
+
+        /*if (root.getChildren().contains(map)){
+            this.closeMap();
+        }
+
+        this.setTitleVisibility(false);
 
         if (root.getChildren().contains(map)){
+            this.closeMap();
+        }
+        pathDisplayed = createMap(path);
+        container.setCenter(pathDisplayed);
+
+        runDisplayPathAnimation();*/
+
+        /*if (root.getChildren().contains(map)){
             this.closeMap();
         }
         this.setTitleVisibility(false);
         if(this.pathDisplayed != null){
             container.getChildren().remove(pathDisplayed);
         }
-        pathDisplayed = createMap(path);
+        pathDisplayed = pathDisplayer.createLine(path);
         container.setCenter(pathDisplayed);
 
-        runDisplayPathAnimation();
-
-//        if (root.getChildren().contains(map)){
-//            this.closeMap();
-//        }
-//        this.setTitleVisibility(false);
-//        if(this.pathDisplayed != null){
-//            container.getChildren().remove(pathDisplayed);
-//        }
-//        pathDisplayed = pathDisplayer.createLine(path);
-//        container.setCenter(pathDisplayed);
-//
-//        runDisplayPathAnimation();
+        runDisplayPathAnimation();*/
     }
 
     /**
@@ -568,14 +611,6 @@ public class View {
     public void setEndDest(String stationId){
         String stationName = this.idsToStations.get(stationId);
         endDestSelector.setValue(stationName);
-    }
-
-
-
-
-
-    private void showMapWithRoute() {
-
     }
 
     private Pane createMap(List<Pair<String,List<String>>> path) {
@@ -777,10 +812,10 @@ public class View {
      * **/
     public void setStandardStyles(){
         //Selection Toggle
-        searchLength.setStyle("-fx-background-color: #fff; -fx-background-radius: 10;-fx-border-color: #0B132B;-fx-border-radius: 10;");
-        searchLength.setTextFill(background);
-        searchTransitions.setStyle("-fx-background-color: #0B132B; -fx-background-radius: 10;-fx-border-color: #0B132B;-fx-border-radius: 10;");
-        searchTransitions.setTextFill(Color.WHITE);
+        searchTransitions.setStyle("-fx-background-color: #fff; -fx-background-radius: 10;-fx-border-color: #0B132B;-fx-border-radius: 10;");
+        searchTransitions.setTextFill(background);
+        searchLength.setStyle("-fx-background-color: #0B132B; -fx-background-radius: 10;-fx-border-color: #0B132B;-fx-border-radius: 10;");
+        searchLength.setTextFill(Color.WHITE);
         searchTransitions.setFont(Font.font("Arial"));
         searchLength.setFont(Font.font("Arial"));
 

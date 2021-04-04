@@ -25,7 +25,7 @@
  25 Charles/MGH			    Red 23 29
  26 Aquarium			    Blue 18 28
  27 GovernmentCenter		    Green 22 29  Blue 24 28
- 28 State			    Blue 26 27  Orange 22 30
+ 28 State           	    Blue 26 27  Orange 22 30
  29 ParkStreet			    Red 25 30  Green 31 27
  30 DowntownCrossing		    Red 33 29  Orange 32 28
  31 Boylston			    Green 34 29

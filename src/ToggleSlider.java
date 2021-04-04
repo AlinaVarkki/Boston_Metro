@@ -3,7 +3,9 @@ import javafx.animation.ParallelTransition;
 import javafx.animation.TranslateTransition;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.event.EventHandler;
 import javafx.scene.Parent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Ellipse;
@@ -13,6 +15,8 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+
+import java.util.function.Function;
 
 public class ToggleSlider extends Parent {
 
@@ -88,11 +92,14 @@ public class ToggleSlider extends Parent {
                 fillTransition.setFromValue(mapOnCheck ? Color.rgb(245,153,35) : Color.rgb(244, 244, 244));*/
                 animate.play();
             });
-
-            setOnMouseClicked(event -> {
-                switchOn.set(!switchOn.get());
-            });
         }
 
+        public void setClickHandler(EventHandler<MouseEvent> handler) {
+            this.setOnMouseClicked(handler);
+        }
+
+        public void runSwitchOn(){
+            switchOn.set(!switchOn.get());
+        }
 }
 
