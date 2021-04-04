@@ -14,8 +14,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
@@ -350,9 +349,7 @@ public class View {
         startStationErrorMsg.setVisible(false);
         endStationErrorMsg.setVisible(false);
 
-
-
-        if (startStation.equals(endStation)){
+        if (startStation != null && startStation.equals(endStation)){
             endStationError = "Sorry, you're already there.";
         }
 
@@ -400,19 +397,30 @@ public class View {
      * Calls runDisplayPathAnimation to rotate the Main Logo
      */
     public void displayFoundPath(List<Pair<String,List<String>>> path){
+
         if (root.getChildren().contains(map)){
             this.closeMap();
         }
         this.setTitleVisibility(false);
         if(this.pathDisplayed != null){
-//            displayArea.getChildren().remove(container);
             container.getChildren().remove(pathDisplayed);
         }
-        pathDisplayed = pathDisplayer.createLine(path);
+        pathDisplayed = createMap(path);
         container.setCenter(pathDisplayed);
-//        displayArea.setCenter(container);
 
         runDisplayPathAnimation();
+
+//        if (root.getChildren().contains(map)){
+//            this.closeMap();
+//        }
+//        this.setTitleVisibility(false);
+//        if(this.pathDisplayed != null){
+//            container.getChildren().remove(pathDisplayed);
+//        }
+//        pathDisplayed = pathDisplayer.createLine(path);
+//        container.setCenter(pathDisplayed);
+//
+//        runDisplayPathAnimation();
     }
 
     /**
@@ -534,7 +542,7 @@ public class View {
 
     }
 
-    public void mapButtonEndClicked() throws IOException {
+    public void mapButtonEndClicked() {
         if(root.getChildren().contains(map)){
             if(this.mapContr.getDestinationDirection().equals("END")){
                 this.closeMap();}
@@ -570,30 +578,55 @@ public class View {
 
     }
 
-    private void createMap(List<Pair<String,List<String>>> path) {
+    private Pane createMap(List<Pair<String,List<String>>> path) {
         Pane mapView = new Pane();
         ImageView map =  new ImageView("Images/mapFontVectorised.png");
         mapView.getChildren().add(map);
         map.setFitHeight(820);
+        map.setPreserveRatio(true);
         map.setLayoutX(-25);
         map.setLayoutY(-25);
 
 
+        List<String> stations = new ArrayList<>();
 
         for (Pair<String,List<String>> currentLine : path) {
-            String color = currentLine.getKey();
-            List<String> stations = currentLine.getValue();
-
-            double[] firstCoords = stationToCoords.get(stations.get(0));
-
-            for (int i = 1; i < stations.size(); i++) {
-                double[] secondCoords = stationToCoords.get(stations.get(i));
-                Line segment = new Line(firstCoords[0],firstCoords[1],secondCoords[0],secondCoords[1]);
-                segment.setFill(Color.rgb(255,255,255));
-                mapView.getChildren().add(segment);
-            }
-
+            stations.addAll(currentLine.getValue());
         }
+
+        Double[] allPoints = new Double[stations.size()*2];
+        List<Double> points = new ArrayList<>();
+
+        String[] stationsAroundCorners = {  "30 Downtown Crossing", "28 State",
+                                            "20 North Station", "22 Haymarket",
+                                            "41 Copley", "53 Prudential",
+                                            "33 South Station", "60 Broadway",
+                                            "98 JFK/UMass", "100 Savin Hill",
+                                            "98 JFK/UMass", "120 North Quincy"};
+
+//        Map<String, Pair<>>
+
+        for (int i = 0; i < stations.size(); i++) {
+            double[] coords = this.stationToCoords.get(stations.get(i));
+            if (coords != null) {
+
+                allPoints[i*2] = coords[0]-20;
+                allPoints[i*2+1] = coords[1]-20;
+            }
+        }
+
+        Polyline line = new Polyline();
+        line.getPoints().addAll(allPoints);
+        line.setStyle("-fx-stroke-width: 12;");
+        line.setOpacity(0.75);
+        line.setStrokeLineCap(StrokeLineCap.ROUND);
+        line.setStrokeLineJoin(StrokeLineJoin.ROUND);
+        line.setStrokeType(StrokeType.CENTERED);
+        line.setStroke(Color.rgb(244,244,244));
+
+        mapView.getChildren().add(line);
+
+        return mapView;
 
     }
 

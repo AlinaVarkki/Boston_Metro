@@ -17,7 +17,7 @@ public class Controller {
    public void run(){
         this.setUpDropDowns();
         this.setupButtonEventHandler(this);
-        view.setupAlgorithmSelectorEventHandler();
+       view.setupAlgorithmSelectorEventHandler();
         view.setupIdsToStatioins(model.getMapIdsToStation());
         view.setStandardStyles();
         view.setupMap();
