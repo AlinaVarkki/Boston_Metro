@@ -615,7 +615,7 @@ public class View {
 
     private Pane createMap(List<Pair<String,List<String>>> path) {
         Pane mapView = new Pane();
-        ImageView map =  new ImageView("Images/mapFontVectorised.png");
+        ImageView map =  new ImageView("Images/mapFinal.png");
         mapView.getChildren().add(map);
         map.setFitHeight(820);
         map.setPreserveRatio(true);

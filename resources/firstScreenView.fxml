@@ -81,6 +81,11 @@
                 <Image url="Images/mapIcon2.png" />
             </image>
         </ImageView>
+        <Text fill="#0b132b" layoutX="870.0" layoutY="475.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Find route based on the least amount of:" textAlignment="CENTER" wrappingWidth="153.63671875">
+        <font>
+            <Font name="Arial" size="13.0" />
+        </font>
+        </Text>
         <Button  fx:id="searchTransitions" minHeight="30" minWidth="70" layoutX="969.0" layoutY="500.0" mnemonicParsing="false" style="-fx-background-color: #0B132B; -fx-background-radius: 10;" text="TRANS" textFill="WHITE" >
             <font>
                 <Font name="System Bold" size="13.0" />
