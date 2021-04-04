@@ -28,51 +28,51 @@ public class ToggleSlider extends Parent {
             background.setCenterX(20);
             background.setCenterY(20);
             background.setRadiusX(32);
-            background.setRadiusY(22);
-            background.setFill(Color.rgb(245,61,61));
+            background.setRadiusY(18);
+            background.setFill(Color.rgb(244, 244, 244));
             background.setStroke(Color.rgb(11,19,43));
 
             Ellipse background2 = new Ellipse();
             background2.setCenterX(20);
             background2.setCenterY(20);
             background2.setRadiusX(30);
-            background2.setRadiusY(20);
+            background2.setRadiusY(16);
             background2.setFill(Color.rgb(11,19,43));
             background2.setStroke(Color.rgb(11,19,43));
 
-            Circle circle = new Circle(14);
-            circle.setCenterX(2);
+            Circle circle = new Circle(13);
+            circle.setCenterX(2.2);
             circle.setCenterY(20);
-            circle.setFill(Color.SILVER);
-            circle.setStroke(Color.SILVER);
+            circle.setFill(Color.rgb(245,153,35));
+            circle.setStroke(Color.rgb(245,153,35));
 
 
             Text map = new Text();
             map.setText("Map");
-            map.setFill(Color.WHITE);
-            map.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, FontPosture.REGULAR,9));
+            map.setFill(Color.rgb(11,19,43));
+            map.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, FontPosture.REGULAR,8));
             map.setX(-2);
             map.setY(18);
 
             Text mapOn = new Text();
             mapOn.setText("On");
-            mapOn.setFill(Color.WHITE);
-            mapOn.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, FontPosture.REGULAR,9));
+            mapOn.setFill(Color.rgb(11,19,43));
+            mapOn.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, FontPosture.REGULAR,8));
             mapOn.setX(0);
             mapOn.setY(28);
 
             Text map2 = new Text();
             map2.setText("Map");
-            map2.setFill(Color.WHITE);
-            map2.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, FontPosture.REGULAR,9));
-            map2.setX(25);
+            map2.setFill(Color.rgb(11,19,43));
+            map2.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, FontPosture.REGULAR,8));
+            map2.setX(26);
             map2.setY(18);
 
             Text mapOff = new Text();
             mapOff.setText("Off");
-            mapOff.setFill(Color.WHITE);
-            mapOff.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, FontPosture.REGULAR,9));
-            mapOff.setX(25);
+            mapOff.setFill(Color.rgb(11,19,43));
+            mapOff.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, FontPosture.REGULAR,8));
+            mapOff.setX(26);
             mapOff.setY(28);
 
             translateTransition.setNode(circle);
@@ -83,9 +83,9 @@ public class ToggleSlider extends Parent {
 
             switchOn.addListener((obs,oldState,newState) -> {
                 boolean mapOnCheck = newState.booleanValue();
-                translateTransition.setToX(mapOnCheck ? 0+35 : 0);
-                fillTransition.setFromValue(mapOnCheck ? Color.rgb(245,61,61) : Color.rgb(20,158,106));
-                fillTransition.setFromValue(mapOnCheck ? Color.rgb(20,158,106) : Color.rgb(245,61,61));
+                translateTransition.setToX(mapOnCheck ? 0+35.5 : 0);
+                /*fillTransition.setFromValue(mapOnCheck ? Color.rgb(244, 244, 244) : Color.rgb(245,153,35));
+                fillTransition.setFromValue(mapOnCheck ? Color.rgb(245,153,35) : Color.rgb(244, 244, 244));*/
                 animate.play();
             });
 

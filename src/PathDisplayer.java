@@ -137,10 +137,10 @@ public class PathDisplayer {
         StackPane.setMargin(train,new Insets(circleRadius,circleRadius/2,circleRadius/2,circleRadius));
         animationActive(train);
 
-        box.setPadding(new Insets(circleRadius,circleRadius,circleRadius,0));
+        box.setPadding(new Insets(circleRadius,circleRadius,circleRadius,circleRadius));
         box.getChildren().add(toggleSlider);
-        box.setAlignment(Pos.TOP_RIGHT);
-        border.setRight(box);
+        box.setAlignment(Pos.TOP_LEFT);
+        border.setLeft(box);
         border.setCenter(finalBox);
         border.setBottom(animation);
         border.setPrefHeight(700);
