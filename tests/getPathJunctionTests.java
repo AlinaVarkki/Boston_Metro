@@ -11,7 +11,7 @@ public class getPathJunctionTests {
     MultiGraph<Node, Edge<Node>> testGraph;
     List<Edge<Node>> testPath;
 
-    /* Creates a Connection & two new Stations and Reads in bostonmetro.txt*/
+    /* Reads in bostonmetro.txt*/
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
 
@@ -128,7 +128,7 @@ public class getPathJunctionTests {
     void multiGraphGreenDtoGreenBJunctionLine() {
 
         Node source = App.getStationByName(testStations, "Fenway");
-        Node destination = App.getStationByName(testStations, "Hynes/ICA");
+        Node destination = App.getStationByName(testStations, "BlandfordStreet");
 
         // Tests Obtained Route Correct for the Green Junction line from GreenD to GreenB
         testPath = testGraph.getPath(source, destination);
@@ -141,10 +141,10 @@ public class getPathJunctionTests {
         assertEquals("Kenmore", greenJNode.getName());
 
         label = testPath.get(1).getLabel();
-        assertEquals("GreenD", label);
+        assertEquals("GreenB", label);
 
         greenJNode = testPath.get(1).getOppositeNode(greenJNode);
-        assertEquals("Hynes/ICA", greenJNode.getName());
+        assertEquals("BlandfordStreet", greenJNode.getName());
     }
 
     @org.junit.jupiter.api.Test
