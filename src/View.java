@@ -580,7 +580,7 @@ public class View {
 
     private Pane createMap(List<Pair<String,List<String>>> path) {
         Pane mapView = new Pane();
-        ImageView map =  new ImageView("Images/mapFontVectorised.png");
+        ImageView map =  new ImageView("Images/mapFinal.png");
         mapView.getChildren().add(map);
         map.setFitHeight(820);
         map.setPreserveRatio(true);
@@ -777,10 +777,10 @@ public class View {
      * **/
     public void setStandardStyles(){
         //Selection Toggle
-        searchLength.setStyle("-fx-background-color: #fff; -fx-background-radius: 10;-fx-border-color: #0B132B;-fx-border-radius: 10;");
-        searchLength.setTextFill(background);
-        searchTransitions.setStyle("-fx-background-color: #0B132B; -fx-background-radius: 10;-fx-border-color: #0B132B;-fx-border-radius: 10;");
-        searchTransitions.setTextFill(Color.WHITE);
+        searchTransitions.setStyle("-fx-background-color: #fff; -fx-background-radius: 10;-fx-border-color: #0B132B;-fx-border-radius: 10;");
+        searchTransitions.setTextFill(background);
+        searchLength.setStyle("-fx-background-color: #0B132B; -fx-background-radius: 10;-fx-border-color: #0B132B;-fx-border-radius: 10;");
+        searchLength.setTextFill(Color.WHITE);
         searchTransitions.setFont(Font.font("Arial"));
         searchLength.setFont(Font.font("Arial"));
 
