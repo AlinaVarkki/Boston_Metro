@@ -142,7 +142,6 @@ public class PathDisplayer {
         border.setCenter(finalBox);
         border.setBottom(animation);
         border.setPrefHeight(700);
-        //border.setPrefWidth(900);
 
         return border;
     }

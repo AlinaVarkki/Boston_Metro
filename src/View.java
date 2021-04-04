@@ -626,8 +626,8 @@ public class View {
                                             "20 North Station", "22 Haymarket",
                                             "41 Copley", "53 Prudential",
                                             "33 South Station", "60 Broadway",
+                                            "47 Kenmore","54 St.Mary's Street",
                                             "98 JFK/UMass", "100 Savin Hill", "120 North Quincy"};
-
 
 
         List<Double> points = new ArrayList<Double>();
@@ -889,6 +889,13 @@ public class View {
             return new double[]{545,230};
 
 //layoutX="545.0" layoutY="230.0"
+        } else if (station.equals("47 Kenmore") && nextStation.equals("54 St.Mary's Street")) {
+            return new double[]{287,330};
+
+            //layoutX="545.0" layoutY="330.0"
+        } else if (station.equals("54 St.Mary's Street") && nextStation.equals("47 Kenmore")) {
+            return new double[]{287,330};
+
         } else if (station.equals("41 Copley") && nextStation.equals("53 Prudential")) {
             return new double[]{365,346};
 
