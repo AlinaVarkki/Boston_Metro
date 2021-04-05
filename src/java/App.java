@@ -34,11 +34,4 @@ public class App extends Application {
         controller.run();
     }
 
-    //  method used for tests
-    public static Node getStationByName(List<Node> stations, String name) {
-        for (Node s : stations) {
-            if (s.getName().equals(name)) return s;
-        }
-        return null;
-    }
 }

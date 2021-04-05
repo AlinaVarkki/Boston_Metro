@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -31,6 +32,15 @@ public class getPathLineTests {
         for (Node n : testStations) testGraph.addNode(n);
         for (Edge e : testConnections) testGraph.addEdge(e);
 
+    }
+
+
+    Node getStationByName(String stationName){
+        Map<Node, List<Edge<Node>>> adjMap = testGraph.getAdjMap();
+        for(Node station: adjMap.keySet()){
+            if(station.getName().equals(stationName)) return station;
+        }
+        return null;
     }
 
     /* Tests Set and Get of Station Class implementing Node Interface */
@@ -83,8 +93,8 @@ public class getPathLineTests {
     void multiGraphBlueLine() {
 
         // Tests Nodes and Edges Correctly Set Up for the Blue line
-        Node source = App.getStationByName(testStations, "Bowdoin");
-        Node destination = App.getStationByName(testStations, "Wonderland");
+        Node source = getStationByName("Bowdoin");
+        Node destination = getStationByName("Wonderland");
         testPath = testGraph.getPath(source, destination);
 
         Node blueNode = source;
@@ -151,9 +161,9 @@ public class getPathLineTests {
     @org.junit.jupiter.api.Test
     void multiGraphOrangeLine() {
 
-        Station source = (Station) App.getStationByName(testStations, "OakGrove");
+        Station source = (Station) getStationByName("OakGrove");
         // Tests Nodes and Edges Correctly Set Up for the Orange line
-        testPath = testGraph.getPath(App.getStationByName(testStations, "OakGrove"), App.getStationByName(testStations, "ForestHills"));
+        testPath = testGraph.getPath(getStationByName("OakGrove"), getStationByName("ForestHills"));
         Node orangeNode = testPath.get(0).getNode1();
         assertEquals("OakGrove", orangeNode.getName());
         String label = testPath.get(0).getLabel();
@@ -252,8 +262,8 @@ public class getPathLineTests {
     @org.junit.jupiter.api.Test
     void multiGraphRedLine() {
 
-        Node source = App.getStationByName(testStations, "Alewife");
-        Node destination = App.getStationByName(testStations, "JFK/UMass");
+        Node source = getStationByName("Alewife");
+        Node destination = getStationByName("JFK/UMass");
         // Tests Nodes and Edges Correctly Set Up for the Red line
         testPath = testGraph.getPath(source, destination);
         Node redNode = source;
@@ -326,7 +336,7 @@ public class getPathLineTests {
     void multiGraphRedBLine() {
 
         // Tests Nodes and Edges Correctly Set Up for the RedB line
-        testPath = testGraph.getPath(App.getStationByName(testStations, "JFK/UMass"), App.getStationByName(testStations, "Braintree"));
+        testPath = testGraph.getPath(getStationByName("JFK/UMass"), getStationByName("Braintree"));
         Node redANode = testPath.get(0).getNode1();
         assertEquals("JFK/UMass", redANode.getName());
         String label = testPath.get(0).getLabel();
@@ -361,7 +371,7 @@ public class getPathLineTests {
     void multiGraphRedALine() {
 
         // Tests Nodes and Edges Correctly Set Up for the RedA line
-        testPath = testGraph.getPath(App.getStationByName(testStations, "JFK/UMass"), App.getStationByName(testStations, "Ashmont"));
+        testPath = testGraph.getPath(getStationByName("JFK/UMass"), getStationByName("Ashmont"));
         Node redBNode = testPath.get(0).getNode1();
         assertEquals("JFK/UMass", redBNode.getName());
         String label = testPath.get(0).getLabel();
@@ -392,7 +402,7 @@ public class getPathLineTests {
     void multiGraphMattapanLine() {
 
         // Tests Nodes and Edges Correctly Set Up for the Mattapan line
-        testPath = testGraph.getPath(App.getStationByName(testStations, "Ashmont"), App.getStationByName(testStations, "Mattapan"));
+        testPath = testGraph.getPath(getStationByName("Ashmont"), getStationByName("Mattapan"));
         Node mattapanNode = testPath.get(0).getNode1();
         assertEquals("Ashmont", mattapanNode.getName());
         String label = testPath.get(0).getLabel();
@@ -437,7 +447,7 @@ public class getPathLineTests {
     void multiGraphGreenLine() {
 
         // Tests Nodes and Edges Correctly Set Up for the Green line
-        testPath = testGraph.getPath(App.getStationByName(testStations, "Lechmere"), App.getStationByName(testStations, "Copley"));
+        testPath = testGraph.getPath(getStationByName("Lechmere"), getStationByName("Copley"));
         Node greenNode = testPath.get(0).getNode1();
         assertEquals("Lechmere", greenNode.getName());
         String label = testPath.get(0).getLabel();
@@ -487,8 +497,8 @@ public class getPathLineTests {
     void multiGraphGreenBLine() {
 
         // Tests Nodes and Edges Correctly Set Up for the GreenB line
-        Node source = App.getStationByName(testStations, "Copley");
-        Node destination = App.getStationByName(testStations, "BostonCollege");
+        Node source = getStationByName("Copley");
+        Node destination = getStationByName("BostonCollege");
         testPath = testGraph.getPath(source, destination);
         Node greenBNode = source;
         assertEquals("Copley", greenBNode.getName());
@@ -619,7 +629,7 @@ public class getPathLineTests {
     void multiGraphGreenCLine() {
 
         // Tests Nodes and Edges Correctly Set Up for the GreenC line
-        testPath = testGraph.getPath(App.getStationByName(testStations, "Kenmore"), App.getStationByName(testStations, "ClevelandCircle"));
+        testPath = testGraph.getPath(getStationByName("Kenmore"), getStationByName("ClevelandCircle"));
         Node greenCNode = testPath.get(0).getNode1();
         assertEquals("Kenmore", greenCNode.getName());
         String label = testPath.get(0).getLabel();
@@ -694,8 +704,8 @@ public class getPathLineTests {
     void multiGraphGreenDLine() {
 
         // Tests Nodes and Edges Correctly Set Up for the GreenD line
-        Node source = App.getStationByName(testStations, "Kenmore");
-        Node destination = App.getStationByName(testStations, "Riverside");
+        Node source = getStationByName("Kenmore");
+        Node destination = getStationByName("Riverside");
         testPath = testGraph.getPath(source, destination);
         Node greenDNode = source;
         assertEquals("Kenmore", greenDNode.getName());
@@ -771,7 +781,7 @@ public class getPathLineTests {
     void multiGraphGreenELine() {
 
         // Tests Nodes and Edges Correctly Set Up for the GreenE line
-        testPath = testGraph.getPath(App.getStationByName(testStations, "Copley"), App.getStationByName(testStations, "HeathStreet"));
+        testPath = testGraph.getPath(getStationByName("Copley"), getStationByName("HeathStreet"));
         Node greenENode = testPath.get(0).getNode1();
         assertEquals("Copley", greenENode.getName());
         String label = testPath.get(0).getLabel();
