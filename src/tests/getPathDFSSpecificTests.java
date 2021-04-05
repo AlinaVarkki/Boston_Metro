@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -25,6 +26,14 @@ public class getPathDFSSpecificTests {
 
     }
 
+    Node getStationByName(String stationName){
+        Map<Node, List<Edge<Node>>> adjMap = testGraph.getAdjMap();
+        for(Node station: adjMap.keySet()){
+            if(station.getName().equals(stationName)) return station;
+        }
+        return null;
+    }
+
     /**
      * Below Test Optimal routes from a station to another using the getPathDFS() method
      * This method takes the route with the fewest transitions on select instances
@@ -32,12 +41,12 @@ public class getPathDFSSpecificTests {
      */
 
       /* Tests MultiGraph getPathDFS() optimal route with fewest transitions
-       from Orange Chinatown to Green Boylston swApp2ing at Haymarket */
+       from Orange Chinatown to Green Boylston swng at Haymarket */
     @org.junit.jupiter.api.Test
     void multiGraphOrangeToGreenWithOnly1Transition() {
 
-        Node source = App.getStationByName(testStations, "Chinatown");
-        Node destination = App.getStationByName(testStations, "Boylston");
+        Node source = getStationByName("Chinatown");
+        Node destination = getStationByName("Boylston");
 
         testPath = testGraph.getPathDFS(source, destination);
         String label = testPath.get(0).getLabel();
@@ -64,13 +73,13 @@ public class getPathDFSSpecificTests {
     }
 
     /* Tests MultiGraph getPathDFS() optimal route with fewest transitions
-       from Orange ChinaTown to Blue Bowdoin swApping at State */
+       from Orange ChinaTown to Blue Bowdoin swng at State */
     @org.junit.jupiter.api.Test
     void multiGraphOrangeToBlueWithOnly1Transition() {
 
         // Previous test getPath() for route called - multiGraphOrangeToBlue
-        Node source = App.getStationByName(testStations, "Chinatown");
-        Node destination = App.getStationByName(testStations, "Bowdoin");
+        Node source = getStationByName("Chinatown");
+        Node destination = getStationByName("Bowdoin");
 
         testPath = testGraph.getPathDFS(source, destination);
         String label = testPath.get(0).getLabel();
@@ -100,8 +109,8 @@ public class getPathDFSSpecificTests {
     void multiGraphGreenEtoGreenDJunctionLineWithOnly2Transitions() {
 
         // Previous test getPath() for route called - multiGraphGreenEtoGreenD
-        Node source = App.getStationByName(testStations, "Prudential");
-        Node destination = App.getStationByName(testStations, "Fenway");
+        Node source = getStationByName("Prudential");
+        Node destination = getStationByName("Fenway");
         testPath = testGraph.getPathDFS(source, destination);
         String label = testPath.get(0).getLabel();
         assertEquals("GreenE", label);
