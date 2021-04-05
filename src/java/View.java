@@ -38,7 +38,7 @@ public class View {
     String algorithmSelected;
 
     Pane map;
-    mapView mapContr;
+    MapView mapContr;
 
 
     private final Color background = Color.rgb(11, 19, 43);
