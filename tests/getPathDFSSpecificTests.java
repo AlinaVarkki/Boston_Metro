@@ -32,7 +32,7 @@ public class getPathDFSSpecificTests {
      */
 
       /* Tests MultiGraph getPathDFS() optimal route with fewest transitions
-       from Orange Chinatown to Green Boylston swapping at Haymarket */
+       from Orange Chinatown to Green Boylston swApp2ing at Haymarket */
     @org.junit.jupiter.api.Test
     void multiGraphOrangeToGreenWithOnly1Transition() {
 
@@ -64,7 +64,7 @@ public class getPathDFSSpecificTests {
     }
 
     /* Tests MultiGraph getPathDFS() optimal route with fewest transitions
-       from Orange ChinaTown to Blue Bowdoin swapping at State */
+       from Orange ChinaTown to Blue Bowdoin swApping at State */
     @org.junit.jupiter.api.Test
     void multiGraphOrangeToBlueWithOnly1Transition() {
 

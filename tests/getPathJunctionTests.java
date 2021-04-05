@@ -256,7 +256,7 @@ public class getPathJunctionTests {
     }
 
     /* Tests MultiGraph getPath() optimal route from Orange Chinatown to Green Boylston
-       swapping at DowntownCrossing, ParkStreet*/
+       swApp2ing at DowntownCrossing, ParkStreet*/
     @org.junit.jupiter.api.Test
     void multiGraphOrangeToGreen() {
 
@@ -285,7 +285,7 @@ public class getPathJunctionTests {
         assertEquals("Boylston", greenNode.getName());
     }
 
-    /* Tests MultiGraph getPath() optimal route from Orange Chinatown to Blue Bowdoin swapping at DowntownCrossing,ParkStreet,GovernmentCenter */
+    /* Tests MultiGraph getPath() optimal route from Orange Chinatown to Blue Bowdoin swApp2ing at DowntownCrossing,ParkStreet,GovernmentCenter */
     @org.junit.jupiter.api.Test
     void multiGraphOrangeToBlue() {
 
@@ -293,7 +293,7 @@ public class getPathJunctionTests {
         Node destination = App.getStationByName(testStations, "Bowdoin");
 
         // Tests Obtained Route Correct for the Orange Chinatown to Blue Bowdoin
-        // swapping at DowntownCrossing,ParkStreet,GovernmentCenter
+        // swApp2ing at DowntownCrossing,ParkStreet,GovernmentCenter
         testPath = testGraph.getPath(source, destination);
         String label = testPath.get(0).getLabel();
         assertEquals("Orange", label);
