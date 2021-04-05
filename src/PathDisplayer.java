@@ -2,18 +2,15 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -24,10 +21,6 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 import javafx.util.Pair;
 
-import java.awt.*;
-import java.util.*;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -162,11 +155,11 @@ public class PathDisplayer {
     private Image trainSelector(String colour) {
         Image image;
         switch (colour.charAt(0)) {
-            case 'B' -> image = new Image("Images/bluesubwayboii.png");
-            case 'R', 'M' -> image = new Image("Images/redsubwayboii.png");
-            case 'O' -> image = new Image("Images/yellowsubwayboii.png");
-            case 'G' -> image = new Image("Images/greensubwayboii.png");
-            default -> image = new Image("Images/subwayboii.png");
+            case 'B' -> image = new Image("Images/blueSubway.png");
+            case 'R', 'M' -> image = new Image("Images/redSubway.png");
+            case 'O' -> image = new Image("Images/yellowSubway.png");
+            case 'G' -> image = new Image("Images/greenSubway.png");
+            default -> image = new Image("Images/whiteSubway.png");
         }
         return image;
 
