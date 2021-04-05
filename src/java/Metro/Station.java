@@ -1,8 +1,6 @@
 package Metro;
 
-import Graph.Node;
-
-public class Station implements Node {
+public class Station{
 
     String name;
     String idNumber;
@@ -16,12 +14,10 @@ public class Station implements Node {
         this.idNumber = id;
     }
 
-    @Override
     public String getName() {
         return this.name;
     }
 
-    @Override
     public void setName(String name) {
         this.name = name;
     }

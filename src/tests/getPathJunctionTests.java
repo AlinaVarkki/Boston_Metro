@@ -1,6 +1,6 @@
 import Graph.Edge;
 import Graph.MultiGraph;
-import Graph.Node;
+import Metro.Station;
 
 import java.util.List;
 import java.util.Map;
@@ -11,10 +11,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class getPathJunctionTests {
 
     //User for Testing Graph.MultiGraph Methods
-    List<Edge<Node>> testConnections;
-    List<Node> testStations;
-    MultiGraph<Node, Edge<Node>> testGraph;
-    List<Edge<Node>> testPath;
+    List<Edge<Station>> testConnections;
+    List<Station> testStations;
+    MultiGraph<Station, Edge<Station>> testGraph;
+    List<Edge<Station>> testPath;
 
     /* Reads in bostonMetroStations.txt*/
     @org.junit.jupiter.api.BeforeEach
@@ -24,15 +24,15 @@ public class getPathJunctionTests {
         testStations = reader.getStations();
         testConnections = reader.getConnections();
 
-        testGraph = new MultiGraph<Node, Edge<Node>>();
-        for (Node n : testStations) testGraph.addNode(n);
+        testGraph = new MultiGraph<Station, Edge<Station>>();
+        for (Station n : testStations) testGraph.addNode(n);
         for (Edge e : testConnections) testGraph.addEdge(e);
 
     }
 
-    Node getStationByName(String stationName){
-        Map<Node, List<Edge<Node>>> adjMap = testGraph.getAdjMap();
-        for(Node station: adjMap.keySet()){
+    Station getStationByName(String stationName){
+        Map<Station, List<Edge<Station>>> adjMap = testGraph.getAdjMap();
+        for(Station station: adjMap.keySet()){
             if(station.getName().equals(stationName)) return station;
         }
         return null;
@@ -49,15 +49,15 @@ public class getPathJunctionTests {
     void multiGraphRedJunctionLine() {
 
         // Tests Obtained Route Correct for the Red Junction line from RedB to RedA
-        Node source = getStationByName("Wollaston");
-        Node destination = getStationByName("FieldsCorner");
+        Station source = getStationByName("Wollaston");
+        Station destination = getStationByName("FieldsCorner");
         testPath = testGraph.getPath(source, destination);
         String label = testPath.get(0).getLabel();
         assertEquals("RedB", label);
 
-        Node redJNode = source;
+        Station redJNode = source;
         assertEquals("Wollaston", redJNode.getName());
-        Node redJNodes = testPath.get(0).getOppositeNode(redJNode);
+        Station redJNodes = testPath.get(0).getOppositeNode(redJNode);
         assertEquals("NorthQuincy", redJNodes.getName());
         redJNode = testPath.get(1).getOppositeNode(redJNodes);
         assertEquals("JFK/UMass", redJNode.getName());
@@ -80,9 +80,9 @@ public class getPathJunctionTests {
         String label = testPath.get(0).getLabel();
         assertEquals("RedA", label);
 
-        Node redJNode = testPath.get(0).getNode1();
+        Station redJNode = testPath.get(0).getNode1();
         assertEquals("Shawmut", redJNode.getName());
-        Node redJNodes = testPath.get(0).getOppositeNode(redJNode);
+        Station redJNodes = testPath.get(0).getOppositeNode(redJNode);
         assertEquals("Ashmont", redJNodes.getName());
 
         label = testPath.get(1).getLabel();
@@ -97,13 +97,13 @@ public class getPathJunctionTests {
     void multiGraphGreenEtoGreenBJunctionLine() {
 
         // Tests Obtained Route Correct for the Green Junction line from GreenE to GreenB
-        Node source = getStationByName("Prudential");
-        Node destination = getStationByName("Hynes/ICA");
+        Station source = getStationByName("Prudential");
+        Station destination = getStationByName("Hynes/ICA");
         testPath = testGraph.getPath(source, destination);
         String label = testPath.get(0).getLabel();
         assertEquals("GreenE", label);
 
-        Node greenJNode = source;
+        Station greenJNode = source;
         assertEquals("Prudential", greenJNode.getName());
         greenJNode = testPath.get(0).getOppositeNode(greenJNode);
         assertEquals("Copley", greenJNode.getName());
@@ -124,9 +124,9 @@ public class getPathJunctionTests {
         String label = testPath.get(0).getLabel();
         assertEquals("GreenB", label);
 
-        Node greenJNode = testPath.get(0).getNode1();
+        Station greenJNode = testPath.get(0).getNode1();
         assertEquals("BlandfordStreet", greenJNode.getName());
-        Node greenJNodes = testPath.get(0).getOppositeNode(greenJNode);
+        Station greenJNodes = testPath.get(0).getOppositeNode(greenJNode);
         assertEquals("Kenmore", greenJNodes.getName());
 
         label = testPath.get(1).getLabel();
@@ -140,15 +140,15 @@ public class getPathJunctionTests {
     @org.junit.jupiter.api.Test
     void multiGraphGreenDtoGreenBJunctionLine() {
 
-        Node source = getStationByName("Fenway");
-        Node destination = getStationByName("BlandfordStreet");
+        Station source = getStationByName("Fenway");
+        Station destination = getStationByName("BlandfordStreet");
 
         // Tests Obtained Route Correct for the Green Junction line from GreenD to GreenB
         testPath = testGraph.getPath(source, destination);
         String label = testPath.get(0).getLabel();
         assertEquals("GreenD", label);
 
-        Node greenJNode = source;
+        Station greenJNode = source;
         assertEquals("Fenway", greenJNode.getName());
         greenJNode = testPath.get(0).getOppositeNode(greenJNode);
         assertEquals("Kenmore", greenJNode.getName());
@@ -164,13 +164,13 @@ public class getPathJunctionTests {
     void multiGraphGreenEtoGreenDJunctionLine() {
 
         // Tests Obtained Route Correct for the Green Junction line from GreenE to GreenD
-        Node source = getStationByName("Prudential");
-        Node destination = getStationByName("Fenway");
+        Station source = getStationByName("Prudential");
+        Station destination = getStationByName("Fenway");
         testPath = testGraph.getPath(source, destination);
         String label = testPath.get(0).getLabel();
         assertEquals("GreenE", label);
 
-        Node greenJNode = source;
+        Station greenJNode = source;
         assertEquals("Prudential", greenJNode.getName());
         greenJNode = testPath.get(0).getOppositeNode(greenJNode);
         assertEquals("Copley", greenJNode.getName());
@@ -198,13 +198,13 @@ public class getPathJunctionTests {
     void multiGraphGreenDtoGreenJunctionLine() {
 
         // Tests Obtained Route Correct for the Green Junction line from GreenD to Green
-        Node source = getStationByName("Fenway");
-        Node destination = getStationByName("Boylston");
+        Station source = getStationByName("Fenway");
+        Station destination = getStationByName("Boylston");
         testPath = testGraph.getPath(source, destination);
         String label = testPath.get(0).getLabel();
         assertEquals("GreenD", label);
 
-        Node greenJNode = source;
+        Station greenJNode = source;
         assertEquals("Fenway", greenJNode.getName());
         greenJNode = testPath.get(0).getOppositeNode(greenJNode);
         assertEquals("Kenmore", greenJNode.getName());
@@ -246,15 +246,15 @@ public class getPathJunctionTests {
     @org.junit.jupiter.api.Test
     void multiGraphOrangeToRed() {
 
-        Node source = getStationByName("Chinatown");
-        Node destination = getStationByName("Charles/MGH");
+        Station source = getStationByName("Chinatown");
+        Station destination = getStationByName("Charles/MGH");
 
         // Tests Obtained Route Correct for the Orange ChinaTown to Red Charles/MGH
         testPath = testGraph.getPath(source, destination);
         String label = testPath.get(0).getLabel();
         assertEquals("Orange", label);
 
-        Node orangeNode = source;
+        Station orangeNode = source;
         assertEquals("Chinatown", orangeNode.getName());
         orangeNode = testPath.get(0).getOppositeNode(orangeNode);
         assertEquals("DowntownCrossing", orangeNode.getName());
@@ -273,14 +273,14 @@ public class getPathJunctionTests {
     @org.junit.jupiter.api.Test
     void multiGraphOrangeToGreen() {
 
-        Node source = getStationByName("Chinatown");
-        Node destination = getStationByName("Boylston");
+        Station source = getStationByName("Chinatown");
+        Station destination = getStationByName("Boylston");
 
         testPath = testGraph.getPath(source, destination);
         String label = testPath.get(0).getLabel();
         assertEquals("Orange", label);
 
-        Node orangeNode = source;
+        Station orangeNode = source;
         assertEquals("Chinatown", orangeNode.getName());
         orangeNode = testPath.get(0).getOppositeNode(orangeNode);
         assertEquals("DowntownCrossing", orangeNode.getName());
@@ -288,7 +288,7 @@ public class getPathJunctionTests {
         label = testPath.get(1).getLabel();
         assertEquals("Red", label);
 
-        Node greenNode = testPath.get(2).getOppositeNode(orangeNode);
+        Station greenNode = testPath.get(2).getOppositeNode(orangeNode);
         assertEquals("ParkStreet", greenNode.getName());
 
         label = testPath.get(2).getLabel();
@@ -302,8 +302,8 @@ public class getPathJunctionTests {
     @org.junit.jupiter.api.Test
     void multiGraphOrangeToBlue() {
 
-        Node source = getStationByName("Chinatown");
-        Node destination = getStationByName("Bowdoin");
+        Station source = getStationByName("Chinatown");
+        Station destination = getStationByName("Bowdoin");
 
         // Tests Obtained Route Correct for the Orange Chinatown to Blue Bowdoin
         // swing at DowntownCrossing,ParkStreet,GovernmentCenter
@@ -311,7 +311,7 @@ public class getPathJunctionTests {
         String label = testPath.get(0).getLabel();
         assertEquals("Orange", label);
 
-        Node orangeNode = source;
+        Station orangeNode = source;
         assertEquals("Chinatown", orangeNode.getName());
         orangeNode = testPath.get(0).getOppositeNode(orangeNode);
         assertEquals("DowntownCrossing", orangeNode.getName());
@@ -325,7 +325,7 @@ public class getPathJunctionTests {
         label = testPath.get(2).getLabel();
         assertEquals("Blue", label);
 
-        Node blueNode = testPath.get(2).getOppositeNode(orangeNode);
+        Station blueNode = testPath.get(2).getOppositeNode(orangeNode);
         assertEquals("GovernmentCenter", blueNode.getName());
 
         label = testPath.get(3).getLabel();
@@ -340,15 +340,15 @@ public class getPathJunctionTests {
     @org.junit.jupiter.api.Test
     void multiGraphBlueToRed() {
 
-        Node source = getStationByName("Aquarium");
-        Node destination = getStationByName("Charles/MGH");
+        Station source = getStationByName("Aquarium");
+        Station destination = getStationByName("Charles/MGH");
 
         // Tests Obtained Route Correct for the Blue Aquarium to Red Charles/MGH
         testPath = testGraph.getPath(source, destination);
         String label = testPath.get(0).getLabel();
         assertEquals("Blue", label);
 
-        Node blueNode = source;
+        Station blueNode = source;
         assertEquals("Aquarium", blueNode.getName());
         blueNode = testPath.get(0).getOppositeNode(blueNode);
         assertEquals("State", blueNode.getName());
@@ -358,13 +358,13 @@ public class getPathJunctionTests {
         label = testPath.get(2).getLabel();
         assertEquals("Green", label);
 
-        Node greenNode = testPath.get(2).getOppositeNode(blueNode);
+        Station greenNode = testPath.get(2).getOppositeNode(blueNode);
         assertEquals("ParkStreet", greenNode.getName());
 
         label = testPath.get(3).getLabel();
         assertEquals("Red", label);
 
-        Node redNode = testPath.get(3).getOppositeNode(greenNode);
+        Station redNode = testPath.get(3).getOppositeNode(greenNode);
         assertEquals("Charles/MGH", redNode.getName());
     }
 
@@ -373,15 +373,15 @@ public class getPathJunctionTests {
     void multiGraphBlueToOrangeGreen() {
 
         // Tests Obtained Route Correct for the Blue Aquarium to Orange/Green Haymarket via State
-        Node source = getStationByName("Aquarium");
-        Node destination = getStationByName("Haymarket");
+        Station source = getStationByName("Aquarium");
+        Station destination = getStationByName("Haymarket");
 
         testPath = testGraph.getPath(source, destination);
 
         String label = testPath.get(0).getLabel();
         assertEquals("Blue", label);
 
-        Node blueNode = source;
+        Station blueNode = source;
         assertEquals("Aquarium", blueNode.getName());
         blueNode = testPath.get(0).getOppositeNode(blueNode);
         assertEquals("State", blueNode.getName());
@@ -389,7 +389,7 @@ public class getPathJunctionTests {
         label = testPath.get(1).getLabel();
         assertEquals("Orange", label);
 
-        Node orangeNode = testPath.get(1).getOppositeNode(blueNode);
+        Station orangeNode = testPath.get(1).getOppositeNode(blueNode);
         assertEquals("Haymarket", orangeNode.getName());
     }
 }

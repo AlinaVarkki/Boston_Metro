@@ -1,5 +1,4 @@
 import Graph.Edge;
-import Graph.Node;
 import Metro.Connection;
 import Metro.Station;
 
@@ -12,9 +11,9 @@ public class FileReader {
     ArrayList<String[]> edgesToBeProcessed;
     HashSet<String> linesToBeProcessed;
 
-    HashMap<String, Node> stationsNodesById;
-    HashMap<String, Node> stationsById;
-    List<Edge<Node>> connections;
+    HashMap<String, Station> stationsNodesById;
+    HashMap<String, Station> stationsById;
+    List<Edge<Station>> connections;
     int idNumCheck;
 
 
@@ -100,11 +99,11 @@ public class FileReader {
         connections = new ArrayList<>();
         for (String[] edgeArr : edgesToBeProcessed) {
             if (!edgeArr[2].equals("0")) {
-                Connection<Node> new_connection = new Connection<>(stationsById.get(edgeArr[0]), stationsById.get(edgeArr[2]), edgeArr[1]);
+                Connection<Station> new_connection = new Connection<>(stationsById.get(edgeArr[0]), stationsById.get(edgeArr[2]), edgeArr[1]);
                 connections.add(new_connection);
             }
             if (!edgeArr[3].equals("0")) {
-                Connection<Node> new_connection = new Connection<>(stationsById.get(edgeArr[0]), stationsById.get(edgeArr[3]), edgeArr[1]);
+                Connection<Station> new_connection = new Connection<>(stationsById.get(edgeArr[0]), stationsById.get(edgeArr[3]), edgeArr[1]);
                 connections.add(new_connection);
             }
 
@@ -115,7 +114,7 @@ public class FileReader {
      * Returns the Edges loaded from the file
      * @return Edges loaded from the file
      */
-    public List<Edge<Node>> getConnections() {
+    public List<Edge<Station>> getConnections() {
         return connections;
     }
 
@@ -123,8 +122,8 @@ public class FileReader {
      * Return the list of Nodes loaded from the file
      * @return list of nodes loaded from the file
      */
-    public List<Node> getStations() {
-        List<Node> stations = new ArrayList<>();
+    public List<Station> getStations() {
+        List<Station> stations = new ArrayList<>();
         for (String s : stationsNodesById.keySet()) stations.add(stationsById.get(s));
         System.out.println("Num of Stations (exp: 124):" + stations.size());
         return stations;

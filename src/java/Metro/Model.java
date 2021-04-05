@@ -2,7 +2,6 @@ package Metro;
 
 import Graph.Edge;
 import Graph.MultiGraph;
-import Graph.Node;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
@@ -12,14 +11,14 @@ import java.util.Map;
 
 public class Model {
 
-    private MultiGraph<Node, Edge<Node>> multiGraph;
-    private HashMap<String, Node> stationsHashMap;
-    private List<Node> stations;
-    private List<Edge<Node>> connections;
-    private Map<Node, List<Edge<Node>>> adjMap;
+    private MultiGraph<Station, Edge<Station>> multiGraph;
+    private HashMap<String, Station> stationsHashMap;
+    private List<Station> stations;
+    private List<Edge<Station>> connections;
+    private Map<Station, List<Edge<Station>>> adjMap;
     private Map<String, List<String>> stationColorMap;
 
-    public Model(List<Node> stations, List<Edge<Node>> connections) {
+    public Model(List<Station> stations, List<Edge<Station>> connections) {
         this.stations = stations;
         this.connections = connections;
         this.setMultiGraph();
@@ -39,10 +38,10 @@ public class Model {
      */
     private void setMultiGraph() {
 
-        multiGraph = new MultiGraph<Node, Edge<Node>>();
+        multiGraph = new MultiGraph<Station, Edge<Station>>();
 
-        for (Node n : stations) multiGraph.addNode(n);
-        for (Edge<Node> e : connections) multiGraph.addEdge(e);
+        for (Station n : stations) multiGraph.addNode(n);
+        for (Edge<Station> e : connections) multiGraph.addEdge(e);
 
     }
 
@@ -73,7 +72,7 @@ public class Model {
      */
     private void setStationsHashMap() {
         stationsHashMap = new HashMap<>();
-        for (Node station : stations) {
+        for (Station station : stations) {
             this.stationsHashMap.put(station.toString(), station);
         }
     }
@@ -85,25 +84,25 @@ public class Model {
      * @return List of Tuples for optimal Route
      */
     public List<Pair<String, List<String>>> runSearch(String start, String destination, String algorithm) {
-        Node from = this.find(start);
-        Node to = this.find(destination);
+        Station from = this.find(start);
+        Station to = this.find(destination);
 
         List<Pair<String, List<String>>> processedForView = new ArrayList<>();
-        List<Edge<Node>> path;
+        List<Edge<Station>> path;
         if (algorithm.equals("Length")) {
             path = multiGraph.getPath(from, to);
         } else {
             path = multiGraph.getPathDFS(from, to);
         }
 
-        Node station = from;
+        Station station = from;
 
         if (path.size() != 0) {
             String lineColour = path.get(0).getLabel();
             Pair<String, List<String>> line = new Pair<>(lineColour, new ArrayList<>());
             line.getValue().add(station.toString());
 
-            for (Edge<Node> edge : path) {
+            for (Edge<Station> edge : path) {
                 lineColour = edge.getLabel();
                 if (!lineColour.equals(line.getKey())) {
                     processedForView.add(line);
@@ -123,7 +122,7 @@ public class Model {
      * @param name String
      * @return Node of station with name
      */
-    private Node find(String name) {
+    private Station find(String name) {
         return stationsHashMap.get(name);
     }
 
@@ -131,14 +130,14 @@ public class Model {
      * @param adjMap of nodes and their corresponding edges
      * fills stationColorMap with station name and colors of lines that pass through
      */
-    private void fillStationColorMap(Map<Node, List<Edge<Node>>> adjMap) {
-        List<Edge<Node>> adjEdges;
+    private void fillStationColorMap(Map<Station, List<Edge<Station>>> adjMap) {
+        List<Edge<Station>> adjEdges;
 
-        for (Node n : adjMap.keySet()) {
+        for (Station n : adjMap.keySet()) {
             adjEdges = adjMap.get(n);
             List<String> colors = new ArrayList<>();
 
-            for (Edge<Node> e : adjEdges) {
+            for (Edge<Station> e : adjEdges) {
                 String color = e.getLabel();
                 if (!colors.contains(color)) {
                     colors.add(color);

@@ -1,6 +1,5 @@
 import Graph.Edge;
 import Graph.MultiGraph;
-import Graph.Node;
 import Metro.Connection;
 import Metro.Station;
 
@@ -12,14 +11,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class getPathLineTests {
 
     //Used to Test Metro.Station and Metro.Connection
-    Node a, b;
-    Edge<Node> c;
+    Station a, b;
+    Edge<Station> c;
 
     //User for Testing Graph.MultiGraph Methods
-    List<Edge<Node>> testConnections;
-    List<Node> testStations;
-    MultiGraph<Node, Edge<Node>> testGraph;
-    List<Edge<Node>> testPath;
+    List<Edge<Station>> testConnections;
+    List<Station> testStations;
+    MultiGraph<Station, Edge<Station>> testGraph;
+    List<Edge<Station>> testPath;
 
     /* Creates a Metro.Connection & two new Stations and Reads in bostonMetroStations.txt*/
     @org.junit.jupiter.api.BeforeEach
@@ -34,16 +33,16 @@ public class getPathLineTests {
         testStations = reader.getStations();
         testConnections = reader.getConnections();
 
-        testGraph = new MultiGraph<Node, Edge<Node>>();
-        for (Node n : testStations) testGraph.addNode(n);
+        testGraph = new MultiGraph<Station, Edge<Station>>();
+        for (Station n : testStations) testGraph.addNode(n);
         for (Edge e : testConnections) testGraph.addEdge(e);
 
     }
 
 
-    Node getStationByName(String stationName){
-        Map<Node, List<Edge<Node>>> adjMap = testGraph.getAdjMap();
-        for(Node station: adjMap.keySet()){
+    Station getStationByName(String stationName){
+        Map<Station, List<Edge<Station>>> adjMap = testGraph.getAdjMap();
+        for(Station station: adjMap.keySet()){
             if(station.getName().equals(stationName)) return station;
         }
         return null;
@@ -69,8 +68,8 @@ public class getPathLineTests {
     @org.junit.jupiter.api.Test
     void fileReader() {
         FileReader reader = new FileReader("src/resources/bostonMetroStations.txt");
-        List<Node> testStations = reader.getStations();
-        List<Edge<Node>> testConnections = reader.getConnections();
+        List<Station> testStations = reader.getStations();
+        List<Edge<Station>> testConnections = reader.getConnections();
 
         // Tests Names Correctly Read in from Data from start of the file to the end
         assertEquals("FenwoodRoad", testStations.get(0).getName());
@@ -81,8 +80,8 @@ public class getPathLineTests {
         /* Tests Connections Correctly Read in from Data (Bi-directional) */
 
         // Tests Basic Case of Orange line between OakGrove and Malden Read in Correctly
-        Node a = testConnections.get(0).getNode1();
-        Node b = testConnections.get(0).getNode2();
+        Station a = testConnections.get(0).getNode1();
+        Station b = testConnections.get(0).getNode2();
         assertEquals("OakGrove", a.getName());
         assertEquals("Malden", b.getName());
         assertEquals("Orange", testConnections.get(0).getLabel());
@@ -99,11 +98,11 @@ public class getPathLineTests {
     void multiGraphBlueLine() {
 
         // Tests Nodes and Edges Correctly Set Up for the Blue line
-        Node source = getStationByName("Bowdoin");
-        Node destination = getStationByName("Wonderland");
+        Station source = getStationByName("Bowdoin");
+        Station destination = getStationByName("Wonderland");
         testPath = testGraph.getPath(source, destination);
 
-        Node blueNode = source;
+        Station blueNode = source;
         assertEquals("Bowdoin", blueNode.getName());
         String label = testPath.get(0).getLabel();
         assertEquals("Blue", label);
@@ -170,12 +169,12 @@ public class getPathLineTests {
         Station source = (Station) getStationByName("OakGrove");
         // Tests Nodes and Edges Correctly Set Up for the Orange line
         testPath = testGraph.getPath(getStationByName("OakGrove"), getStationByName("ForestHills"));
-        Node orangeNode = testPath.get(0).getNode1();
+        Station orangeNode = testPath.get(0).getNode1();
         assertEquals("OakGrove", orangeNode.getName());
         String label = testPath.get(0).getLabel();
         assertEquals("Orange", label);
 
-        Node orangeNodes = testPath.get(1).getOppositeNode(orangeNode);
+        Station orangeNodes = testPath.get(1).getOppositeNode(orangeNode);
         assertEquals("Malden", orangeNodes.getName());
         label = testPath.get(1).getLabel();
         assertEquals("Orange", label);
@@ -268,11 +267,11 @@ public class getPathLineTests {
     @org.junit.jupiter.api.Test
     void multiGraphRedLine() {
 
-        Node source = getStationByName("Alewife");
-        Node destination = getStationByName("JFK/UMass");
+        Station source = getStationByName("Alewife");
+        Station destination = getStationByName("JFK/UMass");
         // Tests Nodes and Edges Correctly Set Up for the Red line
         testPath = testGraph.getPath(source, destination);
-        Node redNode = source;
+        Station redNode = source;
         assertEquals("Alewife", redNode.getName());
         String label = testPath.get(0).getLabel();
         assertEquals("Red", label);
@@ -343,12 +342,12 @@ public class getPathLineTests {
 
         // Tests Nodes and Edges Correctly Set Up for the RedB line
         testPath = testGraph.getPath(getStationByName("JFK/UMass"), getStationByName("Braintree"));
-        Node redANode = testPath.get(0).getNode1();
+        Station redANode = testPath.get(0).getNode1();
         assertEquals("JFK/UMass", redANode.getName());
         String label = testPath.get(0).getLabel();
         assertEquals("RedB", label);
 
-        Node redANodes = testPath.get(1).getOppositeNode(redANode);
+        Station redANodes = testPath.get(1).getOppositeNode(redANode);
         assertEquals("NorthQuincy", redANodes.getName());
         label = testPath.get(1).getLabel();
         assertEquals("RedB", label);
@@ -378,12 +377,12 @@ public class getPathLineTests {
 
         // Tests Nodes and Edges Correctly Set Up for the RedA line
         testPath = testGraph.getPath(getStationByName("JFK/UMass"), getStationByName("Ashmont"));
-        Node redBNode = testPath.get(0).getNode1();
+        Station redBNode = testPath.get(0).getNode1();
         assertEquals("JFK/UMass", redBNode.getName());
         String label = testPath.get(0).getLabel();
         assertEquals("RedA", label);
 
-        Node redANodes = testPath.get(0).getOppositeNode(redBNode);
+        Station redANodes = testPath.get(0).getOppositeNode(redBNode);
         assertEquals("SavinHill", redANodes.getName());
         label = testPath.get(1).getLabel();
         assertEquals("RedA", label);
@@ -409,12 +408,12 @@ public class getPathLineTests {
 
         // Tests Nodes and Edges Correctly Set Up for the Mattapan line
         testPath = testGraph.getPath(getStationByName("Ashmont"), getStationByName("Mattapan"));
-        Node mattapanNode = testPath.get(0).getNode1();
+        Station mattapanNode = testPath.get(0).getNode1();
         assertEquals("Ashmont", mattapanNode.getName());
         String label = testPath.get(0).getLabel();
         assertEquals("Mattapan", label);
 
-        Node mattapanNodes = testPath.get(1).getOppositeNode(mattapanNode);
+        Station mattapanNodes = testPath.get(1).getOppositeNode(mattapanNode);
         assertEquals("CedarGrove", mattapanNodes.getName());
         label = testPath.get(1).getLabel();
         assertEquals("Mattapan", label);
@@ -454,12 +453,12 @@ public class getPathLineTests {
 
         // Tests Nodes and Edges Correctly Set Up for the Green line
         testPath = testGraph.getPath(getStationByName("Lechmere"), getStationByName("Copley"));
-        Node greenNode = testPath.get(0).getNode1();
+        Station greenNode = testPath.get(0).getNode1();
         assertEquals("Lechmere", greenNode.getName());
         String label = testPath.get(0).getLabel();
         assertEquals("Green", label);
 
-        Node greenNodes = testPath.get(1).getOppositeNode(greenNode);
+        Station greenNodes = testPath.get(1).getOppositeNode(greenNode);
         assertEquals("SciencePark", greenNodes.getName());
         label = testPath.get(1).getLabel();
         assertEquals("Green", label);
@@ -503,10 +502,10 @@ public class getPathLineTests {
     void multiGraphGreenBLine() {
 
         // Tests Nodes and Edges Correctly Set Up for the GreenB line
-        Node source = getStationByName("Copley");
-        Node destination = getStationByName("BostonCollege");
+        Station source = getStationByName("Copley");
+        Station destination = getStationByName("BostonCollege");
         testPath = testGraph.getPath(source, destination);
-        Node greenBNode = source;
+        Station greenBNode = source;
         assertEquals("Copley", greenBNode.getName());
         String label = testPath.get(0).getLabel();
         assertEquals("GreenB", label);
@@ -636,12 +635,12 @@ public class getPathLineTests {
 
         // Tests Nodes and Edges Correctly Set Up for the GreenC line
         testPath = testGraph.getPath(getStationByName("Kenmore"), getStationByName("ClevelandCircle"));
-        Node greenCNode = testPath.get(0).getNode1();
+        Station greenCNode = testPath.get(0).getNode1();
         assertEquals("Kenmore", greenCNode.getName());
         String label = testPath.get(0).getLabel();
         assertEquals("GreenC", label);
 
-        Node greenCNodes = testPath.get(0).getOppositeNode(greenCNode);
+        Station greenCNodes = testPath.get(0).getOppositeNode(greenCNode);
         assertEquals("St.Mary'sStreet", greenCNodes.getName());
         label = testPath.get(1).getLabel();
         assertEquals("GreenC", label);
@@ -710,10 +709,10 @@ public class getPathLineTests {
     void multiGraphGreenDLine() {
 
         // Tests Nodes and Edges Correctly Set Up for the GreenD line
-        Node source = getStationByName("Kenmore");
-        Node destination = getStationByName("Riverside");
+        Station source = getStationByName("Kenmore");
+        Station destination = getStationByName("Riverside");
         testPath = testGraph.getPath(source, destination);
-        Node greenDNode = source;
+        Station greenDNode = source;
         assertEquals("Kenmore", greenDNode.getName());
         String label = testPath.get(0).getLabel();
         assertEquals("GreenD", label);
@@ -788,12 +787,12 @@ public class getPathLineTests {
 
         // Tests Nodes and Edges Correctly Set Up for the GreenE line
         testPath = testGraph.getPath(getStationByName("Copley"), getStationByName("HeathStreet"));
-        Node greenENode = testPath.get(0).getNode1();
+        Station greenENode = testPath.get(0).getNode1();
         assertEquals("Copley", greenENode.getName());
         String label = testPath.get(0).getLabel();
         assertEquals("GreenE", label);
 
-        Node greenENodes = testPath.get(0).getOppositeNode(greenENode);
+        Station greenENodes = testPath.get(0).getOppositeNode(greenENode);
         assertEquals("Prudential", greenENodes.getName());
         label = testPath.get(1).getLabel();
         assertEquals("GreenE", label);

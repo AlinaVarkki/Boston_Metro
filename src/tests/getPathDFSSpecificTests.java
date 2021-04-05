@@ -1,6 +1,6 @@
 import Graph.Edge;
 import Graph.MultiGraph;
-import Graph.Node;
+import Metro.Station;
 
 import java.util.List;
 import java.util.Map;
@@ -11,10 +11,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class getPathDFSSpecificTests {
 
     //User for Testing Graph.MultiGraph Methods
-    List<Edge<Node>> testConnections;
-    List<Node> testStations;
-    MultiGraph<Node, Edge<Node>> testGraph;
-    List<Edge<Node>> testPath;
+    List<Edge<Station>> testConnections;
+    List<Station> testStations;
+    MultiGraph<Station, Edge<Station>> testGraph;
+    List<Edge<Station>> testPath;
 
     /* Creates a Metro.Connection & two new Stations and Reads in bostonMetroStations.txt*/
     @org.junit.jupiter.api.BeforeEach
@@ -24,15 +24,15 @@ public class getPathDFSSpecificTests {
         testStations = reader.getStations();
         testConnections = reader.getConnections();
 
-        testGraph = new MultiGraph<Node, Edge<Node>>();
-        for (Node n : testStations) testGraph.addNode(n);
+        testGraph = new MultiGraph<Station, Edge<Station>>();
+        for (Station n : testStations) testGraph.addNode(n);
         for (Edge e : testConnections) testGraph.addEdge(e);
 
     }
 
-    Node getStationByName(String stationName){
-        Map<Node, List<Edge<Node>>> adjMap = testGraph.getAdjMap();
-        for(Node station: adjMap.keySet()){
+    Station getStationByName(String stationName){
+        Map<Station, List<Edge<Station>>> adjMap = testGraph.getAdjMap();
+        for(Station station: adjMap.keySet()){
             if(station.getName().equals(stationName)) return station;
         }
         return null;
@@ -49,14 +49,14 @@ public class getPathDFSSpecificTests {
     @org.junit.jupiter.api.Test
     void multiGraphOrangeToGreenWithOnly1Transition() {
 
-        Node source = getStationByName("Chinatown");
-        Node destination = getStationByName("Boylston");
+        Station source = getStationByName("Chinatown");
+        Station destination = getStationByName("Boylston");
 
         testPath = testGraph.getPathDFS(source, destination);
         String label = testPath.get(0).getLabel();
         assertEquals("Orange", label);
 
-        Node orangeNode = source;
+        Station orangeNode = source;
         assertEquals("Chinatown", orangeNode.getName());
         orangeNode = testPath.get(0).getOppositeNode(orangeNode);
         assertEquals("DowntownCrossing", orangeNode.getName());
@@ -68,7 +68,7 @@ public class getPathDFSSpecificTests {
         label = testPath.get(3).getLabel();
         assertEquals("Green", label);
 
-        Node greenNode = testPath.get(3).getOppositeNode(orangeNode);
+        Station greenNode = testPath.get(3).getOppositeNode(orangeNode);
         assertEquals("GovernmentCenter", greenNode.getName());
         greenNode = testPath.get(4).getOppositeNode(greenNode);
         assertEquals("ParkStreet", greenNode.getName());
@@ -82,14 +82,14 @@ public class getPathDFSSpecificTests {
     void multiGraphOrangeToBlueWithOnly1Transition() {
 
         // Previous test getPath() for route called - multiGraphOrangeToBlue
-        Node source = getStationByName("Chinatown");
-        Node destination = getStationByName("Bowdoin");
+        Station source = getStationByName("Chinatown");
+        Station destination = getStationByName("Bowdoin");
 
         testPath = testGraph.getPathDFS(source, destination);
         String label = testPath.get(0).getLabel();
         assertEquals("Orange", label);
 
-        Node orangeNode = source;
+        Station orangeNode = source;
         assertEquals("Chinatown", orangeNode.getName());
         orangeNode = testPath.get(0).getOppositeNode(orangeNode);
         assertEquals("DowntownCrossing", orangeNode.getName());
@@ -99,7 +99,7 @@ public class getPathDFSSpecificTests {
         label = testPath.get(2).getLabel();
         assertEquals("Blue", label);
 
-        Node blueNode = testPath.get(2).getOppositeNode(orangeNode);
+        Station blueNode = testPath.get(2).getOppositeNode(orangeNode);
         assertEquals("GovernmentCenter", blueNode.getName());
         blueNode = testPath.get(3).getOppositeNode(blueNode);
         assertEquals("Bowdoin", blueNode.getName());
@@ -113,13 +113,13 @@ public class getPathDFSSpecificTests {
     void multiGraphGreenEtoGreenDJunctionLineWithOnly2Transitions() {
 
         // Previous test getPath() for route called - multiGraphGreenEtoGreenD
-        Node source = getStationByName("Prudential");
-        Node destination = getStationByName("Fenway");
+        Station source = getStationByName("Prudential");
+        Station destination = getStationByName("Fenway");
         testPath = testGraph.getPathDFS(source, destination);
         String label = testPath.get(0).getLabel();
         assertEquals("GreenE", label);
 
-        Node greenJNode = source;
+        Station greenJNode = source;
         assertEquals("Prudential", greenJNode.getName());
         greenJNode = testPath.get(0).getOppositeNode(greenJNode);
         assertEquals("Copley", greenJNode.getName());
