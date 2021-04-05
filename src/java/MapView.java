@@ -3,7 +3,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 
-public class mapView {
+public class MapView {
 
     View view;
     String destinationDirection;
@@ -14,7 +14,7 @@ public class mapView {
     private void getName(ActionEvent event) {
 
         Button button = (Button) event.getSource();
-        String stationName = parseString(button.getId());
+        String stationName = button.getId().substring(1);
 
         view.closeMap();
 
@@ -28,24 +28,6 @@ public class mapView {
         view.closeMap();
     }
 
-    //method that parses the station name to the one we use for the search.
-    // Implemented because button ids cannot contain slashed and numbers at the start
-    public String parseString(String station) {
-        StringBuilder stationParsed = new StringBuilder();
-
-        //starting with 1 because first character is a dummy as id cannot be started with a number
-        for (int i = 1; i < station.length(); i++) {
-            char currChar = station.charAt(i);
-            if (Character.isUpperCase(currChar)) {
-                stationParsed.append(" " + currChar);
-            } else {
-                stationParsed.append(currChar);
-            }
-        }
-
-        return stationParsed.toString();
-    }
-
     public void setView(View view) {
         this.view = view;
     }
@@ -57,6 +39,5 @@ public class mapView {
     public String getDestinationDirection() {
         return this.destinationDirection;
     }
-
 
 }

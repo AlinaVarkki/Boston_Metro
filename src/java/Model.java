@@ -10,11 +10,14 @@ public class Model {
     MultiGraph<Node, Edge<Node>> multiGraph;
     HashMap<String, Node> stationsHashMap;
     List<Node> stations;
+    List<Edge<Node>> connections;
     Map<Node, List<Edge<Node>>> adjMap;
     private Map<String, List<String>> stationColorMap;
 
-    public Model(String filepath) {
-        this.setMultiGraph(filepath);
+    public Model(List<Node> stations, List<Edge<Node>> connections) {
+        this.stations = stations;
+        this.connections = connections;
+        this.setMultiGraph();
         this.setStationsHashMap();
         stationColorMap = new HashMap<>();
         getAdjMap();
@@ -24,16 +27,13 @@ public class Model {
     /**
      * Called in Model Constructor
      *
-     * @param filepath passed to FileReader
-     *                 MultiGraph initialised with Nodes and Edges
-     *                 Nodes representing Stations, Edges representing Connecting Lines
+     *
+     * MultiGraph initialised with Nodes and Edges
+     * Nodes representing Stations, Edges representing Connecting Lines
      */
-    private void setMultiGraph(String filepath) {
-        FileReader reader = new FileReader(filepath);
+    private void setMultiGraph() {
 
         multiGraph = new MultiGraph<>();
-        stations = reader.getStations();
-        List<Edge<Node>> connections = reader.getConnections();
 
         for (Node n : stations) multiGraph.addNode(n);
         for (Edge<Node> e : connections) multiGraph.addEdge(e);

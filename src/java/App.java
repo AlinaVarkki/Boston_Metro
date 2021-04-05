@@ -25,9 +25,10 @@ public class App extends Application {
         window.setScene(scene);
         window.show();
 
+        FileReader reader = new FileReader("src/resources/bostonMetroStations.txt");
         View view = loader.getController();
         view.setRoot(root);
-        Model model = new Model("src/resources/bostonMetroStations.txt");
+        Model model = new Model(reader.getStations(), reader.getConnections());
         Controller controller = new Controller(model, view);
 
         controller.run();
