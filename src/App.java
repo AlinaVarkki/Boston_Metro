@@ -8,7 +8,6 @@ import javafx.stage.Stage;
 import java.util.List;
 
 public class App extends Application {
-    Stage window;
 
     public static void main(String[] args){
         launch(args);

@@ -31,63 +31,6 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
         if(node1Adj != null) node1Adj.add(edge);
     }
 
-    /**
-     * @param source,destination used as Start and Finish points for Path Construction
-     * visited list keeps track of the line it has been visited from along with the node
-     * Builds all possible paths from source to destination prioritizing exploring line that the last explored node is on
-     * Calls removeCycle
-     * @return LinkedList of Edges for the current Path
-     * */
-    @Override
-    public List<E> getPathDFS(N source, N destination) {
-        List<String> visited = new ArrayList<>();
-        Deque<Pair<N, List<E>>> deque = new LinkedList<>();
-
-        deque.add(new Pair<>(source,new LinkedList<>()));
-        Pair<N,List<E>> currPair;
-        N currNode;
-        List<E> currPath;
-        N neighbourNode;
-
-        while(!deque.isEmpty()){
-            currPair = deque.poll();
-            currNode = currPair.getKey();
-            currPath = currPair.getValue();
-
-            if(currNode == destination){
-                deque.clear();
-                return removeCycle(currPath);
-            }
-
-
-                if(currPath.size() > 0){
-                    String labelFrom = currPath.get(currPath.size()-1).getLabel();
-                    visited.add(currNode.toString() + labelFrom);
-                }else{
-                    visited.add(currNode.toString() + "any");
-                }
-                List<E> adjEdges = adjacencyMap.get(currNode);
-                for(E edge: adjEdges){
-                    neighbourNode = edge.getOppositeNode(currNode);
-                    String p1 = neighbourNode.toString() + edge.getLabel();
-                    String p2 = neighbourNode.toString() + "any";
-                    if(!visited.contains(p1) && !visited.contains(p2)){
-                        List<E> newPath = new LinkedList<>(currPath);
-                        newPath.add(edge);
-                        //always put in front the edges that have the same label so the line would get explored first
-                        if(currPath.size() > 0 && edge.getLabel().equals(currPath.get(currPath.size()-1).getLabel())){
-                            deque.addFirst(new Pair<>(neighbourNode, newPath));
-                        }else{
-                            deque.add(new Pair<>(neighbourNode, newPath));
-                        }
-                    }
-                }
-
-        }
-        System.out.println("No path found");
-        return new LinkedList<E>();
-    }
-
     @Override
     public List<E> getPath(N source, N destination) {
         List<String> visited = new ArrayList<>();
@@ -146,10 +89,8 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
                         newPath.add(edge);
                         //always put in front the edges that have the same label so the line would get explored first
                         if(currPath.size() > 0 && edge.getLabel().equals(currPath.get(currPath.size()-1).getLabel())){
-//                            deque.addFirst(new Pair<>(neighbourNode, newPath));
                             nodesToEnqueueSameLabel.add(new Triple<>(neighbourNode, newPath, currTransitions));
                         }else{
-//                            deque.add(new Pair<>(neighbourNode, newPath));
                             nodesToEnqueueDiffLabel.add(new Triple<>(neighbourNode, newPath, currTransitions + 1));
                         }
                     }
@@ -157,6 +98,63 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N,E> {
                     deque.addAll(nodesToEnqueueSameLabel);
                     deque.addAll(nodesToEnqueueDiffLabel);
 
+
+        }
+        System.out.println("No path found");
+        return new LinkedList<E>();
+    }
+
+    /**
+     * @param source,destination used as Start and Finish points for Path Construction
+     * visited list keeps track of the line it has been visited from along with the node
+     * Builds all possible paths from source to destination prioritizing exploring line that the last explored node is on
+     * Calls removeCycle
+     * @return LinkedList of Edges for the current Path
+     * */
+    @Override
+    public List<E> getPathDFS(N source, N destination) {
+        List<String> visited = new ArrayList<>();
+        Deque<Pair<N, List<E>>> deque = new LinkedList<>();
+
+        deque.add(new Pair<>(source,new LinkedList<>()));
+        Pair<N,List<E>> currPair;
+        N currNode;
+        List<E> currPath;
+        N neighbourNode;
+
+        while(!deque.isEmpty()){
+            currPair = deque.poll();
+            currNode = currPair.getKey();
+            currPath = currPair.getValue();
+
+            if(currNode == destination){
+                deque.clear();
+                return removeCycle(currPath);
+            }
+
+
+            if(currPath.size() > 0){
+                String labelFrom = currPath.get(currPath.size()-1).getLabel();
+                visited.add(currNode.toString() + labelFrom);
+            }else{
+                visited.add(currNode.toString() + "any");
+            }
+            List<E> adjEdges = adjacencyMap.get(currNode);
+            for(E edge: adjEdges){
+                neighbourNode = edge.getOppositeNode(currNode);
+                String p1 = neighbourNode.toString() + edge.getLabel();
+                String p2 = neighbourNode.toString() + "any";
+                if(!visited.contains(p1) && !visited.contains(p2)){
+                    List<E> newPath = new LinkedList<>(currPath);
+                    newPath.add(edge);
+                    //always put in front the edges that have the same label so the line would get explored first
+                    if(currPath.size() > 0 && edge.getLabel().equals(currPath.get(currPath.size()-1).getLabel())){
+                        deque.addFirst(new Pair<>(neighbourNode, newPath));
+                    }else{
+                        deque.add(new Pair<>(neighbourNode, newPath));
+                    }
+                }
+            }
 
         }
         System.out.println("No path found");

@@ -9,14 +9,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Ellipse;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-
-import java.util.function.Function;
 
 public class ToggleSlider extends Parent {
 
@@ -88,8 +85,6 @@ public class ToggleSlider extends Parent {
             switchOn.addListener((obs,oldState,newState) -> {
                 boolean mapOnCheck = newState.booleanValue();
                 translateTransition.setToX(mapOnCheck ? 0+35.5 : 0);
-                /*fillTransition.setFromValue(mapOnCheck ? Color.rgb(244, 244, 244) : Color.rgb(245,153,35));
-                fillTransition.setFromValue(mapOnCheck ? Color.rgb(245,153,35) : Color.rgb(244, 244, 244));*/
                 animate.play();
             });
         }

@@ -96,28 +96,11 @@ public class FileReader {
         for(String[] edgeArr: edgesToBeProcessed){
             if(!edgeArr[2].equals("0")) {
                 Connection<Node> new_connection = new Connection<>(stationsById.get(edgeArr[0]), stationsById.get(edgeArr[2]), edgeArr[1]);
-                boolean isDuplicate = false;
-                /*for(Edge<Node> edge: connections){
-                    if(edge.getNode1() == new_connection.getNode1() && edge.getNode2() == new_connection.getNode2() && edge.getLabel().equals(new_connection.getLabel())) {
-                        isDuplicate = true;
-                        break;
-                    }
-                    if (edge.getNode1() == new_connection.getNode2() && edge.getNode2() == new_connection.getNode1() && edge.getLabel().equals(new_connection.getLabel())) {
-                        isDuplicate = true;
-                        break;
-                    }
-                }*/
-                if(!isDuplicate) {
-                    connections.add(new_connection);
-                }
+                connections.add(new_connection);
             }
             if(!edgeArr[3].equals("0")) {
                 Connection<Node> new_connection = new Connection<>(stationsById.get(edgeArr[0]), stationsById.get(edgeArr[3]), edgeArr[1]);
-                boolean isDuplicate = false;
-
-                if(!isDuplicate) {
-                    connections.add(new_connection);
-                }
+                connections.add(new_connection);
             }
 
         }

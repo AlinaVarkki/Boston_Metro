@@ -171,7 +171,7 @@ public class View {
     public void setOptionsColours(ComboBox<String> comboBox){
 
         comboBox.setCellFactory(
-                new Callback<ListView<String>, ListCell<String>>() {
+                new Callback<>() {
                     @Override public ListCell<String> call(ListView<String> param) {
                         final ListCell<String> cell = new ListCell<>() {
                             {
@@ -403,13 +403,6 @@ public class View {
         container.getChildren().remove(mapPath);
         container.setCenter(null);
 
-/*
-        if(container.getChildren().contains(pathDisplayed)){
-            container.setCenter(null);
-        }
-        else if(container.getChildren().contains(mapPath)){
-        }*/
-
         this.mapPath = this.createMap(path);
         this.pathDisplayed = pathDisplayer.createLine(path);
 
@@ -441,31 +434,6 @@ public class View {
             }
         });
 
-        /*if (root.getChildren().contains(map)){
-            this.closeMap();
-        }
-
-        this.setTitleVisibility(false);
-
-        if (root.getChildren().contains(map)){
-            this.closeMap();
-        }
-        pathDisplayed = createMap(path);
-        container.setCenter(pathDisplayed);
-
-        runDisplayPathAnimation();*/
-
-        /*if (root.getChildren().contains(map)){
-            this.closeMap();
-        }
-        this.setTitleVisibility(false);
-        if(this.pathDisplayed != null){
-            container.getChildren().remove(pathDisplayed);
-        }
-        pathDisplayed = pathDisplayer.createLine(path);
-        container.setCenter(pathDisplayed);
-
-        runDisplayPathAnimation();*/
     }
 
     /**
@@ -669,13 +637,6 @@ public class View {
             }
         }
 
-
-
-//allpoints to double[]
-
-
-//        double[] allpoints = points.stream().mapToDouble(i -> i).toArray();
-
         Double[] allpoints = new Double[points.size()];
         allpoints = points.toArray(allpoints);
 
@@ -792,10 +753,6 @@ public class View {
                 }
                 moveCaretToPos = false;
             }
-
-            //handle errors
-            //new error message
-            //fix styling in css
 
         });
 
@@ -937,11 +894,9 @@ public class View {
                 return new double[]{572,529};
 
             }
-
         }
 
         return new double[]{0,0};
 
     }
-
 }

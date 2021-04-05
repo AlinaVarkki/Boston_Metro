@@ -23,12 +23,6 @@ public class Station implements Node{
     }
 
     @Override
-    public String getID(){return this.idNumber;}
-
-    @Override
-    public void setID(String id){this.idNumber = id;}
-
-    @Override
     public String toString(){
         String name = this.idNumber+" "+this.name;
         StringBuilder newName = new StringBuilder();
