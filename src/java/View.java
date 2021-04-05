@@ -23,7 +23,7 @@ import javafx.util.Pair;
 import java.util.*;
 
 public class View {
-    AnchorPane root ;
+    AnchorPane root;
     BorderPane container;
 
     PathDisplayer pathDisplayer;
@@ -32,16 +32,16 @@ public class View {
 
     Map<String, List<String>> stationColorMap;
     List<String> sortedStations;
-    Map<String,String> idsToStations;
+    Map<String, String> idsToStations;
     Map<String, double[]> stationToCoords;
 
     String algorithmSelected;
 
     Pane map;
-    mapController mapContr;
+    mapView mapContr;
 
 
-    private final Color background = Color.rgb(11,19,43);
+    private final Color background = Color.rgb(11, 19, 43);
 
     @FXML
     Button findButton;
@@ -99,7 +99,7 @@ public class View {
     BorderPane displayArea;
 
     @FXML
-    public void initialize(){
+    public void initialize() {
         this.pathDisplayer = new PathDisplayer();
         this.algorithmSelected = "Length";
         this.sortedStations = new ArrayList<>();
@@ -110,10 +110,11 @@ public class View {
 
     /**
      * Called by Controller setUpDropDowns()
+     *
      * @param stationColorMap initialised in Model, contains all possible Line colours
-     * Activates Fade Animation of Circular Logo
+     *                        Activates Fade Animation of Circular Logo
      */
-    public void customizeDropDowns(Map<String, List<String>> stationColorMap){
+    public void customizeDropDowns(Map<String, List<String>> stationColorMap) {
         this.stationColorMap = stationColorMap;
 
         setOptionsColours(startDestSelector);
@@ -165,34 +166,37 @@ public class View {
 
     /**
      * Called by View's customizeDropDowns()
+     *
      * @param comboBox input from firstScreenView.fxml
-     * Sets the Combobox's colour according to corresponding colour in stationColourMap
+     *                 Sets the Combobox's colour according to corresponding colour in stationColourMap
      */
-    public void setOptionsColours(ComboBox<String> comboBox){
+    public void setOptionsColours(ComboBox<String> comboBox) {
 
         comboBox.setCellFactory(
                 new Callback<>() {
-                    @Override public ListCell<String> call(ListView<String> param) {
+                    @Override
+                    public ListCell<String> call(ListView<String> param) {
                         final ListCell<String> cell = new ListCell<>() {
                             {
                                 super.setPrefWidth(100);
                             }
-                            @Override public void updateItem(String item,
-                                                             boolean empty) {
+
+                            @Override
+                            public void updateItem(String item,
+                                                   boolean empty) {
                                 super.updateItem(item, empty);
                                 if (item != null) {
                                     setText(item);
                                     String label = stationColorMap.get(item).get(0);
 
                                     switch (label.charAt(0)) {
-                                        case 'R','M' -> setTextFill(Color.RED);
+                                        case 'R', 'M' -> setTextFill(Color.RED);
                                         case 'O' -> setTextFill(Color.ORANGE);
                                         case 'B' -> setTextFill(Color.BLUE);
                                         case 'G' -> setTextFill(Color.GREEN);
                                         default -> setTextFill(Color.BLACK);
                                     }
-                                }
-                                else {
+                                } else {
                                     setText(null);
                                 }
                             }
@@ -208,7 +212,7 @@ public class View {
      */
     public void changeSelectorColourStart() {
 
-        if (startingCircles != null ) {
+        if (startingCircles != null) {
             startingCircles.getChildren().remove(0, startingCircles.getChildren().size());
         }
         String selectedStation = startDestSelector.getValue();
@@ -220,8 +224,8 @@ public class View {
     /**
      * Enables Changing Icon Circles next to ComboBox's for endDestSelector
      */
-    public void changeSelectorColourEnd(){
-        if (endingCircles != null ) {
+    public void changeSelectorColourEnd() {
+        if (endingCircles != null) {
             endingCircles.getChildren().remove(0, endingCircles.getChildren().size());
         }
 
@@ -239,7 +243,7 @@ public class View {
         FlowPane pane = new FlowPane();
 
         for (String color : stationColorMap.get(selectedStation)) {
-            pane.getChildren().add(pathDisplayer.makeTripleCircle(0,0,8,color,"OffWhite",true));
+            pane.getChildren().add(pathDisplayer.makeTripleCircle(0, 0, 8, color, "OffWhite", true));
         }
 
         pane.setAlignment(Pos.CENTER);
@@ -277,7 +281,7 @@ public class View {
      * @param stations sorts all stations, by color and index
      *                 and populates startDestSelector and endDestSelector
      */
-    public void fillStationsOptions(List<String> stations){
+    public void fillStationsOptions(List<String> stations) {
 
         List<String> greenStations = new ArrayList<>();
         List<String> orangeStations = new ArrayList<>();
@@ -285,7 +289,7 @@ public class View {
         List<String> blueStations = new ArrayList<>();
         List<String> restStations = new ArrayList<>();
 
-        for (String station: stations){
+        for (String station : stations) {
             switch (stationColorMap.get(station).get(0).charAt(0)) {
                 case 'G' -> greenStations.add(station);
                 case 'O' -> orangeStations.add(station);
@@ -325,28 +329,28 @@ public class View {
         });
     }
 
-    public void setDefaultStyleEndSelector(){
+    public void setDefaultStyleEndSelector() {
         endStationErrorMsg.setVisible(false);
-        this.changeStyle(endDestSelector,"-fx-background-color", "#ffffff");
+        this.changeStyle(endDestSelector, "-fx-background-color", "#ffffff");
     }
 
-    public void setDefaultStyleStartSelector(){
+    public void setDefaultStyleStartSelector() {
         startStationErrorMsg.setVisible(false);
-        this.changeStyle(startDestSelector,"-fx-background-color","#ffffff");
+        this.changeStyle(startDestSelector, "-fx-background-color", "#ffffff");
     }
 
-    public String getDestinationStation(){
+    public String getDestinationStation() {
         return endDestSelector.getValue();
     }
 
-    public String getSourceStation(){
+    public String getSourceStation() {
         return startDestSelector.getValue();
     }
 
     /**
      * Sets and Checks for appropriate Error Messages to display
      */
-    public boolean stationsSelected(){
+    public boolean stationsSelected() {
         boolean valid = true;
         String startStation = startDestSelector.getValue();
         String endStation = endDestSelector.getValue();
@@ -355,7 +359,7 @@ public class View {
         startStationErrorMsg.setVisible(false);
         endStationErrorMsg.setVisible(false);
 
-        if (startStation != null && startStation.equals(endStation)){
+        if (startStation != null && startStation.equals(endStation)) {
             endStationError = "Sorry, you're already there.";
         }
 
@@ -364,28 +368,28 @@ public class View {
         }
 
         if (!sortedStations.contains(endStation)) {
-            endStationError ="That station doesn't exist.";
+            endStationError = "That station doesn't exist.";
         }
 
-        if(startStation == null || startStation.equals("")) {
+        if (startStation == null || startStation.equals("")) {
             startStationError = "Please select a starting station.";
-            }
+        }
 
-        if(endStation == null || endStation.equals("")){
+        if (endStation == null || endStation.equals("")) {
             endStationError = "Please select a final station.";
         }
 
         if (!startStationError.equals("empty")) {
             startStationErrorMsg.setText(startStationError);
             startStationErrorMsg.setVisible(true);
-            this.changeStyle(startDestSelector,"-fx-background-color", "#fff0f0");
+            this.changeStyle(startDestSelector, "-fx-background-color", "#fff0f0");
             valid = false;
         }
 
         if (!endStationError.equals("empty")) {
             endStationErrorMsg.setText(endStationError);
             endStationErrorMsg.setVisible(true);
-            this.changeStyle(endDestSelector,"-fx-background-color", "#fff0f0");
+            this.changeStyle(endDestSelector, "-fx-background-color", "#fff0f0");
             valid = false;
         }
 
@@ -393,7 +397,7 @@ public class View {
 
     }
 
-    public void setFindButtonEventHandler(EventHandler<ActionEvent> eventHandler){
+    public void setFindButtonEventHandler(EventHandler<ActionEvent> eventHandler) {
         findButton.setOnAction(eventHandler);
     }
 
@@ -402,8 +406,8 @@ public class View {
      * Calls createLine in PathDisplayer class to display the Route,Line,Stations and Transfers
      * Calls runDisplayPathAnimation to rotate the Main Logo
      */
-    public void displayFoundPath(List<Pair<String,List<String>>> path){
-        if (root.getChildren().contains(map)){
+    public void displayFoundPath(List<Pair<String, List<String>>> path) {
+        if (root.getChildren().contains(map)) {
             this.closeMap();
         }
         this.setTitleVisibility(false);
@@ -425,15 +429,13 @@ public class View {
         togglik.toFront();
 
 
-
-        togglik.setClickHandler(event->{
-            if(container.getChildren().contains(pathDisplayed)){
+        togglik.setClickHandler(event -> {
+            if (container.getChildren().contains(pathDisplayed)) {
                 container.setCenter(null);
                 container.getChildren().add(mapPath);
                 togglik.runSwitchOn();
                 togglik.toFront();
-            }
-            else if(container.getChildren().contains(mapPath)){
+            } else if (container.getChildren().contains(mapPath)) {
                 container.getChildren().remove(mapPath);
                 container.setCenter(pathDisplayed);
                 togglik.runSwitchOn();
@@ -483,7 +485,7 @@ public class View {
         rtC.play();
     }
 
-    public void setTitleVisibility(boolean visible){
+    public void setTitleVisibility(boolean visible) {
         titleImage.setVisible(visible);
         titleText1.setVisible(visible);
         titleText2.setVisible(visible);
@@ -492,7 +494,7 @@ public class View {
     /**
      * Sets Left Hand Side Pane Size
      */
-    public void setRoot(AnchorPane root){
+    public void setRoot(AnchorPane root) {
         this.root = root;
         container = new BorderPane();
         container.setMinWidth(795);
@@ -505,7 +507,7 @@ public class View {
 
     }
 
-    public void setupMap(){
+    public void setupMap() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("BostonMetroMap.fxml"));
 
@@ -523,7 +525,7 @@ public class View {
 
             ObservableMap<String, Object> stationButtonsMap = loader.getNamespace();
             Map<String, double[]> coordinateMap = new HashMap<>();
-            for(String id : this.idsToStations.keySet()) {
+            for (String id : this.idsToStations.keySet()) {
                 String id2 = "a" + id;
                 String station = idsToStations.get(id);
                 Button button = (Button) stationButtonsMap.get(id2);
@@ -532,29 +534,26 @@ public class View {
                     double y = button.getLayoutY();
                     double[] coordinates = {x, y};
                     coordinateMap.put(station, coordinates);
-                }
-                else{
+                } else {
                     System.out.println(id);
                 }
 
             }
             this.stationToCoords = coordinateMap;
 
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
 
     public void mapButtonStartClicked() {
-        if(root.getChildren().contains(map)){
-            if(this.mapContr.getDestinationDirection().equals("START")){
-                this.closeMap();}
-            else{
+        if (root.getChildren().contains(map)) {
+            if (this.mapContr.getDestinationDirection().equals("START")) {
+                this.closeMap();
+            } else {
                 this.mapContr.setDestinationDirection("START");
             }
-        }
-        else {
+        } else {
             this.mapContr.setDestinationDirection("START");
             this.root.getChildren().add(map);
         }
@@ -563,29 +562,28 @@ public class View {
     }
 
     public void mapButtonEndClicked() {
-        if(root.getChildren().contains(map)){
-            if(this.mapContr.getDestinationDirection().equals("END")){
-                this.closeMap();}
-            else{
+        if (root.getChildren().contains(map)) {
+            if (this.mapContr.getDestinationDirection().equals("END")) {
+                this.closeMap();
+            } else {
                 this.mapContr.setDestinationDirection("END");
             }
-        }
-        else {
+        } else {
             this.mapContr.setDestinationDirection("END");
             this.root.getChildren().add(map);
         }
     }
 
-    public void closeMap(){
+    public void closeMap() {
         this.root.getChildren().remove(map);
     }
 
-    public void setStartDest(String stationId){
+    public void setStartDest(String stationId) {
         String stationName = this.idsToStations.get(stationId);
         startDestSelector.setValue(stationName);
     }
 
-    public void setEndDest(String stationId){
+    public void setEndDest(String stationId) {
         String stationName = this.idsToStations.get(stationId);
         endDestSelector.setValue(stationName);
     }
@@ -594,26 +592,26 @@ public class View {
      * @param path to be displayed on the map
      * @return Pane with a map and a line drawn across all appropriate stations
      */
-    private Pane createMap(List<Pair<String,List<String>>> path) {
+    private Pane createMap(List<Pair<String, List<String>>> path) {
         Pane mapView = new Pane();
-        ImageView map =  new ImageView("Images/metroMap.png");
+        ImageView map = new ImageView("Images/metroMap.png");
         mapView.getChildren().add(map);
         map.setFitHeight(820);
         map.setPreserveRatio(true);
         map.setLayoutX(-25);
         map.setLayoutY(-25);
 
-        String[] stationsAroundCorners = {  "30 Downtown Crossing", "28 State",
-                                            "20 North Station", "22 Haymarket",
-                                            "41 Copley", "53 Prudential",
-                                            "33 South Station", "60 Broadway",
-                                            "47 Kenmore","54 St.Mary's Street",
-                                            "98 JFK/UMass", "100 Savin Hill", "120 North Quincy"};
+        String[] stationsAroundCorners = {"30 Downtown Crossing", "28 State",
+                "20 North Station", "22 Haymarket",
+                "41 Copley", "53 Prudential",
+                "33 South Station", "60 Broadway",
+                "47 Kenmore", "54 St.Mary's Street",
+                "98 JFK/UMass", "100 Savin Hill", "120 North Quincy"};
 
         List<Double> points = new ArrayList<>();
 
         for (int line = 0; line < path.size(); line++) {
-            Pair<String,List<String>> currentLine = path.get(line);
+            Pair<String, List<String>> currentLine = path.get(line);
 
             List<String> stations = currentLine.getValue();
             String color = currentLine.getKey();
@@ -623,24 +621,24 @@ public class View {
 
                 double[] coords = this.stationToCoords.get(currStation);
                 if (coords != null) {
-                    points.add(coords[0]-20);
-                    points.add(coords[1]-20);
+                    points.add(coords[0] - 20);
+                    points.add(coords[1] - 20);
                 }
 
                 if (Arrays.asList(stationsAroundCorners).contains(currStation)) {
-                    if (i+1 < stations.size()) {
-                        String nextStation = stations.get(i+1);
-                        double[] midCoords = getMidCoords(currStation, nextStation,color);
+                    if (i + 1 < stations.size()) {
+                        String nextStation = stations.get(i + 1);
+                        double[] midCoords = getMidCoords(currStation, nextStation, color);
                         if (midCoords[0] != 0) {
-                            points.add(midCoords[0]-20);
-                            points.add(midCoords[1]-20);
+                            points.add(midCoords[0] - 20);
+                            points.add(midCoords[1] - 20);
                         }
-                    } else if (line+1 < path.size()) {
-                        String nextStation = path.get(line+1).getValue().get(0);
-                        double[] midCoords = getMidCoords(currStation, nextStation,color);
+                    } else if (line + 1 < path.size()) {
+                        String nextStation = path.get(line + 1).getValue().get(0);
+                        double[] midCoords = getMidCoords(currStation, nextStation, color);
                         if (midCoords[0] != 0) {
-                            points.add(midCoords[0]-20);
-                            points.add(midCoords[1]-20);
+                            points.add(midCoords[0] - 20);
+                            points.add(midCoords[1] - 20);
                         }
                     }
                 }
@@ -657,7 +655,7 @@ public class View {
         line.setStrokeLineCap(StrokeLineCap.ROUND);
         line.setStrokeLineJoin(StrokeLineJoin.ROUND);
         line.setStrokeType(StrokeType.CENTERED);
-        line.setStroke(Color.rgb(244,244,244));
+        line.setStroke(Color.rgb(244, 244, 244));
 
         mapView.getChildren().add(line);
 
@@ -667,33 +665,35 @@ public class View {
 
     /**
      * This method will setup the event handlers for the algorithm selectors
-     * **/
-    public void setupAlgorithmSelectorEventHandler(){
+     **/
+    public void setupAlgorithmSelectorEventHandler() {
         searchLength.setOnAction(actionEvent ->
-        {algorithmSelected = "Length";
-        this.changeStyle(searchTransitions,"-fx-background-color","#fff");
-        searchTransitions.setTextFill(background);
-        this.changeStyle(searchLength,"-fx-background-color","#0B132B");
-        searchLength.setTextFill(Color.WHITE);
+        {
+            algorithmSelected = "Length";
+            this.changeStyle(searchTransitions, "-fx-background-color", "#fff");
+            searchTransitions.setTextFill(background);
+            this.changeStyle(searchLength, "-fx-background-color", "#0B132B");
+            searchLength.setTextFill(Color.WHITE);
 
         });
         searchTransitions.setOnAction(actionEvent -> {
             algorithmSelected = "Transitions";
-            this.changeStyle(searchLength,"-fx-background-color","#fff");
+            this.changeStyle(searchLength, "-fx-background-color", "#fff");
             searchLength.setTextFill(background);
-            this.changeStyle(searchTransitions,"-fx-background-color","#0B132B");
+            this.changeStyle(searchTransitions, "-fx-background-color", "#0B132B");
             searchTransitions.setTextFill(Color.WHITE);
         });
     }
 
     /**
      * This method will setup event handlers on Key Events for the dropdown menu with stations
+     *
      * @param element dropdown menu element
      */
-    private void setupAutofill(ComboBox<String> element){
+    private void setupAutofill(ComboBox<String> element) {
         element.addEventHandler(KeyEvent.KEY_TYPED, t -> element.show());
         element.addEventHandler(KeyEvent.KEY_PRESSED, t -> element.show());
-        element.addEventHandler(KeyEvent.KEY_RELEASED,new EventHandler<KeyEvent>(){
+        element.addEventHandler(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
 
             private boolean moveCaretToPos = false;
             private int caretPos;
@@ -754,6 +754,7 @@ public class View {
                 element.setVisibleRowCount(Math.min(numOfStations, 10));
                 element.show();
             }
+
             //Following method is part of the borrowed code from https://stackoverflow.com/questions/19924852/autocomplete-combobox-in-javafx
             private void moveCaret(int textLength) {
                 if (caretPos == -1) {
@@ -770,16 +771,17 @@ public class View {
 
     /**
      * Method used to decide which type of search does the user want to use
+     *
      * @return the selected algorithm, either "Length" or "Transitions"
      */
-    public String getAlgorithmSelected(){
+    public String getAlgorithmSelected() {
         return algorithmSelected;
     }
 
     /**
      * This method is used during initialization to standardize all styling in one place
-     * **/
-    public void setStandardStyles(){
+     **/
+    public void setStandardStyles() {
         //Selection Toggle
         searchTransitions.setStyle("-fx-background-color: #fff; -fx-background-radius: 10;-fx-border-color: #0B132B;-fx-border-radius: 10;");
         searchTransitions.setTextFill(background);
@@ -806,23 +808,24 @@ public class View {
 
     /**
      * This method is used to change FXML style property while keeping the rest of the style unchanged
-     * @param elem Control - FXML element we are changing the style
+     *
+     * @param elem        Control - FXML element we are changing the style
      * @param newProperty String - This is the FXML style tag value of which we are changing
-     * @param newValue String - The new value we give to the FXML style tag
-     * **/
-    private void changeStyle(Control elem,String newProperty,String newValue){
-        HashMap<String,String> properties = new HashMap<>();
+     * @param newValue    String - The new value we give to the FXML style tag
+     **/
+    private void changeStyle(Control elem, String newProperty, String newValue) {
+        HashMap<String, String> properties = new HashMap<>();
         String style = elem.getStyle();
         String[] styleProperties = style.split(";");
-        for(String pair : styleProperties){
+        for (String pair : styleProperties) {
             String[] styleProperty = pair.split(":");
-            properties.put(styleProperty[0].trim(),styleProperty[1].trim());
+            properties.put(styleProperty[0].trim(), styleProperty[1].trim());
         }
 
-        properties.put(newProperty,newValue);
+        properties.put(newProperty, newValue);
 
-        StringBuilder newStyle =  new StringBuilder();
-        for(String key : properties.keySet()){
+        StringBuilder newStyle = new StringBuilder();
+        for (String key : properties.keySet()) {
             newStyle.append(key);
             newStyle.append(":");
             newStyle.append(properties.get(key));
@@ -831,66 +834,67 @@ public class View {
         elem.setStyle(newStyle.toString());
     }
 
-    public void setupIdsToStatioins(Map<String,String> map ) {
+    public void setupIdsToStatioins(Map<String, String> map) {
         this.idsToStations = map;
     }
 
 
     /**
      * checks whether an intermediate point needs to be added to make the line fit a bit better
+     *
      * @param station,nextStation stations between which we're checking
-     * @param color to determine whether green or orange needs to be taken at that one spot
+     * @param color               to determine whether green or orange needs to be taken at that one spot
      * @return coordinates of the mid-point or [0,0] if none is needed
      */
     private double[] getMidCoords(String station, String nextStation, String color) {
 
         if (station.equals("30 Downtown Crossing") && nextStation.equals("28 State")) {
-            return new double[]{532,312};
+            return new double[]{532, 312};
             //layoutX="532.0" layoutY="312.0"
         } else if (station.equals("28 State") && nextStation.equals("30 Downtown Crossing")) {
-            return new double[]{532,312};
+            return new double[]{532, 312};
             //layoutX="532.0" layoutY="312.0"
         } else if (color.equals("Green") && station.equals("20 North Station") && nextStation.equals("22 Haymarket")) {
-            return new double[]{545,230};
+            return new double[]{545, 230};
 
             //layoutX="545.0" layoutY="230.0"
         } else if (color.equals("Green") && station.equals("22 Haymarket") && nextStation.equals("20 North Station")) {
-            return new double[]{545,230};
+            return new double[]{545, 230};
 
 //layoutX="545.0" layoutY="230.0"
         } else if (station.equals("47 Kenmore") && nextStation.equals("54 St.Mary's Street")) {
-            return new double[]{287,330};
+            return new double[]{287, 330};
 
             //layoutX="545.0" layoutY="330.0"
         } else if (station.equals("54 St.Mary's Street") && nextStation.equals("47 Kenmore")) {
-            return new double[]{287,330};
+            return new double[]{287, 330};
 
         } else if (station.equals("41 Copley") && nextStation.equals("53 Prudential")) {
-            return new double[]{365,346};
+            return new double[]{365, 346};
 
 //layoutX="365.0" layoutY="346.0"
         } else if (station.equals("53 Prudential") && nextStation.equals("41 Copley")) {
-            return new double[]{365,346};
+            return new double[]{365, 346};
 
 //layoutX="365.0" layoutY="346.0"
         } else if (station.equals("33 South Station") && nextStation.equals("60 Broadway")) {
-            return new double[]{569,386};
+            return new double[]{569, 386};
 
             //layoutX="569.0" layoutY="386.0"
 
         } else if (station.equals("60 Broadway") && nextStation.equals("33 South Station")) {
-            return new double[]{569,386};
+            return new double[]{569, 386};
 
             //layoutX="569.0" layoutY="386.0"
         } else if (station.equals("98 JFK/UMass")) {
 
 //layoutX="572.0" layoutY="529.0"
             if (nextStation.equals("100 Savin Hill")) {
-                return new double[]{572,529};
+                return new double[]{572, 529};
 
 
             } else if (nextStation.equals("120 North Quincy")) {
-                return new double[]{572,529};
+                return new double[]{572, 529};
 
             }
 
@@ -898,15 +902,15 @@ public class View {
 //layoutX="572.0" layoutY="529.0"
 
             if (station.equals("100 Savin Hill")) {
-                return new double[]{572,529};
+                return new double[]{572, 529};
 
             } else if (station.equals("120 North Quincy")) {
-                return new double[]{572,529};
+                return new double[]{572, 529};
 
             }
         }
 
-        return new double[]{0,0};
+        return new double[]{0, 0};
 
     }
 }

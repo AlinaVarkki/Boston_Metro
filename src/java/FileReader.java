@@ -8,7 +8,7 @@ public class FileReader {
     HashSet<String> linesToBeProcessed;
 
     HashMap<String, Node> stationsNodesById;
-    HashMap<String,Node> stationsById;
+    HashMap<String, Node> stationsById;
     List<Edge<Node>> connections;
     int idNumCheck;
 
@@ -19,10 +19,10 @@ public class FileReader {
 
     /**
      * @param filepath saved to ArrayList of strings
-     * Each String broken into components and added to Fields
-     * Calls createEdge once ArrayList has been sorted through
-     * */
-    public void readInGraph (String filepath){
+     *                 Each String broken into components and added to Fields
+     *                 Calls createEdge once ArrayList has been sorted through
+     */
+    public void readInGraph(String filepath) {
 
         ArrayList<String[]> arrsToBeProcessed = this.readFile(filepath);
         edgesToBeProcessed = new ArrayList<>();
@@ -66,8 +66,8 @@ public class FileReader {
     /**
      * @param filepath String is the path to the file with metro details
      * @return An Arraylist of the file lines, each line split into an array by whitespace
-     * */
-    private ArrayList<String[]> readFile(String filepath){
+     */
+    private ArrayList<String[]> readFile(String filepath) {
 
         ArrayList<String[]> fileLines = new ArrayList<>();
         try {
@@ -90,15 +90,15 @@ public class FileReader {
     /**
      * Creates Connections between Nodes considering End Cases
      * Saves Connections to ArrayList
-     * */
-    public void createEdges(){
+     */
+    public void createEdges() {
         connections = new ArrayList<>();
-        for(String[] edgeArr: edgesToBeProcessed){
-            if(!edgeArr[2].equals("0")) {
+        for (String[] edgeArr : edgesToBeProcessed) {
+            if (!edgeArr[2].equals("0")) {
                 Connection<Node> new_connection = new Connection<>(stationsById.get(edgeArr[0]), stationsById.get(edgeArr[2]), edgeArr[1]);
                 connections.add(new_connection);
             }
-            if(!edgeArr[3].equals("0")) {
+            if (!edgeArr[3].equals("0")) {
                 Connection<Node> new_connection = new Connection<>(stationsById.get(edgeArr[0]), stationsById.get(edgeArr[3]), edgeArr[1]);
                 connections.add(new_connection);
             }
@@ -106,14 +106,14 @@ public class FileReader {
         }
     }
 
-    public List<Edge<Node>> getConnections(){
+    public List<Edge<Node>> getConnections() {
         return connections;
     }
 
-    public List<Node> getStations(){
+    public List<Node> getStations() {
         List<Node> stations = new ArrayList<>();
-        for (String s: stationsNodesById.keySet()) stations.add(stationsById.get(s));
-        System.out.println("Num of Stations (exp: 124):"+stations.size());
+        for (String s : stationsNodesById.keySet()) stations.add(stationsById.get(s));
+        System.out.println("Num of Stations (exp: 124):" + stations.size());
         return stations;
     }
 

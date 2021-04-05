@@ -11,11 +11,11 @@ public class getPathJunctionTests {
     MultiGraph<Node, Edge<Node>> testGraph;
     List<Edge<Node>> testPath;
 
-    /* Reads in bostonmetro.txt*/
+    /* Reads in bostonMetroStations.txt*/
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
 
-        FileReader reader = new FileReader("resources/bostonmetro.txt");
+        FileReader reader = new FileReader("src/resources/bostonMetroStations.txt");
         testStations = reader.getStations();
         testConnections = reader.getConnections();
 

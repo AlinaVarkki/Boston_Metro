@@ -15,7 +15,7 @@
         <BorderPane fx:id="displayArea">
         <ImageView fx:id="titleImage" fitWidth="795.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="Images/abstractMap.png" />
+                <Image url="resources/Images/abstractMap.png" />
             </image>
         </ImageView>
             <Text fx:id="titleText1" fill="WHITE" layoutX="20.0" layoutY="645.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WELCOME TO THE BOSTON METRO">
@@ -31,22 +31,22 @@
         </BorderPane>
         <ImageView fx:id="yellowLine" fitHeight="185.0" fitWidth="185.0" layoutX="858.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="Images/logoYellowLine.png" />
+                <Image url="resources/Images/logoYellowLine.png" />
             </image>
         </ImageView>
         <ImageView fx:id="redLine" fitHeight="185.0" fitWidth="185.0" layoutX="858.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="Images/logoRedLine.png" />
+                <Image url="resources/Images/logoRedLine.png" />
             </image>
         </ImageView>
         <ImageView fx:id="greenLine" fitHeight="185.0" fitWidth="185.0" layoutX="858.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="Images/logoGreenLine.png" />
+                <Image url="resources/Images/logoGreenLine.png" />
             </image>
         </ImageView>
         <ImageView fx:id="blueLine" fitHeight="185.0" fitWidth="185.0" layoutX="858.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="Images/logo.png" />
+                <Image url="resources/Images/logo.png" />
             </image>
         </ImageView>
 
@@ -60,12 +60,12 @@
         <ComboBox fx:id="startDestSelector" onHidden="#changeSelectorColourStart" minHeight="35" minWidth="180" promptText="START DESTINATION" layoutX="860.0" layoutY="295.5" prefHeight="29.0" prefWidth="154.0" style="-fx-background-radius: 10; -fx-background-color: #F4F4F4; -fx-border-color: #0B132B;" onAction="#setDefaultStyleStartSelector"/>
         <ImageView fx:id="mapButtonStart" onMouseClicked="#mapButtonStartClicked" fitHeight="33" fitWidth="33" layoutX="1054.5" layoutY="295.5" pickOnBounds="true" preserveRatio="true">
             <image >
-                <Image url="Images/mapIcon.png" />
+                <Image url="resources/Images/mapIcon.png" />
             </image>
         </ImageView>
         <ImageView fx:id="switchButton" onMouseClicked="#reverseButton" fitHeight="35" fitWidth="35" layoutX="936.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="Images/stationsSwitch.png" />
+                <Image url="resources/Images/stationsSwitch.png" />
             </image>
         </ImageView>
         <Text fx:id="endStationErrorMsg" text = "hello" layoutX="858.0" layoutY="407.5" style="-fx-fill: red;" visible="false">
@@ -78,7 +78,7 @@
         <ComboBox fx:id="endDestSelector" onHidden="#changeSelectorColourEnd" minHeight="35" minWidth="180" promptText="END DESTINATION" layoutX="860.0" layoutY="415.0" prefHeight="29.0" prefWidth="154.0" style="-fx-background-radius: 10; -fx-background-color: #F4F4F4; -fx-border-color: #0B132B;" onAction="#setDefaultStyleEndSelector"/>
         <ImageView fx:id="mapButtonEnd" onMouseClicked="#mapButtonEndClicked" fitHeight="33" fitWidth="33" layoutX="1054.5" layoutY="415.0" pickOnBounds="true" preserveRatio="true">
             <image >
-                <Image url="Images/mapIcon.png" />
+                <Image url="resources/Images/mapIcon.png" />
             </image>
         </ImageView>
         <Text fill="#0b132b" layoutX="870.0" layoutY="475.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Find route based on the least amount of:" textAlignment="CENTER" wrappingWidth="153.63671875">

@@ -9,7 +9,7 @@ import java.util.List;
 
 public class App extends Application {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         launch(args);
     }
 
@@ -25,18 +25,18 @@ public class App extends Application {
         window.setScene(scene);
         window.show();
 
-        View view = loader.<View>getController();
+        View view = loader.getController();
         view.setRoot(root);
-        Model model = new Model("resources/bostonmetro.txt");
+        Model model = new Model("src/resources/bostonMetroStations.txt");
         Controller controller = new Controller(model, view);
 
         controller.run();
     }
 
-//  method used for tests
-    public static Node getStationByName(List<Node> stations, String name){
-        for(Node s: stations){
-            if(s.getName().equals(name)) return s;
+    //  method used for tests
+    public static Node getStationByName(List<Node> stations, String name) {
+        for (Node s : stations) {
+            if (s.getName().equals(name)) return s;
         }
         return null;
     }

@@ -4,7 +4,7 @@ public class Connection<N> implements Edge<N> {
     private final String label;
 
 
-    public Connection(N node1,N node2, String label){
+    public Connection(N node1, N node2, String label) {
         this.node1 = node1;
         this.node2 = node2;
         this.label = label;
@@ -32,6 +32,6 @@ public class Connection<N> implements Edge<N> {
 
     @Override
     public String toString() {
-        return this.label + ": "+ node1.toString()+" to "+node2.toString();
+        return this.label + ": " + node1.toString() + " to " + node2.toString();
     }
 }

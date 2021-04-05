@@ -11,11 +11,11 @@ public class getPathDFSSpecificTests {
     MultiGraph<Node, Edge<Node>> testGraph;
     List<Edge<Node>> testPath;
 
-    /* Creates a Connection & two new Stations and Reads in bostonmetro.txt*/
+    /* Creates a Connection & two new Stations and Reads in bostonMetroStations.txt*/
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
 
-        FileReader reader = new FileReader("resources/bostonmetro.txt");
+        FileReader reader = new FileReader("src/resources/bostonMetroStations.txt");
         testStations = reader.getStations();
         testConnections = reader.getConnections();
 

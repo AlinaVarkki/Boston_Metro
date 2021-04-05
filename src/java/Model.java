@@ -8,12 +8,12 @@ import java.util.Map;
 public class Model {
 
     MultiGraph<Node, Edge<Node>> multiGraph;
-    HashMap<String,Node> stationsHashMap;
+    HashMap<String, Node> stationsHashMap;
     List<Node> stations;
     Map<Node, List<Edge<Node>>> adjMap;
     private Map<String, List<String>> stationColorMap;
 
-    public Model(String filepath){
+    public Model(String filepath) {
         this.setMultiGraph(filepath);
         this.setStationsHashMap();
         stationColorMap = new HashMap<>();
@@ -23,61 +23,60 @@ public class Model {
 
     /**
      * Called in Model Constructor
+     *
      * @param filepath passed to FileReader
-     * MultiGraph initialised with Nodes and Edges
-     * Nodes representing Stations, Edges representing Connecting Lines
-     * */
-    private void setMultiGraph(String filepath){
+     *                 MultiGraph initialised with Nodes and Edges
+     *                 Nodes representing Stations, Edges representing Connecting Lines
+     */
+    private void setMultiGraph(String filepath) {
         FileReader reader = new FileReader(filepath);
 
         multiGraph = new MultiGraph<>();
         stations = reader.getStations();
         List<Edge<Node>> connections = reader.getConnections();
 
-        for(Node n: stations) multiGraph.addNode(n);
-        for(Edge<Node> e: connections) multiGraph.addEdge(e);
+        for (Node n : stations) multiGraph.addNode(n);
+        for (Edge<Node> e : connections) multiGraph.addEdge(e);
 
     }
 
-    public void getAdjMap(){
+    public void getAdjMap() {
         adjMap = multiGraph.getAdjMap();
     }
 
-    public ArrayList<String> getListOfStations(){
+    public ArrayList<String> getListOfStations() {
         return new ArrayList<>(stationsHashMap.keySet());
     }
 
-    public Map<String, List<String>> getStationColorMap(){
+    public Map<String, List<String>> getStationColorMap() {
         return stationColorMap;
     }
 
     /**
      * Called in Model Constructor
      * Fills Hashmap with Station which can be easily Searched through
-     * */
-    private void setStationsHashMap(){
+     */
+    private void setStationsHashMap() {
         stationsHashMap = new HashMap<>();
-        for(Node station : stations){
-            this.stationsHashMap.put(station.toString(),station);
+        for (Node station : stations) {
+            this.stationsHashMap.put(station.toString(), station);
         }
     }
 
     /**
      * @param start,destination stored as Nodes and passed to MultiGraph
-     * Pair used to store Line-Colour and Station's
+     *                          Pair used to store Line-Colour and Station's
      * @return List of Tuples for optimal Route
-     * */
-    public List<Pair<String,List<String>>> runSearch(String start,String destination,String algorithm){
+     */
+    public List<Pair<String, List<String>>> runSearch(String start, String destination, String algorithm) {
         Node from = this.find(start);
         Node to = this.find(destination);
 
-        List<Pair<String,List<String>>> processedForView = new ArrayList<>();
+        List<Pair<String, List<String>>> processedForView = new ArrayList<>();
         List<Edge<Node>> path;
         if (algorithm.equals("Length")) {
             path = multiGraph.getPath(from, to);
-        }
-
-        else{
+        } else {
             path = multiGraph.getPathDFS(from, to);
         }
 
@@ -104,18 +103,18 @@ public class Model {
         return processedForView;
     }
 
-    private Node find(String name){
+    private Node find(String name) {
         return stationsHashMap.get(name);
     }
 
-    private void fillStationColorMap(Map<Node, List<Edge<Node>>> adjMap){
+    private void fillStationColorMap(Map<Node, List<Edge<Node>>> adjMap) {
         List<Edge<Node>> adjEdges;
 
-        for(Node n: adjMap.keySet()){
+        for (Node n : adjMap.keySet()) {
             adjEdges = adjMap.get(n);
             List<String> colors = new ArrayList<>();
 
-            for(Edge<Node> e: adjEdges){
+            for (Edge<Node> e : adjEdges) {
                 String color = e.getLabel();
                 if (!colors.contains(color)) {
                     colors.add(color);
@@ -126,13 +125,13 @@ public class Model {
         }
     }
 
-    public Map<String,String> getMapIdsToStation(){
-        Map<String,String> idsToStations = new HashMap<>();
+    public Map<String, String> getMapIdsToStation() {
+        Map<String, String> idsToStations = new HashMap<>();
         ArrayList<String> stations = new ArrayList<>(stationsHashMap.keySet());
 
-        for(String station : stations){
+        for (String station : stations) {
             String id = station.split(" ")[0];
-            idsToStations.put(id,station);
+            idsToStations.put(id, station);
         }
 
         return idsToStations;

@@ -3,7 +3,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 
-public class mapController {
+public class mapView {
 
     View view;
     String destinationDirection;
@@ -11,18 +11,17 @@ public class mapController {
     ImageView mapImage;
 
     @FXML
-    private void getName(ActionEvent event){
+    private void getName(ActionEvent event) {
 
         Button button = (Button) event.getSource();
         String stationName = parseString(button.getId());
 
         view.closeMap();
 
-        if(destinationDirection.equals("START")){
+        if (destinationDirection.equals("START")) {
             view.setStartDest(stationName);
             view.changeSelectorColourStart();
-        }
-        else{
+        } else {
             view.setEndDest(stationName);
             view.changeSelectorColourEnd();
         }
@@ -31,15 +30,15 @@ public class mapController {
 
     //method that parses the station name to the one we use for the search.
     // Implemented because button ids cannot contain slashed and numbers at the start
-    public String parseString(String station){
+    public String parseString(String station) {
         StringBuilder stationParsed = new StringBuilder();
 
         //starting with 1 because first character is a dummy as id cannot be started with a number
-        for(int i = 1; i < station.length(); i++){
+        for (int i = 1; i < station.length(); i++) {
             char currChar = station.charAt(i);
-            if(Character.isUpperCase(currChar)){
+            if (Character.isUpperCase(currChar)) {
                 stationParsed.append(" " + currChar);
-            }else{
+            } else {
                 stationParsed.append(currChar);
             }
         }
@@ -47,15 +46,15 @@ public class mapController {
         return stationParsed.toString();
     }
 
-    public void setView(View view){
+    public void setView(View view) {
         this.view = view;
     }
 
-    public void setDestinationDirection(String destinationDirection){
+    public void setDestinationDirection(String destinationDirection) {
         this.destinationDirection = destinationDirection;
     }
 
-    public String getDestinationDirection(){
+    public String getDestinationDirection() {
         return this.destinationDirection;
     }
 
