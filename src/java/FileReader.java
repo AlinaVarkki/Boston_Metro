@@ -1,5 +1,7 @@
 import Graph.Edge;
 import Graph.Node;
+import Metro.Connection;
+import Metro.Station;
 
 import java.io.File;
 import java.io.FileNotFoundException;

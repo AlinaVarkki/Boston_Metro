@@ -1,6 +1,8 @@
 import Graph.Edge;
 import Graph.MultiGraph;
 import Graph.Node;
+import Metro.Connection;
+import Metro.Station;
 
 import java.util.List;
 import java.util.Map;
@@ -9,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class getPathLineTests {
 
-    //Used to Test Station and Connection
+    //Used to Test Metro.Station and Metro.Connection
     Node a, b;
     Edge<Node> c;
 
@@ -19,7 +21,7 @@ public class getPathLineTests {
     MultiGraph<Node, Edge<Node>> testGraph;
     List<Edge<Node>> testPath;
 
-    /* Creates a Connection & two new Stations and Reads in bostonMetroStations.txt*/
+    /* Creates a Metro.Connection & two new Stations and Reads in bostonMetroStations.txt*/
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
 
@@ -47,14 +49,14 @@ public class getPathLineTests {
         return null;
     }
 
-    /* Tests Set and Get of Station Class implementing Graph.Node Interface */
+    /* Tests Set and Get of Metro.Station Class implementing Graph.Node Interface */
     @org.junit.jupiter.api.Test
     void setStationName() {
         a.setName("A");
         assertEquals("A", a.getName());
     }
 
-    /* Tests Get and Opposite of Connection Class implementing Generic Graph.Edge Interface */
+    /* Tests Get and Opposite of Metro.Connection Class implementing Generic Graph.Edge Interface */
     @org.junit.jupiter.api.Test
     void setConnectionNameAndNodes() {
         assertEquals("Pink", c.getLabel());

@@ -53,7 +53,7 @@ public class PathDisplayer {
     }
 
     /**
-     * @param stations contains the Best Suited Path Found By the Model
+     * @param stations contains the Best Suited Path Found By the Metro.Model
      * @return Borderpane with all the elements, all corresponding labels and animations appropriately Styled and Sized
      */
 
@@ -163,11 +163,11 @@ public class PathDisplayer {
     private Image trainSelector(String colour) {
         Image image;
         switch (colour.charAt(0)) {
-            case 'B' -> image = new Image("Images/blueSubway.png");
-            case 'R', 'M' -> image = new Image("Images/redSubway.png");
-            case 'O' -> image = new Image("Images/yellowSubway.png");
-            case 'G' -> image = new Image("Images/greenSubway.png");
-            default -> image = new Image("Images/whiteSubway.png");
+            case 'B' -> image = new Image("Images/Subways/blueSubway.png");
+            case 'R', 'M' -> image = new Image("Images/Subways/redSubway.png");
+            case 'O' -> image = new Image("Images/Subways/yellowSubway.png");
+            case 'G' -> image = new Image("Images/Subways/greenSubway.png");
+            default -> image = new Image("Images/Subways/whiteSubway.png");
         }
         return image;
 
@@ -279,7 +279,7 @@ public class PathDisplayer {
     }
 
     /**
-     * @param name,previousColor,label Calls displayBiggerStationName to get final Size and Style for key Station name
+     * @param name,previousColor,label Calls displayBiggerStationName to get final Size and Style for key Metro.Station name
      * @return Hbox with elements added
      */
     private HBox displayLineLabel(String name, StackPane circle) {

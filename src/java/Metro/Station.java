@@ -1,3 +1,5 @@
+package Metro;
+
 import Graph.Node;
 
 public class Station implements Node {

@@ -1,3 +1,5 @@
+package Metro;
+
 import Graph.Edge;
 
 public class Connection<N> implements Edge<N> {

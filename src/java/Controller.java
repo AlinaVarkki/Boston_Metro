@@ -1,3 +1,4 @@
+import Metro.Model;
 import View.View;
 import javafx.util.Pair;
 
@@ -14,7 +15,7 @@ public class Controller {
     }
 
     /**
-     * This method connects Model and View to function properly
+     * This method connects Metro.Model and View to function properly
      */
     public void run() {
         this.setUpDropDowns();
@@ -37,14 +38,14 @@ public class Controller {
     }
 
     /**
-     * This method sets up the controller for Find button in the View, connecting the View to the Model
+     * This method sets up the controller for Find button in the View, connecting the View to the Metro.Model
      */
     private void setupButtonEventHandler(Controller controller) {
         view.setFindButtonEventHandler(e -> controller.performSearch());
     }
 
     /**
-     * Calls elements of Model to get the most Direct Path from one Station to the Other
+     * Calls elements of Metro.Model to get the most Direct Path from one Metro.Station to the Other
      * Calls elements of View.View to Construct the Line output with Consistent Styling and Sizing of corresponding Labels
      */
     private void performSearch() {

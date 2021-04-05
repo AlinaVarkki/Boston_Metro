@@ -16,7 +16,7 @@ public class getPathDFSSpecificTests {
     MultiGraph<Node, Edge<Node>> testGraph;
     List<Edge<Node>> testPath;
 
-    /* Creates a Connection & two new Stations and Reads in bostonMetroStations.txt*/
+    /* Creates a Metro.Connection & two new Stations and Reads in bostonMetroStations.txt*/
     @org.junit.jupiter.api.BeforeEach
     void setUp() {
 

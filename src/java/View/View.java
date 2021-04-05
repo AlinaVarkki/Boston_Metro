@@ -113,7 +113,7 @@ public class View {
     /**
      * Called by Controller setUpDropDowns()
      *
-     * @param stationColorMap initialised in Model, contains all possible Line colours
+     * @param stationColorMap initialised in Metro.Model, contains all possible Line colours
      *                        Activates Fade Animation of Circular Logo and the Title
      */
     public void customizeDropDowns(Map<String, List<String>> stationColorMap) {
@@ -621,7 +621,7 @@ public class View {
 
     /**
      * This method will put the required station in the start station selector after it has been selected on the map selector
-     * @param stationId Station Id
+     * @param stationId Metro.Station Id
      */
     public void setStartDest(String stationId) {
         String stationName = this.idsToStations.get(stationId);
@@ -630,7 +630,7 @@ public class View {
 
     /**
      * This method will put the required station in the end station selector after it has been selected on the map selector
-     * @param stationId Station Id
+     * @param stationId Metro.Station Id
      */
     public void setEndDest(String stationId) {
         String stationName = this.idsToStations.get(stationId);
@@ -651,9 +651,9 @@ public class View {
         map.setLayoutY(-25);
 
         String[] stationsAroundCorners = {"30 Downtown Crossing", "28 State",
-                "20 North Station", "22 Haymarket",
+                "20 North Metro.Station", "22 Haymarket",
                 "41 Copley", "53 Prudential",
-                "33 South Station", "60 Broadway",
+                "33 South Metro.Station", "60 Broadway",
                 "47 Kenmore", "54 St.Mary's Street",
                 "98 JFK/UMass", "100 Savin Hill", "120 North Quincy"};
 
@@ -837,7 +837,7 @@ public class View {
         searchTransitions.setFont(Font.font("Arial"));
         searchLength.setFont(Font.font("Arial"));
 
-        //Station Selectors
+        //Metro.Station Selectors
         endStationErrorMsg.setVisible(false);
         startStationErrorMsg.setVisible(false);
         startDestSelector.setStyle(" -fx-font-family: Arial; -fx-background-radius: 10; -fx-background-color: ffffff; -fx-border-color: #0B132B;-fx-border-radius: 10;");
@@ -901,9 +901,9 @@ public class View {
             return new double[]{532, 312};
         } else if (station.equals("28 State") && nextStation.equals("30 Downtown Crossing")) {
             return new double[]{532, 312};
-        } else if (color.equals("Green") && station.equals("20 North Station") && nextStation.equals("22 Haymarket")) {
+        } else if (color.equals("Green") && station.equals("20 North Metro.Station") && nextStation.equals("22 Haymarket")) {
             return new double[]{545, 230};
-        } else if (color.equals("Green") && station.equals("22 Haymarket") && nextStation.equals("20 North Station")) {
+        } else if (color.equals("Green") && station.equals("22 Haymarket") && nextStation.equals("20 North Metro.Station")) {
             return new double[]{545, 230};
         } else if (station.equals("47 Kenmore") && nextStation.equals("54 St.Mary's Street")) {
             return new double[]{287, 330};
@@ -913,9 +913,9 @@ public class View {
             return new double[]{365, 346};
         } else if (station.equals("53 Prudential") && nextStation.equals("41 Copley")) {
             return new double[]{365, 346};
-        } else if (station.equals("33 South Station") && nextStation.equals("60 Broadway")) {
+        } else if (station.equals("33 South Metro.Station") && nextStation.equals("60 Broadway")) {
             return new double[]{569, 386};
-        } else if (station.equals("60 Broadway") && nextStation.equals("33 South Station")) {
+        } else if (station.equals("60 Broadway") && nextStation.equals("33 South Metro.Station")) {
             return new double[]{569, 386};
         } else if (station.equals("98 JFK/UMass")) {
             if (nextStation.equals("100 Savin Hill")) {

@@ -31,22 +31,22 @@
         </BorderPane>
         <ImageView fx:id="yellowLine" fitHeight="185.0" fitWidth="185.0" layoutX="858.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="/Images/logoYellowLine.png" />
+                <Image url="/Images/Logo/logoYellowLine.png" />
             </image>
         </ImageView>
         <ImageView fx:id="redLine" fitHeight="185.0" fitWidth="185.0" layoutX="858.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="/Images/logoRedLine.png" />
+                <Image url="/Images/Logo/logoRedLine.png" />
             </image>
         </ImageView>
         <ImageView fx:id="greenLine" fitHeight="185.0" fitWidth="185.0" layoutX="858.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="/Images/logoGreenLine.png" />
+                <Image url="/Images/Logo/logoGreenLine.png" />
             </image>
         </ImageView>
         <ImageView fx:id="blueLine" fitHeight="185.0" fitWidth="185.0" layoutX="858.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="/Images/logo.png" />
+                <Image url="/Images/Logo/logo.png" />
             </image>
         </ImageView>
 

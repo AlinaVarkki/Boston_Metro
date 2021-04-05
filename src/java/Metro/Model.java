@@ -1,3 +1,5 @@
+package Metro;
+
 import Graph.Edge;
 import Graph.MultiGraph;
 import Graph.Node;
@@ -28,7 +30,7 @@ public class Model {
     }
 
     /**
-     * Called in Model Constructor
+     * Called in Metro.Model Constructor
      * MultiGraph initialised with Nodes and Edges
      *
      *
@@ -66,8 +68,8 @@ public class Model {
     }
 
     /**
-     * Called in Model Constructor
-     * Fills Hashmap with Station which can be easily Searched through
+     * Called in Metro.Model Constructor
+     * Fills Hashmap with Metro.Station which can be easily Searched through
      */
     private void setStationsHashMap() {
         stationsHashMap = new HashMap<>();
@@ -78,7 +80,7 @@ public class Model {
 
     /**
      * @param start,destination stored as Nodes and passed to Graph.MultiGraph
-     *                          Pair used to store Line-Colour and Station's
+     *                          Pair used to store Line-Colour and Metro.Station's
      * @param algorithm chosen algorithm for search
      * @return List of Tuples for optimal Route
      */
