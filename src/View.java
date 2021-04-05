@@ -273,6 +273,10 @@ public class View {
 
     }
 
+    /**
+     * @param stations sorts all stations, by color and index
+     *                 and populates startDestSelector and endDestSelector
+     */
     public void fillStationsOptions(List<String> stations){
 
         List<String> greenStations = new ArrayList<>();
@@ -308,6 +312,9 @@ public class View {
 
     }
 
+    /**
+     * @param stations sorts station names by indexes
+     */
     private void sortByIds(List<String> stations) {
         stations.sort((o1, o2) -> {
             int id1 = Integer.parseInt(o1.split(" ")[0]);
@@ -583,6 +590,10 @@ public class View {
         endDestSelector.setValue(stationName);
     }
 
+    /**
+     * @param path to be displayed on the map
+     * @return Pane with a map and a line drawn across all appropriate stations
+     */
     private Pane createMap(List<Pair<String,List<String>>> path) {
         Pane mapView = new Pane();
         ImageView map =  new ImageView("Images/metroMap.png");
@@ -599,8 +610,7 @@ public class View {
                                             "47 Kenmore","54 St.Mary's Street",
                                             "98 JFK/UMass", "100 Savin Hill", "120 North Quincy"};
 
-
-        List<Double> points = new ArrayList<Double>();
+        List<Double> points = new ArrayList<>();
 
         for (int line = 0; line < path.size(); line++) {
             Pair<String,List<String>> currentLine = path.get(line);

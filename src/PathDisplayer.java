@@ -139,6 +139,9 @@ public class PathDisplayer {
         return border;
     }
 
+    /**
+     * @param train sets the train animation in motion
+     */
     private void animationActive(Rectangle train) {
         Duration duration = Duration.seconds(7);
         TranslateTransition transition = new TranslateTransition(duration,train);
@@ -152,6 +155,10 @@ public class PathDisplayer {
         timeline.play();
     }
 
+    /**
+     * @param colour of the train
+     * @return Image with appropriate color
+     */
     private Image trainSelector(String colour) {
         Image image;
         switch (colour.charAt(0)) {
@@ -165,24 +172,47 @@ public class PathDisplayer {
 
     }
 
+    /**
+     * @param name,color,x,y
+     * wrapper function that creates an element with a circle and the first station, styling them appropriately
+     * calls displayLineLabel and makeTripleCircle with appropriate arguments
+     * @return Hbox of a circle and station name
+     */
     private HBox createStartingStation(String name, String color, double x, double y) {
 
         return displayLineLabel(name, makeTripleCircle(x,y,circleRadius,color,"BG", true));
 
     }
 
+    /**
+     * @param name,color,x,y
+     * wrapper function that creates an element with a circle and the final station, styling them appropriately
+     * calls displayLineLabel and makeTripleCircle with appropriate arguments
+     * @return Hbox of a circle and station name
+     */
     private HBox createEndingStation(String name, String color, double x, double y) {
 
         return displayLineLabel(name, makeTripleCircle(x,y,circleRadius,color,"BG", false));
 
     }
 
+    /**
+     * @param name,color1,color2,x,y
+     * wrapper function that creates an element with a circle and a changing station, styling them appropriately
+     * calls displayLineLabel and makeDoubleCircle with appropriate arguments
+     * @return Hbox of a circle and station name
+     */
     private HBox createMiddleStation(String name, String color1, String color2, double x, double y) {
 
         return displayLineLabel(name, makeDoubleCircle(x,y,color1,color2));
 
     }
 
+    /**
+     * @param stations,color,start,end creates element with line (from start to end) of color color
+     *                                 and list of stations next to it (by calling miniStationsWithButton)
+     * @return hbox containing a line and list of stations
+     */
     private HBox createLineWithMiniStations(List<String> stations, String color, int start, int end) {
         HBox linebox = new HBox();
 
@@ -198,6 +228,11 @@ public class PathDisplayer {
         return linebox;
     }
 
+    /**
+     * @param stations list of stations to just traverse through
+     * if less than 3, displays all, if more, displays 2 and collapses the rest under "more stations" button
+     * @return vbox with the stations
+     */
     private VBox miniStationsWithButton(List<String> stations) {
 
         VBox stats;
@@ -220,6 +255,10 @@ public class PathDisplayer {
         return stats;
     }
 
+    /**
+     * @param stations list of stations to display
+     * @return vbox with collapsed stations and "intermediate stations" heading
+     */
     private Pane showAllSmallStations(List<String> stations) {
 
         VBox stats = displaySmallerStationNames(stations);
