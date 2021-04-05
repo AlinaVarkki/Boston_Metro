@@ -26,8 +26,6 @@ public class Model {
 
     /**
      * Called in Model Constructor
-     *
-     *
      * MultiGraph initialised with Nodes and Edges
      * Nodes representing Stations, Edges representing Connecting Lines
      */
@@ -40,14 +38,23 @@ public class Model {
 
     }
 
+    /**
+     * stores multigraph's ajdMap in a local variable
+     */
     public void getAdjMap() {
         adjMap = multiGraph.getAdjMap();
     }
 
+    /**
+     * @return list of all stations
+     */
     public ArrayList<String> getListOfStations() {
         return new ArrayList<>(stationsHashMap.keySet());
     }
 
+    /**
+     * @return map of color and corresponding stations
+     */
     public Map<String, List<String>> getStationColorMap() {
         return stationColorMap;
     }
@@ -104,10 +111,18 @@ public class Model {
         return processedForView;
     }
 
+    /**
+     * @param name String
+     * @return Node of station with name
+     */
     private Node find(String name) {
         return stationsHashMap.get(name);
     }
 
+    /**
+     * @param adjMap of nodes and their corresponding edges
+     * fills stationColorMap with station name and colors of lines that pass through
+     */
     private void fillStationColorMap(Map<Node, List<Edge<Node>>> adjMap) {
         List<Edge<Node>> adjEdges;
 
@@ -126,6 +141,9 @@ public class Model {
         }
     }
 
+    /**
+     * @return a map containing station ids mapped to their names
+     */
     public Map<String, String> getMapIdsToStation() {
         Map<String, String> idsToStations = new HashMap<>();
         ArrayList<String> stations = new ArrayList<>(stationsHashMap.keySet());
