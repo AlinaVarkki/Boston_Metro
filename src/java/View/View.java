@@ -651,9 +651,9 @@ public class View {
         map.setLayoutY(-25);
 
         String[] stationsAroundCorners = {"30 Downtown Crossing", "28 State",
-                "20 North Metro.Station", "22 Haymarket",
+                "20 North Station", "22 Haymarket",
                 "41 Copley", "53 Prudential",
-                "33 South Metro.Station", "60 Broadway",
+                "33 South Station", "60 Broadway",
                 "47 Kenmore", "54 St.Mary's Street",
                 "98 JFK/UMass", "100 Savin Hill", "120 North Quincy"};
 
@@ -901,9 +901,9 @@ public class View {
             return new double[]{532, 312};
         } else if (station.equals("28 State") && nextStation.equals("30 Downtown Crossing")) {
             return new double[]{532, 312};
-        } else if (color.equals("Green") && station.equals("20 North Metro.Station") && nextStation.equals("22 Haymarket")) {
+        } else if (color.equals("Green") && station.equals("20 North Station") && nextStation.equals("22 Haymarket")) {
             return new double[]{545, 230};
-        } else if (color.equals("Green") && station.equals("22 Haymarket") && nextStation.equals("20 North Metro.Station")) {
+        } else if (color.equals("Green") && station.equals("22 Haymarket") && nextStation.equals("20 North Station")) {
             return new double[]{545, 230};
         } else if (station.equals("47 Kenmore") && nextStation.equals("54 St.Mary's Street")) {
             return new double[]{287, 330};
@@ -913,9 +913,9 @@ public class View {
             return new double[]{365, 346};
         } else if (station.equals("53 Prudential") && nextStation.equals("41 Copley")) {
             return new double[]{365, 346};
-        } else if (station.equals("33 South Metro.Station") && nextStation.equals("60 Broadway")) {
+        } else if (station.equals("33 South Station") && nextStation.equals("60 Broadway")) {
             return new double[]{569, 386};
-        } else if (station.equals("60 Broadway") && nextStation.equals("33 South Metro.Station")) {
+        } else if (station.equals("60 Broadway") && nextStation.equals("33 South Station")) {
             return new double[]{569, 386};
         } else if (station.equals("98 JFK/UMass")) {
             if (nextStation.equals("100 Savin Hill")) {
