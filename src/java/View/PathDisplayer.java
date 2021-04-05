@@ -63,10 +63,9 @@ public class PathDisplayer {
         HBox box = new HBox();
         finalBox = new HBox();
 
-
         showingStations = "";
 
-        VBox thingy = new VBox();
+        VBox verticalLineBox = new VBox();
 
         if (!stations.isEmpty()) {
             int currentEnd = 2 * circleRadius;
@@ -80,7 +79,7 @@ public class PathDisplayer {
             ImagePattern imagePattern = new ImagePattern(trainSelector(currentColor));
             train.setFill(imagePattern);
 
-            thingy.getChildren().add(createStartingStation(currentLine.get(0), currentColor, x, y));
+            verticalLineBox.getChildren().add(createStartingStation(currentLine.get(0), currentColor, x, y));
 
             stations.get(0).getValue().remove(0);
 
@@ -99,22 +98,22 @@ public class PathDisplayer {
                 currentEnd = end;
 
                 //creates line with stations
-                thingy.getChildren().add(createLineWithMiniStations(currentLine, currentColor, start, end));
+                verticalLineBox.getChildren().add(createLineWithMiniStations(currentLine, currentColor, start, end));
 
                 String lastStation = currentLine.get(currentLine.size() - 1);
-                //creates circle depending on whether this is the last station or nah
+                //creates circle depending on whether this is the last station or not
                 if (i + 1 < stations.size()) {
-                    thingy.getChildren().add(createMiddleStation(lastStation, currentColor, stations.get(i + 1).getKey(), x, y + start));
+                    verticalLineBox.getChildren().add(createMiddleStation(lastStation, currentColor, stations.get(i + 1).getKey(), x, y + start));
 
                 } else {
-                    thingy.getChildren().add(createEndingStation(lastStation, currentColor, x, y + start));
+                    verticalLineBox.getChildren().add(createEndingStation(lastStation, currentColor, x, y + start));
 
                 }
 
             }
         }
 
-        almostFinalBox.getChildren().add(thingy);
+        almostFinalBox.getChildren().add(verticalLineBox);
         almostFinalBox.setAlignment(Pos.CENTER);
         almostFinalBox.setPadding(new Insets(0, 0, 0, 5 * circleRadius));
 

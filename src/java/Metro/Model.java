@@ -30,11 +30,8 @@ public class Model {
 
     /**
      * Called in Metro.Model Constructor
-     * MultiGraph initialised with Nodes and Edges
-     *
-     *
-     * Graph.MultiGraph initialised with Nodes and Edges
-     * Nodes representing Stations, Edges representing Connecting Lines
+     * Graph.MultiGraph initialised with Stations and Edges
+     * Edges representing Connecting Lines
      */
     private void setMultiGraph() {
 
@@ -46,7 +43,7 @@ public class Model {
     }
 
     /**
-     * stores multigraph's ajdMap in a local variable
+     * stores MultiGraph's ajdMap in a local variable
      */
     public void getAdjMap() {
         adjMap = multiGraph.getAdjMap();
@@ -60,7 +57,7 @@ public class Model {
     }
 
     /**
-     * @return map of color and corresponding stations
+     * @return map of station and lines that pass through it
      */
     public Map<String, List<String>> getStationColorMap() {
         return stationColorMap;
@@ -81,7 +78,7 @@ public class Model {
      * @param start,destination stored as Nodes and passed to Graph.MultiGraph
      *                          Pair used to store Line-Colour and Metro.Station's
      * @param algorithm chosen algorithm for search
-     * @return List of Tuples for optimal Route
+     * @return List of Pairs of optimal Route
      */
     public List<Pair<String, List<String>>> runSearch(String start, String destination, String algorithm) {
         Station from = this.find(start);
@@ -120,7 +117,7 @@ public class Model {
 
     /**
      * @param name String
-     * @return Node of station with name
+     * @return Station of station with name
      */
     private Station find(String name) {
         return stationsHashMap.get(name);
