@@ -539,7 +539,7 @@ public class View {
 
     public void setupMap() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/BostonMetroMap.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/BostonMetroMap.fxml"));
 
             System.out.println("loading map");
 

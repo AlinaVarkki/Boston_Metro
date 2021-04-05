@@ -237,7 +237,7 @@ public class PathDisplayer {
             stats = displaySmallerStationNames(stations);
         } else {
             stats = displaySmallerStationNames(stations.subList(0, 3));
-            String buttonLabel = "... " + (stations.size() - 3) + " more stations";
+            String buttonLabel = "... click for " + (stations.size() - 3) + " more stations";
             Button button = new Button(buttonLabel);
             button.setFont(Font.font("Arial", FontWeight.NORMAL, FontPosture.ITALIC, circleRadius));
             button.setStyle("-fx-background-color: #0B132B; -fx-text-fill: #FFFFFF");
