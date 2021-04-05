@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MapView">
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.MapView">
     <children>
     <Group layoutX="0" layoutY="0">
     <ImageView fx:id="mapImage" fitHeight="820.0" fitWidth="1189.0" pickOnBounds="true" preserveRatio="true">

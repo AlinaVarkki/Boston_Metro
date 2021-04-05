@@ -1,3 +1,5 @@
+package Graph;
+
 public class Triple<X, Y, Z> {
     public final X first;
     public final Y second;

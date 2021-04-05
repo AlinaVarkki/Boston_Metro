@@ -1,3 +1,7 @@
+import Graph.Edge;
+import Graph.MultiGraph;
+import Graph.Node;
+
 import java.util.List;
 import java.util.Map;
 
@@ -6,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class getPathDFSSpecificTests {
 
-    //User for Testing MultiGraph Methods
+    //User for Testing Graph.MultiGraph Methods
     List<Edge<Node>> testConnections;
     List<Node> testStations;
     MultiGraph<Node, Edge<Node>> testGraph;
@@ -20,7 +24,7 @@ public class getPathDFSSpecificTests {
         testStations = reader.getStations();
         testConnections = reader.getConnections();
 
-        testGraph = new MultiGraph<>();
+        testGraph = new MultiGraph<Node, Edge<Node>>();
         for (Node n : testStations) testGraph.addNode(n);
         for (Edge e : testConnections) testGraph.addEdge(e);
 
@@ -40,7 +44,7 @@ public class getPathDFSSpecificTests {
      * The tests will also name the standard getPath() method favouring fewest stops from above for comparison
      */
 
-      /* Tests MultiGraph getPathDFS() optimal route with fewest transitions
+      /* Tests Graph.MultiGraph getPathDFS() optimal route with fewest transitions
        from Orange Chinatown to Green Boylston swng at Haymarket */
     @org.junit.jupiter.api.Test
     void multiGraphOrangeToGreenWithOnly1Transition() {
@@ -72,7 +76,7 @@ public class getPathDFSSpecificTests {
         assertEquals("Boylston", greenNode.getName());
     }
 
-    /* Tests MultiGraph getPathDFS() optimal route with fewest transitions
+    /* Tests Graph.MultiGraph getPathDFS() optimal route with fewest transitions
        from Orange ChinaTown to Blue Bowdoin swng at State */
     @org.junit.jupiter.api.Test
     void multiGraphOrangeToBlueWithOnly1Transition() {
@@ -103,7 +107,7 @@ public class getPathDFSSpecificTests {
 
     }
 
-    /* Tests MultiGraph getPathDFS() optimal route with fewest transitions
+    /* Tests Graph.MultiGraph getPathDFS() optimal route with fewest transitions
        of the Green Junction Line from GreenE to GreenD */
     @org.junit.jupiter.api.Test
     void multiGraphGreenEtoGreenDJunctionLineWithOnly2Transitions() {

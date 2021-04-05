@@ -1,3 +1,5 @@
+import Graph.Edge;
+
 public class Connection<N> implements Edge<N> {
     private final N node1;
     private final N node2;

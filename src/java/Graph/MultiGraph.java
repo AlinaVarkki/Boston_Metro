@@ -1,3 +1,5 @@
+package Graph;
+
 import javafx.util.Pair;
 
 import java.util.*;
@@ -36,7 +38,7 @@ public class MultiGraph<N, E extends Edge<N>> implements Graph<N, E> {
         List<String> visited = new ArrayList<>();
         Deque<Triple<N, List<E>, Integer>> deque = new LinkedList<>();
 
-        deque.add(new Triple<>(source, new LinkedList<>(), 0));
+        deque.add(new Triple<N, List<E>, Integer>(source, new LinkedList<>(), 0));
         Triple<N, List<E>, Integer> currTriple;
         N currNode;
         List<E> currPath;

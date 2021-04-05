@@ -1,3 +1,4 @@
+import View.View;
 import javafx.util.Pair;
 
 import java.util.List;
@@ -35,7 +36,7 @@ public class Controller {
 
     /**
      * Calls elements of Model to get the most Direct Path from one Station to the Other
-     * Calls elements of View to Construct the Line output with Consistent Styling and Sizing of corresponding Labels
+     * Calls elements of View.View to Construct the Line output with Consistent Styling and Sizing of corresponding Labels
      */
     private void performSearch() {
         if (view.stationsSelected()) {

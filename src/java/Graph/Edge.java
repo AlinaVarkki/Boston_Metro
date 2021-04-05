@@ -1,4 +1,6 @@
-interface Edge<N> {
+package Graph;
+
+public interface Edge<N> {
     N getOppositeNode(N node);
 
     String getLabel();

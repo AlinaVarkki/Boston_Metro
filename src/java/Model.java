@@ -1,3 +1,6 @@
+import Graph.Edge;
+import Graph.MultiGraph;
+import Graph.Node;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
@@ -28,7 +31,7 @@ public class Model {
      * Called in Model Constructor
      *
      *
-     * MultiGraph initialised with Nodes and Edges
+     * Graph.MultiGraph initialised with Nodes and Edges
      * Nodes representing Stations, Edges representing Connecting Lines
      */
     private void setMultiGraph() {
@@ -64,7 +67,7 @@ public class Model {
     }
 
     /**
-     * @param start,destination stored as Nodes and passed to MultiGraph
+     * @param start,destination stored as Nodes and passed to Graph.MultiGraph
      *                          Pair used to store Line-Colour and Station's
      * @param algorithm chosen algorithm for search
      * @return List of Tuples for optimal Route

@@ -1,3 +1,7 @@
+import Graph.Edge;
+import Graph.MultiGraph;
+import Graph.Node;
+
 import java.util.List;
 import java.util.Map;
 
@@ -9,7 +13,7 @@ public class getPathLineTests {
     Node a, b;
     Edge<Node> c;
 
-    //User for Testing MultiGraph Methods
+    //User for Testing Graph.MultiGraph Methods
     List<Edge<Node>> testConnections;
     List<Node> testStations;
     MultiGraph<Node, Edge<Node>> testGraph;
@@ -28,7 +32,7 @@ public class getPathLineTests {
         testStations = reader.getStations();
         testConnections = reader.getConnections();
 
-        testGraph = new MultiGraph<>();
+        testGraph = new MultiGraph<Node, Edge<Node>>();
         for (Node n : testStations) testGraph.addNode(n);
         for (Edge e : testConnections) testGraph.addEdge(e);
 
@@ -43,14 +47,14 @@ public class getPathLineTests {
         return null;
     }
 
-    /* Tests Set and Get of Station Class implementing Node Interface */
+    /* Tests Set and Get of Station Class implementing Graph.Node Interface */
     @org.junit.jupiter.api.Test
     void setStationName() {
         a.setName("A");
         assertEquals("A", a.getName());
     }
 
-    /* Tests Get and Opposite of Connection Class implementing Generic Edge Interface */
+    /* Tests Get and Opposite of Connection Class implementing Generic Graph.Edge Interface */
     @org.junit.jupiter.api.Test
     void setConnectionNameAndNodes() {
         assertEquals("Pink", c.getLabel());
@@ -88,7 +92,7 @@ public class getPathLineTests {
      * Blue, Orange, Red, RedA, Mattapan, Green, GreenB, GreenC, GreenD, GreenE
      */
 
-    /* Tests MultiGraph getPath() of the Blue Line */
+    /* Tests Graph.MultiGraph getPath() of the Blue Line */
     @org.junit.jupiter.api.Test
     void multiGraphBlueLine() {
 
@@ -157,7 +161,7 @@ public class getPathLineTests {
 
     }
 
-    /* Tests MultiGraph getPath() of the Orange Line */
+    /* Tests Graph.MultiGraph getPath() of the Orange Line */
     @org.junit.jupiter.api.Test
     void multiGraphOrangeLine() {
 
@@ -258,7 +262,7 @@ public class getPathLineTests {
         assertEquals("ForestHills", orangeNodes.getName());
     }
 
-    /* Tests MultiGraph getPath() of the Red Line */
+    /* Tests Graph.MultiGraph getPath() of the Red Line */
     @org.junit.jupiter.api.Test
     void multiGraphRedLine() {
 
@@ -331,7 +335,7 @@ public class getPathLineTests {
 
     }
 
-    /* Tests MultiGraph getPath() of the RedB Line */
+    /* Tests Graph.MultiGraph getPath() of the RedB Line */
     @org.junit.jupiter.api.Test
     void multiGraphRedBLine() {
 
@@ -366,7 +370,7 @@ public class getPathLineTests {
         assertEquals("Braintree", redANode.getName());
     }
 
-    /* Tests MultiGraph getPath() of the RedA Line */
+    /* Tests Graph.MultiGraph getPath() of the RedA Line */
     @org.junit.jupiter.api.Test
     void multiGraphRedALine() {
 
@@ -397,7 +401,7 @@ public class getPathLineTests {
 
     }
 
-    /* Tests MultiGraph getPath() of the Mattapan Line */
+    /* Tests Graph.MultiGraph getPath() of the Mattapan Line */
     @org.junit.jupiter.api.Test
     void multiGraphMattapanLine() {
 
@@ -442,7 +446,7 @@ public class getPathLineTests {
         assertEquals("Mattapan", mattapanNode.getName());
     }
 
-    /* Tests MultiGraph getPath() of the Green Line */
+    /* Tests Graph.MultiGraph getPath() of the Green Line */
     @org.junit.jupiter.api.Test
     void multiGraphGreenLine() {
 
@@ -492,7 +496,7 @@ public class getPathLineTests {
         assertEquals("Copley", greenNode.getName());
     }
 
-    /* Tests MultiGraph getPath() of the GreenB Line */
+    /* Tests Graph.MultiGraph getPath() of the GreenB Line */
     @org.junit.jupiter.api.Test
     void multiGraphGreenBLine() {
 
@@ -624,7 +628,7 @@ public class getPathLineTests {
         assertEquals("BostonCollege", greenBNode.getName());
     }
 
-    /* Tests MultiGraph getPath() of the GreenC Line */
+    /* Tests Graph.MultiGraph getPath() of the GreenC Line */
     @org.junit.jupiter.api.Test
     void multiGraphGreenCLine() {
 
@@ -699,7 +703,7 @@ public class getPathLineTests {
         assertEquals("ClevelandCircle", greenCNode.getName());
     }
 
-    /* Tests MultiGraph getPath() of the GreenD Line */
+    /* Tests Graph.MultiGraph getPath() of the GreenD Line */
     @org.junit.jupiter.api.Test
     void multiGraphGreenDLine() {
 
@@ -776,7 +780,7 @@ public class getPathLineTests {
         assertEquals("Riverside", greenDNode.getName());
     }
 
-    /* Tests MultiGraph getPath() of the GreenE Line */
+    /* Tests Graph.MultiGraph getPath() of the GreenE Line */
     @org.junit.jupiter.api.Test
     void multiGraphGreenELine() {
 

@@ -1,3 +1,5 @@
+import Graph.Node;
+
 public class Station implements Node {
 
     String name;

@@ -1,3 +1,6 @@
+import Graph.Edge;
+import Graph.Node;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;

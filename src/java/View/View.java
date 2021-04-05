@@ -1,3 +1,5 @@
+package View;
+
 import javafx.animation.FadeTransition;
 import javafx.animation.RotateTransition;
 import javafx.collections.ObservableMap;
@@ -165,7 +167,7 @@ public class View {
     }
 
     /**
-     * Called by View's customizeDropDowns()
+     * Called by View.View's customizeDropDowns()
      *
      * @param comboBox input from firstScreenView.fxml
      *                 Sets the Combobox's colour according to corresponding colour in stationColourMap
@@ -403,7 +405,7 @@ public class View {
 
     /**
      * Hides left hand Home screen to allow Path to be Displayed
-     * Calls createLine in PathDisplayer class to display the Route,Line,Stations and Transfers
+     * Calls createLine in View.PathDisplayer class to display the Route,Line,Stations and Transfers
      * Calls runDisplayPathAnimation to rotate the Main Logo
      */
     public void displayFoundPath(List<Pair<String, List<String>>> path) {
@@ -509,7 +511,7 @@ public class View {
 
     public void setupMap() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("BostonMetroMap.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/BostonMetroMap.fxml"));
 
             System.out.println("loading map");
 

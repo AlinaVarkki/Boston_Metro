@@ -1,3 +1,7 @@
+import Graph.Edge;
+import Graph.MultiGraph;
+import Graph.Node;
+
 import java.util.List;
 import java.util.Map;
 
@@ -6,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class getPathJunctionTests {
 
-    //User for Testing MultiGraph Methods
+    //User for Testing Graph.MultiGraph Methods
     List<Edge<Node>> testConnections;
     List<Node> testStations;
     MultiGraph<Node, Edge<Node>> testGraph;
@@ -20,7 +24,7 @@ public class getPathJunctionTests {
         testStations = reader.getStations();
         testConnections = reader.getConnections();
 
-        testGraph = new MultiGraph<>();
+        testGraph = new MultiGraph<Node, Edge<Node>>();
         for (Node n : testStations) testGraph.addNode(n);
         for (Edge e : testConnections) testGraph.addEdge(e);
 
@@ -40,7 +44,7 @@ public class getPathJunctionTests {
      * RedB to RedA, RedA to Mattapan,
      */
 
-    /* Tests MultiGraph getPath() of the Red Junction Line between RedA and RedB */
+    /* Tests Graph.MultiGraph getPath() of the Red Junction Line between RedA and RedB */
     @org.junit.jupiter.api.Test
     void multiGraphRedJunctionLine() {
 
@@ -67,7 +71,7 @@ public class getPathJunctionTests {
         assertEquals("FieldsCorner", redJNode.getName());
     }
 
-    /* Tests MultiGraph getPath() of the Mattapan Junction Line from RedA */
+    /* Tests Graph.MultiGraph getPath() of the Mattapan Junction Line from RedA */
     @org.junit.jupiter.api.Test
     void multiGraphMattapanJunctionLine() {
 
@@ -88,7 +92,7 @@ public class getPathJunctionTests {
         assertEquals("CedarGrove", redJNode.getName());
     }
 
-    /* Tests MultiGraph getPath() of the Green Junction Line from GreenE to GreenB */
+    /* Tests Graph.MultiGraph getPath() of the Green Junction Line from GreenE to GreenB */
     @org.junit.jupiter.api.Test
     void multiGraphGreenEtoGreenBJunctionLine() {
 
@@ -111,7 +115,7 @@ public class getPathJunctionTests {
         assertEquals("Hynes/ICA", greenJNode.getName());
     }
 
-    /* Tests MultiGraph getPath() of the Green Junction Line from GreenB to GreenC */
+    /* Tests Graph.MultiGraph getPath() of the Green Junction Line from GreenB to GreenC */
     @org.junit.jupiter.api.Test
     void multiGraphGreenBtoGreenCJunctionLine() {
 
@@ -132,7 +136,7 @@ public class getPathJunctionTests {
         assertEquals("St.Mary'sStreet", greenJNode.getName());
     }
 
-    /* Tests MultiGraph getPath() of the Green Junction Line from GreenD to GreenB */
+    /* Tests Graph.MultiGraph getPath() of the Green Junction Line from GreenD to GreenB */
     @org.junit.jupiter.api.Test
     void multiGraphGreenDtoGreenBJunctionLine() {
 
@@ -238,7 +242,7 @@ public class getPathJunctionTests {
      * Orange-Red, Orange-Green, Orange-Blue, Blue-Red, Blue-Orange/Green,
      */
 
-    /* Tests MultiGraph getPath() optimal route from Orange ChinaTown to Red Charles/MGH */
+    /* Tests Graph.MultiGraph getPath() optimal route from Orange ChinaTown to Red Charles/MGH */
     @org.junit.jupiter.api.Test
     void multiGraphOrangeToRed() {
 
@@ -264,7 +268,7 @@ public class getPathJunctionTests {
         assertEquals("Charles/MGH", orangeNode.getName());
     }
 
-    /* Tests MultiGraph getPath() optimal route from Orange Chinatown to Green Boylston
+    /* Tests Graph.MultiGraph getPath() optimal route from Orange Chinatown to Green Boylston
        swing at DowntownCrossing, ParkStreet*/
     @org.junit.jupiter.api.Test
     void multiGraphOrangeToGreen() {
@@ -294,7 +298,7 @@ public class getPathJunctionTests {
         assertEquals("Boylston", greenNode.getName());
     }
 
-    /* Tests MultiGraph getPath() optimal route from Orange Chinatown to Blue Bowdoin swing at DowntownCrossing,ParkStreet,GovernmentCenter */
+    /* Tests Graph.MultiGraph getPath() optimal route from Orange Chinatown to Blue Bowdoin swing at DowntownCrossing,ParkStreet,GovernmentCenter */
     @org.junit.jupiter.api.Test
     void multiGraphOrangeToBlue() {
 
@@ -332,7 +336,7 @@ public class getPathJunctionTests {
 
     }
 
-    /* Tests MultiGraph getPath() optimal route from Blue Aquarium to Red Charles/MGH via GovernmentCenter and ParkStreet */
+    /* Tests Graph.MultiGraph getPath() optimal route from Blue Aquarium to Red Charles/MGH via GovernmentCenter and ParkStreet */
     @org.junit.jupiter.api.Test
     void multiGraphBlueToRed() {
 
@@ -364,7 +368,7 @@ public class getPathJunctionTests {
         assertEquals("Charles/MGH", redNode.getName());
     }
 
-    /* Tests MultiGraph getPath() optimal route from Blue Aquarium to Orange/Green Haymarket via State */
+    /* Tests Graph.MultiGraph getPath() optimal route from Blue Aquarium to Orange/Green Haymarket via State */
     @org.junit.jupiter.api.Test
     void multiGraphBlueToOrangeGreen() {
 
