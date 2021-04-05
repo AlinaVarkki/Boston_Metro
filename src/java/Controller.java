@@ -13,16 +13,22 @@ public class Controller {
         this.view = view;
     }
 
+    /**
+     * This method connects Model and View to function properly
+     */
     public void run() {
         this.setUpDropDowns();
         this.setupButtonEventHandler(this);
         view.setupAlgorithmSelectorEventHandler();
-        view.setupIdsToStatioins(model.getMapIdsToStation());
+        view.setupIdsToStations(model.getMapIdsToStation());
         view.setStandardStyles();
         view.setupMap();
 
     }
 
+    /**
+     * This method sets up the stations loaded from the file in the model to the dropdown menus in the View
+     */
     private void setUpDropDowns() {
         List<String> stations = model.getListOfStations();
         Map<String, List<String>> stationColorMap = model.getStationColorMap();
@@ -30,6 +36,9 @@ public class Controller {
         view.fillStationsOptions(stations);
     }
 
+    /**
+     * This method sets up the controller for Find button in the View, connecting the View to the Model
+     */
     private void setupButtonEventHandler(Controller controller) {
         view.setFindButtonEventHandler(e -> controller.performSearch());
     }

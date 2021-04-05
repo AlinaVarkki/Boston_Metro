@@ -109,10 +109,18 @@ public class FileReader {
         }
     }
 
+    /**
+     * Returns the Edges loaded from the file
+     * @return Edges loaded from the file
+     */
     public List<Edge<Node>> getConnections() {
         return connections;
     }
 
+    /**
+     * Return the list of Nodes loaded from the file
+     * @return list of nodes loaded from the file
+     */
     public List<Node> getStations() {
         List<Node> stations = new ArrayList<>();
         for (String s : stationsNodesById.keySet()) stations.add(stationsById.get(s));

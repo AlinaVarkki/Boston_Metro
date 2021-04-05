@@ -91,10 +91,17 @@ public class ToggleSlider extends Parent {
         });
     }
 
+    /**
+     * Sets up the given Event Handler for Mouse Click event
+     * @param handler event handler
+     */
     public void setClickHandler(EventHandler<MouseEvent> handler) {
         this.setOnMouseClicked(handler);
     }
 
+    /**
+     * Toggles between boolean turned On and Off
+     */
     public void runSwitchOn() {
         switchOn.set(!switchOn.get());
     }

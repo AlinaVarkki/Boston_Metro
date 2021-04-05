@@ -114,7 +114,7 @@ public class View {
      * Called by Controller setUpDropDowns()
      *
      * @param stationColorMap initialised in Model, contains all possible Line colours
-     *                        Activates Fade Animation of Circular Logo
+     *                        Activates Fade Animation of Circular Logo and the Title
      */
     public void customizeDropDowns(Map<String, List<String>> stationColorMap) {
         this.stationColorMap = stationColorMap;
@@ -169,8 +169,8 @@ public class View {
     /**
      * Called by View.View's customizeDropDowns()
      *
-     * @param comboBox input from firstScreenView.fxml
-     *                 Sets the Combobox's colour according to corresponding colour in stationColourMap
+     * @param comboBox Combobox with the list of stations
+     * Sets colour of every station in the dropdown list according to which line passes through it
      */
     public void setOptionsColours(ComboBox<String> comboBox) {
 
@@ -238,6 +238,8 @@ public class View {
     }
 
     /**
+     * Creates the circles representing lines that pass through the station given to the method
+     * @param selectedStation station to display circles for
      * @return flowpane with the required circles with respective styling
      */
     private Pane displayCircles(String selectedStation) {
@@ -280,8 +282,8 @@ public class View {
     }
 
     /**
-     * @param stations sorts all stations, by color and index
-     *                 and populates startDestSelector and endDestSelector
+     * @param stations all stations
+     * sorts stations, by color and index and populates startDestSelector and endDestSelector
      */
     public void fillStationsOptions(List<String> stations) {
 
@@ -319,7 +321,8 @@ public class View {
     }
 
     /**
-     * @param stations sorts station names by indexes
+     * @param stations list of stations
+     * sorts given station names by indexes
      */
     private void sortByIds(List<String> stations) {
         stations.sort((o1, o2) -> {
@@ -331,26 +334,41 @@ public class View {
         });
     }
 
+    /**
+     * This method sets the background of end selector to white, in case errors have been displayed
+     */
     public void setDefaultStyleEndSelector() {
         endStationErrorMsg.setVisible(false);
         this.changeStyle(endDestSelector, "-fx-background-color", "#ffffff");
     }
 
+    /**
+     * This method sets the background of start selector to white, in case errors have been displayed
+     */
     public void setDefaultStyleStartSelector() {
         startStationErrorMsg.setVisible(false);
         this.changeStyle(startDestSelector, "-fx-background-color", "#ffffff");
     }
 
+    /**
+     * Return the end station selected
+     * @return The selected station from end station selector
+     */
     public String getDestinationStation() {
         return endDestSelector.getValue();
     }
 
+    /**
+     * Return the start station selected
+     * @return The selected station from start station selector
+     */
     public String getSourceStation() {
         return startDestSelector.getValue();
     }
 
     /**
-     * Sets and Checks for appropriate Error Messages to display
+     * Used to display the proper error messages and checks for validity of the input
+     * @return boolean whether the stations have been selected correctly
      */
     public boolean stationsSelected() {
         boolean valid = true;
@@ -399,6 +417,10 @@ public class View {
 
     }
 
+    /**
+     * Used so the Controller can setup event handler on the Find Button
+     * @param eventHandler handling press of Find Path button
+     */
     public void setFindButtonEventHandler(EventHandler<ActionEvent> eventHandler) {
         findButton.setOnAction(eventHandler);
     }
@@ -406,6 +428,7 @@ public class View {
     /**
      * Hides left hand Home screen to allow Path to be Displayed
      * Calls createLine in View.PathDisplayer class to display the Route,Line,Stations and Transfers
+     * Sets up the Toggle switch and its event handler to switch between the two types of presentation
      * Calls runDisplayPathAnimation to rotate the Main Logo
      */
     public void displayFoundPath(List<Pair<String, List<String>>> path) {
@@ -487,6 +510,10 @@ public class View {
         rtC.play();
     }
 
+    /**
+     * This method is used to hide or show the Title image and Text
+     * @param visible boolean, true to display the title adn false to hide
+     */
     public void setTitleVisibility(boolean visible) {
         titleImage.setVisible(visible);
         titleText1.setVisible(visible);
@@ -494,7 +521,8 @@ public class View {
     }
 
     /**
-     * Sets Left Hand Side Pane Size
+     * Sets Left Hand Side Pane Size and the main window
+     * @param root the main window to display in
      */
     public void setRoot(AnchorPane root) {
         this.root = root;
@@ -536,8 +564,6 @@ public class View {
                     double y = button.getLayoutY();
                     double[] coordinates = {x, y};
                     coordinateMap.put(station, coordinates);
-                } else {
-                    System.out.println(id);
                 }
 
             }
@@ -548,6 +574,11 @@ public class View {
         }
     }
 
+    /**
+     * This method is used as event handler for the button opening map for the selection of start station
+     * It will open or close the map depending on the situation and tell the map to place the selected station
+     * into the start selector
+     */
     public void mapButtonStartClicked() {
         if (root.getChildren().contains(map)) {
             if (this.mapContr.getDestinationDirection().equals("START")) {
@@ -563,6 +594,11 @@ public class View {
 
     }
 
+    /**
+     * This method is used as event handler for the button opening map for the selection of end station
+     * It will open or close the map depending on the situation and tell the map to place the selected station
+     * into the end selector
+     */
     public void mapButtonEndClicked() {
         if (root.getChildren().contains(map)) {
             if (this.mapContr.getDestinationDirection().equals("END")) {
@@ -576,15 +612,26 @@ public class View {
         }
     }
 
+    /**
+     * This method is used to hide the map selector
+     */
     public void closeMap() {
         this.root.getChildren().remove(map);
     }
 
+    /**
+     * This method will put the required station in the start station selector after it has been selected on the map selector
+     * @param stationId Station Id
+     */
     public void setStartDest(String stationId) {
         String stationName = this.idsToStations.get(stationId);
         startDestSelector.setValue(stationName);
     }
 
+    /**
+     * This method will put the required station in the end station selector after it has been selected on the map selector
+     * @param stationId Station Id
+     */
     public void setEndDest(String stationId) {
         String stationName = this.idsToStations.get(stationId);
         endDestSelector.setValue(stationName);
@@ -689,7 +736,6 @@ public class View {
 
     /**
      * This method will setup event handlers on Key Events for the dropdown menu with stations
-     *
      * @param element dropdown menu element
      */
     private void setupAutofill(ComboBox<String> element) {
@@ -773,7 +819,6 @@ public class View {
 
     /**
      * Method used to decide which type of search does the user want to use
-     *
      * @return the selected algorithm, either "Length" or "Transitions"
      */
     public String getAlgorithmSelected() {
@@ -810,7 +855,6 @@ public class View {
 
     /**
      * This method is used to change FXML style property while keeping the rest of the style unchanged
-     *
      * @param elem        Control - FXML element we are changing the style
      * @param newProperty String - This is the FXML style tag value of which we are changing
      * @param newValue    String - The new value we give to the FXML style tag
@@ -836,14 +880,17 @@ public class View {
         elem.setStyle(newStyle.toString());
     }
 
-    public void setupIdsToStatioins(Map<String, String> map) {
+    /**
+     * Used to set up the mapping required for the map station selectors to work
+     * @param map the mapping from IDs of stations to the full name
+     */
+    public void setupIdsToStations(Map<String, String> map) {
         this.idsToStations = map;
     }
 
 
     /**
      * checks whether an intermediate point needs to be added to make the line fit a bit better
-     *
      * @param station,nextStation stations between which we're checking
      * @param color               to determine whether green or orange needs to be taken at that one spot
      * @return coordinates of the mid-point or [0,0] if none is needed
@@ -852,67 +899,38 @@ public class View {
 
         if (station.equals("30 Downtown Crossing") && nextStation.equals("28 State")) {
             return new double[]{532, 312};
-            //layoutX="532.0" layoutY="312.0"
         } else if (station.equals("28 State") && nextStation.equals("30 Downtown Crossing")) {
             return new double[]{532, 312};
-            //layoutX="532.0" layoutY="312.0"
         } else if (color.equals("Green") && station.equals("20 North Station") && nextStation.equals("22 Haymarket")) {
             return new double[]{545, 230};
-
-            //layoutX="545.0" layoutY="230.0"
         } else if (color.equals("Green") && station.equals("22 Haymarket") && nextStation.equals("20 North Station")) {
             return new double[]{545, 230};
-
-//layoutX="545.0" layoutY="230.0"
         } else if (station.equals("47 Kenmore") && nextStation.equals("54 St.Mary's Street")) {
             return new double[]{287, 330};
-
-            //layoutX="545.0" layoutY="330.0"
         } else if (station.equals("54 St.Mary's Street") && nextStation.equals("47 Kenmore")) {
             return new double[]{287, 330};
-
         } else if (station.equals("41 Copley") && nextStation.equals("53 Prudential")) {
             return new double[]{365, 346};
-
-//layoutX="365.0" layoutY="346.0"
         } else if (station.equals("53 Prudential") && nextStation.equals("41 Copley")) {
             return new double[]{365, 346};
-
-//layoutX="365.0" layoutY="346.0"
         } else if (station.equals("33 South Station") && nextStation.equals("60 Broadway")) {
             return new double[]{569, 386};
-
-            //layoutX="569.0" layoutY="386.0"
-
         } else if (station.equals("60 Broadway") && nextStation.equals("33 South Station")) {
             return new double[]{569, 386};
-
-            //layoutX="569.0" layoutY="386.0"
         } else if (station.equals("98 JFK/UMass")) {
-
-//layoutX="572.0" layoutY="529.0"
             if (nextStation.equals("100 Savin Hill")) {
                 return new double[]{572, 529};
-
-
             } else if (nextStation.equals("120 North Quincy")) {
                 return new double[]{572, 529};
-
             }
-
         } else if (nextStation.equals("98 JFK/UMass")) {
-//layoutX="572.0" layoutY="529.0"
-
             if (station.equals("100 Savin Hill")) {
                 return new double[]{572, 529};
-
             } else if (station.equals("120 North Quincy")) {
                 return new double[]{572, 529};
-
             }
         }
-
         return new double[]{0, 0};
-
     }
+
 }
