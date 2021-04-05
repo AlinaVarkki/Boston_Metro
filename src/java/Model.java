@@ -7,11 +7,11 @@ import java.util.Map;
 
 public class Model {
 
-    MultiGraph<Node, Edge<Node>> multiGraph;
-    HashMap<String, Node> stationsHashMap;
-    List<Node> stations;
-    List<Edge<Node>> connections;
-    Map<Node, List<Edge<Node>>> adjMap;
+    private MultiGraph<Node, Edge<Node>> multiGraph;
+    private HashMap<String, Node> stationsHashMap;
+    private List<Node> stations;
+    private List<Edge<Node>> connections;
+    private Map<Node, List<Edge<Node>>> adjMap;
     private Map<String, List<String>> stationColorMap;
 
     public Model(List<Node> stations, List<Edge<Node>> connections) {
@@ -66,6 +66,7 @@ public class Model {
     /**
      * @param start,destination stored as Nodes and passed to MultiGraph
      *                          Pair used to store Line-Colour and Station's
+     * @param algorithm chosen algorithm for search
      * @return List of Tuples for optimal Route
      */
     public List<Pair<String, List<String>>> runSearch(String start, String destination, String algorithm) {
