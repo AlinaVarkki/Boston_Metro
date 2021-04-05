@@ -413,6 +413,8 @@ public class View {
         this.mapPath = this.createMap(path);
         this.pathDisplayed = pathDisplayer.createLine(path);
 
+        runDisplayPathAnimation();
+
         ToggleSlider togglik = new ToggleSlider();
 
         container.getChildren().add(togglik);
